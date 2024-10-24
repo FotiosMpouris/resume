@@ -3,91 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fotios Mpouris - Resume</title>
+    <title>Fotios Mpouris - Creative Developer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 0; 
-            padding: 20px; 
-            background-color: #f4f4f4; 
+        :root {
+            --primary: #2A2A2A;
+            --secondary: #007BFF;
+            --accent: #FF4081;
+            --background: #f8f9fa;
+            --card: #ffffff;
         }
-        h1, h2, h3 { 
-            text-align: center; 
-            color: #333; 
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .container { 
-            max-width: 800px; 
-            margin: auto; 
-            background: white; 
-            padding: 20px; 
-            border-radius: 8px; 
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+
+        body {
+            background-color: var(--background);
+            color: var(--primary);
+            line-height: 1.6;
         }
-        img { 
-            display: block; 
-            margin: 0 auto 20px; 
-            border-radius: 50%; 
-            width: 150px; 
-            height: 150px; 
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
-        a { 
-            color: #007BFF; 
-            text-decoration: none; 
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #363636 100%);
+            color: white;
+            overflow: hidden;
         }
-        a:hover { 
-            text-decoration: underline; 
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(0,123,255,0.2) 0%, rgba(0,0,0,0) 70%);
         }
-        ul { 
-            list-style-type: none; 
-            padding: 0; 
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--secondary);
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
         }
-        ul li { 
-            margin: 10px 0; 
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
-        p { 
-            line-height: 1.6; 
+
+        .title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section {
+            padding: 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--card);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 4rem 1rem;
+            }
+
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <section class="hero">
+        <div class="container">
+            <img src="fotiosProfile.png" alt="Fotios Mpouris" class="profile-img">
+            <h1 class="title">Fotios Mpouris</h1>
+            <h2 class="subtitle">2D & 3D Artist / Animator / Developer</h2>
+        </div>
+    </section>
+
     <div class="container">
-        <img src="fotiosProfile.png" alt="Fotios Mpouris Profile Picture">
-        <h1>Fotios Mpouris</h1>
-        <h2>2D & 3D Artist / Animator / Developer</h2>
-        <h3>Contact Information</h3>
-        <p>Email: <a href="mailto:fotiosmpouris@gmail.com">fotiosmpouris@gmail.com</a></p>
-        
-        <h3>Summary</h3>
-        <p>
-            I’m a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. 
-            My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.
-        </p>
-        <p>
-            More recently, I’ve been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). 
-            These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement.
-        </p>
-        <p>
-            Throughout my career, I’ve used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. 
-            My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.
-        </p>
-        <p>
-            Always eager to explore new frontiers in creative development, I’m committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it’s developing dynamic applications or crafting custom solutions, I’m dedicated to merging technology and design in today’s rapidly evolving digital landscape.
-        </p>
+        <section class="section">
+            <div class="card">
+                <h3>About Me</h3>
+                <p>I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production.</p>
+                <p>More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs).</p>
+            </div>
+        </section>
 
-        <h3>Projects</h3>
-        <ul>
-            <li><a href="https://github.com/FotiosMpouris/ImpossibleShark2">Impossible Shark Repo</a></li>
-            <li><a href="https://fotiosmpouris.github.io/ImpossibleShark2/">Play It Here</a></li>
-            <li><a href="https://github.com/FotiosMpouris/Hardie-Siding-Agent-Testing-Working_Copy/blob/main/README.md">Siding Project Assistant</a></li>
-            <li><a href="https://github.com/FotiosMpouris/Oriana/blob/main/README.md">Oriana</a></li>
-            <li><a href="https://github.com/FotiosMpouris/ReggieResume2/blob/main/README.md">AI Resume Tailor</a></li>
-        </ul>
+        <section class="section">
+            <h3>Featured Projects</h3>
+            <div class="projects">
+                <a href="https://github.com/FotiosMpouris/ImpossibleShark2" class="project-card">
+                    <h4>Impossible Shark</h4>
+                    <p>Game Development</p>
+                </a>
+                <a href="https://github.com/FotiosMpouris/Hardie-Siding-Agent-Testing-Working_Copy/blob/main/README.md" class="project-card">
+                    <h4>Siding Project Assistant</h4>
+                    <p>AI Development</p>
+                </a>
+                <a href="https://github.com/FotiosMpouris/Oriana/blob/main/README.md" class="project-card">
+                    <h4>Oriana</h4>
+                    <p>AI Assistant</p>
+                </a>
+                <a href="https://github.com/FotiosMpouris/ReggieResume2/blob/main/README.md" class="project-card">
+                    <h4>AI Resume Tailor</h4>
+                    <p>AI Tool</p>
+                </a>
+            </div>
+        </section>
 
-        <h3>Connect with me:</h3>
-        <p>
-            <a href="https://linkedin.com/in/fotiosmpouris" target="_blank">LinkedIn</a> | 
-            <a href="https://www.behance.net/fotiosmpouris" target="_blank">Behance</a>
-        </p>
+        <section class="section">
+            <div class="card">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="mailto:fotiosmpouris@gmail.com" class="social-link">Email</a>
+                    <a href="https://linkedin.com/in/fotiosmpouris" class="social-link">LinkedIn</a>
+                    <a href="https://www.behance.net/fotiosmpouris" class="social-link">Behance</a>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <script>
+        // Animation on load
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.to('.title', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.5
+            });
+
+            gsap.to('.subtitle', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.8
+            });
+
+            // Animate sections on scroll
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                gsap.to(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    delay: 0.2 * index
+                });
+            });
+        });
+    </script>
 </body>
 </html>
