@@ -46,15 +46,17 @@
         }
 
         .energy-wave {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            background: radial-gradient(circle at center, 
-                rgba(0,123,255,0.15) 0%, 
-                rgba(0,123,255,0.08) 30%, 
-                transparent 70%);
-            animation: ripple 8s infinite;
-        }
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle at center, 
+        rgba(0,123,255,0.25) 0%,
+        rgba(0,123,255,0.15) 30%, 
+        transparent 70%);
+    animation: ripple 6s infinite;
+    width: 200px;
+    height: 200px;
+}
 
         .power-surge {
             position: absolute;
@@ -200,24 +202,23 @@
 
         /* Dark Theme Section */
         .dark-theme-section {
-            background: linear-gradient(135deg, #1f0000 0%, #400 25%, #600 75%, #300 100%);
-            position: relative;
-            overflow: hidden;
-        }
+    background: linear-gradient(135deg, #2f0000 0%, #600 25%, #800 75%, #400 100%);
+    position: relative;
+    overflow: hidden;
+}
 
-        .dark-theme-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.15), transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.15), transparent 40%);
-            animation: glow 8s infinite ease-in-out;
-        }
-
+       .dark-theme-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.25), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.25), transparent 40%);
+    animation: glow 6s infinite ease-in-out;
+}
         @keyframes glow {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
@@ -595,14 +596,14 @@
 
         // Create energy wave function
         function createEnergyWave(x, y, container) {
-            const wave = document.createElement('div');
-            wave.className = 'energy-wave';
-            wave.style.left = `${x}px`;
-            wave.style.top = `${y}px`;
-            container.appendChild(wave);
-            
-            setTimeout(() => wave.remove(), 8000);
-        }
+    const wave = document.createElement('div');
+    wave.className = 'energy-wave';
+    wave.style.left = `${x - 100}px`;
+    wave.style.top = `${y - 100}px`;
+    container.appendChild(wave);
+    
+    setTimeout(() => wave.remove(), 6000);
+}
 
         // Initialize particles
         const particlesContainers = document.querySelectorAll('.particles-container');
@@ -612,16 +613,17 @@
 
         // Mouse interaction
         document.addEventListener('mousemove', (e) => {
-            particlesContainers.forEach(container => {
-                const rect = container.getBoundingClientRect();
-                if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                    if (Math.random() < 0.1) {
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        createEnergyWave(x, y, container);
-                    }
-                }
-            });
+    particlesContainers.forEach(container => {
+        const rect = container.getBoundingClientRect();
+        if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+            if (Math.random() < 0.2) {
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                createEnergyWave(x, y, container);
+            }
+        }
+    });
+});
         });
 
         // Initial animations
