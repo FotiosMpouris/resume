@@ -50,7 +50,7 @@
     border-radius: 50%;
     pointer-events: none;
     background: radial-gradient(circle at center, 
-        rgba(0,123,255,0.25) 0%,
+        rgba(0,123,255,0.25) 0%, 
         rgba(0,123,255,0.15) 30%, 
         transparent 70%);
     animation: ripple 6s infinite;
@@ -219,6 +219,7 @@
         radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.25), transparent 40%);
     animation: glow 6s infinite ease-in-out;
 }
+        
         @keyframes glow {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
@@ -595,7 +596,7 @@
         }
 
         // Create energy wave function
-        function createEnergyWave(x, y, container) {
+       function createEnergyWave(x, y, container) {
     const wave = document.createElement('div');
     wave.className = 'energy-wave';
     wave.style.left = `${x - 100}px`;
@@ -624,7 +625,6 @@
         }
     });
 });
-        });
 
         // Initial animations
         document.addEventListener('DOMContentLoaded', () => {
@@ -674,3 +674,5 @@
     </script>
 </body>
 </html>
+
+
