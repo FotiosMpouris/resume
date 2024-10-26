@@ -233,6 +233,93 @@
             50% { opacity: 1; }
         }
 
+/* Add this right after your .dark-theme-section class */
+.chemical-bubble {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    transform-style: preserve-3d;
+}
+
+.bubble-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, 
+        rgba(255, 150, 150, 0.9) 0%,
+        rgba(255, 100, 100, 0.6) 30%,
+        rgba(255, 50, 50, 0.2) 60%,
+        transparent 80%);
+    filter: blur(2px);
+    animation: bubbleGlow 2s infinite alternate;
+}
+
+.bubble-outer {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    top: -10%;
+    left: -10%;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, 
+        transparent 0%,
+        rgba(255, 100, 100, 0.1) 70%,
+        rgba(255, 50, 50, 0.2) 90%,
+        rgba(255, 0, 0, 0.3) 100%);
+    filter: blur(4px);
+}
+
+        /* Enhanced About Card */
+.about-card {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    transform-style: preserve-3d;
+}
+
+.about-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 123, 255, 0.2), 
+        transparent);
+    z-index: 1;
+    animation: borderGlow 3s infinite linear;
+}
+
+/* Enhanced Grid */
+.tech-grid {
+    opacity: 0.4;
+    background-size: 40px 40px !important;
+    animation: gridPulse 4s infinite ease-in-out, gridMove 15s infinite linear;
+    pointer-events: none;
+}
+
+        /* New Animations */
+@keyframes bubbleGlow {
+    0% { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes borderGlow {
+    0%, 100% { opacity: 0.5; filter: blur(3px); }
+    50% { opacity: 1; filter: blur(1px); }
+}
+
+@keyframes gridPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes gridMove {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.02); }
+    100% { transform: translateY(0) scale(1); }
+}
+
         /* About Section */
         /* About Section */
 .about-card {
@@ -703,6 +790,52 @@
         // Initialize GSAP ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
+        // Add this after your GSAP initialization
+function createChemicalBubble(x, y, container) {
+    const bubble = document.createElement('div');
+    bubble.className = 'chemical-bubble';
+    
+    // Random size between 10 and 30 pixels
+    const size = Math.random() * 20 + 10;
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    
+    // Position at mouse coordinates
+    bubble.style.left = `${x}px`;
+    bubble.style.top = `${y}px`;
+    
+    // Create inner and outer glow
+    const inner = document.createElement('div');
+    inner.className = 'bubble-inner';
+    const outer = document.createElement('div');
+    outer.className = 'bubble-outer';
+    
+    bubble.appendChild(inner);
+    bubble.appendChild(outer);
+    container.appendChild(bubble);
+    
+    // Animate the bubble
+    gsap.to(bubble, {
+        y: -200 - Math.random() * 100,
+        x: x + (Math.random() - 0.5) * 100,
+        scale: 2,
+        opacity: 0,
+        duration: 4,
+        ease: "power1.out",
+        onComplete: () => bubble.remove()
+    });
+}
+        // Add this after the createChemicalBubble function
+document.querySelector('.dark-theme-section').addEventListener('mousemove', (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    if (Math.random() < 0.2) {
+        createChemicalBubble(x, y, e.currentTarget);
+    }
+});
+        
         // Create particles function
         function createParticle(container) {
             const particle = document.createElement('div');
