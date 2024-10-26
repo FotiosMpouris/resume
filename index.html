@@ -397,7 +397,8 @@
         rgba(15, 25, 40, 0.95) 100%
     ) !important;
     border: 1px solid rgba(0, 123, 255, 0.1) !important;
-} !important;
+    overflow: hidden;
+}  !important;
     border: none !important;
     box-shadow: 
         0 0 40px rgba(0, 0, 0, 0.4),
@@ -432,8 +433,8 @@
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
-    width: 100%;
+    left: -50%;
+    width: 50%;
     height: 100%;
     background: linear-gradient(
         90deg,
@@ -441,11 +442,9 @@
         rgba(0, 123, 255, 0.2),
         transparent
     );
-    transform: translateX(0);  /* Added this line */
-    animation: aboutGlow 8s ease-in-out infinite;
+    animation: aboutGlow 4s ease-in-out infinite;
     pointer-events: none;
     z-index: 2;
-    will-change: transform;  /* Added this line */
 }
 
 /* Tech Grid Background */
@@ -698,12 +697,12 @@
         /* Animations for About Section */
 @keyframes aboutGlow {
     0% {
-        transform: translateX(0%);
+        transform: translateX(-100%);
     }
     100% {
-        transform: translateX(200%);
+        transform: translateX(300%);
     }
-}        
+}
         @keyframes cardPulse {
     0%, 100% { 
         box-shadow: 
