@@ -87,25 +87,26 @@
 /* Matrix-like Data Stream Effect */
 .data-stream {
     position: absolute;
-    width: 30px;
+    width: 40px;  /* made wider */
     height: 100%;
-    color: rgba(0, 183, 255, 0.15);
+    color: rgba(0, 183, 255, 0.25);  /* made more visible */
     font-family: 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 14px;
+    font-size: 16px;  /* made larger */
+    line-height: 16px;
     overflow: hidden;
     opacity: 0;
-    animation: streamFlow 8s ease-out;
+    animation: streamFlow 12s ease-out;  /* made slower */
     pointer-events: none;
     mix-blend-mode: screen;
+    text-shadow: 0 0 10px rgba(0, 183, 255, 0.3);  /* added glow */
 }
 
 .data-stream::before {
     content: '守\A ら\A れ\A た\A 0\A 1\A ア\A プ\A リ\A ケ\A ー\A シ\A ョ\A ン\A \}\A \{\A #\A $\A @\A 9\A 8\A 7';
     position: absolute;
     white-space: pre;
-    animation: matrixRain 4s linear infinite;
-    text-shadow: 0 0 8px rgba(0, 183, 255, 0.5);
+    animation: matrixRain 8s linear infinite;  /* made slower */
+    text-shadow: 0 0 12px rgba(0, 183, 255, 0.6);  /* enhanced glow */
 }
 
         @keyframes streamFlow {
@@ -113,10 +114,10 @@
         transform: translateY(-100%);
         opacity: 0;
     }
-    10% {
+    5% {  /* faster fade in */
         opacity: 1;
     }
-    90% {
+    95% {  /* longer visible time */
         opacity: 1;
     }
     100% {
@@ -858,25 +859,31 @@
     // Add data stream effect
 function createDataStream() {
     const container = document.querySelector('.about-card');
-    const stream = document.createElement('div');
-    stream.className = 'data-stream';
     
-    // Random position along the width
-    stream.style.left = `${5 + Math.random() * 90}%`;
+    // Create multiple streams at once
+    const numStreams = Math.floor(Math.random() * 3) + 1; // 1 to 3 streams at once
     
-    container.appendChild(stream);
-    
-    // Remove the stream after animation completes
-    setTimeout(() => stream.remove(), 8000);
+    for(let i = 0; i < numStreams; i++) {
+        const stream = document.createElement('div');
+        stream.className = 'data-stream';
+        
+        // More evenly distributed across the width
+        stream.style.left = `${(i * 30) + Math.random() * 20}%`;
+        
+        container.appendChild(stream);
+        
+        // Remove after animation
+        setTimeout(() => stream.remove(), 12000);  // matched to new animation time
+    }
 }
-
 // Create streams periodically
 // Create streams periodically
+// Create streams more frequently
 setInterval(() => {
-    if (Math.random() < 0.2) { // 20% chance each interval
+    if (Math.random() < 0.4) { // 40% chance each interval
         createDataStream();
     }
-}, 1000); // Check every second // Check every 2 seconds
+}, 2000); // Check every 2 seconds // Check every second // Check every 2 seconds
 
         // Add this after your GSAP initialization
 // function createChemicalBubble(x, y, container) {
