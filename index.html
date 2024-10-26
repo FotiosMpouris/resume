@@ -87,68 +87,28 @@
 /* Matrix-like Data Stream Effect */
 .data-stream {
     position: absolute;
-    width: 40px;
+    width: 40px;  /* made wider */
     height: 100%;
-    color: rgba(0, 183, 255, 0.25);
+    color: rgba(0, 183, 255, 0.25);  /* made more visible */
     font-family: 'Courier New', monospace;
-    font-size: 16px;
+    font-size: 16px;  /* made larger */
     line-height: 16px;
     overflow: hidden;
     opacity: 0;
-    animation: streamFlow 12s ease-out;
+    animation: streamFlow 12s ease-out;  /* made slower */
     pointer-events: none;
     mix-blend-mode: screen;
-    text-shadow: 0 0 10px rgba(0, 183, 255, 0.3);
-    transform-origin: center;
+    text-shadow: 0 0 10px rgba(0, 183, 255, 0.3);  /* added glow */
 }
 
 .data-stream::before {
     content: '守\A ら\A れ\A た\A 0\A 1\A ア\A プ\A リ\A ケ\A ー\A シ\A ョ\A ン\A \}\A \{\A #\A $\A @\A 9\A 8\A 7';
     position: absolute;
     white-space: pre;
-    animation: matrixRain 8s linear infinite;
-    text-shadow: 0 0 12px rgba(0, 183, 255, 0.6);
+    animation: matrixRain 8s linear infinite;  /* made slower */
+    text-shadow: 0 0 12px rgba(0, 183, 255, 0.6);  /* enhanced glow */
 }
 
-/* Add these new glitch-related classes right after */
-.data-stream.glitch {
-    animation: streamGlitch 0.2s steps(2) infinite;
-}
-
-.matrix-column.glitch {
-    animation: columnGlitch 0.2s steps(2) infinite;
-}
-
-.about-header-text h3.glitch {
-    animation: textGlitch 0.2s steps(2) 3;
-    position: relative;
-}
-
-.about-header-text h3.glitch::before,
-.about-header-text h3.glitch::after {
-    content: 'About Me';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    clip: rect(0, 900px, 0, 0);
-    background: linear-gradient(90deg, rgba(0, 123, 255, 1), rgba(0, 180, 255, 1));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.about-header-text h3.glitch::before {
-    left: 2px;
-    text-shadow: -2px 0 red;
-    animation: textGlitchOne 4s infinite linear alternate-reverse;
-}
-
-.about-header-text h3.glitch::after {
-    left: -2px;
-    text-shadow: 2px 0 blue;
-    animation: textGlitchTwo 4s infinite linear alternate-reverse;
-}
         @keyframes streamFlow {
     0% {
         transform: translateY(-100%);
@@ -173,48 +133,6 @@
     100% {
         transform: translateY(100%);
     }
-}
-
-@keyframes streamGlitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 2px); }
-    40% { transform: translate(-3px, -2px); }
-    60% { transform: translate(3px, 2px); }
-    80% { transform: translate(3px, -2px); }
-    100% { transform: translate(0); }
-}
-
-@keyframes columnGlitch {
-    0% { transform: translate(0); opacity: 1; }
-    50% { transform: translate(10px, 0); opacity: 0.5; }
-    100% { transform: translate(0); opacity: 1; }
-}
-
-@keyframes textGlitch {
-    0% { transform: skew(0deg); }
-    20% { transform: skew(-3deg); filter: blur(4px); }
-    40% { transform: skew(3deg); filter: blur(0); }
-    60% { transform: skew(-3deg); filter: blur(2px); }
-    80% { transform: skew(3deg); filter: blur(0); }
-    100% { transform: skew(0deg); }
-}
-
-@keyframes textGlitchOne {
-    0% { clip: rect(20px, 900px, 28px, 0); }
-    20% { clip: rect(40px, 900px, 48px, 0); }
-    40% { clip: rect(60px, 900px, 68px, 0); }
-    60% { clip: rect(80px, 900px, 88px, 0); }
-    80% { clip: rect(100px, 900px, 108px, 0); }
-    100% { clip: rect(120px, 900px, 128px, 0); }
-}
-
-@keyframes textGlitchTwo {
-    0% { clip: rect(12px, 900px, 16px, 0); }
-    20% { clip: rect(32px, 900px, 36px, 0); }
-    40% { clip: rect(52px, 900px, 56px, 0); }
-    60% { clip: rect(72px, 900px, 76px, 0); }
-    80% { clip: rect(92px, 900px, 96px, 0); }
-    100% { clip: rect(112px, 900px, 116px, 0); }
 }
 
 @keyframes streamFlow {
@@ -985,52 +903,23 @@
     // Add data stream effect
 function createDataStream() {
     const container = document.querySelector('.about-card');
-    const aboutHeader = document.querySelector('.about-header-text h3');
     
     // Create multiple streams at once
-    const numStreams = Math.floor(Math.random() * 3) + 1;
+    const numStreams = Math.floor(Math.random() * 3) + 1; // 1 to 3 streams at once
     
     for(let i = 0; i < numStreams; i++) {
         const stream = document.createElement('div');
         stream.className = 'data-stream';
         
+        // More evenly distributed across the width
         stream.style.left = `${(i * 30) + Math.random() * 20}%`;
+        
         container.appendChild(stream);
         
-        // Random glitch effect
-        if (Math.random() < 0.3) { // 30% chance of glitch
-            setTimeout(() => {
-                stream.classList.add('glitch');
-                
-                // Trigger About Me glitch
-                aboutHeader.classList.add('glitch');
-                
-                // Remove glitch classes after animation
-                setTimeout(() => {
-                    stream.classList.remove('glitch');
-                    aboutHeader.classList.remove('glitch');
-                }, 500);
-            }, Math.random() * 1000); // Random delay up to 1s
-        }
-        
-        // Remove stream after animation
-        setTimeout(() => stream.remove(), 12000);
+        // Remove after animation
+        setTimeout(() => stream.remove(), 12000);  // matched to new animation time
     }
 }
-
-// Add this new function for matrix column glitches
-function createMatrixGlitch() {
-    const columns = document.querySelectorAll('.matrix-column');
-    columns.forEach(column => {
-        if (Math.random() < 0.1) { // 10% chance for each column
-            column.classList.add('glitch');
-            setTimeout(() => column.classList.remove('glitch'), 200);
-        }
-    });
-}
-
-// Add this interval for periodic matrix glitches
-setInterval(createMatrixGlitch, 3000); // Check every 3 seconds
 // Create streams periodically
 // Create streams periodically
 // Create streams more frequently
@@ -1169,10 +1058,7 @@ for(let j = 0; j < 100; j++) {  // increased from 50 to 100
         // for(let j = 0; j < 50; j++) {
         //     columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
         // }
-       column.appendChild(container);
-
-// Add this line right after
-if (Math.random() < 0.2) column.classList.add('glitch'); 
+        
         column.textContent = columnChars;
         column.style.left = `${i * columnWidth}px`;
         
