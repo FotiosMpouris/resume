@@ -659,7 +659,19 @@
     z-index: 1;
 }
 
-.matrix-column {
+        .matrix-column {
+    position: absolute;
+    top: -100%;
+    width: 30px;
+    height: 300%;  /* increased from 200% to ensure full coverage */
+    color: rgba(0, 183, 255, 0.25);
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    line-height: 16px;
+    white-space: pre;
+    animation: matrixRain 20s linear infinite;
+}
+/* .matrix-column {
     position: absolute;
     top: -100%;
     width: 30px;
@@ -671,7 +683,7 @@
     white-space: pre;
     animation: matrixRain 20s linear infinite;
 }
-
+ */
 @keyframes matrixRain {
     from {
         transform: translateY(0);
@@ -1038,10 +1050,14 @@ document.querySelector('.dark-theme-section').addEventListener('mousemove', (e) 
         column.className = 'matrix-column';
         
         // Create random string of characters
-        let columnChars = '';
-        for(let j = 0; j < 50; j++) {
-            columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
-        }
+       let columnChars = '';
+for(let j = 0; j < 100; j++) {  // increased from 50 to 100
+    columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
+}
+        // let columnChars = '';
+        // for(let j = 0; j < 50; j++) {
+        //     columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
+        // }
         
         column.textContent = columnChars;
         column.style.left = `${i * columnWidth}px`;
