@@ -84,18 +84,54 @@
 }
 
         /* New Data Stream Effect */
+/* Matrix-like Data Stream Effect */
 .data-stream {
     position: absolute;
-    width: 2px;
+    width: 30px;
     height: 100%;
-    background: linear-gradient(to bottom,
-        rgba(0, 183, 255, 0) 0%,
-        rgba(0, 183, 255, 0.8) 50%,
-        rgba(0, 183, 255, 0) 100%);
-    filter: blur(1px);
+    color: rgba(0, 183, 255, 0.15);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 14px;
+    overflow: hidden;
     opacity: 0;
-    animation: streamFlow 3s ease-out;
+    animation: streamFlow 8s ease-out;
     pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+.data-stream::before {
+    content: '守\A ら\A れ\A た\A 0\A 1\A ア\A プ\A リ\A ケ\A ー\A シ\A ョ\A ン\A \}\A \{\A #\A $\A @\A 9\A 8\A 7';
+    position: absolute;
+    white-space: pre;
+    animation: matrixRain 4s linear infinite;
+    text-shadow: 0 0 8px rgba(0, 183, 255, 0.5);
+}
+
+        @keyframes streamFlow {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes matrixRain {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
 }
 
 @keyframes streamFlow {
@@ -826,20 +862,21 @@ function createDataStream() {
     stream.className = 'data-stream';
     
     // Random position along the width
-    stream.style.left = `${Math.random() * 100}%`;
+    stream.style.left = `${5 + Math.random() * 90}%`;
     
     container.appendChild(stream);
     
     // Remove the stream after animation completes
-    setTimeout(() => stream.remove(), 3000);
+    setTimeout(() => stream.remove(), 8000);
 }
 
 // Create streams periodically
+// Create streams periodically
 setInterval(() => {
-    if (Math.random() < 0.3) { // 30% chance each interval
+    if (Math.random() < 0.2) { // 20% chance each interval
         createDataStream();
     }
-}, 2000); // Check every 2 seconds
+}, 1000); // Check every second // Check every 2 seconds
 
         // Add this after your GSAP initialization
 // function createChemicalBubble(x, y, container) {
