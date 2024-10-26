@@ -94,14 +94,22 @@
                 opacity: 0;
             }
         }
+        @keyframes paperShimmer {
+    0% {
+        background-position: 0 0, 0 0;
+    }
+    100% {
+        background-position: 0 100px, 0 0;
+    }
+}
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
+    max-width: 1000px;  /* reduced from 1200px */
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
 
         /* Hero Section */
         .hero {
@@ -229,21 +237,22 @@
         /* About Section */
 .about-card {
     position: relative;
-    padding: 3rem !important;
+    padding: 2rem !important; /* reduced from 3rem */
     background: linear-gradient(
         135deg,
-        rgba(40, 40, 45, 0.95) 0%,
-        rgba(35, 35, 40, 0.97) 50%,
-        rgba(30, 30, 35, 0.95) 100%
+        rgba(30, 30, 35, 0.92) 0%,
+        rgba(25, 25, 30, 0.95) 50%,
+        rgba(20, 20, 25, 0.92) 100%
     ) !important;
     border: none !important;
     box-shadow: 
-        0 0 30px rgba(0, 0, 0, 0.3),
-        0 0 60px rgba(255, 0, 0, 0.1),
-        inset 0 0 30px rgba(0, 123, 255, 0.05) !important;
+        0 0 40px rgba(0, 0, 0, 0.4),
+        0 0 80px rgba(255, 0, 0, 0.2),
+        inset 0 0 40px rgba(0, 123, 255, 0.08) !important;
     overflow: hidden;
     backdrop-filter: blur(10px);
     animation: cardPulse 4s infinite ease-in-out;
+    margin: 0 2rem; /* added to create space on sides */
 }
 
 /* Metallic Frame Effect */
@@ -254,16 +263,17 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-        linear-gradient(45deg, 
-            rgba(255,255,255,0.1) 0%, 
-            rgba(255,255,255,0.05) 50%, 
-            rgba(255,255,255,0.1) 100%);
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 45%, 
+        rgba(255, 255, 255, 0.15) 50%, 
+        rgba(255, 255, 255, 0.1) 55%, 
+        transparent 100%);
     pointer-events: none;
     z-index: 1;
+    animation: shimmer 5s infinite;
 }
 
-/* Animated Border */
 .about-card::after {
     content: '';
     position: absolute;
@@ -271,13 +281,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border: 1px solid rgba(0, 123, 255, 0.3);
+    border: 2px solid rgba(0, 123, 255, 0.4); /* increased from 1px */
     box-shadow: 
-        0 0 15px rgba(0, 123, 255, 0.2),
-        inset 0 0 15px rgba(0, 123, 255, 0.2);
+        0 0 20px rgba(0, 123, 255, 0.3),
+        inset 0 0 20px rgba(0, 123, 255, 0.3);
     animation: borderGlow 4s infinite ease-in-out;
 }
-
 /* Tech Grid Background */
 .tech-grid {
     position: absolute;
@@ -286,13 +295,12 @@
     right: 0;
     bottom: 0;
     background-image: 
-        linear-gradient(rgba(0, 123, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 123, 255, 0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
-    opacity: 0.1;
-    animation: gridMove 20s infinite linear;
+        linear-gradient(rgba(0, 123, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 123, 255, 0.15) 1px, transparent 1px);
+    background-size: 30px 30px; /* increased from 20px */
+    opacity: 0.2; /* increased from 0.1 */
+    animation: gridMove 15s infinite ease-in-out;
 }
-
 /* Modern Profile Image Container */
 .about-header {
     display: flex;
@@ -342,14 +350,14 @@
 .about-content {
     position: relative;
     z-index: 2;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem; /* reduced from 2rem */
     border-radius: 15px;
     box-shadow: 
-        inset 0 0 30px rgba(0, 123, 255, 0.05),
-        0 0 20px rgba(0, 0, 0, 0.1);
+        inset 0 0 40px rgba(0, 123, 255, 0.08),
+        0 0 30px rgba(0, 0, 0, 0.15);
+    margin-top: 1rem; /* added to reduce vertical space */
 }
-
 .about-content p {
     color: rgba(255, 255, 255, 0.9);
     font-size: 1.15rem;
@@ -447,18 +455,44 @@
 
         /* Animations for About Section */
 @keyframes cardPulse {
-    0%, 100% { box-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 60px rgba(255, 0, 0, 0.1); }
-    50% { box-shadow: 0 0 40px rgba(0, 0, 0, 0.4), 0 0 80px rgba(255, 0, 0, 0.2); }
+    0%, 100% { 
+        box-shadow: 
+            0 0 40px rgba(0, 0, 0, 0.4),
+            0 0 80px rgba(255, 0, 0, 0.2),
+            inset 0 0 40px rgba(0, 123, 255, 0.08);
+    }
+    50% { 
+        box-shadow: 
+            0 0 60px rgba(0, 0, 0, 0.5),
+            0 0 100px rgba(255, 0, 0, 0.3),
+            inset 0 0 60px rgba(0, 123, 255, 0.12);
+    }
 }
 
 @keyframes borderGlow {
-    0%, 100% { border-color: rgba(0, 123, 255, 0.3); }
-    50% { border-color: rgba(0, 123, 255, 0.6); }
+    0%, 100% { 
+        border-color: rgba(0, 123, 255, 0.4);
+        box-shadow: 
+            0 0 20px rgba(0, 123, 255, 0.3),
+            inset 0 0 20px rgba(0, 123, 255, 0.3);
+    }
+    50% { 
+        border-color: rgba(0, 123, 255, 0.8);
+        box-shadow: 
+            0 0 30px rgba(0, 123, 255, 0.5),
+            inset 0 0 30px rgba(0, 123, 255, 0.5);
+    }
 }
 
 @keyframes gridMove {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(20px); }
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(10px) translateX(5px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(200%) rotate(45deg); }
 }
 
         /* Responsive Design */
@@ -481,12 +515,15 @@
                 padding: 1rem;
             }
 
-            .about-header {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 2rem;
-            }
+           .about-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* reduced from 3rem */
+    margin-bottom: 2rem; /* reduced from 4rem */
+    padding: 0 1rem;
+    position: relative;
+    z-index: 2;
+}
 
             .about-profile-img {
                 width: 150px;
@@ -497,10 +534,34 @@
                 padding: 2rem !important;
             }
 
-            .about-content p {
-                padding: 0;
-            }
-        }
+          .about-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 
+        inset 0 0 40px rgba(0, 123, 255, 0.08),
+        0 0 30px rgba(0, 0, 0, 0.15);
+    margin-top: 1rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 123, 255, 0.03) 0px,
+            rgba(0, 123, 255, 0.03) 1px,
+            transparent 1px,
+            transparent 2px
+        ),
+        linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.05),
+            rgba(0, 123, 255, 0.05)
+        );
+    animation: paperShimmer 10s infinite linear;
+}
+        
     </style>
 </head>
 
