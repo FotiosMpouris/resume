@@ -649,6 +649,37 @@
     100% { transform: translateX(200%) rotate(45deg); }
 }
 
+        .matrix-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.matrix-column {
+    position: absolute;
+    top: -100%;
+    width: 30px;
+    height: 200%;
+    color: rgba(0, 183, 255, 0.25);
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    line-height: 16px;
+    white-space: pre;
+    animation: matrixRain 20s linear infinite;
+}
+
+@keyframes matrixRain {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(50%);
+    }
+}
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero {
@@ -786,6 +817,7 @@
         <div class="container">
             <section class="section">
                 <div class="card about-card">
+                     <div class="matrix-background"></div>  
                     <div class="tech-grid"></div>
                     <div class="about-header">
                         <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
@@ -991,6 +1023,35 @@ document.querySelector('.dark-theme-section').addEventListener('mousemove', (e) 
     });
 });
 
+        function createMatrixBackground() {
+    const container = document.querySelector('.matrix-background');
+    const containerWidth = container.offsetWidth;
+    const columnWidth = 30;
+    const numberOfColumns = Math.ceil(containerWidth / columnWidth);
+    
+    // Matrix characters pool
+    const chars = '守らリケーシタアプョン01\{\}#$@987';
+    
+    // Create columns
+    for(let i = 0; i < numberOfColumns; i++) {
+        const column = document.createElement('div');
+        column.className = 'matrix-column';
+        
+        // Create random string of characters
+        let columnChars = '';
+        for(let j = 0; j < 50; j++) {
+            columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
+        }
+        
+        column.textContent = columnChars;
+        column.style.left = `${i * columnWidth}px`;
+        
+        // Random animation delay for each column
+        column.style.animationDelay = `${-Math.random() * 20}s`;
+        
+        container.appendChild(column);
+    }
+}
         // Initial animations
         document.addEventListener('DOMContentLoaded', () => {
             // Title and subtitle animations
@@ -999,6 +1060,7 @@ document.querySelector('.dark-theme-section').addEventListener('mousemove', (e) 
                 y: 0,
                 duration: 1,
                 delay: 0.5
+                
             });
 
             gsap.to('.subtitle', {
@@ -1035,7 +1097,18 @@ document.querySelector('.dark-theme-section').addEventListener('mousemove', (e) 
                     delay: 0.2 * index
                 });
             });
-        });
+
+            // Add these lines at the end, before the closing });
+    createMatrixBackground();
+    
+    // Recreate on window resize
+    window.addEventListener('resize', () => {
+        const container = document.querySelector('.matrix-background');
+        container.innerHTML = '';
+        createMatrixBackground();
+    });
+});
+        
     </script>
 </body>
 </html>
