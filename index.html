@@ -343,17 +343,7 @@
     transform-style: preserve-3d;
 }
 
-.about-card::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(0, 123, 255, 0.2), 
-        transparent);
-    z-index: 1;
-    animation: borderGlow 3s infinite linear;
-}
+
 
 /* Enhanced Grid */
 .tech-grid {
@@ -429,7 +419,7 @@
     animation: shimmer 5s infinite;
 }
 
-/* .about-card::after {
+.about-card::after {
     content: '';
     position: absolute;
     top: 0;
@@ -445,7 +435,7 @@
     animation: aboutGlow 4s ease-in-out infinite;
     pointer-events: none;
     z-index: 2;
-} */
+}
 
 /* Tech Grid Background */
 .tech-grid {
