@@ -408,14 +408,19 @@
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(0, 123, 255, 0.2),
-        rgba(0, 255, 255, 0.4),
-        rgba(0, 123, 255, 0.2),
+        rgba(0, 183, 255, 0.4),  /* Brighter blue */
+        rgba(0, 255, 255, 0.6),  /* Brighter cyan */
+        rgba(0, 183, 255, 0.4),  /* Brighter blue */
         transparent
     );
     animation: borderFlow 8s linear infinite;
     z-index: 1;
+    filter: blur(8px);  /* Add blur for more glow */
+    box-shadow: 
+        0 0 20px rgba(0, 183, 255, 0.3),
+        0 0 40px rgba(0, 255, 255, 0.2);  /* Additional glow effect */
 }
+
 
 .about-card::after {
     content: '';
@@ -845,8 +850,17 @@
 }
 
 @keyframes borderFlow {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    0% { 
+        transform: translateX(-100%);
+        opacity: 0.8;  /* Start slightly faded */
+    }
+    50% {
+        opacity: 1;    /* Full opacity in middle */
+    }
+    100% { 
+        transform: translateX(100%);
+        opacity: 0.8;  /* End slightly faded */
+    }
 }
         
     </style>
