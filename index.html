@@ -756,19 +756,35 @@
     z-index: 1;
 }
 
-        .matrix-column {
+       .matrix-column {
     position: absolute;
     top: -100%;
     width: 30px;
-    height: 300%;  /* increased from 200% to ensure full coverage */
+    height: 300%;
     color: rgba(0, 183, 255, 0.25);
     font-family: 'Courier New', monospace;
     font-size: 16px;
     line-height: 16px;
     white-space: pre;
-    animation: matrixRain 20s linear infinite;
+    /* Add these new properties */
+    background: linear-gradient(
+        0deg,
+        transparent,
+        rgba(255, 60, 0, 0.2) 50%,
+        transparent
+    );
+    background-size: 100% 200%;
+    animation: 
+        matrixRain 20s linear infinite,
+        fireFlow 8s infinite linear;
+    mix-blend-mode: screen;
 }
 
+@keyframes fireFlow {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 200%; }
+}
+        
 @keyframes matrixRain {
     from {
         transform: translateY(0);
