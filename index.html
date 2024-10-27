@@ -470,12 +470,15 @@
     height: 180px;
     border-radius: 10px;
     object-fit: cover;
+    position: relative;
+    isolation: isolate;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: all 0.3s ease;
     box-shadow: 
         0 10px 25px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(0, 123, 255, 0.3);
-    transform: rotate(-3deg);
-    transition: all 0.5s ease;
-    position: relative;
+        0 0 0 1px rgba(0, 123, 255, 0.3),
+        0 0 30px rgba(0, 123, 255, 0.2);
 }
 
 .about-profile-img:hover {
@@ -493,17 +496,17 @@
 .about-profile-img::before {
     content: '';
     position: absolute;
-    inset: -2px;
+    inset: 0;
     background: linear-gradient(
         125deg,
-        transparent 0%,
+        rgba(0, 123, 255, 0) 0%,
         rgba(0, 123, 255, 0.3) 40%,
         rgba(0, 255, 255, 0.6) 60%,
-        transparent 100%
+        rgba(0, 123, 255, 0) 100%
     );
-    animation: holoGlow 8s linear infinite;
-    z-index: 1;
-    opacity: 0.5;
+    animation: profileGlow 3s ease-in-out infinite;
+    z-index: 2;
+    mix-blend-mode: overlay;
 }
 
 .about-profile-img::after {
@@ -512,23 +515,50 @@
     inset: 0;
     background: repeating-linear-gradient(
         90deg,
-        transparent,
-        rgba(0, 123, 255, 0.1) 1px,
-        transparent 2px
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.1) 1px,
+        transparent 1px,
+        transparent 3px
     );
-    animation: scanlines 8s linear infinite;
-    mix-blend-mode: overlay;
+    animation: scanEffect 8s linear infinite;
+    z-index: 3;
 }
 
 /* ADD these new text effect styles */
 .about-content p {
     position: relative;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .about-content p:hover {
-    text-shadow: 0 0 8px rgba(0, 123, 255, 0.8);
-    letter-spacing: 0.2px;
+    color: #fff;
+    text-shadow: 
+        0 0 5px rgba(0, 123, 255, 0.5),
+        0 0 10px rgba(0, 123, 255, 0.3);
+    transform: translateX(5px);
+}
+
+.about-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 123, 255, 0.2),
+        transparent
+    );
+    animation: aboutGlow 8s ease-in-out infinite;
+    pointer-events: none;
 }
 
 /* ADD these new card border effect styles */
@@ -712,6 +742,41 @@
     }
 }
 
+@keyframes profileGlow {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes scanEffect {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+@keyframes textGlitch {
+    0%, 100% { transform: none; opacity: 1; }
+    5% { transform: skew(-2deg); opacity: 0.75; }
+    10% { transform: none; opacity: 1; }
+    15% { transform: skew(2deg); opacity: 0.75; }
+    20% { transform: none; opacity: 1; }
+}
+
+@keyframes aboutGlow {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
 @keyframes gridMove {
     0% { transform: translateY(0) translateX(0); }
     50% { transform: translateY(10px) translateX(5px); }
@@ -722,6 +787,8 @@
     0% { transform: translateX(-100%) rotate(45deg); }
     100% { transform: translateX(200%) rotate(45deg); }
 }
+
+        
 
         .matrix-background {
     position: absolute;
@@ -1044,7 +1111,42 @@ document.querySelector('.dark-theme-section').addEventListener('mousemove', (e) 
         createChemicalBubble(x, y, e.currentTarget);
     }
 });
+        function enhanceAboutSection() {
+    const profile = document.querySelector('.about-profile-img');
+    const paragraphs = document.querySelectorAll('.about-content p');
+    
+    // Profile 3D effect
+    profile.addEventListener('mousemove', (e) => {
+        const rect = profile.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         
+        const rotateX = ((y / rect.height) - 0.5) * 20;
+        const rotateY = ((x / rect.width) - 0.5) * 20;
+        
+        profile.style.transform = `
+            perspective(1000px)
+            rotateX(${rotateX}deg)
+            rotateY(${rotateY}deg)
+            scale(1.1)
+        `;
+    });
+    
+    profile.addEventListener('mouseleave', () => {
+        profile.style.transform = 'none';
+    });
+
+    // Text glitch effect on hover
+    paragraphs.forEach(p => {
+        p.addEventListener('mouseenter', () => {
+            p.style.animation = 'textGlitch 0.3s ease';
+        });
+        
+        p.addEventListener('animationend', () => {
+            p.style.animation = '';
+        });
+    });
+}
         // Create particles function
         function createParticle(container) {
             const particle = document.createElement('div');
@@ -1202,6 +1304,8 @@ function enhanceProfileHologram() {
         // Initial animations
         document.addEventListener('DOMContentLoaded', () => {
     // Title and subtitle animations
+              enhanceAboutSection();
+});
     gsap.to('.title', {
         opacity: 1,
         y: 0,
