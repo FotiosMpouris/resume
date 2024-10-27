@@ -16,6 +16,77 @@
             --card: #ffffff;
         }
 
+        /* STEP 3: Add these styles to your CSS section, right after your existing :root variables */
+
+/* Section Border Glow */
+.section-border-glow {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 0, 0, 0.5),
+        rgba(255, 128, 0, 0.5),
+        rgba(255, 0, 0, 0.5),
+        transparent
+    );
+    filter: blur(2px);
+    animation: borderGlow 3s infinite alternate;
+}
+
+/* Profile Container and Stats */
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-stats-overlay {
+    position: absolute;
+    top: 0;
+    left: 120%;
+    width: 300px;
+    background: rgba(0, 30, 60, 0.95);
+    border: 1px solid rgba(0, 183, 255, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+/* Glowing About Me Text */
+.glow-text {
+    color: transparent !important;
+    -webkit-text-stroke: 1px rgba(0, 183, 255, 0.5);
+    text-shadow: 
+        0 0 10px rgba(0, 183, 255, 0.5),
+        0 0 20px rgba(0, 183, 255, 0.3);
+    animation: titlePulse 3s infinite alternate;
+}
+
+/* STEP 4: Add these animation keyframes at the end of your CSS */
+@keyframes borderGlow {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+@keyframes titlePulse {
+    0% {
+        text-shadow: 
+            0 0 10px rgba(0, 183, 255, 0.3),
+            0 0 20px rgba(0, 183, 255, 0.2);
+    }
+    100% {
+        text-shadow: 
+            0 0 15px rgba(0, 183, 255, 0.5),
+            0 0 30px rgba(0, 183, 255, 0.3);
+    }
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -867,6 +938,7 @@
     </section>
 
     <div class="dark-theme-section">
+        <div class="section-border-glow"></div>
         <div class="particles-container" id="particles-container-bottom">
             <div class="power-surge"></div>
         </div>
@@ -876,12 +948,15 @@
                      <div class="matrix-background"></div>  
                     <div class="tech-grid"></div>
                     <div class="about-header">
-                        <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
-                        <div class="about-header-text">
-                            <h3>About Me</h3>
-                        </div>
-                    </div>
-                    <div class="about-content">
+    <div class="profile-container">
+        <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
+        <div class="profile-stats-overlay"></div>
+    </div>
+    <div class="about-header-text">
+        <h3 class="glow-text">About Me</h3>
+    </div>
+</div>
+                    
 
     <div class="about-content">
                         <p>
@@ -1138,6 +1213,71 @@ function enhanceProfileHologram() {
         profile.style.transform = 'rotate(-3deg)';
     });
 }
+
+        // STEP 5: Add this code to your JavaScript section, right before the existing DOMContentLoaded event
+
+function initializeProfileStats() {
+    const statsData = [
+        "Multimedia Specialist: Level 7",
+        "AI Development: Level 6",
+        "Creative Suite Mastery: 92%",
+        "Project Management: Level 8",
+        "Innovation Index: 94%"
+    ];
+    
+    const overlay = document.querySelector('.profile-stats-overlay');
+    
+    // Create stat elements
+    statsData.forEach((stat, index) => {
+        const statItem = document.createElement('div');
+        statItem.className = 'stat-item';
+        statItem.dataset.stat = stat;
+        overlay.appendChild(statItem);
+    });
+}
+
+function typeStatEffect(element, text) {
+    let index = 0;
+    element.textContent = '';
+    
+    const typeInterval = setInterval(() => {
+        if (index < text.length) {
+            element.textContent += text[index];
+            index++;
+        } else {
+            clearInterval(typeInterval);
+        }
+    }, 30);
+}
+
+// STEP 6: Add this to your existing DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', () => {
+    // Your existing initialization code here...
+    
+    // Add this new initialization
+    initializeProfileStats();
+    
+    // Add hover event for profile image
+    const profileImg = document.querySelector('.about-profile-img');
+    const statsOverlay = document.querySelector('.profile-stats-overlay');
+    
+    profileImg.addEventListener('mouseenter', () => {
+        statsOverlay.style.opacity = '1';
+        statsOverlay.style.transform = 'translateX(0)';
+        
+        const statItems = statsOverlay.querySelectorAll('.stat-item');
+        statItems.forEach((item, index) => {
+            setTimeout(() => {
+                typeStatEffect(item, item.dataset.stat);
+            }, index * 500);
+        });
+    });
+    
+    profileImg.addEventListener('mouseleave', () => {
+        statsOverlay.style.opacity = '0';
+        statsOverlay.style.transform = 'translateX(20px)';
+    });
+});
         // Initial animations
         document.addEventListener('DOMContentLoaded', () => {
     // Title and subtitle animations
