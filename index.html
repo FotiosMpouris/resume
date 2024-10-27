@@ -15,6 +15,7 @@
             --primary-dark: #0a192f;
             --primary-light: #20232a;
             --accent-blue: #007BFF;
+            --accent-red: #FF0000;
             --accent-glow: rgba(0, 183, 255, 0.5);
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
@@ -335,6 +336,7 @@
         .profile-container {
             position: relative;
             display: inline-block;
+            flex: 2; /* Adjusted to allow space for infographic */
         }
 
         /* Profile Image */
@@ -426,6 +428,7 @@
         .about-header-text {
             position: relative;
             display: inline-block;
+            flex: 1; /* Adjusted to allow space for infographic */
         }
 
         .glow-text {
@@ -762,6 +765,11 @@
             .about-content {
                 padding: 1rem;
             }
+
+            /* Adjust infographic positioning */
+            .infographic {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 768px) {
@@ -841,9 +849,67 @@
 
         /* Additional Enhancements */
 
-        /* Lower Hero Section - Removed */
+        /* Lower Hero Section Enhancements */
+        .lower-hero {
+            position: relative;
+            height: 50vh;
+            background: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--text-primary);
+        }
 
-        /* "About Me" Section Enhancements */
+        .lower-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://www.svgrepo.com/show/331541/circuit.svg') repeat;
+            background-size: 50px 50px;
+            opacity: 0.05;
+            animation: subtleScroll 60s linear infinite;
+        }
+
+        /* Subtle Scrolling Code Effects */
+        .lower-hero .scrolling-code {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            width: 90%;
+            height: 80%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .scrolling-code::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(255, 255, 255, 0.05),
+                transparent
+            );
+            background-size: 100% 20px;
+            animation: codeScroll 10s linear infinite;
+        }
+
+        @keyframes subtleScroll {
+            from { background-position: 0 0; }
+            to { background-position: 100px 100px; }
+        }
+
+        @keyframes codeScroll {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100%); }
+        }
+
+        /* Glowing Borders for About Card */
         .about-card::after {
             content: '';
             position: absolute;
@@ -866,6 +932,7 @@
             flex-wrap: wrap;
             gap: 1rem;
             margin-top: 2rem;
+            flex: 1; /* Allows it to occupy space alongside profile */
         }
 
         .infographic-item {
@@ -908,6 +975,33 @@
 
         .infographic-item p {
             color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Cycling Animation for Infographics */
+        .infographic-item {
+            opacity: 0;
+            animation: cycleInfographics 20s infinite;
+        }
+
+        .infographic-item:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .infographic-item:nth-child(2) {
+            animation-delay: 5s;
+        }
+
+        .infographic-item:nth-child(3) {
+            animation-delay: 10s;
+        }
+
+        .infographic-item:nth-child(4) {
+            animation-delay: 15s;
+        }
+
+        @keyframes cycleInfographics {
+            0%, 100% { opacity: 0; }
+            10%, 40% { opacity: 1; }
         }
 
         /* Animated SVGs */
@@ -989,6 +1083,13 @@
             </div>
         </section>
 
+        <!-- Lower Hero Section Enhancements -->
+        <section class="lower-hero">
+            <div class="particles-container"></div>
+            <div class="scrolling-code"></div>
+            <!-- No additional content needed as per your preference -->
+        </section>
+
         <!-- Dark Theme Section -->
         <div class="dark-theme-section">
             <div class="section-border-glow"></div>
@@ -1008,25 +1109,7 @@
                             <div class="about-header-text">
                                 <h3 class="glow-text">About Me</h3>
                             </div>
-                        </div>
-                        <div class="about-content">
-                            <p>
-                                I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.
-                            </p>
-                            <p>
-                                More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement. By leveraging AI-assisted applications, I'm focused on creating innovative, agent-centric systems that reflect the future of technology.
-                            </p>
-                            <p>
-                                Throughout my career, I've used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.
-                            </p>
-                            <p>
-                                I've also managed digital platforms and multimedia content creation for various organizations, overseeing Google Workspace operations and creating social media assets to improve outreach. These hands-on experiences have given me a well-rounded understanding of how technology and creativity intersect to streamline workflows, enhance communication, and deliver captivating user experiences.
-                            </p>
-                            <p>
-                                Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.
-                            </p>
-
-                            <!-- Interactive Infographics -->
+                            <!-- Repositioned Infographic Sections -->
                             <div class="infographic">
                                 <div class="infographic-item">
                                     <h4>AI Development</h4>
@@ -1045,9 +1128,23 @@
                                     <p>Coordinating cross-functional teams to deliver projects on time.</p>
                                 </div>
                             </div>
-
-                            <!-- Animated SVG -->
-                            <img src="https://www.svgrepo.com/show/331541/circuit.svg" alt="Circuit Design" class="animated-svg">
+                        </div>
+                        <div class="about-content">
+                            <p>
+                                I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.
+                            </p>
+                            <p>
+                                More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement. By leveraging AI-assisted applications, I'm focused on creating innovative, agent-centric systems that reflect the future of technology.
+                            </p>
+                            <p>
+                                Throughout my career, I've used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.
+                            </p>
+                            <p>
+                                I've also managed digital platforms and multimedia content creation for various organizations, overseeing Google Workspace operations and creating social media assets to improve outreach. These hands-on experiences have given me a well-rounded understanding of how technology and creativity intersect to streamline workflows, enhance communication, and deliver captivating user experiences.
+                            </p>
+                            <p>
+                                Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.
+                            </p>
                         </div>
                     </div>
                 </section>
