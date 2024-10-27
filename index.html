@@ -126,9 +126,14 @@
         opacity: 0;
     }
 }
+
 @keyframes matrixRain {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(50%); }
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
 }
 
 @keyframes streamFlow {
@@ -136,13 +141,18 @@
         transform: translateY(-100%);
         opacity: 0;
     }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
     100% {
         transform: translateY(100%);
         opacity: 0;
     }
 }
+
 @keyframes dissipate {
     0% {
         opacity: 0;
@@ -327,7 +337,11 @@
 }
  */
         /* Enhanced About Card */
-
+.about-card {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    transform-style: preserve-3d;
+}
 
 
 
@@ -363,8 +377,69 @@
 
         /* About Section */
         /* About Section */
+.about-card {
+    position: relative;
+    padding: 2rem !important; /* reduced from 3rem */
+    background: linear-gradient(
+        135deg,
+        rgba(15, 25, 40, 0.95) 0%,
+        rgba(20, 30, 50, 0.97) 50%,
+        rgba(15, 25, 40, 0.95) 100%
+    ) !important;
+    border: 1px solid rgba(0, 123, 255, 0.1) !important;
+    overflow: hidden;
+}  !important;
+    border: none !important;
+    box-shadow: 
+        0 0 40px rgba(0, 0, 0, 0.4),
+        0 0 80px rgba(255, 0, 0, 0.2),
+        inset 0 0 40px rgba(0, 123, 255, 0.08) !important;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    animation: cardPulse 4s infinite ease-in-out;
+    margin: 0 2rem; /* added to create space on sides */
+}
 
 /* Metallic Frame Effect */
+.about-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 183, 255, 0.4),  /* Brighter blue */
+        rgba(0, 255, 255, 0.6),  /* Brighter cyan */
+        rgba(0, 183, 255, 0.4),  /* Brighter blue */
+        transparent
+    );
+    animation: borderFlow 8s linear infinite;
+    z-index: 1;
+    filter: blur(8px);  /* Add blur for more glow */
+    box-shadow: 
+        0 0 20px rgba(0, 183, 255, 0.3),
+        0 0 40px rgba(0, 255, 255, 0.2);  /* Additional glow effect */
+}
+
+
+.about-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 123, 255, 0.2),
+        transparent
+    );
+    animation: aboutGlow 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
 /* Tech Grid Background */
 .tech-grid {
     position: absolute;
@@ -395,15 +470,12 @@
     height: 180px;
     border-radius: 10px;
     object-fit: cover;
-    position: relative;
-    isolation: isolate;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    transition: all 0.3s ease;
     box-shadow: 
         0 10px 25px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(0, 123, 255, 0.3),
-        0 0 30px rgba(0, 123, 255, 0.2);
+        0 0 0 1px rgba(0, 123, 255, 0.3);
+    transform: rotate(-3deg);
+    transition: all 0.5s ease;
+    position: relative;
 }
 
 .about-profile-img:hover {
@@ -421,17 +493,17 @@
 .about-profile-img::before {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: -2px;
     background: linear-gradient(
         125deg,
-        rgba(0, 123, 255, 0) 0%,
+        transparent 0%,
         rgba(0, 123, 255, 0.3) 40%,
         rgba(0, 255, 255, 0.6) 60%,
-        rgba(0, 123, 255, 0) 100%
+        transparent 100%
     );
-    animation: profileGlow 3s ease-in-out infinite;
-    z-index: 2;
-    mix-blend-mode: overlay;
+    animation: holoGlow 8s linear infinite;
+    z-index: 1;
+    opacity: 0.5;
 }
 
 .about-profile-img::after {
@@ -440,16 +512,25 @@
     inset: 0;
     background: repeating-linear-gradient(
         90deg,
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0.1) 1px,
-        transparent 1px,
-        transparent 3px
+        transparent,
+        rgba(0, 123, 255, 0.1) 1px,
+        transparent 2px
     );
-    animation: scanEffect 8s linear infinite;
-    z-index: 3;
+    animation: scanlines 8s linear infinite;
+    mix-blend-mode: overlay;
 }
 
 /* ADD these new text effect styles */
+.about-content p {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.about-content p:hover {
+    text-shadow: 0 0 8px rgba(0, 123, 255, 0.8);
+    letter-spacing: 0.2px;
+}
+
 /* ADD these new card border effect styles */
 
         
@@ -484,31 +565,35 @@
     text-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
 }
 
-/* STEP 2: Find and DELETE all existing .about-card styles */
-/* Then ADD this consolidated version */
-
-.about-card {
-    position: relative;
-    padding: 2rem !important;
-    background: linear-gradient(
-        135deg,
-        rgba(15, 25, 40, 0.95) 0%,
-        rgba(20, 30, 50, 0.97) 50%,
-        rgba(15, 25, 40, 0.95) 100%
-    ) !important;
-    border: 1px solid rgba(0, 123, 255, 0.1) !important;
-    overflow: hidden;
-    box-shadow: 
-        0 0 40px rgba(0, 0, 0, 0.4),
-        0 0 80px rgba(255, 0, 0, 0.2),
-        inset 0 0 40px rgba(0, 123, 255, 0.08) !important;
-    backdrop-filter: blur(10px);
-    max-width: 900px !important;
-    margin: 0 auto !important;
-    transform-style: preserve-3d;
-}
 /* Content Area Styling */
+.about-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(20, 35, 60, 0.4);
+      border: 1px solid rgba(0, 123, 255, 0.1);
+    padding: 1.5rem; /* reduced from 2rem */
+    border-radius: 15px;
+    box-shadow: 
+        inset 0 0 40px rgba(0, 123, 255, 0.08),
+        0 0 30px rgba(0, 0, 0, 0.15);
+    margin-top: 1rem; /* added to reduce vertical space */
+}
+.about-content p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.15rem;
+    line-height: 2;
+    text-align: justify;
+    padding: 0;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 2;
+}
 
+.about-content p:first-of-type {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+}
         /* Section Styling */
         .section {
             padding: 4rem 0;
@@ -569,41 +654,6 @@
                        0 0 20px rgba(255, 0, 0, 0.2);
         }
 
-
-/* STEP 3: Find and DELETE all existing .about-content styles */
-/* Then ADD this consolidated version */
-
-.about-content {
-    position: relative;
-    z-index: 2;
-    background: rgba(20, 35, 60, 0.4);
-    border: 1px solid rgba(0, 123, 255, 0.1);
-    padding: 1.5rem;
-    border-radius: 15px;
-    box-shadow: 
-        inset 0 0 40px rgba(0, 123, 255, 0.08),
-        0 0 30px rgba(0, 0, 0, 0.15);
-    margin-top: 1rem;
-}
-
-/* And add these specific text styles */
-.about-content p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.15rem;
-    line-height: 2;
-    text-align: justify;
-    padding: 0;
-    margin-bottom: 2.5rem;
-    position: relative;
-    z-index: 2;
-}
-
-.about-content p:first-of-type {
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 500;
-}
-        
         /* Social Links */
         .social-links {
             display: flex;
@@ -662,41 +712,6 @@
     }
 }
 
-@keyframes profileGlow {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 0.8; }
-}
-
-@keyframes scanEffect {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-}
-
-@keyframes textGlitch {
-    0%, 100% { transform: none; opacity: 1; }
-    5% { transform: skew(-2deg); opacity: 0.75; }
-    10% { transform: none; opacity: 1; }
-    15% { transform: skew(2deg); opacity: 0.75; }
-    20% { transform: none; opacity: 1; }
-}
-
-@keyframes aboutGlow {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
-
 @keyframes gridMove {
     0% { transform: translateY(0) translateX(0); }
     50% { transform: translateY(10px) translateX(5px); }
@@ -707,8 +722,6 @@
     0% { transform: translateX(-100%) rotate(45deg); }
     100% { transform: translateX(200%) rotate(45deg); }
 }
-
-        
 
         .matrix-background {
     position: absolute;
@@ -787,8 +800,39 @@
                 width: 150px;
                 height: 150px;
             }
-        
-         
+
+            .about-card {
+                padding: 2rem !important;
+            }
+
+          .about-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 
+        inset 0 0 40px rgba(0, 123, 255, 0.08),
+        0 0 30px rgba(0, 0, 0, 0.15);
+    margin-top: 1rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 123, 255, 0.03) 0px,
+            rgba(0, 123, 255, 0.03) 1px,
+            transparent 1px,
+            transparent 2px
+        ),
+        linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.05),
+            rgba(0, 123, 255, 0.05)
+        );
+    animation: paperShimmer 10s infinite linear;
+}
+
     @keyframes holoGlow {
     0% { 
         opacity: 0.3;
@@ -898,8 +942,9 @@
                         </div>
                     </div>
                     <div class="about-content">
-    <p>...</p>
-</div>
+
+    <div class="about-content">
+                        <p>
                             I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.
                         </p>
                         <p>
@@ -999,42 +1044,7 @@ document.querySelector('.dark-theme-section').addEventListener('mousemove', (e) 
         createChemicalBubble(x, y, e.currentTarget);
     }
 });
-        function enhanceAboutSection() {
-    const profile = document.querySelector('.about-profile-img');
-    const paragraphs = document.querySelectorAll('.about-content p');
-    
-    // Profile 3D effect
-    profile.addEventListener('mousemove', (e) => {
-        const rect = profile.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
         
-        const rotateX = ((y / rect.height) - 0.5) * 20;
-        const rotateY = ((x / rect.width) - 0.5) * 20;
-        
-        profile.style.transform = `
-            perspective(1000px)
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            scale(1.1)
-        `;
-    });
-    
-    profile.addEventListener('mouseleave', () => {
-        profile.style.transform = 'none';
-    });
-
-    // Text glitch effect on hover
-    paragraphs.forEach(p => {
-        p.addEventListener('mouseenter', () => {
-            p.style.animation = 'textGlitch 0.3s ease';
-        });
-        
-        p.addEventListener('animationend', () => {
-            p.style.animation = '';
-        });
-    });
-}
         // Create particles function
         function createParticle(container) {
             const particle = document.createElement('div');
@@ -1190,10 +1200,8 @@ function enhanceProfileHologram() {
     });
 }
         // Initial animations
-        // STEP 5: Replace the existing animation setup with this cleaner version
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize GSAP animations
+        document.addEventListener('DOMContentLoaded', () => {
+    // Title and subtitle animations
     gsap.to('.title', {
         opacity: 1,
         y: 0,
@@ -1236,19 +1244,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initialize other effects
+    // Create Matrix Background
     createMatrixBackground();
-    enhanceAboutSection();
-    addInteractiveTextEffects();
-    enhanceProfileHologram();
-});
-
-// Add window resize handler
-window.addEventListener('resize', () => {
-    const container = document.querySelector('.matrix-background');
-    container.innerHTML = '';
-    createMatrixBackground();
-});
+    
+    // Recreate on window resize
+    window.addEventListener('resize', () => {
+        const container = document.querySelector('.matrix-background');
+        container.innerHTML = '';
+        createMatrixBackground();
+    });
 
     // New function calls for about section enhancements
     addInteractiveTextEffects();
@@ -1259,6 +1263,8 @@ window.addEventListener('resize', () => {
     </script>
 </body>
 </html>
+
+
 
 
 
