@@ -297,53 +297,12 @@
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
-
-/* Add this right after your .dark-theme-section class */
-/* .chemical-bubble {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    mix-blend-mode: screen;
-    transform-style: preserve-3d;
-} */
-
-/* .bubble-inner {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle at 40% 40%, 
-        rgba(255, 150, 150, 0.9) 0%,
-        rgba(255, 100, 100, 0.6) 30%,
-        rgba(255, 50, 50, 0.2) 60%,
-        transparent 80%);
-    filter: blur(2px);
-    animation: bubbleGlow 2s infinite alternate;
-}
-
-.bubble-outer {
-    position: absolute;
-    width: 120%;
-    height: 120%;
-    top: -10%;
-    left: -10%;
-    border-radius: 50%;
-    background: radial-gradient(circle at center, 
-        transparent 0%,
-        rgba(255, 100, 100, 0.1) 70%,
-        rgba(255, 50, 50, 0.2) 90%,
-        rgba(255, 0, 0, 0.3) 100%);
-    filter: blur(4px);
-}
- */
         /* Enhanced About Card */
 .about-card {
     max-width: 900px !important;
     margin: 0 auto !important;
     transform-style: preserve-3d;
 }
-
-
 
 /* Enhanced Grid */
 .tech-grid {
@@ -682,13 +641,6 @@
         transform: translateX(300%);
     }
 }
-/*         @keyframes cardPulse {
-    0%, 100% { 
-        box-shadow: 
-            0 0 40px rgba(0, 0, 0, 0.4),
-            0 0 80px rgba(255, 0, 0, 0.2),
-            inset 0 0 40px rgba(0, 123, 255, 0.08); */
-/*     } */
     50% { 
         box-shadow: 
             0 0 60px rgba(0, 0, 0, 0.5),
@@ -745,19 +697,7 @@
     white-space: pre;
     animation: matrixRain 20s linear infinite;
 }
-/* .matrix-column {
-    position: absolute;
-    top: -100%;
-    width: 30px;
-    height: 200%;
-    color: rgba(0, 183, 255, 0.25);
-    font-family: 'Courier New', monospace;
-    font-size: 16px;
-    line-height: 16px;
-    white-space: pre;
-    animation: matrixRain 20s linear infinite;
-}
- */
+
 @keyframes matrixRain {
     from {
         transform: translateY(0);
@@ -1024,7 +964,6 @@ function createDataStream() {
         setTimeout(() => stream.remove(), 12000);  // matched to new animation time
     }
 }
-// Create streams periodically
 // Create streams periodically
 // Create streams more frequently
 setInterval(() => {
