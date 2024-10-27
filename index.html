@@ -6,6 +6,10 @@
     <title>Fotios Mpouris - Creative Developer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Add this after your existing script tags -->
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <style>
         
         :root {
@@ -298,44 +302,86 @@
             50% { opacity: 1; }
         }
 
-/* Add this right after your .dark-theme-section class */
-/* .chemical-bubble {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    mix-blend-mode: screen;
+/* Add this after your existing @keyframes definitions */
+
+/* Holographic Profile Effects */
+.holographic-profile {
+    position: relative;
     transform-style: preserve-3d;
-} */
+    transition: all 0.3s ease;
+}
 
-/* .bubble-inner {
+.holographic-scan {
     position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 183, 255, 0.2),
+        transparent
+    );
+    transform: translateY(-100%);
+    animation: scanEffect 2s linear infinite;
+}
+
+@keyframes scanEffect {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(200%); }
+}
+
+/* Animated Text Effects */
+.animated-text {
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-text::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle at 40% 40%, 
-        rgba(255, 150, 150, 0.9) 0%,
-        rgba(255, 100, 100, 0.6) 30%,
-        rgba(255, 50, 50, 0.2) 60%,
-        transparent 80%);
-    filter: blur(2px);
-    animation: bubbleGlow 2s infinite alternate;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 183, 255, 0.5),
+        transparent
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: textUnderline 2s ease-out forwards;
 }
 
-.bubble-outer {
-    position: absolute;
-    width: 120%;
-    height: 120%;
-    top: -10%;
-    left: -10%;
-    border-radius: 50%;
-    background: radial-gradient(circle at center, 
-        transparent 0%,
-        rgba(255, 100, 100, 0.1) 70%,
-        rgba(255, 50, 50, 0.2) 90%,
-        rgba(255, 0, 0, 0.3) 100%);
-    filter: blur(4px);
+@keyframes textUnderline {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
 }
- */
+
+/* Futuristic Border */
+.futuristic-border {
+    position: relative;
+    border: 1px solid rgba(0, 183, 255, 0.1);
+    overflow: hidden;
+}
+
+.border-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 183, 255, 0.2),
+        transparent
+    );
+    transform: translateX(-100%);
+    animation: borderFlow 3s linear infinite;
+}
+
+@keyframes borderFlow {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
         /* Enhanced About Card */
 .about-card {
     max-width: 900px !important;
@@ -932,37 +978,59 @@
         </div>
         <div class="container">
             <section class="section">
-                <div class="card about-card">
-                     <div class="matrix-background"></div>  
-                    <div class="tech-grid"></div>
-                    <div class="about-header">
-                        <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
-                        <div class="about-header-text">
-                            <h3>About Me</h3>
-                        </div>
-                    </div>
-                    <div class="about-content">
-
-    <div class="about-content">
-                        <p>
-                            I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.
-                        </p>
-                        <p>
-                            More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement. By leveraging AI-assisted applications, I'm focused on creating innovative, agent-centric systems that reflect the future of technology.
-                        </p>
-                        <p>
-                            Throughout my career, I've used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.
-                        </p>
-                        <p>
-                            I've also managed digital platforms and multimedia content creation for various organizations, overseeing Google Workspace operations and creating social media assets to improve outreach. These hands-on experiences have given me a well-rounded understanding of how technology and creativity intersect to streamline workflows, enhance communication, and deliver captivating user experiences.
-                        </p>
-                        <p>
-                            Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
+    <div class="card about-card futuristic-border">
+        <!-- Existing matrix and grid backgrounds -->
+        <div class="matrix-background"></div>  
+        <div class="tech-grid"></div>
+        
+        <!-- New border glow effect -->
+        <div class="border-glow"></div>
+        
+        <!-- Updated header with holographic profile -->
+        <div class="about-header">
+            <div class="holographic-profile">
+                <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
+                <div class="holographic-scan"></div>
+            </div>
+            <div class="about-header-text">
+                <h3>About Me</h3>
+            </div>
+        </div>
+        
+        <!-- Updated content section with animated text -->
+        <div class="about-content">
+            <div class="animated-text">
+                <p>
+                    I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.
+                </p>
+            </div>
+            
+            <div class="animated-text">
+                <p>
+                    More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement. By leveraging AI-assisted applications, I'm focused on creating innovative, agent-centric systems that reflect the future of technology.
+                </p>
+            </div>
+            
+            <div class="animated-text">
+                <p>
+                    Throughout my career, I've used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.
+                </p>
+            </div>
+            
+            <div class="animated-text">
+                <p>
+                    I've also managed digital platforms and multimedia content creation for various organizations, overseeing Google Workspace operations and creating social media assets to improve outreach. These hands-on experiences have given me a well-rounded understanding of how technology and creativity intersect to streamline workflows, enhance communication, and deliver captivating user experiences.
+                </p>
+            </div>
+            
+            <div class="animated-text">
+                <p>
+                    Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
             <section class="section">
                 <div class="card">
                     <h3>Featured Projects</h3>
@@ -1258,6 +1326,66 @@ function enhanceProfileHologram() {
     addInteractiveTextEffects();
     enhanceProfileHologram();
     setInterval(updateMatrixColumns, 1000);
+});
+        // Holographic Profile Effect
+function initHolographicEffect() {
+    const profile = document.querySelector('.holographic-profile');
+    if (!profile) return;
+
+    profile.addEventListener('mousemove', (e) => {
+        const rect = profile.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        
+        const tiltX = (y - 0.5) * 20;
+        const tiltY = (x - 0.5) * 20;
+        
+        profile.style.transform = `
+            perspective(1000px)
+            rotateX(${tiltX}deg)
+            rotateY(${tiltY}deg)
+            scale(1.05)
+        `;
+        
+        const hue = Math.floor(x * 360);
+        profile.style.boxShadow = `
+            0 0 30px rgba(${hue}, 183, 255, 0.4),
+            0 0 60px rgba(${hue}, 183, 255, 0.2)
+        `;
+    });
+
+    profile.addEventListener('mouseleave', () => {
+        profile.style.transform = 'rotate(-3deg)';
+        profile.style.boxShadow = '';
+    });
+}
+
+// Animated Text Effect
+function initTextAnimations() {
+    const textElements = document.querySelectorAll('.animated-text');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    textElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'all 0.8s ease-out';
+        observer.observe(element);
+    });
+}
+
+// Initialize all effects
+document.addEventListener('DOMContentLoaded', () => {
+    initHolographicEffect();
+    initTextAnimations();
+    // ... your existing initialization code ...
 });
         
     </script>
