@@ -550,20 +550,6 @@
             50% { opacity: 1; }
         }
 
-        @keyframes borderFlow {
-            0% { 
-                transform: translateX(-100%);
-                opacity: 0.8;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% { 
-                transform: translateX(100%);
-                opacity: 0.8;
-            }
-        }
-
         /* Section Styling */
         .section {
             padding: 4rem 0;
@@ -838,6 +824,141 @@
                 background: rgba(255, 60, 0, 0.15);
             }
         }
+
+        /* Additional Enhancements */
+
+        /* Lower Hero Section */
+        .lower-hero {
+            position: relative;
+            height: 50vh;
+            background: linear-gradient(
+                135deg,
+                var(--primary-light) 0%,
+                var(--primary-dark) 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--text-primary);
+        }
+
+        .lower-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(0,123,255,0.1) 0%, transparent 60%),
+                radial-gradient(circle at 70% 50%, rgba(0,123,255,0.1) 0%, transparent 60%);
+            animation: subtleGlow 10s ease-in-out infinite;
+        }
+
+        .floating-hologram {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 183, 255, 0.1);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 20px rgba(0, 183, 255, 0.3),
+                0 0 40px rgba(0, 183, 255, 0.2);
+            animation: floatHologram 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes subtleGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes floatHologram {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+            50% { transform: translate(-50%, -50%) translateY(-20px); }
+        }
+
+        /* "About Me" Section Enhancements */
+        .about-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid rgba(0, 123, 255, 0.5);
+            border-radius: 15px;
+            box-shadow: 
+                0 0 20px rgba(0, 123, 255, 0.3),
+                0 0 40px rgba(0, 255, 255, 0.2);
+            animation: borderFlow 8s linear infinite;
+            pointer-events: none;
+        }
+
+        /* Interactive Infographics */
+        .infographic {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .infographic-item {
+            flex: 1 1 45%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .infographic-item:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 15px rgba(0, 183, 255, 0.5),
+                0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .infographic-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://www.svgrepo.com/show/331541/circuit.svg') no-repeat center center;
+            background-size: 50%;
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+        }
+
+        .infographic-item:hover::before {
+            opacity: 0.2;
+        }
+
+        .infographic-item h4 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 183, 255, 0.5);
+        }
+
+        .infographic-item p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Animated SVGs */
+        .animated-svg {
+            width: 100%;
+            height: auto;
+            margin-top: 2rem;
+            animation: svgMove 10s linear infinite;
+        }
+
+        @keyframes svgMove {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+            100% { transform: translateX(0); }
+        }
     </style>
 </head>
 
@@ -905,6 +1026,15 @@
         </div>
     </section>
 
+    <!-- Lower Hero Section -->
+    <section class="lower-hero">
+        <div class="floating-hologram"></div>
+        <div class="container">
+            <h2 class="subtitle">Welcome to My Digital Realm</h2>
+            <img src="https://www.svgrepo.com/show/331541/circuit.svg" alt="Circuit Design" class="animated-svg">
+        </div>
+    </section>
+
     <!-- Dark Theme Section -->
     <div class="dark-theme-section">
         <div class="section-border-glow"></div>
@@ -941,6 +1071,29 @@
                         <p>
                             Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.
                         </p>
+
+                        <!-- Interactive Infographics -->
+                        <div class="infographic">
+                            <div class="infographic-item">
+                                <h4>AI Development</h4>
+                                <p>Leveraging machine learning algorithms to create intelligent systems.</p>
+                            </div>
+                            <div class="infographic-item">
+                                <h4>Game Design</h4>
+                                <p>Designing immersive game environments and interactive experiences.</p>
+                            </div>
+                            <div class="infographic-item">
+                                <h4>Multimedia Production</h4>
+                                <p>Creating high-quality animations and motion graphics.</p>
+                            </div>
+                            <div class="infographic-item">
+                                <h4>Project Management</h4>
+                                <p>Coordinating cross-functional teams to deliver projects on time.</p>
+                            </div>
+                        </div>
+
+                        <!-- Animated SVG -->
+                        <img src="https://www.svgrepo.com/show/331541/circuit.svg" alt="Circuit Design" class="animated-svg">
                     </div>
                 </div>
             </section>
@@ -1103,8 +1256,8 @@
             // Initialize Matrix
             createMatrixBackground();
             setInterval(() => {
-                const chars = document.querySelectorAll('.matrix-column');
-                chars.forEach(column => {
+                const columns = document.querySelectorAll('.matrix-column');
+                columns.forEach(column => {
                     if (Math.random() < 0.01) { // 1% chance per column to glow a character
                         const randomCharIndex = Math.floor(Math.random() * 100);
                         const char = column.childNodes[randomCharIndex];
