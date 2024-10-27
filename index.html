@@ -7,7 +7,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        
         :root {
             --primary: #2A2A2A;
             --secondary: #007BFF;
@@ -343,7 +342,17 @@
     transform-style: preserve-3d;
 }
 
-
+.about-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 123, 255, 0.2), 
+        transparent);
+    z-index: 1;
+    animation: borderGlow 3s infinite linear;
+}
 
 /* Enhanced Grid */
 .tech-grid {
@@ -387,8 +396,7 @@
         rgba(15, 25, 40, 0.95) 100%
     ) !important;
     border: 1px solid rgba(0, 123, 255, 0.1) !important;
-    overflow: hidden;
-}  !important;
+} !important;
     border: none !important;
     box-shadow: 
         0 0 40px rgba(0, 0, 0, 0.4),
@@ -404,37 +412,34 @@
 .about-card::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 123, 255, 0.2),
-        rgba(0, 255, 255, 0.4),
-        rgba(0, 123, 255, 0.2),
-        transparent
-    );
-    animation: borderFlow 8s linear infinite;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 45%, 
+        rgba(255, 255, 255, 0.15) 50%, 
+        rgba(255, 255, 255, 0.1) 55%, 
+        transparent 100%);
+    pointer-events: none;
     z-index: 1;
+    animation: shimmer 5s infinite;
 }
 
 .about-card::after {
     content: '';
     position: absolute;
     top: 0;
-    left: -50%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 123, 255, 0.2),
-        transparent
-    );
-    animation: aboutGlow 4s ease-in-out infinite;
-    pointer-events: none;
-    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid rgba(0, 123, 255, 0.4); /* increased from 1px */
+    box-shadow: 
+        0 0 20px rgba(0, 123, 255, 0.3),
+        inset 0 0 20px rgba(0, 123, 255, 0.3);
+    animation: borderGlow 4s infinite ease-in-out;
 }
-
 /* Tech Grid Background */
 .tech-grid {
     position: absolute;
@@ -479,86 +484,6 @@
         0 15px 35px rgba(0, 0, 0, 0.4),
         0 0 0 2px rgba(0, 123, 255, 0.5),
         0 0 30px rgba(0, 123, 255, 0.3);
-}
-
-.about-profile-img {
-    isolation: isolate;  /* Add this property to existing class */
-}
-
-.about-profile-img::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(
-        125deg,
-        transparent 0%,
-        rgba(0, 123, 255, 0.3) 40%,
-        rgba(0, 255, 255, 0.6) 60%,
-        transparent 100%
-    );
-    animation: holoGlow 8s linear infinite;
-    z-index: 1;
-    opacity: 0.5;
-}
-
-.about-profile-img::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 123, 255, 0.1) 1px,
-        transparent 2px
-    );
-    animation: scanlines 8s linear infinite;
-    mix-blend-mode: overlay;
-}
-
-/* ADD these new text effect styles */
-.about-content p {
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.about-content p:hover {
-    text-shadow: 0 0 8px rgba(0, 123, 255, 0.8);
-    letter-spacing: 0.2px;
-}
-
-/* ADD these new card border effect styles */
-.about-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 123, 255, 0.2),
-        rgba(0, 255, 255, 0.4),
-        rgba(0, 123, 255, 0.2),
-        transparent
-    );
-    animation: borderFlow 8s linear infinite;
-    z-index: 1;
-}
-
-/* Matrix containment fix */
-.matrix-background {
-    mask-image: linear-gradient(
-        to bottom,
-        transparent,
-        black 10%,
-        black 90%,
-        transparent
-    );
-    -webkit-mask-image: linear-gradient(
-        to bottom,
-        transparent,
-        black 10%,
-        black 90%,
-        transparent
-    );
 }
 
 /* Enhanced Header Text */
@@ -683,21 +608,13 @@
         }
 
         /* Animations for About Section */
-@keyframes aboutGlow {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(300%);
-    }
-}
-/*         @keyframes cardPulse {
+@keyframes cardPulse {
     0%, 100% { 
         box-shadow: 
             0 0 40px rgba(0, 0, 0, 0.4),
             0 0 80px rgba(255, 0, 0, 0.2),
-            inset 0 0 40px rgba(0, 123, 255, 0.08); */
-/*     } */
+            inset 0 0 40px rgba(0, 123, 255, 0.08);
+    }
     50% { 
         box-shadow: 
             0 0 60px rgba(0, 0, 0, 0.5),
@@ -841,27 +758,6 @@
         );
     animation: paperShimmer 10s infinite linear;
 }
-
-    @keyframes holoGlow {
-    0% { 
-        opacity: 0.3;
-        transform: translateX(-100%) rotate(35deg);
-    }
-    100% { 
-        opacity: 0.7;
-        transform: translateX(200%) rotate(35deg);
-    }
-}
-
-@keyframes scanlines {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(100%); }
-}
-
-@keyframes borderFlow {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
         
     </style>
 </head>
@@ -933,7 +829,7 @@
         <div class="container">
             <section class="section">
                 <div class="card about-card">
-<!--                      <div class="matrix-background"></div>   -->
+                     <div class="matrix-background"></div>  
                     <div class="tech-grid"></div>
                     <div class="about-header">
                         <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
@@ -1033,7 +929,41 @@ setInterval(() => {
     }
 }, 2000); // Check every 2 seconds // Check every second // Check every 2 seconds
 
- 
+        // Add this after your GSAP initialization
+// function createChemicalBubble(x, y, container) {
+//     const bubble = document.createElement('div');
+//     bubble.className = 'chemical-bubble';
+    
+//     // Random size between 10 and 30 pixels
+//     const size = Math.random() * 20 + 10;
+//     bubble.style.width = `${size}px`;
+//     bubble.style.height = `${size}px`;
+    
+//     // Position at mouse coordinates
+//     bubble.style.left = `${x}px`;
+//     bubble.style.top = `${y}px`;
+    
+//     // Create inner and outer glow
+//     const inner = document.createElement('div');
+//     inner.className = 'bubble-inner';
+//     const outer = document.createElement('div');
+//     outer.className = 'bubble-outer';
+    
+//     bubble.appendChild(inner);
+//     bubble.appendChild(outer);
+//     container.appendChild(bubble);
+    
+//     // Animate the bubble
+//     gsap.to(bubble, {
+//         y: -200 - Math.random() * 100,
+//         x: x + (Math.random() - 0.5) * 100,
+//         scale: 2,
+//         opacity: 0,
+//         duration: 4,
+//         ease: "power1.out",
+//         onComplete: () => bubble.remove()
+//     });
+// }
         // Add this after the createChemicalBubble function
 document.querySelector('.dark-theme-section').addEventListener('mousemove', (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -1138,113 +1068,53 @@ for(let j = 0; j < 100; j++) {  // increased from 50 to 100
         container.appendChild(column);
     }
 }
-
-        // ADD these new functions after your existing GSAP initialization
-
-// Matrix Effect Control
-function updateMatrixColumns() {
-    const container = document.querySelector('.matrix-background');
-    const columns = container.querySelectorAll('.matrix-column');
-    
-    columns.forEach(column => {
-        const rect = column.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
-        
-        if (rect.bottom < containerRect.top || rect.top > containerRect.bottom) {
-            column.style.animationPlayState = 'paused';
-        } else {
-            column.style.animationPlayState = 'running';
-        }
-    });
-}
-
-// Interactive Text Effect
-function addInteractiveTextEffects() {
-    const paragraphs = document.querySelectorAll('.about-content p');
-    
-    paragraphs.forEach(p => {
-        p.addEventListener('mouseover', () => {
-            p.style.transform = 'scale(1.01)';
-            p.style.backgroundColor = 'rgba(0, 123, 255, 0.05)';
-        });
-        
-        p.addEventListener('mouseout', () => {
-            p.style.transform = 'scale(1)';
-            p.style.backgroundColor = 'transparent';
-        });
-    });
-}
-
-// Holographic Profile Effect
-function enhanceProfileHologram() {
-    const profile = document.querySelector('.about-profile-img');
-    
-    profile.addEventListener('mousemove', (e) => {
-        const rect = profile.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const rotateX = (y / rect.height - 0.5) * 20;
-        const rotateY = (x / rect.width - 0.5) * 20;
-        
-        profile.style.transform = `
-            perspective(1000px)
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            scale(1.05)
-        `;
-    });
-    
-    profile.addEventListener('mouseleave', () => {
-        profile.style.transform = 'rotate(-3deg)';
-    });
-}
         // Initial animations
         document.addEventListener('DOMContentLoaded', () => {
-    // Title and subtitle animations
-    gsap.to('.title', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.5
-    });
+            // Title and subtitle animations
+            gsap.to('.title', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.5
+                
+            });
 
-    gsap.to('.subtitle', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.8
-    });
+            gsap.to('.subtitle', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.8
+            });
 
-    // Skill icons animation
-    const skillIcons = document.querySelectorAll('.skill-icon');
-    skillIcons.forEach((icon, index) => {
-        gsap.to(icon, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            delay: 1.2 + (index * 0.1),
-            ease: "back.out(1.7)"
-        });
-    });
+            // Skill icons animation
+            const skillIcons = document.querySelectorAll('.skill-icon');
+            skillIcons.forEach((icon, index) => {
+                gsap.to(icon, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.5,
+                    delay: 1.2 + (index * 0.1),
+                    ease: "back.out(1.7)"
+                });
+            });
 
-    // Section animations
-    const sections = document.querySelectorAll('.section');
-    sections.forEach((section, index) => {
-        gsap.to(section, {
-            scrollTrigger: {
-                trigger: section,
-                start: "top 80%",
-                toggleActions: "play none none none"
-            },
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.2 * index
-        });
-    });
+            // Section animations
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                gsap.to(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    delay: 0.2 * index
+                });
+            });
 
-    // Create Matrix Background
+            // Add these lines at the end, before the closing });
     createMatrixBackground();
     
     // Recreate on window resize
@@ -1253,15 +1123,8 @@ function enhanceProfileHologram() {
         container.innerHTML = '';
         createMatrixBackground();
     });
-
-    // New function calls for about section enhancements
-    addInteractiveTextEffects();
-    enhanceProfileHologram();
-    setInterval(updateMatrixColumns, 1000);
 });
         
     </script>
 </body>
 </html>
-
-
