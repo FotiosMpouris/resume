@@ -59,13 +59,76 @@
 }
 
 /* Glowing About Me Text */
+/* Find and replace your existing .glow-text class with this updated version */
 .glow-text {
     color: transparent !important;
-    -webkit-text-stroke: 1px rgba(0, 183, 255, 0.5);
+    -webkit-text-stroke: 2px rgba(0, 183, 255, 0.3);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Add these new styles right after .glow-text */
+.glow-text:hover {
+    -webkit-text-stroke: 2px rgba(0, 183, 255, 0.8);
     text-shadow: 
-        0 0 10px rgba(0, 183, 255, 0.5),
-        0 0 20px rgba(0, 183, 255, 0.3);
-    animation: titlePulse 3s infinite alternate;
+        0 0 10px rgba(0, 183, 255, 0.8),
+        0 0 20px rgba(0, 183, 255, 0.5),
+        0 0 30px rgba(0, 183, 255, 0.3);
+}
+
+.about-header-text {
+    position: relative;
+    display: inline-block;
+}
+
+.about-header-text::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    pointer-events: none;
+    background: radial-gradient(
+        circle closest-side,
+        rgba(0, 183, 255, 0.2),
+        transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.about-header-text:hover::after {
+    opacity: 1;
+}
+
+/* Find your .profile-stats-overlay class in the CSS and add these styles */
+.profile-stats-overlay {
+    /* Keep existing styles */
+    position: absolute;
+    top: 0;
+    left: 120%;
+    width: 300px;
+    background: rgba(0, 30, 60, 0.95);
+    border: 1px solid rgba(0, 183, 255, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+/* Add this new class right after .profile-stats-overlay */
+.stat-item {
+    color: #ffffff; /* Bright base color */
+    text-shadow: 
+        0 0 5px rgba(0, 183, 255, 0.8),
+        0 0 10px rgba(0, 183, 255, 0.5);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    font-family: 'Courier New', monospace;
 }
 
 /* STEP 4: Add these animation keyframes at the end of your CSS */
@@ -766,18 +829,28 @@
     font-size: 16px;
     line-height: 16px;
     white-space: pre;
-    /* Add these new properties */
-    background: linear-gradient(
-        0deg,
-        transparent,
-        rgba(255, 60, 0, 0.2) 50%,
-        transparent
-    );
-    background-size: 100% 200%;
-    animation: 
-        matrixRain 20s linear infinite,
-        fireFlow 8s infinite linear;
-    mix-blend-mode: screen;
+    animation: matrixRain 20s linear infinite;
+}
+
+/* Add these new classes right after .matrix-column */
+.matrix-char {
+    display: inline-block;
+    animation: charGlow 2s infinite;
+    opacity: 0.25;
+}
+
+.matrix-char.glow {
+    color: #ffffff;
+    opacity: 1;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px rgba(0, 183, 255, 0.8);
+}
+
+@keyframes charGlow {
+    0%, 100% { opacity: 0.25; }
+    50% { opacity: 1; }
 }
 
 @keyframes fireFlow {
@@ -1135,6 +1208,28 @@ document.querySelector('.dark-theme-section').addEventListener('mousemove', (e) 
     });
 });
 
+function updateMatrixGlow() {
+    const columns = document.querySelectorAll('.matrix-column');
+    
+    columns.forEach(column => {
+        const chars = column.textContent.split('');
+        column.textContent = ''; // Clear existing content
+        
+        chars.forEach(char => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.className = 'matrix-char';
+            
+            // Random chance to add glow class
+            if (Math.random() < 0.1) {
+                span.classList.add('glow');
+            }
+            
+            column.appendChild(span);
+        });
+    });
+}
+
         function createMatrixBackground() {
     const container = document.querySelector('.matrix-background');
     const containerWidth = container.offsetWidth;
@@ -1268,12 +1363,10 @@ function typeStatEffect(element, text) {
 
 // STEP 6: Add this to your existing DOMContentLoaded event
 document.addEventListener('DOMContentLoaded', () => {
-    // Your existing initialization code here...
-    
-    // Add this new initialization
+    // Profile Stats Initialization
     initializeProfileStats();
     
-    // Add hover event for profile image
+    // Profile Image Hover Events
     const profileImg = document.querySelector('.about-profile-img');
     const statsOverlay = document.querySelector('.profile-stats-overlay');
     
@@ -1293,10 +1386,8 @@ document.addEventListener('DOMContentLoaded', () => {
         statsOverlay.style.opacity = '0';
         statsOverlay.style.transform = 'translateX(20px)';
     });
-});
-        // Initial animations
-        document.addEventListener('DOMContentLoaded', () => {
-    // Title and subtitle animations
+
+    // GSAP Animations
     gsap.to('.title', {
         opacity: 1,
         y: 0,
@@ -1311,7 +1402,7 @@ document.addEventListener('DOMContentLoaded', () => {
         delay: 0.8
     });
 
-    // Skill icons animation
+    // Skill Icons Animation
     const skillIcons = document.querySelectorAll('.skill-icon');
     skillIcons.forEach((icon, index) => {
         gsap.to(icon, {
@@ -1323,7 +1414,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Section animations
+    // Section Animations
     const sections = document.querySelectorAll('.section');
     sections.forEach((section, index) => {
         gsap.to(section, {
@@ -1339,17 +1430,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Create Matrix Background
+    // Matrix Background
     createMatrixBackground();
     
-    // Recreate on window resize
+    // Start the matrix glow effect
+    setInterval(updateMatrixGlow, 100);
+    
+    // Window Resize Handler
     window.addEventListener('resize', () => {
         const container = document.querySelector('.matrix-background');
         container.innerHTML = '';
         createMatrixBackground();
     });
 
-    // New function calls for about section enhancements
+    // About Section Enhancements
     addInteractiveTextEffects();
     enhanceProfileHologram();
     setInterval(updateMatrixColumns, 1000);
