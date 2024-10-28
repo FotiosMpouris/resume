@@ -21,7 +21,7 @@
             --text-secondary: rgba(255, 255, 255, 0.7);
             --matrix-color: rgba(0, 183, 255, 0.25);
             --transition-standard: all 0.3s ease;
-            --infographic-bg: rgba(0, 0, 139, 0.4); /* Dark Blue, more transparent */
+            --infographic-bg: rgba(0, 123, 255, 0.3); /* Semi-transparent Blue */
         }
 
         /* Reset and Base Styles */
@@ -394,9 +394,6 @@
             position: relative;
             display: inline-block;
             flex: 2; /* Adjusted to allow space for infographic */
-            /* Option 2: Invisible Overlay to Expand Hover Area */
-            /* Add the following div inside the profile-container */
-            /* This will be added in the HTML below */
         }
 
         /* Profile Image */
@@ -657,7 +654,7 @@
             left: 0;
             padding: 1rem;
             box-sizing: border-box;
-            background: var(--infographic-bg); /* Dark Blue, more transparent */
+            background: var(--infographic-bg); /* Semi-transparent Blue */
             border-radius: 10px;
             display: none; /* Hide all by default */
             flex-direction: column;
@@ -681,6 +678,7 @@
             font-size: 1.5rem;
             position: relative;
             /* Removed animation: shiftUp 4s forwards; */
+            border: none; /* Ensure no border */
         }
 
         .infographic-item p {
@@ -704,38 +702,9 @@
             transition: opacity 0.3s ease;
         }
 
-        .typing-text::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background: var(--accent-blue);
-            animation: blink-caret 0.75s step-end infinite;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .typing-text.active::after {
-            opacity: 1;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-            from, to { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        /* Shift Up Animation for Titles */
-        @keyframes shiftUp {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
+        /* Removed ::after pseudo-element to eliminate caret */
+        /* If you still want to keep the caret without it expanding, use a separate approach */
+        /* For complete removal, no ::after is defined */
 
         /* Section Styling */
         .section {
@@ -846,8 +815,7 @@
             font-size: 1.4rem;
             margin-bottom: 0.5rem;
             text-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
-            /* Ensure no border or extra lines */
-            border: none;
+            border: none; /* Ensure no border */
         }
 
         .project-card p {
@@ -1233,31 +1201,33 @@
 
         // Matrix Effect Functions
         function createMatrixBackground() {
-            const container = document.querySelector('.matrix-background');
-            const containerWidth = container.offsetWidth;
-            const columnWidth = 30; // Increased width for fewer columns
-            const numberOfColumns = Math.ceil(containerWidth / columnWidth);
+            const containers = document.querySelectorAll('.matrix-background');
+            containers.forEach(container => {
+                const containerWidth = container.offsetWidth;
+                const columnWidth = 30; // Increased width for fewer columns
+                const numberOfColumns = Math.ceil(containerWidth / columnWidth);
 
-            const chars = '守らリケーシタアプョン01{}#$@987';
+                const chars = '守らリケーシタアプョン01{}#$@987';
 
-            container.innerHTML = ''; // Clear existing columns
+                container.innerHTML = ''; // Clear existing columns
 
-            for(let i = 0; i < numberOfColumns; i++) {
-                const column = document.createElement('div');
-                column.className = 'matrix-column';
-                
-                // Create random string of characters
-                let columnChars = '';
-                for(let j = 0; j < 100; j++) { // Increased from 50 to 100
-                    columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
+                for(let i = 0; i < numberOfColumns; i++) {
+                    const column = document.createElement('div');
+                    column.className = 'matrix-column';
+                    
+                    // Create random string of characters
+                    let columnChars = '';
+                    for(let j = 0; j < 100; j++) { // Increased from 50 to 100
+                        columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
+                    }
+
+                    column.textContent = columnChars;
+                    column.style.left = `${i * columnWidth}px`;
+                    column.style.animationDelay = `${-Math.random() * 20}s`;
+
+                    container.appendChild(column);
                 }
-
-                column.textContent = columnChars;
-                column.style.left = `${i * columnWidth}px`;
-                column.style.animationDelay = `${-Math.random() * 20}s`;
-
-                container.appendChild(column);
-            }
+            });
         }
 
         // Profile Stats Functions
@@ -1355,18 +1325,12 @@
                 let index = 0;
                 element.textContent = '';
                 element.style.opacity = '1';
-                if (element.classList.contains('typing-text')) {
-                    element.classList.add('active'); // Show caret
-                }
                 
                 const typingInterval = setInterval(() => {
                     if (index < text.length) {
                         element.textContent += text[index];
                         index++;
                     } else {
-                        if (element.classList.contains('typing-text')) {
-                            element.classList.remove('active'); // Hide caret
-                        }
                         clearInterval(typingInterval);
                         resolve();
                     }
