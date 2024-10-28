@@ -487,9 +487,9 @@
         /* Profile Stats Overlay */
         .profile-stats-overlay {
             position: absolute;
-            top: 100%; /* Position directly below the profile image */
-            left: 50%; /* Center horizontally relative to the profile image */
-            transform: translateX(-50%) translateY(5px); /* Reduced downward shift for closer positioning */
+            top: 50%; /* Center vertically relative to the profile image */
+            left: 100%; /* Position to the right of the profile image */
+            transform: translateY(-50%) translateX(10px); /* Shift to the right and center vertically */
             width: 280px; /* Slightly narrower for better fit */
             background: rgba(0, 123, 255, 0.3); /* Light Transparent Blue */
             border: 1px solid rgba(0, 183, 255, 0.5); /* Updated Border Color */
@@ -504,7 +504,7 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translateX(-50%) translateY(0); /* Move up to align perfectly */
+            transform: translateY(-50%) translateX(0); /* Remove the X shift on hover */
             pointer-events: auto;
         }
 
@@ -639,6 +639,12 @@
             height: 200px;
             overflow: hidden;
             z-index: 1; /* Ensure it's behind the content */
+            background: var(--infographic-bg); /* Moved background here */
+            border-radius: 10px; /* Moved border radius here */
+            padding: 1rem; /* Added padding for inner spacing */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .infographic-item {
@@ -647,11 +653,9 @@
             height: 100%;
             top: 0;
             left: 0;
-            padding: 1rem;
             box-sizing: border-box;
-            background: var(--infographic-bg); /* Semi-transparent Blue */
-            border-radius: 10px;
-            display: none; /* Hide all by default */
+            /* Removed background and border-radius */
+            display: flex; /* Always display flex */
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -660,7 +664,6 @@
         }
 
         .infographic-item.active {
-            display: flex;
             opacity: 1;
         }
 
@@ -1069,11 +1072,11 @@
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
                             <div class="profile-stats-overlay">
-                                <div class="stat-item">Multimedia Specialist: Level 7</div>
-                                <div class="stat-item">AI Development: Level 6</div>
-                                <div class="stat-item">Creative Suite Mastery: 92%</div>
-                                <div class="stat-item">Project Management: Level 8</div>
-                                <div class="stat-item">Innovation Index: 94%</div>
+                                <div class="stat-item" data-stat="Multimedia Specialist: Level 7">Multimedia Specialist: Level 7</div>
+                                <div class="stat-item" data-stat="AI Development: Level 6">AI Development: Level 6</div>
+                                <div class="stat-item" data-stat="Creative Suite Mastery: 92%">Creative Suite Mastery: 92%</div>
+                                <div class="stat-item" data-stat="Project Management: Level 8">Project Management: Level 8</div>
+                                <div class="stat-item" data-stat="Innovation Index: 94%">Innovation Index: 94%</div>
                             </div>
                         </div>
                         <!-- Removed the .about-header-text div as per user request -->
@@ -1416,7 +1419,7 @@
             // Hover interactions directly on the profile image
             profileImg.addEventListener('mouseenter', () => {
                 statsOverlay.style.opacity = '1';
-                statsOverlay.style.transform = 'translateX(-50%) translateY(0)'; // Align perfectly
+                statsOverlay.style.transform = 'translateY(-50%) translateX(0)'; /* Align perfectly */
                 
                 const statItems = statsOverlay.querySelectorAll('.stat-item');
                 statItems.forEach((item, index) => {
@@ -1429,7 +1432,7 @@
             
             profileImg.addEventListener('mouseleave', () => {
                 statsOverlay.style.opacity = '0';
-                statsOverlay.style.transform = 'translateX(-50%) translateY(5px)'; /* Slight downward shift */
+                statsOverlay.style.transform = 'translateY(-50%) translateX(10px)'; /* Slight right shift */
             });
 
             // GSAP Animations
