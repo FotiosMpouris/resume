@@ -696,9 +696,10 @@
         /* Typing Effect */
         .typing-text {
             border-right: 2px solid var(--accent-blue);
-            white-space: nowrap;
+            /* Removed white-space: nowrap; to allow wrapping */
+            white-space: normal;
+            word-wrap: break-word;
             overflow: hidden;
-            /* Removed width:0; */
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -1272,6 +1273,10 @@
                     element.textContent += text[index];
                     index++;
                 } else {
+                    // Remove caret if it's a typing-text
+                    if (element.classList.contains('typing-text')) {
+                        element.style.borderRight = 'none';
+                    }
                     clearInterval(typeInterval);
                 }
             }, 30);
@@ -1335,13 +1340,18 @@
                 let index = 0;
                 element.textContent = '';
                 element.style.opacity = '1';
-                element.style.borderRight = '2px solid var(--accent-blue)';
+                if (element.classList.contains('typing-text')) {
+                    element.style.borderRight = '2px solid var(--accent-blue)';
+                }
                 
                 const typingInterval = setInterval(() => {
                     if (index < text.length) {
                         element.textContent += text[index];
                         index++;
                     } else {
+                        if (element.classList.contains('typing-text')) {
+                            element.style.borderRight = 'none'; // Remove the caret after typing
+                        }
                         clearInterval(typingInterval);
                         resolve();
                     }
