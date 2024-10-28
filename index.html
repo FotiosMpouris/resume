@@ -21,7 +21,7 @@
             --text-secondary: rgba(255, 255, 255, 0.7);
             --matrix-color: rgba(0, 183, 255, 0.25);
             --transition-standard: all 0.3s ease;
-            --infographic-bg: rgba(0, 0, 139, 0.8); /* Dark Blue */
+            --infographic-bg: rgba(0, 0, 139, 0.6); /* Dark Blue, more transparent */
         }
 
         /* Reset and Base Styles */
@@ -657,7 +657,7 @@
             left: 0;
             padding: 1rem;
             box-sizing: border-box;
-            background: var(--infographic-bg); /* Dark Blue */
+            background: var(--infographic-bg); /* Dark Blue, more transparent */
             border-radius: 10px;
             display: none; /* Hide all by default */
             flex-direction: column;
@@ -695,13 +695,31 @@
 
         /* Typing Effect */
         .typing-text {
-            border-right: 2px solid var(--accent-blue);
-            /* Removed white-space: nowrap; to allow wrapping */
+            position: relative;
+            /* Removed border-right */
+            /* border-right: 2px solid var(--accent-blue); */
             white-space: normal;
             word-wrap: break-word;
             overflow: hidden;
             opacity: 0;
             transition: opacity 0.3s ease;
+        }
+
+        .typing-text::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--accent-blue);
+            animation: blink-caret 0.75s step-end infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .typing-text.active::after {
+            opacity: 1;
         }
 
         @keyframes typing {
@@ -710,8 +728,8 @@
         }
 
         @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--accent-blue); }
+            from, to { opacity: 0; }
+            50% { opacity: 1; }
         }
 
         /* Shift Up Animation for Titles */
@@ -1275,7 +1293,7 @@
                 } else {
                     // Remove caret if it's a typing-text
                     if (element.classList.contains('typing-text')) {
-                        element.style.borderRight = 'none';
+                        // Not needed since we're using ::after
                     }
                     clearInterval(typeInterval);
                 }
@@ -1341,7 +1359,7 @@
                 element.textContent = '';
                 element.style.opacity = '1';
                 if (element.classList.contains('typing-text')) {
-                    element.style.borderRight = '2px solid var(--accent-blue)';
+                    element.classList.add('active'); // Show caret
                 }
                 
                 const typingInterval = setInterval(() => {
@@ -1350,7 +1368,7 @@
                         index++;
                     } else {
                         if (element.classList.contains('typing-text')) {
-                            element.style.borderRight = 'none'; // Remove the caret after typing
+                            element.classList.remove('active'); // Hide caret
                         }
                         clearInterval(typingInterval);
                         resolve();
