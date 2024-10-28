@@ -321,6 +321,22 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        /* Glowing Box Around About Card */
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
+            animation: glowPulse 4s infinite alternate;
+            pointer-events: none;
+            z-index: -1;
+        }
+
         /* Matrix Background in About Card */
         .matrix-background {
             position: absolute;
@@ -377,6 +393,7 @@
             position: relative;
             display: inline-block;
             flex: 2; /* Adjusted to allow space for infographic */
+            padding: 10px; /* Added padding to increase hover area */
         }
 
         /* Profile Image */
@@ -638,19 +655,19 @@
             left: 0;
             padding: 1rem;
             box-sizing: border-box;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 0, 0.2); /* Transparent Yellow */
             border-radius: 10px;
             display: none; /* Hide all by default */
             flex-direction: column;
             justify-content: center;
             align-items: center;
             opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
 
         .infographic-item.active {
             display: flex;
             opacity: 1;
-            transition: opacity 0.5s ease-in-out;
         }
 
         .infographic-item h4 {
@@ -661,6 +678,7 @@
             width: 100%;
             font-size: 1.5rem;
             position: relative;
+            animation: shiftUp 4s forwards;
         }
 
         .infographic-item p {
@@ -690,6 +708,12 @@
         @keyframes blink-caret {
             from, to { border-color: transparent; }
             50% { border-color: var(--accent-blue); }
+        }
+
+        /* Shift Up Animation for Titles */
+        @keyframes shiftUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
         }
 
         /* Section Styling */
@@ -1295,7 +1319,7 @@
             });
 
             currentInfographic = (currentInfographic + 1) % infographicItems.length;
-            setTimeout(cycleInfographics, 6000); // Faster cycling (6 seconds)
+            setTimeout(cycleInfographics, 4000); // Increased speed (4 seconds)
         }
 
         function typeText(element, text) {
@@ -1309,11 +1333,17 @@
                 if (index < text.length) {
                     element.textContent += text[index];
                     index++;
+                    // Shift title up slightly
+                    const title = element.parentElement.querySelector('h4');
+                    title.style.transform = `translateY(-${index * 0.1}px)`;
                 } else {
                     clearInterval(typingInterval);
                     setTimeout(() => {
                         element.textContent = '';
                         element.style.opacity = '0';
+                        // Reset title position
+                        const title = element.parentElement.querySelector('h4');
+                        title.style.transform = `translateY(0px)`;
                     }, 500); // Pause before disappearing
                 }
             }, 50);
