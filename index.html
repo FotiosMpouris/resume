@@ -21,6 +21,7 @@
             --text-secondary: rgba(255, 255, 255, 0.7);
             --matrix-color: rgba(0, 183, 255, 0.25);
             --transition-standard: all 0.3s ease;
+            --infographic-bg: rgba(0, 0, 139, 0.8); /* Dark Blue */
         }
 
         /* Reset and Base Styles */
@@ -656,7 +657,7 @@
             left: 0;
             padding: 1rem;
             box-sizing: border-box;
-            background: rgba(255, 255, 0, 0.2); /* Transparent Yellow */
+            background: rgba(0, 0, 139, 0.8); /* Dark Blue */
             border-radius: 10px;
             display: none; /* Hide all by default */
             flex-direction: column;
@@ -679,7 +680,7 @@
             width: 100%;
             font-size: 1.5rem;
             position: relative;
-            animation: shiftUp 4s forwards;
+            /* Removed animation: shiftUp 4s forwards; */
         }
 
         .infographic-item p {
@@ -698,7 +699,7 @@
             white-space: nowrap;
             overflow: hidden;
             width: 0;
-            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+            /* Removed animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite; */
         }
 
         @keyframes typing {
@@ -1119,21 +1120,29 @@
                         </div>
                         <!-- Infographics Container -->
                         <div class="infographic">
-                            <div class="infographic-item active">
-                                <h4>AI Development</h4>
-                                <p class="typing-text">Leveraging machine learning algorithms to create intelligent systems.</p>
+                            <div class="infographic-item">
+                                <h4></h4>
+                                <p class="typing-text"></p>
                             </div>
                             <div class="infographic-item">
-                                <h4>Game Design</h4>
-                                <p class="typing-text">Designing immersive game environments and interactive experiences.</p>
+                                <h4></h4>
+                                <p class="typing-text"></p>
                             </div>
                             <div class="infographic-item">
-                                <h4>Multimedia Production</h4>
-                                <p class="typing-text">Creating high-quality animations and motion graphics.</p>
+                                <h4></h4>
+                                <p class="typing-text"></p>
                             </div>
                             <div class="infographic-item">
-                                <h4>Project Management</h4>
-                                <p class="typing-text">Coordinating cross-functional teams to deliver projects on time.</p>
+                                <h4></h4>
+                                <p class="typing-text"></p>
+                            </div>
+                            <div class="infographic-item">
+                                <h4></h4>
+                                <p class="typing-text"></p>
+                            </div>
+                            <div class="infographic-item">
+                                <h4></h4>
+                                <p class="typing-text"></p>
                             </div>
                         </div>
                     </div>
@@ -1301,57 +1310,87 @@
             setTimeout(() => wave.remove(), 6000);
         }
 
-        // Infographics Cycling Animation
-        const infographicTexts = [
-            "Leveraging machine learning algorithms to create intelligent systems.",
-            "Designing immersive game environments and interactive experiences.",
-            "Creating high-quality animations and motion graphics.",
-            "Coordinating cross-functional teams to deliver projects on time."
+        // Typing and Cycling for Infographics
+        const infographicData = [
+            { title: "AI Development", text: "Leveraging machine learning algorithms to create intelligent systems." },
+            { title: "Game Design", text: "Designing immersive game environments and interactive experiences." },
+            { title: "Multimedia Production", text: "Creating high-quality animations and motion graphics." },
+            { title: "Project Management", text: "Coordinating cross-functional teams to deliver projects on time." },
+            { title: "Data Analysis", text: "Analyzing complex datasets to derive actionable insights." },
+            { title: "UI/UX Design", text: "Creating intuitive user interfaces and enhancing user experiences." }
         ];
 
         let currentInfographic = 0;
         const infographicItems = document.querySelectorAll('.infographic-item');
 
-        function cycleInfographics() {
-            infographicItems.forEach((item, index) => {
-                if(index === currentInfographic) {
-                    item.classList.add('active');
-                    typeText(item.querySelector('.typing-text'), infographicTexts[index]);
-                } else {
-                    item.classList.remove('active');
-                    item.querySelector('.typing-text').textContent = '';
-                }
-            });
-
-            currentInfographic = (currentInfographic + 1) % infographicItems.length;
-            setTimeout(cycleInfographics, 4000); // Increased speed (4 seconds)
+        // Helper function to delay execution
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        function typeText(element, text) {
-            let index = 0;
-            element.textContent = '';
-            element.style.width = '0';
-            element.style.opacity = '1';
-            element.style.borderRight = '2px solid var(--accent-blue)';
-            
-            const typingInterval = setInterval(() => {
-                if (index < text.length) {
-                    element.textContent += text[index];
-                    index++;
-                    // Shift title up slightly
-                    const title = element.parentElement.querySelector('h4');
-                    title.style.transform = `translateY(-${index * 0.1}px)`;
-                } else {
-                    clearInterval(typingInterval);
-                    setTimeout(() => {
-                        element.textContent = '';
-                        element.style.opacity = '0';
-                        // Reset title position
-                        const title = element.parentElement.querySelector('h4');
-                        title.style.transform = `translateY(0px)`;
-                    }, 500); // Pause before disappearing
-                }
-            }, 50);
+        // Function to type text into an element
+        function typeText(element, text, speed = 50) {
+            return new Promise((resolve) => {
+                let index = 0;
+                element.textContent = '';
+                element.style.width = '0';
+                element.style.opacity = '1';
+                element.style.borderRight = '2px solid var(--accent-blue)';
+                
+                const typingInterval = setInterval(() => {
+                    if (index < text.length) {
+                        element.textContent += text[index];
+                        index++;
+                    } else {
+                        clearInterval(typingInterval);
+                        resolve();
+                    }
+                }, speed);
+            });
+        }
+
+        // Function to cycle through infographics
+        async function cycleInfographics() {
+            while(true) {
+                const currentItem = infographicItems[currentInfographic];
+                currentItem.classList.add('active');
+
+                const titleElement = currentItem.querySelector('h4');
+                const textElement = currentItem.querySelector('.typing-text');
+
+                // Retrieve the data for current infographic
+                const { title, text } = infographicData[currentInfographic];
+
+                // Start typing title and text simultaneously
+                await Promise.all([
+                    typeText(titleElement, title),
+                    typeText(textElement, text)
+                ]);
+
+                // Wait for half a second
+                await delay(500);
+
+                // Fade out the infographic
+                currentItem.classList.remove('active');
+
+                // Clear the texts
+                titleElement.textContent = '';
+                textElement.textContent = '';
+
+                // Move to next infographic
+                currentInfographic = (currentInfographic + 1) % infographicItems.length;
+
+                // Small delay before showing next infographic
+                await delay(300);
+            }
+        }
+
+        // Initialize Particles
+        function startParticles() {
+            const particlesContainers = document.querySelectorAll('.particles-container');
+            particlesContainers.forEach(container => {
+                setInterval(() => createParticle(container), 200);
+            });
         }
 
         // Initialize Everything
@@ -1445,10 +1484,7 @@
             });
 
             // Initialize Particles
-            const particlesContainers = document.querySelectorAll('.particles-container');
-            particlesContainers.forEach(container => {
-                setInterval(() => createParticle(container), 200);
-            });
+            startParticles();
 
             // Start Infographics Cycling
             cycleInfographics();
@@ -1460,6 +1496,7 @@
 
             // Mouse Movement Handler
             document.addEventListener('mousemove', (e) => {
+                const particlesContainers = document.querySelectorAll('.particles-container');
                 particlesContainers.forEach(container => {
                     const rect = container.getBoundingClientRect();
                     if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
@@ -1475,6 +1512,3 @@
     </script>
 </body>
 </html>
-
-
-
