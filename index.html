@@ -19,7 +19,7 @@
             --accent-glow: rgba(0, 183, 255, 0.5);
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
-            --matrix-color: rgba(0, 183, 255, 0.25);
+            --matrix-color: rgba(0, 183, 255, 0.15); /* Reduced opacity for fainter effect */
             --transition-standard: all 0.3s ease;
         }
 
@@ -117,6 +117,7 @@
                 matrixRain 20s linear infinite,
                 fireFlow 8s linear infinite;
             mix-blend-mode: screen;
+            opacity: 0.7; /* Added for fainter effect */
         }
 
         .matrix-column::before {
@@ -124,7 +125,7 @@
             position: absolute;
             white-space: pre;
             animation: matrixRain 8s linear infinite;
-            text-shadow: 0 0 12px rgba(0, 183, 255, 0.6);
+            text-shadow: 0 0 12px rgba(0, 183, 255, 0.3); /* Reduced glow for fainter effect */
         }
 
         /* Hero Section */
@@ -505,7 +506,7 @@
             text-shadow: 
                 0 0 10px rgba(0, 183, 255, 0.5),
                 0 0 20px rgba(0, 183, 255, 0.3);
-            animation: titlePulse 3s infinite alternate, fadeOutHeading 12s forwards;
+            animation: titlePulse 3s infinite alternate;
             transition: all 0.3s ease;
             position: relative;
         }
@@ -522,6 +523,7 @@
                 inset 0 0 40px rgba(0, 123, 255, 0.08),
                 0 0 30px rgba(0, 0, 0, 0.15);
             margin-top: 1rem;
+            backdrop-filter: blur(5px);
         }
 
         .about-content p {
@@ -535,17 +537,17 @@
             transition: all 0.3s ease;
         }
 
+        .about-content p:first-of-type {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+        }
+
         .about-content p:hover {
             text-shadow: 0 0 8px rgba(0, 183, 255, 0.8);
             letter-spacing: 0.2px;
             background: rgba(0, 123, 255, 0.05);
             transform: scale(1.01);
-        }
-
-        .about-content p:first-of-type {
-            font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 500;
         }
 
         /* Animations */
@@ -620,26 +622,6 @@
             50% { opacity: 1; }
         }
 
-        @keyframes borderFlow {
-            0% { 
-                transform: translateX(-100%);
-                opacity: 0.8;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% { 
-                transform: translateX(100%);
-                opacity: 0.8;
-            }
-        }
-
-        @keyframes fadeOutHeading {
-            0% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
         /* Infographics Cycling Animation */
         .infographic {
             position: relative;
@@ -656,7 +638,7 @@
             left: 0;
             padding: 1rem;
             box-sizing: border-box;
-            background: rgba(255, 255, 0, 0.2); /* Transparent Yellow */
+            background: rgba(0, 70, 140, 0.2); /* Changed to darker blue */
             border-radius: 10px;
             display: none; /* Hide all by default */
             flex-direction: column;
@@ -794,26 +776,6 @@
             backdrop-filter: blur(5px);
         }
 
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(0, 123, 255, 0.2),
-                transparent
-            );
-            transition: 0.5s;
-        }
-
-        .project-card:hover::before {
-            left: 100%;
-        }
-
         .project-card:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 
@@ -858,26 +820,6 @@
             border-radius: 5px;
             overflow: hidden;
             transition: all 0.3s ease;
-        }
-
-        .social-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 60, 0, 0.2),
-                transparent
-            );
-            transition: 0.5s;
-        }
-
-        .social-link:hover::before {
-            left: 100%;
         }
 
         .social-link:hover {
@@ -1016,7 +958,6 @@
 
         /* Infographics Typing and Cycling */
         /* Removed redundant keyframes */
-        
     </style>
 </head>
 
@@ -1135,6 +1076,15 @@
                                 <h4>Project Management</h4>
                                 <p class="typing-text">Coordinating cross-functional teams to deliver projects on time.</p>
                             </div>
+                            <!-- Added Two More Infographic Items -->
+                            <div class="infographic-item">
+                                <h4>AI Application Development</h4>
+                                <p class="typing-text">Developing AI-driven applications for enhanced user experiences.</p>
+                            </div>
+                            <div class="infographic-item">
+                                <h4>Innovative Multimedia Solutions</h4>
+                                <p class="typing-text">Implementing innovative solutions in multimedia production.</p>
+                            </div>
                         </div>
                     </div>
                     <div class="about-content">
@@ -1230,6 +1180,79 @@
             }
         }
 
+        // Infographics Cycling Animation
+        const infographicTexts = [
+            "Leveraging machine learning algorithms to create intelligent systems.",
+            "Designing immersive game environments and interactive experiences.",
+            "Creating high-quality animations and motion graphics.",
+            "Coordinating cross-functional teams to deliver projects on time.",
+            "Developing AI-driven applications for enhanced user experiences.",
+            "Implementing innovative solutions in multimedia production."
+        ];
+
+        let currentInfographic = 0;
+        const infographicItems = document.querySelectorAll('.infographic-item');
+
+        function cycleInfographics() {
+            infographicItems.forEach((item, index) => {
+                if(index === currentInfographic) {
+                    item.classList.add('active');
+                    typeText(item.querySelector('.typing-text'), infographicTexts[index]);
+                } else {
+                    item.classList.remove('active');
+                    item.querySelector('.typing-text').textContent = '';
+                }
+            });
+
+            currentInfographic = (currentInfographic + 1) % infographicItems.length;
+            setTimeout(cycleInfographics, 4000); // Adjusted timing for 6 items
+        }
+
+        function typeText(element, text) {
+            let index = 0;
+            element.textContent = '';
+            element.style.width = '0';
+            element.style.opacity = '1';
+            element.style.borderRight = '2px solid var(--accent-blue)';
+            
+            const typingInterval = setInterval(() => {
+                if (index < text.length) {
+                    element.textContent += text[index];
+                    index++;
+                } else {
+                    clearInterval(typingInterval);
+                    setTimeout(() => {
+                        element.textContent = '';
+                        element.style.opacity = '0';
+                    }, 500); // 0.5 seconds pause before disappearing
+                }
+            }, 50);
+        }
+
+        // Particle Effects
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            container.appendChild(particle);
+            
+            gsap.to(particle, {
+                y: -500,
+                x: Math.random() * 100 - 50,
+                opacity: 0,
+                duration: Math.random() * 3 + 2,
+                ease: "power1.out",
+                onComplete: () => particle.remove()
+            });
+        }
+
         // Profile Stats Functions
         function initializeProfileStats() {
             const statsData = [
@@ -1267,91 +1290,57 @@
             }, 30);
         }
 
-        // Particle Effects
-        function createParticle(container) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
+        // Initialize Crew Stats (from second file insights)
+        function initializeCrewStats() {
+            const crewStats = {
+                header: "CREW MEMBER PROFILE: MPOURIS, F.",
+                stats: [
+                    { label: "Role", value: "Creative Tech Specialist" },
+                    { label: "Service ID", value: "CTD-2374-MP" },
+                    { label: "Tech Proficiency", value: "94.3%" },
+                    { label: "Creative Index", value: "97.2%" },
+                    { label: "Innovation Rating", value: "91.8%" },
+                    { label: "Project Success", value: "93.5%" },
+                    { label: "Team Synergy", value: "89.7%" }
+                ],
+                accessCode: "ACCESS LEVEL: ALPHA-7 // CLEARANCE: VERIFIED"
+            };
+        
+            const profileImg = document.querySelector('.about-profile-img');
+            const statsDisplay = document.querySelector('.crew-stats-display');
             
-            const size = Math.random() * 4 + 2;
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-            
-            container.appendChild(particle);
-            
-            gsap.to(particle, {
-                y: -500,
-                x: Math.random() * 100 - 50,
-                opacity: 0,
-                duration: Math.random() * 3 + 2,
-                ease: "power1.out",
-                onComplete: () => particle.remove()
-            });
-        }
-
-        function createEnergyWave(x, y, container) {
-            const wave = document.createElement('div');
-            wave.className = 'energy-wave';
-            wave.style.left = `${x - 100}px`;
-            wave.style.top = `${y - 100}px`;
-            container.appendChild(wave);
-            
-            setTimeout(() => wave.remove(), 6000);
-        }
-
-        // Infographics Cycling Animation
-        const infographicTexts = [
-            "Leveraging machine learning algorithms to create intelligent systems.",
-            "Designing immersive game environments and interactive experiences.",
-            "Creating high-quality animations and motion graphics.",
-            "Coordinating cross-functional teams to deliver projects on time."
-        ];
-
-        let currentInfographic = 0;
-        const infographicItems = document.querySelectorAll('.infographic-item');
-
-        function cycleInfographics() {
-            infographicItems.forEach((item, index) => {
-                if(index === currentInfographic) {
-                    item.classList.add('active');
-                    typeText(item.querySelector('.typing-text'), infographicTexts[index]);
-                } else {
-                    item.classList.remove('active');
-                    item.querySelector('.typing-text').textContent = '';
-                }
-            });
-
-            currentInfographic = (currentInfographic + 1) % infographicItems.length;
-            setTimeout(cycleInfographics, 4000); // Increased speed (4 seconds)
-        }
-
-        function typeText(element, text) {
-            let index = 0;
-            element.textContent = '';
-            element.style.width = '0';
-            element.style.opacity = '1';
-            element.style.borderRight = '2px solid var(--accent-blue)';
-            
-            const typingInterval = setInterval(() => {
-                if (index < text.length) {
-                    element.textContent += text[index];
-                    index++;
-                    // Shift title up slightly
-                    const title = element.parentElement.querySelector('h4');
-                    title.style.transform = `translateY(-${index * 0.1}px)`;
-                } else {
-                    clearInterval(typingInterval);
+            function populateStats() {
+                statsDisplay.innerHTML = `
+                    <div class="crew-stats-header">${crewStats.header}</div>
+                    ${crewStats.stats.map(stat => `
+                        <div class="crew-stat-item">
+                            <span class="crew-stat-label">${stat.label}:</span>
+                            <span class="crew-stat-value">${stat.value}</span>
+                        </div>
+                    `).join('')}
+                    <div class="access-code">${crewStats.accessCode}</div>
+                `;
+                
+                // Animate each stat item
+                const items = statsDisplay.querySelectorAll('.crew-stat-item');
+                items.forEach((item, index) => {
                     setTimeout(() => {
-                        element.textContent = '';
-                        element.style.opacity = '0';
-                        // Reset title position
-                        const title = element.parentElement.querySelector('h4');
-                        title.style.transform = `translateY(0px)`;
-                    }, 500); // Pause before disappearing
-                }
-            }, 50);
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, index * 300); // Quick appearance
+                });
+            }
+        
+            profileImg.addEventListener('mouseenter', () => {
+                statsDisplay.style.opacity = '1';
+                statsDisplay.style.transform = 'translateY(0)';
+                populateStats();
+            });
+        
+            profileImg.addEventListener('mouseleave', () => {
+                statsDisplay.style.opacity = '0';
+                statsDisplay.style.transform = 'translateY(-10px)';
+            });
         }
 
         // Initialize Everything
@@ -1374,6 +1363,7 @@
 
             // Initialize Profile Stats
             initializeProfileStats();
+            initializeCrewStats(); // Added based on second file insights
 
             // Profile Image Interactions
             const profileImg = document.querySelector('.about-profile-img');
