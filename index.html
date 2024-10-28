@@ -21,7 +21,7 @@
             --text-secondary: rgba(255, 255, 255, 0.7);
             --matrix-color: rgba(0, 183, 255, 0.25);
             --transition-standard: all 0.3s ease;
-            --infographic-bg: rgba(0, 0, 139, 0.6); /* Dark Blue, more transparent */
+            --infographic-bg: rgba(0, 0, 139, 0.4); /* Dark Blue, more transparent */
         }
 
         /* Reset and Base Styles */
@@ -697,7 +697,6 @@
         .typing-text {
             position: relative;
             /* Removed border-right */
-            /* border-right: 2px solid var(--accent-blue); */
             white-space: normal;
             word-wrap: break-word;
             overflow: hidden;
@@ -847,6 +846,8 @@
             font-size: 1.4rem;
             margin-bottom: 0.5rem;
             text-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+            /* Ensure no border or extra lines */
+            border: none;
         }
 
         .project-card p {
@@ -1291,10 +1292,6 @@
                     element.textContent += text[index];
                     index++;
                 } else {
-                    // Remove caret if it's a typing-text
-                    if (element.classList.contains('typing-text')) {
-                        // Not needed since we're using ::after
-                    }
                     clearInterval(typeInterval);
                 }
             }, 30);
