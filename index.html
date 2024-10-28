@@ -657,7 +657,7 @@
             left: 0;
             padding: 1rem;
             box-sizing: border-box;
-            background: rgba(0, 0, 139, 0.8); /* Dark Blue */
+            background: var(--infographic-bg); /* Dark Blue */
             border-radius: 10px;
             display: none; /* Hide all by default */
             flex-direction: column;
@@ -698,8 +698,9 @@
             border-right: 2px solid var(--accent-blue);
             white-space: nowrap;
             overflow: hidden;
-            width: 0;
-            /* Removed animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite; */
+            /* Removed width:0; */
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         @keyframes typing {
@@ -1333,7 +1334,6 @@
             return new Promise((resolve) => {
                 let index = 0;
                 element.textContent = '';
-                element.style.width = '0';
                 element.style.opacity = '1';
                 element.style.borderRight = '2px solid var(--accent-blue)';
                 
