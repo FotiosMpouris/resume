@@ -290,8 +290,8 @@
         /* Lower Hero Section Enhancements */
         .lower-hero {
             position: relative;
-            height: 0vh; /* Set to 0 to remove red space */
-            background: transparent; /* Remove red background */
+            height: 0vh; /* Set to 0 to remove extra space */
+            background: transparent; /* Remove background */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -487,10 +487,10 @@
         /* Profile Stats Overlay */
         .profile-stats-overlay {
             position: absolute;
-            top: 100%; /* Position below the profile image */
-            left: 50%;
-            transform: translateX(-50%) translateY(10px); /* Center horizontally and move down by 10px */
-            width: 300px;
+            top: 100%; /* Position directly below the profile image */
+            left: 50%; /* Center horizontally relative to the profile image */
+            transform: translateX(-50%) translateY(5px); /* Reduced downward shift for closer positioning */
+            width: 280px; /* Slightly narrower for better fit */
             background: rgba(0, 123, 255, 0.3); /* Light Transparent Blue */
             border: 1px solid rgba(0, 183, 255, 0.5); /* Updated Border Color */
             border-radius: 8px;
@@ -521,9 +521,6 @@
             transform: translateX(-10px);
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
-
-        /* Hollow About Me Text */
-        /* Removed the .about-header-text div as per user request */
 
         /* Content Area */
         .about-content {
@@ -874,8 +871,8 @@
 
             .profile-stats-overlay {
                 left: 50%;
-                top: 120%;
-                transform: translateX(-50%) translateY(10px); /* Adjusted for closer positioning */
+                top: 110%; /* Adjusted to align closer */
+                transform: translateX(-50%) translateY(5px); /* Minimal downward shift */
                 width: 90%;
                 max-width: 300px;
             }
@@ -1432,7 +1429,7 @@
             
             profileImg.addEventListener('mouseleave', () => {
                 statsOverlay.style.opacity = '0';
-                statsOverlay.style.transform = 'translateX(-50%) translateY(10px)'; /* Slight downward shift */
+                statsOverlay.style.transform = 'translateX(-50%) translateY(5px)'; /* Slight downward shift */
             });
 
             // GSAP Animations
