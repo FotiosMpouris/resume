@@ -487,15 +487,15 @@
         /* Profile Stats Overlay */
         .profile-stats-overlay {
             position: absolute;
-            top: 0;
-            left: 100%;
+            top: 100%; /* Position below the profile image */
+            left: 50%;
+            transform: translateX(-50%) translateY(10px); /* Center horizontally and move down by 10px */
             width: 300px;
             background: rgba(0, 123, 255, 0.3); /* Light Transparent Blue */
             border: 1px solid rgba(0, 183, 255, 0.5); /* Updated Border Color */
             border-radius: 8px;
             padding: 1.5rem;
             opacity: 0;
-            transform: translateX(10px); /* Reduced from 20px to 10px */
             transition: all 0.3s ease;
             z-index: 4;
             backdrop-filter: blur(5px);
@@ -504,7 +504,7 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateX(-50%) translateY(0); /* Move up to align perfectly */
             pointer-events: auto;
         }
 
@@ -875,7 +875,7 @@
             .profile-stats-overlay {
                 left: 50%;
                 top: 120%;
-                transform: translateX(-50%) translateX(10px); /* Adjusted for closer positioning */
+                transform: translateX(-50%) translateY(10px); /* Adjusted for closer positioning */
                 width: 90%;
                 max-width: 300px;
             }
@@ -1070,9 +1070,6 @@
                     <div class="about-header">
                         <div class="profile-container">
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
-                            
-                            <!-- Option 2: Invisible Overlay to Expand Hover Area -->
-                            <div class="hover-area"></div> <!-- Added Invisible Hover Area -->
 
                             <div class="profile-stats-overlay">
                                 <div class="stat-item">Multimedia Specialist: Level 7</div>
@@ -1418,27 +1415,24 @@
             // Profile Image Interactions
             const profileImg = document.querySelector('.about-profile-img');
             const statsOverlay = document.querySelector('.profile-stats-overlay');
-            const hoverArea = document.querySelector('.hover-area'); // Select the invisible hover area
 
-            // Combine hover events for both profile image and hover area
-            [profileImg, hoverArea].forEach(element => {
-                element.addEventListener('mouseenter', () => {
-                    statsOverlay.style.opacity = '1';
-                    statsOverlay.style.transform = 'translateX(0)';
-                    
-                    const statItems = statsOverlay.querySelectorAll('.stat-item');
-                    statItems.forEach((item, index) => {
-                        setTimeout(() => {
-                            typeStatEffect(item, item.dataset.stat);
-                            gsap.to(item, { opacity: 1, y: 0, duration: 0.5, delay: 0 });
-                        }, index * 300); // Reduced delay for quicker appearance
-                    });
-                });
+            // Hover interactions directly on the profile image
+            profileImg.addEventListener('mouseenter', () => {
+                statsOverlay.style.opacity = '1';
+                statsOverlay.style.transform = 'translateX(-50%) translateY(0)'; // Align perfectly
                 
-                element.addEventListener('mouseleave', () => {
-                    statsOverlay.style.opacity = '0';
-                    statsOverlay.style.transform = 'translateX(10px)'; /* Changed from 20px to 10px */
+                const statItems = statsOverlay.querySelectorAll('.stat-item');
+                statItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        typeStatEffect(item, item.dataset.stat);
+                        gsap.to(item, { opacity: 1, y: 0, duration: 0.5, delay: 0 });
+                    }, index * 300); // Adjust delay as needed
                 });
+            });
+            
+            profileImg.addEventListener('mouseleave', () => {
+                statsOverlay.style.opacity = '0';
+                statsOverlay.style.transform = 'translateX(-50%) translateY(10px)'; /* Slight downward shift */
             });
 
             // GSAP Animations
