@@ -15,7 +15,7 @@
             --primary-dark: #0a192f;
             --primary-light: #20232a;
             --accent-blue: #007BFF;
-            --accent-red: #FF0000;
+            --accent-red: #FF0000; /* Ensure consistent red */
             --accent-glow: rgba(0, 183, 255, 0.5);
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
@@ -234,7 +234,7 @@
         /* Lower Hero Section Enhancements */
         .lower-hero {
             position: relative;
-            height: 50vh;
+            height: 30vh; /* Reduced height to prevent large bright red space */
             background: var(--accent-red);
             display: flex;
             align-items: center;
@@ -298,25 +298,8 @@
             overflow: hidden;
         }
 
-        /* Section Border Glow */
-        .section-border-glow {
-            position: absolute;
-            top: -2px;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 0, 0, 0.5),
-                rgba(255, 128, 0, 0.5),
-                rgba(255, 0, 0, 0.5),
-                transparent
-            );
-            filter: blur(2px);
-            animation: borderGlow 3s infinite alternate;
-            z-index: 5;
-        }
+        /* Section Border Glow - Removed */
+        /* Removed the glowing border animation around the About section */
 
         /* About Card Styling */
         .about-card {
@@ -515,6 +498,7 @@
                 inset 0 0 40px rgba(0, 123, 255, 0.08),
                 0 0 30px rgba(0, 0, 0, 0.15);
             margin-top: 1rem;
+            animation: fadeOutText 15s forwards;
         }
 
         .about-content p {
@@ -627,9 +611,21 @@
             }
         }
 
+        @keyframes fadeOutText {
+            0% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
         /* Infographics Cycling Animation */
+        .infographic {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+        }
+
         .infographic-item {
-            opacity: 0;
             position: absolute;
             width: 100%;
             height: 100%;
@@ -643,28 +639,28 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: fadeInOut 20s infinite;
+            opacity: 0;
         }
 
-        .infographic-item:nth-child(1) {
-            animation-delay: 0s;
+        .infographic-item.active {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
         }
 
-        .infographic-item:nth-child(2) {
-            animation-delay: 5s;
+        .infographic-item h4 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 183, 255, 0.5);
+            text-align: center;
+            width: 100%;
+            font-size: 1.5rem;
         }
 
-        .infographic-item:nth-child(3) {
-            animation-delay: 10s;
-        }
-
-        .infographic-item:nth-child(4) {
-            animation-delay: 15s;
-        }
-
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; }
-            10%, 40% { opacity: 1; }
+        .infographic-item p {
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 1rem;
+            width: 100%;
         }
 
         /* Typing Effect */
@@ -684,37 +680,6 @@
         @keyframes blink-caret {
             from, to { border-color: transparent; }
             50% { border-color: var(--accent-blue); }
-        }
-
-        /* About Card Glowing Borders */
-        .about-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 2px solid rgba(0, 123, 255, 0.5);
-            border-radius: 15px;
-            box-shadow: 
-                0 0 20px rgba(0, 123, 255, 0.3),
-                0 0 40px rgba(0, 255, 255, 0.2);
-            animation: borderFlow 8s linear infinite;
-            pointer-events: none;
-        }
-
-        /* Animated SVGs */
-        .animated-svg {
-            width: 100%;
-            height: auto;
-            margin-top: 2rem;
-            animation: svgMove 10s linear infinite;
-        }
-
-        @keyframes svgMove {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(20px); }
-            100% { transform: translateX(0); }
         }
 
         /* Section Styling */
@@ -918,7 +883,8 @@
 
             /* Adjust infographic positioning */
             .infographic {
-                flex-direction: column;
+                width: 100%;
+                height: 150px;
             }
         }
 
@@ -999,42 +965,39 @@
 
         /* Additional Enhancements */
 
-        /* About Card Glowing Borders */
-        .about-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 2px solid rgba(0, 123, 255, 0.5);
-            border-radius: 15px;
-            box-shadow: 
-                0 0 20px rgba(0, 123, 255, 0.3),
-                0 0 40px rgba(0, 255, 255, 0.2);
-            animation: borderFlow 8s linear infinite;
-            pointer-events: none;
+        /* About Card Glowing Borders - Removed */
+        /* Removed the glowing border animation around the About section */
+
+        /* Animated SVGs */
+        .animated-svg {
+            width: 100%;
+            height: auto;
+            margin-top: 2rem;
+            animation: svgMove 10s linear infinite;
         }
 
-        /* Infographics Container */
-        .infographic {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            overflow: hidden;
+        @keyframes svgMove {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+            100% { transform: translateX(0); }
         }
 
-        /* Typing Effect Container */
-        .infographic-item h4 {
-            margin-bottom: 0.5rem;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(0, 183, 255, 0.5);
+        /* Typing Effect Keyframes */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
         }
 
-        .infographic-item p {
-            color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            font-size: 1rem;
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--accent-blue); }
+        }
+
+        /* Infographics Typing and Cycling */
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
         }
 
     </style>
@@ -1111,7 +1074,6 @@
 
     <!-- Dark Theme Section -->
     <div class="dark-theme-section">
-        <div class="section-border-glow"></div>
         <div class="particles-container" id="particles-container-bottom"></div>
         
         <div class="container">
@@ -1136,21 +1098,21 @@
                         </div>
                         <!-- Infographics Container -->
                         <div class="infographic">
-                            <div class="infographic-item">
+                            <div class="infographic-item active">
                                 <h4>AI Development</h4>
-                                <p class="typing-text"></p>
+                                <p class="typing-text">Leveraging machine learning algorithms to create intelligent systems.</p>
                             </div>
                             <div class="infographic-item">
                                 <h4>Game Design</h4>
-                                <p class="typing-text"></p>
+                                <p class="typing-text">Designing immersive game environments and interactive experiences.</p>
                             </div>
                             <div class="infographic-item">
                                 <h4>Multimedia Production</h4>
-                                <p class="typing-text"></p>
+                                <p class="typing-text">Creating high-quality animations and motion graphics.</p>
                             </div>
                             <div class="infographic-item">
                                 <h4>Project Management</h4>
-                                <p class="typing-text"></p>
+                                <p class="typing-text">Coordinating cross-functional teams to deliver projects on time.</p>
                             </div>
                         </div>
                     </div>
@@ -1280,12 +1242,8 @@
                     index++;
                 } else {
                     clearInterval(typeInterval);
-                    setTimeout(() => {
-                        element.textContent = '';
-                        element.style.opacity = '0';
-                    }, 500); // Pause before disappearing
                 }
-            }, 50);
+            }, 30);
         }
 
         // Particle Effects
@@ -1322,7 +1280,7 @@
             setTimeout(() => wave.remove(), 6000);
         }
 
-        // Typing Effect for Infographics
+        // Infographics Cycling Animation
         const infographicTexts = [
             "Leveraging machine learning algorithms to create intelligent systems.",
             "Designing immersive game environments and interactive experiences.",
@@ -1330,14 +1288,24 @@
             "Coordinating cross-functional teams to deliver projects on time."
         ];
 
-        function startTyping() {
-            const infographicItems = document.querySelectorAll('.infographic-item');
+        let currentInfographic = 0;
+        const infographicItems = document.querySelectorAll('.infographic-item');
+
+        function cycleInfographics() {
+            // Hide all infographics
             infographicItems.forEach((item, index) => {
-                const textElement = item.querySelector('.typing-text');
-                setTimeout(() => {
-                    typeText(textElement, infographicTexts[index]);
-                }, index * 5000); // Each infographic starts after 5 seconds
+                if(index === currentInfographic) {
+                    item.classList.add('active');
+                    typeText(item.querySelector('.typing-text'), infographicTexts[index]);
+                } else {
+                    item.classList.remove('active');
+                    item.querySelector('.typing-text').textContent = '';
+                }
             });
+
+            // Move to next infographic after delay
+            currentInfographic = (currentInfographic + 1) % infographicItems.length;
+            setTimeout(cycleInfographics, 7000); // Adjust timing as needed
         }
 
         function typeText(element, text) {
@@ -1346,17 +1314,15 @@
             element.style.width = '0';
             element.style.opacity = '1';
             element.style.borderRight = '2px solid var(--accent-blue)';
-
+            
             const typingInterval = setInterval(() => {
                 if (index < text.length) {
                     element.textContent += text[index];
-                    element.style.width = `${(index + 1) * 10}px`; // Adjust as needed
                     index++;
                 } else {
                     clearInterval(typingInterval);
                     setTimeout(() => {
                         element.textContent = '';
-                        element.style.width = '0';
                         element.style.opacity = '0';
                     }, 500); // Pause before disappearing
                 }
@@ -1454,8 +1420,8 @@
                 setInterval(() => createParticle(container), 200);
             });
 
-            // Start Typing Effect for Infographics
-            startTyping();
+            // Start Infographics Cycling
+            cycleInfographics();
 
             // Window Resize Handler
             window.addEventListener('resize', () => {
