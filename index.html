@@ -338,30 +338,7 @@
             z-index: -1;
         }
 
-        /* Matrix Background in About Card */
-        .matrix-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            overflow: hidden;
-            z-index: 1;
-            mask-image: linear-gradient(
-                to bottom,
-                transparent,
-                black 10%,
-                black 90%,
-                transparent
-            );
-            -webkit-mask-image: linear-gradient(
-                to bottom,
-                transparent,
-                black 10%,
-                black 90%,
-                transparent
-            );
-        }
+        /* Removed Matrix Background in About Card */
 
         /* Tech Grid Background */
         .tech-grid {
@@ -1087,7 +1064,7 @@
             <!-- About Section -->
             <section class="section">
                 <div class="card about-card">
-                    <div class="matrix-background"></div>
+                    <!-- Removed the matrix-background div to eliminate Matrix effect in About section -->
                     <div class="tech-grid"></div>
                     <div class="about-header">
                         <div class="profile-container">
