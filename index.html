@@ -234,8 +234,8 @@
         /* Lower Hero Section Enhancements */
         .lower-hero {
             position: relative;
-            height: 30vh; /* Reduced height to prevent large bright red space */
-            background: var(--accent-red);
+            height: 0vh; /* Initially set to 0 to remove bright red space */
+            background: transparent; /* Remove red background */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -297,9 +297,6 @@
             position: relative;
             overflow: hidden;
         }
-
-        /* Section Border Glow - Removed */
-        /* Removed the glowing border animation around the About section */
 
         /* About Card Styling */
         .about-card {
@@ -395,6 +392,7 @@
             transition: all 0.5s ease;
             position: relative;
             isolation: isolate;
+            margin-top: 0; /* Remove extra space above */
         }
 
         /* Profile Image Hover Effects */
@@ -498,7 +496,7 @@
                 inset 0 0 40px rgba(0, 123, 255, 0.08),
                 0 0 30px rgba(0, 0, 0, 0.15);
             margin-top: 1rem;
-            animation: fadeOutText 15s forwards;
+            /* Removed fadeOutText animation */
         }
 
         .about-content p {
@@ -611,12 +609,6 @@
             }
         }
 
-        @keyframes fadeOutText {
-            0% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
         /* Infographics Cycling Animation */
         .infographic {
             position: relative;
@@ -635,7 +627,7 @@
             box-sizing: border-box;
             background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
-            display: flex;
+            display: none; /* Hide all by default */
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -643,6 +635,7 @@
         }
 
         .infographic-item.active {
+            display: flex;
             opacity: 1;
             transition: opacity 0.5s ease-in-out;
         }
@@ -965,9 +958,6 @@
 
         /* Additional Enhancements */
 
-        /* About Card Glowing Borders - Removed */
-        /* Removed the glowing border animation around the About section */
-
         /* Animated SVGs */
         .animated-svg {
             width: 100%;
@@ -982,23 +972,8 @@
             100% { transform: translateX(0); }
         }
 
-        /* Typing Effect Keyframes */
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--accent-blue); }
-        }
-
         /* Infographics Typing and Cycling */
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { opacity: 0; }
-        }
+        /* Removed redundant keyframes */
 
     </style>
 </head>
