@@ -385,7 +385,7 @@
         /* Profile Section */
         .about-header {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 3rem;
             margin-bottom: 4rem;
             padding: 0 1rem;
@@ -456,8 +456,8 @@
         /* Profile Stats Overlay */
         .profile-stats-overlay {
             position: absolute;
-            top: -10px;
-            left: 120%;
+            top: 0;
+            left: 100%;
             width: 300px;
             background: rgba(0, 30, 60, 0.95);
             border: 1px solid rgba(0, 183, 255, 0.3);
@@ -625,6 +625,96 @@
                 transform: translateX(100%);
                 opacity: 0.8;
             }
+        }
+
+        /* Infographics Cycling Animation */
+        .infographic-item {
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            padding: 1rem;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInOut 20s infinite;
+        }
+
+        .infographic-item:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .infographic-item:nth-child(2) {
+            animation-delay: 5s;
+        }
+
+        .infographic-item:nth-child(3) {
+            animation-delay: 10s;
+        }
+
+        .infographic-item:nth-child(4) {
+            animation-delay: 15s;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            10%, 40% { opacity: 1; }
+        }
+
+        /* Typing Effect */
+        .typing-text {
+            border-right: 2px solid var(--accent-blue);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--accent-blue); }
+        }
+
+        /* About Card Glowing Borders */
+        .about-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid rgba(0, 123, 255, 0.5);
+            border-radius: 15px;
+            box-shadow: 
+                0 0 20px rgba(0, 123, 255, 0.3),
+                0 0 40px rgba(0, 255, 255, 0.2);
+            animation: borderFlow 8s linear infinite;
+            pointer-events: none;
+        }
+
+        /* Animated SVGs */
+        .animated-svg {
+            width: 100%;
+            height: auto;
+            margin-top: 2rem;
+            animation: svgMove 10s linear infinite;
+        }
+
+        @keyframes svgMove {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+            100% { transform: translateX(0); }
         }
 
         /* Section Styling */
@@ -909,7 +999,7 @@
 
         /* Additional Enhancements */
 
-        /* Glowing Borders for About Card */
+        /* About Card Glowing Borders */
         .about-card::after {
             content: '';
             position: absolute;
@@ -926,49 +1016,15 @@
             pointer-events: none;
         }
 
-        /* Interactive Infographics */
+        /* Infographics Container */
         .infographic {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex: 1; /* Allows it to occupy space alongside profile */
-        }
-
-        .infographic-item {
-            flex: 1 1 45%;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 1rem;
             position: relative;
+            width: 300px;
+            height: 200px;
             overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0;
-            animation: cycleInfographics 20s infinite;
         }
 
-        .infographic-item:hover {
-            transform: scale(1.05);
-            box-shadow: 
-                0 0 15px rgba(0, 183, 255, 0.5),
-                0 0 30px rgba(0, 255, 255, 0.3);
-        }
-
-        .infographic-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('https://www.svgrepo.com/show/331541/circuit.svg') no-repeat center center;
-            background-size: 50%;
-            opacity: 0.1;
-            transition: opacity 0.3s ease;
-        }
-
-        .infographic-item:hover::before {
-            opacity: 0.2;
-        }
-
+        /* Typing Effect Container */
         .infographic-item h4 {
             margin-bottom: 0.5rem;
             color: #fff;
@@ -977,43 +1033,10 @@
 
         .infographic-item p {
             color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 1rem;
         }
 
-        /* Cycling Animation for Infographics */
-        .infographic-item:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .infographic-item:nth-child(2) {
-            animation-delay: 5s;
-        }
-
-        .infographic-item:nth-child(3) {
-            animation-delay: 10s;
-        }
-
-        .infographic-item:nth-child(4) {
-            animation-delay: 15s;
-        }
-
-        @keyframes cycleInfographics {
-            0%, 100% { opacity: 0; }
-            10%, 40% { opacity: 1; }
-        }
-
-        /* Animated SVGs */
-        .animated-svg {
-            width: 100%;
-            height: auto;
-            margin-top: 2rem;
-            animation: svgMove 10s linear infinite;
-        }
-
-        @keyframes svgMove {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(20px); }
-            100% { transform: translateX(0); }
-        }
     </style>
 </head>
 
@@ -1023,383 +1046,436 @@
         <div class="particles-container" id="particles-container"></div>
         <div class="matrix-background"></div>
         <div class="container">
-            <a href="https://github.com/FotiosMpouris" target="_blank">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg" 
-                     alt="GitHub" class="github-icon">
-            </a>
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg" 
+                 alt="GitHub" class="github-icon">
             <h1 class="title">Fotios Mpouris</h1>
             <h2 class="subtitle">2D & 3D Artist / Animator / Developer</h2>
             
             <!-- Skills Container -->
             <div class="skills-container">
-                <a href="https://developer.android.com" target="_blank" class="skill-icon">
+                <div class="skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android">
-                </a>
-                <a href="https://www.blender.org/" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://download.blender.org/branding/community/blender_community_badge_white.svg" alt="blender">
-                </a>
-                <a href="https://www.w3schools.com/cs/" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp">
-                </a>
-                <a href="https://dotnet.microsoft.com/" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg" alt="dotnet">
-                </a>
-                <a href="https://cloud.google.com" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" alt="gcp">
-                </a>
-                <a href="https://www.w3.org/html/" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5">
-                </a>
-                <a href="https://www.adobe.com/in/products/illustrator.html" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://www.vectorlogo.zone/logos/adobe_illustrator/adobe_illustrator-icon.svg" alt="illustrator">
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript">
-                </a>
-                <a href="https://nodejs.org" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs">
-                </a>
-                <a href="https://www.photoshop.com/en" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg" alt="photoshop">
-                </a>
-                <a href="https://www.python.org" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python">
-                </a>
-                <a href="https://unity.com/" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg" alt="unity">
-                </a>
-                <a href="https://zapier.com" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://www.vectorlogo.zone/logos/zapier/zapier-icon.svg" alt="zapier">
-                </a>
-                <a href="https://www.adobe.com/products/premiere.html" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg" alt="premiere pro">
-                </a>
-                <a href="https://www.adobe.com/products/aftereffects.html" target="_blank" class="skill-icon">
+                </div>
+                <div class="skill-icon">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg" alt="after effects">
-                </a>
-            </div>
-        </section>
-
-        <!-- Lower Hero Section Enhancements -->
-        <section class="lower-hero">
-            <div class="particles-container"></div>
-            <div class="scrolling-code"></div>
-            <!-- No additional content needed as per your preference -->
-        </section>
-
-        <!-- Dark Theme Section -->
-        <div class="dark-theme-section">
-            <div class="section-border-glow"></div>
-            <div class="particles-container" id="particles-container-bottom"></div>
-            
-            <div class="container">
-                <!-- About Section -->
-                <section class="section">
-                    <div class="card about-card">
-                        <div class="matrix-background"></div>
-                        <div class="tech-grid"></div>
-                        <div class="about-header">
-                            <div class="profile-container">
-                                <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
-                                <div class="profile-stats-overlay"></div>
-                            </div>
-                            <div class="about-header-text">
-                                <h3 class="glow-text">About Me</h3>
-                            </div>
-                            <!-- Repositioned Infographic Sections -->
-                            <div class="infographic">
-                                <a href="#" class="infographic-item">
-                                    <h4>AI Development</h4>
-                                    <p>Leveraging machine learning algorithms to create intelligent systems.</p>
-                                </a>
-                                <a href="#" class="infographic-item">
-                                    <h4>Game Design</h4>
-                                    <p>Designing immersive game environments and interactive experiences.</p>
-                                </a>
-                                <a href="#" class="infographic-item">
-                                    <h4>Multimedia Production</h4>
-                                    <p>Creating high-quality animations and motion graphics.</p>
-                                </a>
-                                <a href="#" class="infographic-item">
-                                    <h4>Project Management</h4>
-                                    <p>Coordinating cross-functional teams to deliver projects on time.</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="about-content">
-                            <p>
-                                I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.
-                            </p>
-                            <p>
-                                More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement. By leveraging AI-assisted applications, I'm focused on creating innovative, agent-centric systems that reflect the future of technology.
-                            </p>
-                            <p>
-                                Throughout my career, I've used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.
-                            </p>
-                            <p>
-                                I've also managed digital platforms and multimedia content creation for various organizations, overseeing Google Workspace operations and creating social media assets to improve outreach. These hands-on experiences have given me a well-rounded understanding of how technology and creativity intersect to streamline workflows, enhance communication, and deliver captivating user experiences.
-                            </p>
-                            <p>
-                                Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Projects Section -->
-                <section class="section">
-                    <div class="card">
-                        <h3>Featured Projects</h3>
-                        <div class="projects">
-                            <a href="https://github.com/FotiosMpouris/ImpossibleShark2" class="project-card">
-                                <h4>Impossible Shark</h4>
-                                <p>Game Development</p>
-                            </a>
-                            <a href="https://github.com/FotiosMpouris/Hardie-Siding-Agent-Testing-Working_Copy/blob/main/README.md" class="project-card">
-                                <h4>Siding Project Assistant</h4>
-                                <p>AI Development</p>
-                            </a>
-                            <a href="https://github.com/FotiosMpouris/Oriana/blob/main/README.md" class="project-card">
-                                <h4>Oriana</h4>
-                                <p>AI Assistant</p>
-                            </a>
-                            <a href="https://github.com/FotiosMpouris/ReggieResume2/blob/main/README.md" class="project-card">
-                                <h4>AI Resume Tailor</h4>
-                                <p>AI Tool</p>
-                            </a>
-                            <!-- Removed Placeholder Projects -->
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Connect Section -->
-                <section class="section">
-                    <div class="card">
-                        <h3>Connect</h3>
-                        <div class="social-links">
-                            <a href="mailto:fotiosmpouris@gmail.com" class="social-link">Email</a>
-                            <a href="https://linkedin.com/in/fotiosmpouris" class="social-link">LinkedIn</a>
-                            <a href="https://www.behance.net/fotiosmpouris" class="social-link">Behance</a>
-                        </div>
-                    </div>
-                </section>
+                </div>
             </div>
         </div>
+    </section>
 
-        <script>
-            // Initialize GSAP ScrollTrigger
-            gsap.registerPlugin(ScrollTrigger);
+    <!-- Lower Hero Section Enhancements -->
+    <section class="lower-hero">
+        <div class="particles-container"></div>
+        <div class="scrolling-code"></div>
+        <!-- No additional content needed as per your preference -->
+    </section>
 
-            // Matrix Effect Functions
-            function createMatrixBackground() {
-                const container = document.querySelector('.matrix-background');
-                const containerWidth = container.offsetWidth;
-                const columnWidth = 30; // Increased width for fewer columns
-                const numberOfColumns = Math.ceil(containerWidth / columnWidth);
+    <!-- Dark Theme Section -->
+    <div class="dark-theme-section">
+        <div class="section-border-glow"></div>
+        <div class="particles-container" id="particles-container-bottom"></div>
+        
+        <div class="container">
+            <!-- About Section -->
+            <section class="section">
+                <div class="card about-card">
+                    <div class="matrix-background"></div>
+                    <div class="tech-grid"></div>
+                    <div class="about-header">
+                        <div class="profile-container">
+                            <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
+                            <div class="profile-stats-overlay">
+                                <div class="stat-item">Multimedia Specialist: Level 7</div>
+                                <div class="stat-item">AI Development: Level 6</div>
+                                <div class="stat-item">Creative Suite Mastery: 92%</div>
+                                <div class="stat-item">Project Management: Level 8</div>
+                                <div class="stat-item">Innovation Index: 94%</div>
+                            </div>
+                        </div>
+                        <div class="about-header-text">
+                            <h3 class="glow-text">About Me</h3>
+                        </div>
+                        <!-- Infographics Container -->
+                        <div class="infographic">
+                            <div class="infographic-item">
+                                <h4>AI Development</h4>
+                                <p class="typing-text"></p>
+                            </div>
+                            <div class="infographic-item">
+                                <h4>Game Design</h4>
+                                <p class="typing-text"></p>
+                            </div>
+                            <div class="infographic-item">
+                                <h4>Multimedia Production</h4>
+                                <p class="typing-text"></p>
+                            </div>
+                            <div class="infographic-item">
+                                <h4>Project Management</h4>
+                                <p class="typing-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-content">
+                        <p>
+                            I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.
+                        </p>
+                        <p>
+                            More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement. By leveraging AI-assisted applications, I'm focused on creating innovative, agent-centric systems that reflect the future of technology.
+                        </p>
+                        <p>
+                            Throughout my career, I've used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.
+                        </p>
+                        <p>
+                            I've also managed digital platforms and multimedia content creation for various organizations, overseeing Google Workspace operations and creating social media assets to improve outreach. These hands-on experiences have given me a well-rounded understanding of how technology and creativity intersect to streamline workflows, enhance communication, and deliver captivating user experiences.
+                        </p>
+                        <p>
+                            Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-                const chars = '守らリケーシタアプョン01\{\}#$@987';
+            <!-- Projects Section -->
+            <section class="section">
+                <div class="card">
+                    <h3>Featured Projects</h3>
+                    <div class="projects">
+                        <div class="project-card">
+                            <h4>Impossible Shark</h4>
+                            <p>Game Development</p>
+                        </div>
+                        <div class="project-card">
+                            <h4>Siding Project Assistant</h4>
+                            <p>AI Development</p>
+                        </div>
+                        <div class="project-card">
+                            <h4>Oriana</h4>
+                            <p>AI Assistant</p>
+                        </div>
+                        <div class="project-card">
+                            <h4>AI Resume Tailor</h4>
+                            <p>AI Tool</p>
+                        </div>
+                        <!-- Removed Placeholder Projects -->
+                    </div>
+                </div>
+            </section>
 
-                container.innerHTML = ''; // Clear existing columns
+            <!-- Connect Section -->
+            <section class="section">
+                <div class="card">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <div class="social-link">Email</div>
+                        <div class="social-link">LinkedIn</div>
+                        <div class="social-link">Behance</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 
-                for(let i = 0; i < numberOfColumns; i++) {
-                    const column = document.createElement('div');
-                    column.className = 'matrix-column';
-                    
-                    // Create random string of characters
-                    let columnChars = '';
-                    for(let j = 0; j < 100; j++) { // Increased from 50 to 100
-                        columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
-                    }
+    <script>
+        // Initialize GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
 
-                    column.textContent = columnChars;
-                    column.style.left = `${i * columnWidth}px`;
-                    column.style.animationDelay = `${-Math.random() * 20}s`;
+        // Matrix Effect Functions
+        function createMatrixBackground() {
+            const container = document.querySelector('.matrix-background');
+            const containerWidth = container.offsetWidth;
+            const columnWidth = 30; // Increased width for fewer columns
+            const numberOfColumns = Math.ceil(containerWidth / columnWidth);
 
-                    container.appendChild(column);
+            const chars = '守らリケーシタアプョン01{}#$@987';
+
+            container.innerHTML = ''; // Clear existing columns
+
+            for(let i = 0; i < numberOfColumns; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                
+                // Create random string of characters
+                let columnChars = '';
+                for(let j = 0; j < 100; j++) { // Increased from 50 to 100
+                    columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
                 }
+
+                column.textContent = columnChars;
+                column.style.left = `${i * columnWidth}px`;
+                column.style.animationDelay = `${-Math.random() * 20}s`;
+
+                container.appendChild(column);
             }
+        }
 
-            // Profile Stats Functions
-            function initializeProfileStats() {
-                const statsData = [
-                    "Multimedia Specialist: Level 7",
-                    "AI Development: Level 6",
-                    "Creative Suite Mastery: 92%",
-                    "Project Management: Level 8",
-                    "Innovation Index: 94%"
-                ];
-                
-                const overlay = document.querySelector('.profile-stats-overlay');
-                overlay.innerHTML = ''; // Clear existing stats
-                
-                statsData.forEach((stat, index) => {
-                    const statItem = document.createElement('div');
-                    statItem.className = 'stat-item';
-                    statItem.dataset.stat = stat;
-                    overlay.appendChild(statItem);
-                });
-            }
+        // Profile Stats Functions
+        function initializeProfileStats() {
+            const statsData = [
+                "Multimedia Specialist: Level 7",
+                "AI Development: Level 6",
+                "Creative Suite Mastery: 92%",
+                "Project Management: Level 8",
+                "Innovation Index: 94%"
+            ];
+            
+            const overlay = document.querySelector('.profile-stats-overlay');
+            overlay.innerHTML = ''; // Clear existing stats
+            
+            statsData.forEach((stat, index) => {
+                const statItem = document.createElement('div');
+                statItem.className = 'stat-item';
+                statItem.dataset.stat = stat;
+                overlay.appendChild(statItem);
+            });
+        }
 
-            function typeStatEffect(element, text) {
-                let index = 0;
-                element.textContent = '';
-                element.style.opacity = '1';
-                element.style.transform = 'translateX(0)';
+        function typeStatEffect(element, text) {
+            let index = 0;
+            element.textContent = '';
+            element.style.opacity = '1';
+            element.style.transform = 'translateX(0)';
 
-                const typeInterval = setInterval(() => {
-                    if (index < text.length) {
-                        element.textContent += text[index];
-                        index++;
-                    } else {
-                        clearInterval(typeInterval);
+            const typeInterval = setInterval(() => {
+                if (index < text.length) {
+                    element.textContent += text[index];
+                    index++;
+                } else {
+                    clearInterval(typeInterval);
+                    setTimeout(() => {
+                        element.textContent = '';
+                        element.style.opacity = '0';
+                    }, 500); // Pause before disappearing
+                }
+            }, 50);
+        }
+
+        // Particle Effects
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            container.appendChild(particle);
+            
+            gsap.to(particle, {
+                y: -500,
+                x: Math.random() * 100 - 50,
+                opacity: 0,
+                duration: Math.random() * 3 + 2,
+                ease: "power1.out",
+                onComplete: () => particle.remove()
+            });
+        }
+
+        function createEnergyWave(x, y, container) {
+            const wave = document.createElement('div');
+            wave.className = 'energy-wave';
+            wave.style.left = `${x - 100}px`;
+            wave.style.top = `${y - 100}px`;
+            container.appendChild(wave);
+            
+            setTimeout(() => wave.remove(), 6000);
+        }
+
+        // Typing Effect for Infographics
+        const infographicTexts = [
+            "Leveraging machine learning algorithms to create intelligent systems.",
+            "Designing immersive game environments and interactive experiences.",
+            "Creating high-quality animations and motion graphics.",
+            "Coordinating cross-functional teams to deliver projects on time."
+        ];
+
+        function startTyping() {
+            const infographicItems = document.querySelectorAll('.infographic-item');
+            infographicItems.forEach((item, index) => {
+                const textElement = item.querySelector('.typing-text');
+                setTimeout(() => {
+                    typeText(textElement, infographicTexts[index]);
+                }, index * 5000); // Each infographic starts after 5 seconds
+            });
+        }
+
+        function typeText(element, text) {
+            let index = 0;
+            element.textContent = '';
+            element.style.width = '0';
+            element.style.opacity = '1';
+            element.style.borderRight = '2px solid var(--accent-blue)';
+
+            const typingInterval = setInterval(() => {
+                if (index < text.length) {
+                    element.textContent += text[index];
+                    element.style.width = `${(index + 1) * 10}px`; // Adjust as needed
+                    index++;
+                } else {
+                    clearInterval(typingInterval);
+                    setTimeout(() => {
+                        element.textContent = '';
+                        element.style.width = '0';
+                        element.style.opacity = '0';
+                    }, 500); // Pause before disappearing
+                }
+            }, 50);
+        }
+
+        // Initialize Everything
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Matrix
+            createMatrixBackground();
+            setInterval(() => {
+                const columns = document.querySelectorAll('.matrix-column');
+                columns.forEach(column => {
+                    if (Math.random() < 0.01) { // 1% chance per column to glow a character
+                        const randomCharIndex = Math.floor(Math.random() * 100);
+                        const char = column.childNodes[randomCharIndex];
+                        if (char) {
+                            char.classList.add('glow');
+                            setTimeout(() => char.classList.remove('glow'), 1000);
+                        }
                     }
-                }, 30);
-            }
+                });
+            }, 100);
 
-            // Particle Effects
-            function createParticle(container) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
+            // Initialize Profile Stats
+            initializeProfileStats();
+
+            // Profile Image Interactions
+            const profileImg = document.querySelector('.about-profile-img');
+            const statsOverlay = document.querySelector('.profile-stats-overlay');
+            
+            profileImg.addEventListener('mouseenter', () => {
+                statsOverlay.style.opacity = '1';
+                statsOverlay.style.transform = 'translateX(0)';
                 
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                
-                container.appendChild(particle);
-                
-                gsap.to(particle, {
-                    y: -500,
-                    x: Math.random() * 100 - 50,
-                    opacity: 0,
-                    duration: Math.random() * 3 + 2,
-                    ease: "power1.out",
-                    onComplete: () => particle.remove()
-                });
-            }
-
-            function createEnergyWave(x, y, container) {
-                const wave = document.createElement('div');
-                wave.className = 'energy-wave';
-                wave.style.left = `${x - 100}px`;
-                wave.style.top = `${y - 100}px`;
-                container.appendChild(wave);
-                
-                setTimeout(() => wave.remove(), 6000);
-            }
-
-            // Initialize Everything
-            document.addEventListener('DOMContentLoaded', () => {
-                // Initialize Matrix
-                createMatrixBackground();
-                setInterval(() => {
-                    const columns = document.querySelectorAll('.matrix-column');
-                    columns.forEach(column => {
-                        if (Math.random() < 0.01) { // 1% chance per column to glow a character
-                            const randomCharIndex = Math.floor(Math.random() * 100);
-                            const char = column.childNodes[randomCharIndex];
-                            if (char) {
-                                char.classList.add('glow');
-                                setTimeout(() => char.classList.remove('glow'), 1000);
-                            }
-                        }
-                    });
-                }, 100);
-
-                // Initialize Profile Stats
-                initializeProfileStats();
-
-                // Profile Image Interactions
-                const profileImg = document.querySelector('.about-profile-img');
-                const statsOverlay = document.querySelector('.profile-stats-overlay');
-                
-                profileImg.addEventListener('mouseenter', () => {
-                    statsOverlay.style.opacity = '1';
-                    statsOverlay.style.transform = 'translateX(0)';
-                    
-                    const statItems = statsOverlay.querySelectorAll('.stat-item');
-                    statItems.forEach((item, index) => {
-                        setTimeout(() => {
-                            typeStatEffect(item, item.dataset.stat);
-                        }, index * 500);
-                    });
-                });
-                
-                profileImg.addEventListener('mouseleave', () => {
-                    statsOverlay.style.opacity = '0';
-                    statsOverlay.style.transform = 'translateX(20px)';
-                });
-
-                // GSAP Animations
-                gsap.to('.title', {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    delay: 0.5
-                });
-
-                gsap.to('.subtitle', {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    delay: 0.8
-                });
-
-                // Skill Icons Animation
-                const skillIcons = document.querySelectorAll('.skill-icon');
-                skillIcons.forEach((icon, index) => {
-                    gsap.to(icon, {
-                        opacity: 1,
-                        scale: 1,
-                        duration: 0.5,
-                        delay: 1.2 + (index * 0.1),
-                        ease: "back.out(1.7)"
-                    });
-                });
-
-                // Section Animations
-                const sections = document.querySelectorAll('.section');
-                sections.forEach((section, index) => {
-                    gsap.to(section, {
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 80%",
-                            toggleActions: "play none none none"
-                        },
-                        opacity: 1,
-                        y: 0,
-                        duration: 1,
-                        delay: 0.2 * index
-                    });
-                });
-
-                // Initialize Particles
-                const particlesContainers = document.querySelectorAll('.particles-container');
-                particlesContainers.forEach(container => {
-                    setInterval(() => createParticle(container), 200);
-                });
-
-                // Window Resize Handler
-                window.addEventListener('resize', () => {
-                    createMatrixBackground();
-                });
-
-                // Mouse Movement Handler
-                document.addEventListener('mousemove', (e) => {
-                    particlesContainers.forEach(container => {
-                        const rect = container.getBoundingClientRect();
-                        if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                            if (Math.random() < 0.2) {
-                                const x = e.clientX - rect.left;
-                                const y = e.clientY - rect.top;
-                                createEnergyWave(x, y, container);
-                            }
-                        }
-                    });
+                const statItems = statsOverlay.querySelectorAll('.stat-item');
+                statItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        typeStatEffect(item, item.dataset.stat);
+                    }, index * 500);
                 });
             });
-        </script>
-    </body>
+            
+            profileImg.addEventListener('mouseleave', () => {
+                statsOverlay.style.opacity = '0';
+                statsOverlay.style.transform = 'translateX(20px)';
+            });
+
+            // GSAP Animations
+            gsap.to('.title', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.5
+            });
+
+            gsap.to('.subtitle', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.8
+            });
+
+            // Skill Icons Animation
+            const skillIcons = document.querySelectorAll('.skill-icon');
+            skillIcons.forEach((icon, index) => {
+                gsap.to(icon, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.5,
+                    delay: 1.2 + (index * 0.1),
+                    ease: "back.out(1.7)"
+                });
+            });
+
+            // Section Animations
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                gsap.to(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    delay: 0.2 * index
+                });
+            });
+
+            // Initialize Particles
+            const particlesContainers = document.querySelectorAll('.particles-container');
+            particlesContainers.forEach(container => {
+                setInterval(() => createParticle(container), 200);
+            });
+
+            // Start Typing Effect for Infographics
+            startTyping();
+
+            // Window Resize Handler
+            window.addEventListener('resize', () => {
+                createMatrixBackground();
+            });
+
+            // Mouse Movement Handler
+            document.addEventListener('mousemove', (e) => {
+                particlesContainers.forEach(container => {
+                    const rect = container.getBoundingClientRect();
+                    if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                        if (Math.random() < 0.2) {
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            createEnergyWave(x, y, container);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
 </html>
