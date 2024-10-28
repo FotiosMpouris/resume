@@ -231,6 +231,66 @@
             object-fit: contain;
         }
 
+        /* Lower Hero Section Enhancements */
+        .lower-hero {
+            position: relative;
+            height: 50vh;
+            background: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--text-primary);
+        }
+
+        .lower-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://www.svgrepo.com/show/331541/circuit.svg') repeat;
+            background-size: 50px 50px;
+            opacity: 0.05;
+            animation: subtleScroll 60s linear infinite;
+        }
+
+        /* Subtle Scrolling Code Effects */
+        .lower-hero .scrolling-code {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            width: 90%;
+            height: 80%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .lower-hero .scrolling-code::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(255, 255, 255, 0.05),
+                transparent
+            );
+            background-size: 100% 20px;
+            animation: codeScroll 10s linear infinite;
+        }
+
+        @keyframes subtleScroll {
+            from { background-position: 0 0; }
+            to { background-position: 100px 100px; }
+        }
+
+        @keyframes codeScroll {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100%); }
+        }
+
         /* Dark Theme Section */
         .dark-theme-section {
             background: linear-gradient(135deg, #2f0000 0%, #600 25%, #800 75%, #400 100%);
@@ -849,66 +909,6 @@
 
         /* Additional Enhancements */
 
-        /* Lower Hero Section Enhancements */
-        .lower-hero {
-            position: relative;
-            height: 50vh;
-            background: var(--accent-red);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            color: var(--text-primary);
-        }
-
-        .lower-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('https://www.svgrepo.com/show/331541/circuit.svg') repeat;
-            background-size: 50px 50px;
-            opacity: 0.05;
-            animation: subtleScroll 60s linear infinite;
-        }
-
-        /* Subtle Scrolling Code Effects */
-        .lower-hero .scrolling-code {
-            position: absolute;
-            top: 10%;
-            left: 5%;
-            width: 90%;
-            height: 80%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .scrolling-code::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                transparent,
-                rgba(255, 255, 255, 0.05),
-                transparent
-            );
-            background-size: 100% 20px;
-            animation: codeScroll 10s linear infinite;
-        }
-
-        @keyframes subtleScroll {
-            from { background-position: 0 0; }
-            to { background-position: 100px 100px; }
-        }
-
-        @keyframes codeScroll {
-            from { transform: translateY(0); }
-            to { transform: translateY(-100%); }
-        }
-
         /* Glowing Borders for About Card */
         .about-card::after {
             content: '';
@@ -944,6 +944,8 @@
             overflow: hidden;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: cycleInfographics 20s infinite;
         }
 
         .infographic-item:hover {
@@ -978,11 +980,6 @@
         }
 
         /* Cycling Animation for Infographics */
-        .infographic-item {
-            opacity: 0;
-            animation: cycleInfographics 20s infinite;
-        }
-
         .infographic-item:nth-child(1) {
             animation-delay: 0s;
         }
@@ -1111,22 +1108,22 @@
                             </div>
                             <!-- Repositioned Infographic Sections -->
                             <div class="infographic">
-                                <div class="infographic-item">
+                                <a href="#" class="infographic-item">
                                     <h4>AI Development</h4>
                                     <p>Leveraging machine learning algorithms to create intelligent systems.</p>
-                                </div>
-                                <div class="infographic-item">
+                                </a>
+                                <a href="#" class="infographic-item">
                                     <h4>Game Design</h4>
                                     <p>Designing immersive game environments and interactive experiences.</p>
-                                </div>
-                                <div class="infographic-item">
+                                </a>
+                                <a href="#" class="infographic-item">
                                     <h4>Multimedia Production</h4>
                                     <p>Creating high-quality animations and motion graphics.</p>
-                                </div>
-                                <div class="infographic-item">
+                                </a>
+                                <a href="#" class="infographic-item">
                                     <h4>Project Management</h4>
                                     <p>Coordinating cross-functional teams to deliver projects on time.</p>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <div class="about-content">
