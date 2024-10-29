@@ -23,7 +23,9 @@
             --matrix-glow: rgba(0, 183, 255, 0.6); /* Added for anime effect */
             --transition-standard: all 0.3s ease;
             --infographic-bg: rgba(0, 123, 255, 0.3); /* Semi-transparent Blue */
-            --code-green: #00ff00; /* Bright code green for Japanese characters */
+            --code-white: #ffffff;
+            --code-red: #ff0000;
+            --code-blue: #0000ff;
         }
 
         /* Reset and Base Styles */
@@ -1026,12 +1028,23 @@
         /* Added Styles for Random Japanese Characters */
         .random-char {
             position: absolute;
-            color: var(--code-green);
             font-size: 1.2rem;
             opacity: 0;
             pointer-events: none;
             user-select: none;
             animation: fadeInOut 2s forwards;
+        }
+
+        .random-char.white {
+            color: var(--code-white);
+        }
+
+        .random-char.red {
+            color: var(--code-red);
+        }
+
+        .random-char.blue {
+            color: var(--code-blue);
         }
 
         @keyframes fadeInOut {
@@ -1322,6 +1335,8 @@
         }
 
         // Profile Stats Functions
+        let isCyclingStats = false; // Flag to prevent multiple cycles
+
         function initializeProfileStats() {
             const statsData = [
                 "Proficient in creating visually stunning graphics with a 95% client satisfaction rate, ensuring projects are delivered on time and exceed expectations.",
@@ -1334,7 +1349,6 @@
             const paragraphs = cycler.querySelectorAll('.stat-paragraph');
             let currentStatIndex = 0;
             const totalStats = statsData.length;
-            let isCycling = false; // Flag to prevent multiple cycles
 
             // Function to type text into an element
             function typeText(element, text, speed = 20) { // Increased typing speed
@@ -1359,8 +1373,8 @@
 
             // Function to cycle through stats
             async function cycleStats() {
-                if (isCycling) return; // Prevent multiple cycles
-                isCycling = true;
+                if (isCyclingStats) return; // Prevent multiple cycles
+                isCyclingStats = true;
 
                 while(true) {
                     const currentParagraph = paragraphs[currentStatIndex];
@@ -1523,18 +1537,24 @@
             });
         }
 
-        // Function to generate random Japanese characters
+        // Function to generate random Japanese characters with alternating colors
         function generateRandomJapaneseChar() {
             const chars = ['守', 'ら', 'れ', 'た', 'ア', 'プ', 'リ', 'ケ', 'ー', 'シ', 'ョ', 'ン', 'ア', 'ク', 'プ'];
             return chars[Math.floor(Math.random() * chars.length)];
         }
 
-        // Function to display random Japanese characters
+        // Function to display random Japanese characters with random color
         function displayRandomJapaneseChar() {
             const darkSection = document.querySelector('.dark-theme-section');
             const char = generateRandomJapaneseChar();
             const randomCharElem = document.createElement('span');
             randomCharElem.className = 'random-char';
+
+            // Randomly assign one of the three colors
+            const colors = ['white', 'red', 'blue'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            randomCharElem.classList.add(randomColor);
+
             randomCharElem.textContent = char;
 
             // Random position within the dark-theme-section
@@ -1661,11 +1681,7 @@
                         ease: "power1.out"
                     });
                     // Start cycling stats if not already started
-                    const cycler = document.querySelector('.stats-cycler');
-                    if (!cycler.classList.contains('cycling')) {
-                        cycler.classList.add('cycling');
-                        initializeProfileStatsCycle();
-                    }
+                    cycleStats(); // This function already checks the isCyclingStats flag
                 },
                 onLeaveBack: () => {
                     const statsOverlay = document.querySelector('.profile-stats-overlay');
@@ -1677,73 +1693,9 @@
                 }
             });
 
-            // Function to handle cycling stats via scroll trigger
-            function initializeProfileStatsCycle() {
-                const statsData = [
-                    "Proficient in creating visually stunning graphics with a 95% client satisfaction rate, ensuring projects are delivered on time and exceed expectations.",
-                    "Expert in development operations, improving workflow efficiency by 80% through innovative solutions and automation.",
-                    "Specialized in game development with a 90% success rate in asset creation, enhancing user engagement and experience.",
-                    "Skilled in asset creation and multimedia production, contributing to a 100% increase in project scalability and flexibility."
-                ];
-                
-                const cycler = document.querySelector('.profile-stats-overlay .stats-cycler');
-                const paragraphs = cycler.querySelectorAll('.stat-paragraph');
-                let currentStatIndex = 0;
-                const totalStats = statsData.length;
-
-                // Function to type text into an element
-                function typeText(element, text, speed = 20) { // Increased typing speed
-                    return new Promise(resolve => {
-                        let index = 0;
-                        const typingInterval = setInterval(() => {
-                            if (index < text.length) {
-                                element.querySelector('p').textContent += text[index];
-                                index++;
-                            } else {
-                                clearInterval(typingInterval);
-                                resolve();
-                            }
-                        }, speed);
-                    });
-                }
-
-                // Function to delay execution
-                function delay(ms) {
-                    return new Promise(resolve => setTimeout(resolve, ms));
-                }
-
-                // Function to cycle through stats
-                async function cycleStats() {
-                    while(true) {
-                        const currentParagraph = paragraphs[currentStatIndex];
-                        const currentText = statsData[currentStatIndex];
-
-                        // Activate the current paragraph
-                        currentParagraph.classList.add('active');
-                        
-                        // Type the text
-                        await typeText(currentParagraph, currentText);
-
-                        // Wait for a brief moment before transitioning
-                        await delay(1500); // Display duration
-
-                        // Deactivate the current paragraph
-                        currentParagraph.classList.remove('active');
-
-                        // Clear the text
-                        currentParagraph.querySelector('p').textContent = '';
-
-                        // Move to the next stat
-                        currentStatIndex = (currentStatIndex + 1) % totalStats;
-                    }
-                }
-
-                cycleStats();
-            }
-
             /* --- Added Code for Random Japanese Characters in Dark Theme Section --- */
             // Generate Japanese characters at random intervals
-            setInterval(displayRandomJapaneseChar, 500); // Adjust interval as needed
+            setInterval(displayRandomJapaneseChar, 300); // Increased frequency to every 300ms
         });
     </script>
 </body>
