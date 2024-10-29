@@ -494,7 +494,7 @@
             left: 100%; /* Position to the right of the profile image */
             transform: translate(-300px, -50%);
             width: 280px; /* Slightly narrower for better fit */
-            height: 200px; /* Fixed height for scrolling */
+            height: 200px; /* Fixed height for cycling */
             background: rgba(0, 123, 255, 0.3); /* Light Transparent Blue */
             border: 1px solid rgba(0, 183, 255, 0.5); /* Updated Border Color */
             border-radius: 8px;
@@ -513,26 +513,25 @@
             pointer-events: auto;
         }
 
-        /* Container for Scrolling Stats */
-        .stats-scroller {
+        /* Container for Cycling Stats */
+        .stats-cycler {
             display: flex;
             flex-direction: column;
             position: relative; /* Changed from absolute to relative */
             width: 100%;
-            transform: translateY(0); /* Initialize position */
+            height: 100%;
+            overflow: hidden;
         }
 
-        /* Profile Stat Item */
-        .stat-item {
-            height: 24px; /* Fixed height */
-            line-height: 24px; /* Match the height */
+        /* Profile Stat Paragraph */
+        .stat-paragraph {
+            width: 100%;
             color: #ffffff;
             text-shadow: 
                 0 0 5px rgba(0, 183, 255, 0.8),
                 0 0 10px rgba(0, 183, 255, 0.5);
             font-weight: 500;
             letter-spacing: 0.5px;
-            margin-top: 8px; /* Reduced Space between stats */
             font-family: 'Courier New', monospace;
             opacity: 1;
             transform: translateY(0);
@@ -542,14 +541,19 @@
             overflow: hidden; /* Prevent overflow */
             background: rgba(0, 0, 0, 0.2); /* Subtle background for readability */
             border-radius: 4px;
-            padding: 2px 4px;
-            animation: fadeIn 0.5s ease-in-out;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        /* Fade-in Animation for Stat Items */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Active Paragraph */
+        .stat-paragraph.active {
+            opacity: 1;
         }
 
         /* Content Area */
@@ -1106,8 +1110,19 @@
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
                             <div class="profile-stats-overlay">
-                                <div class="stats-scroller">
-                                    <!-- Stat Items will be dynamically inserted here -->
+                                <div class="stats-cycler">
+                                    <div class="stat-paragraph active">
+                                        <p>Proficient in creating visually stunning graphics with a 95% client satisfaction rate, ensuring projects are delivered on time and exceed expectations.</p>
+                                    </div>
+                                    <div class="stat-paragraph">
+                                        <p>Expert in development operations, improving workflow efficiency by 80% through innovative solutions and automation.</p>
+                                    </div>
+                                    <div class="stat-paragraph">
+                                        <p>Specialized in game development with a 90% success rate in asset creation, enhancing user engagement and experience.</p>
+                                    </div>
+                                    <div class="stat-paragraph">
+                                        <p>Skilled in asset creation and multimedia production, contributing to a 100% increase in project scalability and flexibility.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1273,45 +1288,19 @@
         // Profile Stats Functions
         function initializeProfileStats() {
             const statsData = [
-                "Captain's Intellect: 95%",
-                "Engine Efficiency: 88%",
-                "Crew Morale: 100%",
-                "Shield Strength: 75%",
-                "Navigation Accuracy: 92%",
-                "Weapon Systems: Operational",
-                "Life Support Stability: 98%",
-                "Quantum Drive Status: Online",
-                "Communications Clarity: Excellent",
-                "Medical Supplies: Fully Stocked",
-                "Hull Integrity: 89%",
-                "Energy Reserves: 80%",
-                "Stealth Mode: Active",
-                "Sensor Range: 110%",
-                "Fuel Consumption: Optimal",
-                "AI Integration: Seamless",
-                "Drone Deployment: Ready",
-                "Backup Systems: Redundant",
-                "Cargo Capacity: 95%",
-                "Maintenance Level: High",
-                "Hull Temperature: Stable",
-                "Crew Health Index: 100%",
-                "Shield Recharge Rate: Fast",
-                "AI Assistance: Enabled",
-                "Mission Success Rate: 99%"
+                "Proficient in creating visually stunning graphics with a 95% client satisfaction rate, ensuring projects are delivered on time and exceed expectations.",
+                "Expert in development operations, improving workflow efficiency by 80% through innovative solutions and automation.",
+                "Specialized in game development with a 90% success rate in asset creation, enhancing user engagement and experience.",
+                "Skilled in asset creation and multimedia production, contributing to a 100% increase in project scalability and flexibility."
             ];
             
-            const scroller = document.querySelector('.profile-stats-overlay .stats-scroller');
-            scroller.innerHTML = ''; // Clear existing stats
-
-            const containerHeight = document.querySelector('.profile-stats-overlay').clientHeight;
-            const statItemHeight = 32; // height (24px) + margin-top (8px) = 32px
-            const initialCount = Math.ceil(containerHeight / statItemHeight);
-
+            const cycler = document.querySelector('.profile-stats-overlay .stats-cycler');
+            const paragraphs = cycler.querySelectorAll('.stat-paragraph');
             let currentStatIndex = 0;
-            const statQueue = [];
+            const totalStats = statsData.length;
 
             // Function to type text into an element
-            function typeText(element, text, speed = 20) { // Further increased typing speed
+            function typeText(element, text, speed = 20) { // Increased typing speed
                 return new Promise(resolve => {
                     let index = 0;
                     const typingInterval = setInterval(() => {
@@ -1331,57 +1320,34 @@
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
 
-            // Pre-fill the scroller with initialCount stat items
-            async function preFillStats() {
-                for(let i = 0; i < initialCount; i++) {
-                    const stat = statsData[currentStatIndex];
-                    const statItem = document.createElement('div');
-                    statItem.className = 'stat-item';
-                    scroller.appendChild(statItem);
-                    await typeText(statItem, stat);
-                    statQueue.push(statItem);
-                    currentStatIndex = (currentStatIndex + 1) % statsData.length;
-                }
-            }
-
-            // Function to type and scroll stats
-            async function typeAndScrollStats() {
+            // Function to cycle through stats
+            async function cycleStats() {
                 while(true) {
-                    const stat = statsData[currentStatIndex];
-                    const statItem = document.createElement('div');
-                    statItem.className = 'stat-item';
-                    scroller.appendChild(statItem);
-                    await typeText(statItem, stat);
+                    const currentParagraph = paragraphs[currentStatIndex];
+                    const currentText = statsData[currentStatIndex];
+
+                    // Activate the current paragraph
+                    currentParagraph.classList.add('active');
                     
-                    // Animate scrolling up by one stat item's height
-                    gsap.to(scroller, {
-                        y: `-=${statItemHeight}px`,
-                        duration: 0.5, // Increased scroll speed
-                        ease: "power1.out",
-                        onComplete: () => {
-                            // Remove the first stat item
-                            const firstItem = statQueue.shift();
-                            scroller.removeChild(firstItem);
-                            // Reset the scroller's y position
-                            gsap.set(scroller, { y: 0 });
-                        }
-                    });
+                    // Type the text
+                    await typeText(currentParagraph, currentText);
 
-                    // Push the new stat item to the queue
-                    statQueue.push(statItem);
+                    // Wait for a brief moment before transitioning
+                    await delay(1500); // Display duration
 
-                    // Move to next stat
-                    currentStatIndex = (currentStatIndex + 1) % statsData.length;
+                    // Deactivate the current paragraph
+                    currentParagraph.classList.remove('active');
 
-                    // Minimal delay before typing the next stat
-                    await delay(200); // Reduced delay for faster cycling
+                    // Clear the text
+                    currentParagraph.textContent = '';
+
+                    // Move to the next stat
+                    currentStatIndex = (currentStatIndex + 1) % totalStats;
                 }
             }
 
-            // Initialize the stats
-            preFillStats().then(() => {
-                typeAndScrollStats();
-            });
+            // Initialize the stats cycling
+            cycleStats();
         }
 
         // Particle Effects
