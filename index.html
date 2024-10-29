@@ -414,8 +414,8 @@
         /* Profile Section */
         .about-header {
             display: flex;
-            align-items: center;
-            gap: 2rem; /* Adjusted gap for better spacing */
+            align-items: flex-start;
+            gap: 3rem;
             margin-bottom: 4rem;
             padding: 0 1rem;
             position: relative;
@@ -424,7 +424,8 @@
 
         .profile-container {
             position: relative;
-            flex: 0 0 auto; /* Prevent flex item from growing or shrinking */
+            display: inline-block;
+            flex: 2; /* Adjusted to allow space for infographic */
         }
 
         /* Profile Image */
@@ -485,22 +486,25 @@
 
         /* Profile Stats Overlay */
         .profile-stats-overlay {
-            position: relative; /* Changed from absolute to relative */
+            position: absolute;
+            top: 50%; /* Center vertically relative to the profile image */
+            left: 100%; /* Position to the right of the profile image */
+            transform: translateY(-50%) translateX(10px); /* Shift to the right and center vertically */
             width: 280px; /* Slightly narrower for better fit */
             background: rgba(0, 123, 255, 0.3); /* Light Transparent Blue */
             border: 1px solid rgba(0, 183, 255, 0.5); /* Updated Border Color */
             border-radius: 8px;
             padding: 1.5rem;
             opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
+            z-index: 4;
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
         }
 
-        /* Show overlay on hover of profile-container */
-        .profile-container:hover .profile-stats-overlay {
+        .profile-stats-overlay:hover {
             opacity: 1;
+            transform: translateY(-50%) translateX(0); /* Remove the X shift on hover */
             pointer-events: auto;
         }
 
@@ -1064,11 +1068,9 @@
                     <div class="anime-background"></div> <!-- Added Anime Background -->
                     <div class="tech-grid"></div>
                     <div class="about-header">
-                        <!-- Profile Container -->
                         <div class="profile-container">
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
-                            <!-- Profile Stats Overlay -->
                             <div class="profile-stats-overlay">
                                 <div class="stat-item" data-stat="Multimedia Specialist: Level 7">Multimedia Specialist: Level 7</div>
                                 <div class="stat-item" data-stat="AI Development: Level 6">AI Development: Level 6</div>
@@ -1077,7 +1079,7 @@
                                 <div class="stat-item" data-stat="Innovation Index: 94%">Innovation Index: 94%</div>
                             </div>
                         </div>
-
+                        <!-- Removed the .about-header-text div as per user request -->
                         <!-- Infographics Container -->
                         <div class="infographic">
                             <div class="infographic-item">
@@ -1410,14 +1412,27 @@
             // Initialize Profile Stats
             initializeProfileStats();
 
-            // Profile Stats Animation
-            const statItems = document.querySelectorAll('.stat-item');
-            statItems.forEach((item, index) => {
-                // Initial delay based on index
-                setTimeout(() => {
-                    typeStatEffect(item, item.dataset.stat);
-                    gsap.to(item, { opacity: 1, y: 0, duration: 0.5, delay: 0 });
-                }, index * 300); // Adjust delay as needed
+            // Profile Image Interactions
+            const profileImg = document.querySelector('.about-profile-img');
+            const statsOverlay = document.querySelector('.profile-stats-overlay');
+
+            // Hover interactions directly on the profile image
+            profileImg.addEventListener('mouseenter', () => {
+                statsOverlay.style.opacity = '1';
+                statsOverlay.style.transform = 'translateY(-50%) translateX(0)'; /* Align perfectly */
+                
+                const statItems = statsOverlay.querySelectorAll('.stat-item');
+                statItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        typeStatEffect(item, item.dataset.stat);
+                        gsap.to(item, { opacity: 1, y: 0, duration: 0.5, delay: 0 });
+                    }, index * 300); // Adjust delay as needed
+                });
+            });
+            
+            profileImg.addEventListener('mouseleave', () => {
+                statsOverlay.style.opacity = '0';
+                statsOverlay.style.transform = 'translateY(-50%) translateX(10px)'; /* Slight right shift */
             });
 
             // GSAP Animations
