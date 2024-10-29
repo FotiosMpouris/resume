@@ -514,10 +514,9 @@
         .stats-scroller {
             display: flex;
             flex-direction: column;
-            position: absolute;
-            bottom: 0; /* Start at the bottom */
-            left: 0;
+            position: relative; /* Changed from absolute to relative */
             width: 100%;
+            transform: translateY(0); /* Initialize position */
         }
 
         /* Profile Stat Item */
@@ -1288,6 +1287,9 @@
             scroller.innerHTML = ''; // Clear existing stats
 
             let currentStatIndex = 0;
+            let cumulativeY = 0;
+
+            const containerHeight = document.querySelector('.profile-stats-overlay').clientHeight;
 
             // Function to type text into an element
             function typeText(element, text, speed = 50) {
@@ -1331,14 +1333,17 @@
                     gsap.to(scroller, {
                         y: `-=${statHeight}`,
                         duration: 1,
-                        ease: "power1.out"
+                        ease: "power1.out",
+                        onComplete: () => {
+                            cumulativeY += statHeight;
+                            if (cumulativeY >= containerHeight) {
+                                // Reset the scroller's y and clear children
+                                gsap.set(scroller, { y: 0 });
+                                scroller.innerHTML = '';
+                                cumulativeY = 0;
+                            }
+                        }
                     });
-
-                    // Remove the oldest stat if over 25
-                    if (scroller.children.length > 25) {
-                        const removedStat = scroller.children[0];
-                        scroller.removeChild(removedStat);
-                    }
 
                     // Move to the next stat
                     currentStatIndex = (currentStatIndex + 1) % statsData.length;
@@ -1400,12 +1405,12 @@
         const infographicItems = document.querySelectorAll('.infographic-item');
 
         // Helper function to delay execution
-        function delay(ms) {
+        function delayInfographic(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
         // Function to type text into an element
-        function typeText(element, text, speed = 50) {
+        function typeTextInfographic(element, text, speed = 50) {
             return new Promise((resolve) => {
                 let index = 0;
                 element.textContent = '';
@@ -1437,12 +1442,12 @@
 
                 // Start typing title and text simultaneously
                 await Promise.all([
-                    typeText(titleElement, title),
-                    typeText(textElement, text)
+                    typeTextInfographic(titleElement, title),
+                    typeTextInfographic(textElement, text)
                 ]);
 
                 // Wait for half a second
-                await delay(500);
+                await delayInfographic(500);
 
                 // Fade out the infographic
                 currentItem.classList.remove('active');
@@ -1455,7 +1460,7 @@
                 currentInfographic = (currentInfographic + 1) % infographicItems.length;
 
                 // Small delay before showing next infographic
-                await delay(300);
+                await delayInfographic(300);
             }
         }
 
@@ -1495,15 +1500,21 @@
             const profileImg = document.querySelector('.about-profile-img');
             const statsOverlay = document.querySelector('.profile-stats-overlay');
 
-            // Hover interactions directly on the profile image
+            // Hover interactions directly on the profile image using GSAP for smooth transitions
             profileImg.addEventListener('mouseenter', () => {
-                statsOverlay.style.opacity = '1';
-                statsOverlay.style.transform = 'translate(-300px, -50%)'; /* Maintain left and down shift */
+                gsap.to(statsOverlay, {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
             });
             
             profileImg.addEventListener('mouseleave', () => {
-                statsOverlay.style.opacity = '0';
-                statsOverlay.style.transform = 'translate(-300px, -50%)'; /* Maintain left and down shift */
+                gsap.to(statsOverlay, {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
             });
 
             // GSAP Animations
