@@ -514,7 +514,10 @@
         .stats-scroller {
             display: flex;
             flex-direction: column;
-            animation: scrollUp 20s linear infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
         }
 
         /* Profile Stat Item */
@@ -530,16 +533,7 @@
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        /* Scrolling Animation */
-        @keyframes scrollUp {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-50%);
-            }
+            white-space: nowrap;
         }
 
         /* Content Area */
@@ -1097,32 +1091,7 @@
 
                             <div class="profile-stats-overlay">
                                 <div class="stats-scroller">
-                                    <!-- 25 Stat Items -->
-                                    <div class="stat-item">Multimedia Specialist: Level 7</div>
-                                    <div class="stat-item">AI Development: Level 6</div>
-                                    <div class="stat-item">Creative Suite Mastery: 92%</div>
-                                    <div class="stat-item">Project Management: Level 8</div>
-                                    <div class="stat-item">Innovation Index: 94%</div>
-                                    <div class="stat-item">UI/UX Design: Expert</div>
-                                    <div class="stat-item">Data Analysis: Proficient</div>
-                                    <div class="stat-item">Game Design: Advanced</div>
-                                    <div class="stat-item">Animation Skills: 85%</div>
-                                    <div class="stat-item">Python Programming: Level 7</div>
-                                    <div class="stat-item">C# Development: Level 6</div>
-                                    <div class="stat-item">Unity Engine: Expert</div>
-                                    <div class="stat-item">Blender Modeling: Advanced</div>
-                                    <div class="stat-item">JavaScript: Proficient</div>
-                                    <div class="stat-item">Node.js: Intermediate</div>
-                                    <div class="stat-item">Adobe Premiere Pro: Expert</div>
-                                    <div class="stat-item">After Effects: Advanced</div>
-                                    <div class="stat-item">Photoshop: Mastery</div>
-                                    <div class="stat-item">Google Cloud: Proficient</div>
-                                    <div class="stat-item">DotNet Framework: Intermediate</div>
-                                    <div class="stat-item">Zapier Automation: Expert</div>
-                                    <div class="stat-item">Android Development: Level 5</div>
-                                    <div class="stat-item">AI Integration: Level 7</div>
-                                    <div class="stat-item">Project Coordination: Level 8</div>
-                                    <div class="stat-item">Innovation Strategies: Level 9</div>
+                                    <!-- 25 Stat Items will be dynamically inserted here -->
                                 </div>
                             </div>
                         </div>
@@ -1315,15 +1284,69 @@
                 "Innovation Strategies: Level 9"
             ];
             
-            const overlay = document.querySelector('.profile-stats-overlay .stats-scroller');
-            overlay.innerHTML = ''; // Clear existing stats
-            
-            statsData.forEach(stat => {
-                const statItem = document.createElement('div');
-                statItem.className = 'stat-item';
-                statItem.textContent = stat;
-                overlay.appendChild(statItem);
-            });
+            const scroller = document.querySelector('.profile-stats-overlay .stats-scroller');
+            scroller.innerHTML = ''; // Clear existing stats
+
+            let currentStatIndex = 0;
+
+            // Function to type text into an element
+            function typeText(element, text, speed = 50) {
+                return new Promise(resolve => {
+                    let index = 0;
+                    const typingInterval = setInterval(() => {
+                        if (index < text.length) {
+                            element.textContent += text[index];
+                            index++;
+                        } else {
+                            clearInterval(typingInterval);
+                            resolve();
+                        }
+                    }, speed);
+                });
+            }
+
+            // Function to delay execution
+            function delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            // Function to type and scroll stats
+            async function typeAndScrollStats() {
+                while(true) {
+                    const stat = statsData[currentStatIndex];
+                    const statItem = document.createElement('div');
+                    statItem.className = 'stat-item';
+                    scroller.appendChild(statItem);
+                    
+                    // Type the stat text
+                    await typeText(statItem, stat);
+                    
+                    // Calculate the height to scroll (including margin)
+                    const statHeight = statItem.offsetHeight + 12; // 12px margin-bottom
+
+                    // Animate the scroller upwards
+                    gsap.to(scroller, {
+                        y: `-=${statHeight}`,
+                        duration: 1,
+                        ease: "power1.out"
+                    });
+
+                    // Remove the oldest stat if more than 25
+                    if (scroller.children.length > 25) {
+                        const removedStat = scroller.children[0];
+                        scroller.removeChild(removedStat);
+                    }
+
+                    // Move to the next stat
+                    currentStatIndex = (currentStatIndex + 1) % statsData.length;
+
+                    // Optional delay before typing the next stat
+                    await delay(500);
+                }
+            }
+
+            // Start the typing and scrolling
+            typeAndScrollStats();
         }
 
         // Particle Effects
@@ -1480,7 +1503,6 @@
 
             // Initialize Profile Stats
             initializeProfileStats();
-            startScrollingStats();
 
             // Profile Image Interactions
             const profileImg = document.querySelector('.about-profile-img');
