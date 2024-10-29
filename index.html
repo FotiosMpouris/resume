@@ -540,6 +540,16 @@
             white-space: normal; /* Allow text wrapping */
             word-wrap: break-word;
             overflow: hidden; /* Prevent overflow */
+            background: rgba(0, 0, 0, 0.2); /* Subtle background for readability */
+            border-radius: 4px;
+            padding: 2px 4px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Fade-in Animation for Stat Items */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Content Area */
@@ -1263,45 +1273,45 @@
         // Profile Stats Functions
         function initializeProfileStats() {
             const statsData = [
-                "Multimedia Specialist: Level 7",
-                "AI Development: Level 6",
-                "Creative Suite Mastery: 92%",
-                "Project Management: Level 8",
-                "Innovation Index: 94%",
-                "UI/UX Design: Expert",
-                "Data Analysis: Proficient",
-                "Game Design: Advanced",
-                "Animation Skills: 85%",
-                "Python Programming: Level 7",
-                "C# Development: Level 6",
-                "Unity Engine: Expert",
-                "Blender Modeling: Advanced",
-                "JavaScript: Proficient",
-                "Node.js: Intermediate",
-                "Adobe Premiere Pro: Expert",
-                "After Effects: Advanced",
-                "Photoshop: Mastery",
-                "Google Cloud: Proficient",
-                "DotNet Framework: Intermediate",
-                "Zapier Automation: Expert",
-                "Android Development: Level 5",
-                "AI Integration: Level 7",
-                "Project Coordination: Level 8",
-                "Innovation Strategies: Level 9"
+                "Captain's Intellect: 95%",
+                "Engine Efficiency: 88%",
+                "Crew Morale: 100%",
+                "Shield Strength: 75%",
+                "Navigation Accuracy: 92%",
+                "Weapon Systems: Operational",
+                "Life Support Stability: 98%",
+                "Quantum Drive Status: Online",
+                "Communications Clarity: Excellent",
+                "Medical Supplies: Fully Stocked",
+                "Hull Integrity: 89%",
+                "Energy Reserves: 80%",
+                "Stealth Mode: Active",
+                "Sensor Range: 110%",
+                "Fuel Consumption: Optimal",
+                "AI Integration: Seamless",
+                "Drone Deployment: Ready",
+                "Backup Systems: Redundant",
+                "Cargo Capacity: 95%",
+                "Maintenance Level: High",
+                "Hull Temperature: Stable",
+                "Crew Health Index: 100%",
+                "Shield Recharge Rate: Fast",
+                "AI Assistance: Enabled",
+                "Mission Success Rate: 99%"
             ];
             
             const scroller = document.querySelector('.profile-stats-overlay .stats-scroller');
             scroller.innerHTML = ''; // Clear existing stats
 
             const containerHeight = document.querySelector('.profile-stats-overlay').clientHeight;
-            const statItemHeight = 24 + 8; // height + margin-top = 32px
+            const statItemHeight = 32; // height (24px) + margin-top (8px) = 32px
             const initialCount = Math.ceil(containerHeight / statItemHeight);
 
             let currentStatIndex = 0;
             const statQueue = [];
 
             // Function to type text into an element
-            function typeText(element, text, speed = 30) { // Increased typing speed
+            function typeText(element, text, speed = 20) { // Further increased typing speed
                 return new Promise(resolve => {
                     let index = 0;
                     const typingInterval = setInterval(() => {
@@ -1364,7 +1374,7 @@
                     currentStatIndex = (currentStatIndex + 1) % statsData.length;
 
                     // Minimal delay before typing the next stat
-                    await delay(300);
+                    await delay(200); // Reduced delay for faster cycling
                 }
             }
 
@@ -1427,7 +1437,7 @@
         }
 
         // Function to type text into an element
-        function typeTextInfographic(element, text, speed = 30) { // Increased typing speed
+        function typeTextInfographic(element, text, speed = 20) { // Increased typing speed
             return new Promise((resolve) => {
                 let index = 0;
                 element.textContent = '';
@@ -1464,7 +1474,7 @@
                 ]);
 
                 // Wait for a short duration before fading out
-                await delayInfographic(500);
+                await delayInfographic(800); // Increased display duration
 
                 // Fade out the infographic
                 currentItem.classList.remove('active');
@@ -1556,7 +1566,7 @@
                     opacity: 1,
                     scale: 1,
                     duration: 0.5,
-                    delay: 1.2 + (index * 0.1),
+                    delay: 1.2 + (index * 0.05), // Slightly faster stagger
                     ease: "back.out(1.7)"
                 });
             });
