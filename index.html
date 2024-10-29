@@ -489,7 +489,7 @@
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
             left: 100%; /* Position to the right of the profile image */
-            transform: translateY(-50%) translateX(10px); /* Shift to the right and center vertically */
+            transform: translateY(-50%) translateX(5px); /* Changed from 10px to 5px */
             width: 280px; /* Slightly narrower for better fit */
             background: rgba(0, 123, 255, 0.3); /* Light Transparent Blue */
             border: 1px solid rgba(0, 183, 255, 0.5); /* Updated Border Color */
@@ -1432,7 +1432,7 @@
             
             profileImg.addEventListener('mouseleave', () => {
                 statsOverlay.style.opacity = '0';
-                statsOverlay.style.transform = 'translateY(-50%) translateX(10px)'; /* Slight right shift */
+                statsOverlay.style.transform = 'translateY(-50%) translateX(5px)'; /* Slight right shift */
             });
 
             // GSAP Animations
