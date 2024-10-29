@@ -489,7 +489,7 @@
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
             left: 100%; /* Position to the right of the profile image */
-            transform: translateY(-50%) translateX(-100px); /* Moved left by 100px */
+            transform: translate(-300px, calc(-50% + 50px)); /* Moved left by 300px and down by 50px */
             width: 280px; /* Slightly narrower for better fit */
             background: rgba(0, 123, 255, 0.3); /* Light Transparent Blue */
             border: 1px solid rgba(0, 183, 255, 0.5); /* Updated Border Color */
@@ -504,7 +504,7 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translateY(-50%) translateX(-100px); /* Maintain the left shift on hover */
+            transform: translate(-300px, calc(-50% + 50px)); /* Maintain the left and down shift on hover */
             pointer-events: auto;
         }
 
@@ -875,7 +875,7 @@
             .profile-stats-overlay {
                 left: 50%;
                 top: 110%; /* Adjusted to align closer */
-                transform: translateX(-100px) translateY(5px); /* Maintain left shift */
+                transform: translate(-300px, calc(-50% + 50px)); /* Maintain left and down shift */
                 width: 90%;
                 max-width: 300px;
             }
@@ -1424,7 +1424,7 @@
             // Hover interactions directly on the profile image
             profileImg.addEventListener('mouseenter', () => {
                 statsOverlay.style.opacity = '1';
-                statsOverlay.style.transform = 'translateY(-50%) translateX(-100px)'; /* Maintain left shift */
+                statsOverlay.style.transform = 'translate(-300px, calc(-50% + 50px))'; /* Maintain left and down shift */
                 
                 const statItems = statsOverlay.querySelectorAll('.stat-item');
                 statItems.forEach((item, index) => {
@@ -1437,7 +1437,7 @@
             
             profileImg.addEventListener('mouseleave', () => {
                 statsOverlay.style.opacity = '0';
-                statsOverlay.style.transform = 'translateY(-50%) translateX(-100px)'; /* Maintain left shift */
+                statsOverlay.style.transform = 'translate(-300px, calc(-50% + 50px))'; /* Maintain left and down shift */
             });
 
             // GSAP Animations
