@@ -106,8 +106,9 @@
             color: var(--matrix-color);
             font-family: 'Courier New', monospace;
             font-size: 16px;
-            line-height: 16px;
-            white-space: pre;
+            line-height: 24px; /* Fixed line height */
+            white-space: pre-wrap; /* Allow wrapping */
+            word-wrap: break-word;
             background: linear-gradient(
                 0deg,
                 transparent,
@@ -124,7 +125,8 @@
         .matrix-column::before {
             content: '守\A ら\A れ\A た\A 0\A 1\A ア\A プ\A リ\A ケ\A ー\A シ\A ョ\A ン\A \}\A \{\A #\A $\A @\A 9\A 8\A 7';
             position: absolute;
-            white-space: pre;
+            white-space: pre-wrap;
+            word-wrap: break-word;
             animation: matrixRain 8s linear infinite;
             text-shadow: 0 0 12px var(--matrix-glow);
         }
@@ -161,8 +163,9 @@
             color: var(--matrix-color);
             font-family: 'Courier New', monospace;
             font-size: 16px;
-            line-height: 16px;
-            white-space: pre;
+            line-height: 24px; /* Fixed line height */
+            white-space: pre-wrap; /* Allow wrapping */
+            word-wrap: break-word;
             animation: animeRain 20s linear infinite;
             mix-blend-mode: screen;
             text-shadow: 0 0 8px var(--matrix-glow);
@@ -521,6 +524,8 @@
 
         /* Profile Stat Item */
         .stat-item {
+            height: 24px; /* Fixed height */
+            line-height: 24px; /* Match the height */
             color: #ffffff;
             text-shadow: 
                 0 0 5px rgba(0, 183, 255, 0.8),
@@ -534,6 +539,7 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
             white-space: normal; /* Allow text wrapping */
             word-wrap: break-word;
+            overflow: hidden; /* Prevent overflow */
         }
 
         /* Content Area */
@@ -1091,7 +1097,7 @@
 
                             <div class="profile-stats-overlay">
                                 <div class="stats-scroller">
-                                    <!-- 25 Stat Items will be dynamically inserted here -->
+                                    <!-- Stat Items will be dynamically inserted here -->
                                 </div>
                             </div>
                         </div>
@@ -1287,10 +1293,12 @@
             const scroller = document.querySelector('.profile-stats-overlay .stats-scroller');
             scroller.innerHTML = ''; // Clear existing stats
 
-            let currentStatIndex = 0;
-            let cumulativeY = 0;
-
             const containerHeight = document.querySelector('.profile-stats-overlay').clientHeight;
+            const statItemHeight = 24 + 8; // height + margin-top = 32px
+            const initialCount = Math.ceil(containerHeight / statItemHeight);
+
+            let currentStatIndex = 0;
+            const statQueue = [];
 
             // Function to type text into an element
             function typeText(element, text, speed = 30) { // Increased typing speed
@@ -1313,6 +1321,19 @@
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
 
+            // Pre-fill the scroller with initialCount stat items
+            async function preFillStats() {
+                for(let i = 0; i < initialCount; i++) {
+                    const stat = statsData[currentStatIndex];
+                    const statItem = document.createElement('div');
+                    statItem.className = 'stat-item';
+                    scroller.appendChild(statItem);
+                    await typeText(statItem, stat);
+                    statQueue.push(statItem);
+                    currentStatIndex = (currentStatIndex + 1) % statsData.length;
+                }
+            }
+
             // Function to type and scroll stats
             async function typeAndScrollStats() {
                 while(true) {
@@ -1320,42 +1341,37 @@
                     const statItem = document.createElement('div');
                     statItem.className = 'stat-item';
                     scroller.appendChild(statItem);
-                    
-                    // Type the stat text
                     await typeText(statItem, stat);
                     
-                    // Ensure the element is rendered to get accurate height
-                    await delay(100);
-
-                    // Get the height of the stat item
-                    const statHeight = statItem.offsetHeight + 8; // 8px margin-top
-
-                    // Animate the scroller upwards
+                    // Animate scrolling up by one stat item's height
                     gsap.to(scroller, {
-                        y: `-=${statHeight}`,
+                        y: `-=${statItemHeight}px`,
                         duration: 0.5, // Increased scroll speed
                         ease: "power1.out",
                         onComplete: () => {
-                            cumulativeY += statHeight;
-                            if (cumulativeY >= containerHeight) {
-                                // Reset the scroller's y and clear children
-                                gsap.set(scroller, { y: 0 });
-                                scroller.innerHTML = '';
-                                cumulativeY = 0;
-                            }
+                            // Remove the first stat item
+                            const firstItem = statQueue.shift();
+                            scroller.removeChild(firstItem);
+                            // Reset the scroller's y position
+                            gsap.set(scroller, { y: 0 });
                         }
                     });
 
-                    // Move to the next stat
+                    // Push the new stat item to the queue
+                    statQueue.push(statItem);
+
+                    // Move to next stat
                     currentStatIndex = (currentStatIndex + 1) % statsData.length;
 
-                    // Reduced delay before typing the next stat
+                    // Minimal delay before typing the next stat
                     await delay(300);
                 }
             }
 
-            // Start the typing and scrolling
-            typeAndScrollStats();
+            // Initialize the stats
+            preFillStats().then(() => {
+                typeAndScrollStats();
+            });
         }
 
         // Particle Effects
