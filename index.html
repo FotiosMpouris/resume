@@ -446,6 +446,7 @@
             isolation: isolate;
             margin-top: 0; /* Remove extra space above */
             z-index: 3;
+            cursor: pointer; /* Indicate interactivity */
         }
 
         /* Profile Image Hover Effects */
@@ -495,10 +496,10 @@
             transform: translate(-300px, -50%);
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
-            background: rgba(0, 123, 255, 0.3); /* Light Transparent Blue */
+            background: rgba(0, 123, 255, 0.2); /* Reduced opacity to minimize shadow effect */
             border: 1px solid rgba(0, 183, 255, 0.5); /* Updated Border Color */
             border-radius: 8px;
-            padding: 1.5rem;
+            padding: 1rem; /* Reduced padding for better text fit */
             opacity: 0;
             transition: all 0.3s ease;
             z-index: 4;
@@ -528,27 +529,26 @@
             width: 100%;
             color: #ffffff;
             text-shadow: 
-                0 0 5px rgba(0, 183, 255, 0.8),
-                0 0 10px rgba(0, 183, 255, 0.5);
+                0 0 3px rgba(0, 183, 255, 0.8),
+                0 0 6px rgba(0, 183, 255, 0.5);
             font-weight: 500;
             letter-spacing: 0.5px;
             font-family: 'Courier New', monospace;
-            opacity: 1;
+            font-size: 0.9rem; /* Reduced font size */
+            opacity: 0;
             transform: translateY(0);
             transition: opacity 0.3s ease, transform 0.3s ease;
             white-space: normal; /* Allow text wrapping */
             word-wrap: break-word;
             overflow: hidden; /* Prevent overflow */
-            background: rgba(0, 0, 0, 0.2); /* Subtle background for readability */
+            background: rgba(0, 0, 0, 0.1); /* Reduced background opacity */
             border-radius: 4px;
-            padding: 10px;
+            padding: 8px; /* Reduced padding */
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         /* Active Paragraph */
@@ -730,6 +730,7 @@
             overflow: hidden;
             opacity: 0;
             transition: opacity 0.3s ease;
+            font-size: 0.9rem; /* Reduced font size */
         }
 
         /* Section Styling */
@@ -1111,17 +1112,17 @@
 
                             <div class="profile-stats-overlay">
                                 <div class="stats-cycler">
-                                    <div class="stat-paragraph active">
-                                        <p>Proficient in creating visually stunning graphics with a 95% client satisfaction rate, ensuring projects are delivered on time and exceed expectations.</p>
+                                    <div class="stat-paragraph">
+                                        <p></p>
                                     </div>
                                     <div class="stat-paragraph">
-                                        <p>Expert in development operations, improving workflow efficiency by 80% through innovative solutions and automation.</p>
+                                        <p></p>
                                     </div>
                                     <div class="stat-paragraph">
-                                        <p>Specialized in game development with a 90% success rate in asset creation, enhancing user engagement and experience.</p>
+                                        <p></p>
                                     </div>
                                     <div class="stat-paragraph">
-                                        <p>Skilled in asset creation and multimedia production, contributing to a 100% increase in project scalability and flexibility.</p>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
@@ -1298,6 +1299,7 @@
             const paragraphs = cycler.querySelectorAll('.stat-paragraph');
             let currentStatIndex = 0;
             const totalStats = statsData.length;
+            let isCycling = false; // Flag to prevent multiple cycles
 
             // Function to type text into an element
             function typeText(element, text, speed = 20) { // Increased typing speed
@@ -1305,7 +1307,7 @@
                     let index = 0;
                     const typingInterval = setInterval(() => {
                         if (index < text.length) {
-                            element.textContent += text[index];
+                            element.querySelector('p').textContent += text[index];
                             index++;
                         } else {
                             clearInterval(typingInterval);
@@ -1322,6 +1324,9 @@
 
             // Function to cycle through stats
             async function cycleStats() {
+                if (isCycling) return; // Prevent multiple cycles
+                isCycling = true;
+
                 while(true) {
                     const currentParagraph = paragraphs[currentStatIndex];
                     const currentText = statsData[currentStatIndex];
@@ -1339,15 +1344,33 @@
                     currentParagraph.classList.remove('active');
 
                     // Clear the text
-                    currentParagraph.textContent = '';
+                    currentParagraph.querySelector('p').textContent = '';
 
                     // Move to the next stat
                     currentStatIndex = (currentStatIndex + 1) % totalStats;
                 }
             }
 
-            // Initialize the stats cycling
-            cycleStats();
+            // Attach event listeners to start cycling on hover
+            const profileImg = document.querySelector('.about-profile-img');
+            const statsOverlay = document.querySelector('.profile-stats-overlay');
+
+            profileImg.addEventListener('mouseenter', () => {
+                gsap.to(statsOverlay, {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
+                cycleStats(); // Start cycling on first hover
+            });
+            
+            profileImg.addEventListener('mouseleave', () => {
+                gsap.to(statsOverlay, {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
+            });
         }
 
         // Particle Effects
@@ -1488,27 +1511,6 @@
 
             // Initialize Profile Stats
             initializeProfileStats();
-
-            // Profile Image Interactions
-            const profileImg = document.querySelector('.about-profile-img');
-            const statsOverlay = document.querySelector('.profile-stats-overlay');
-
-            // Hover interactions directly on the profile image using GSAP for smooth transitions
-            profileImg.addEventListener('mouseenter', () => {
-                gsap.to(statsOverlay, {
-                    opacity: 1,
-                    duration: 0.3,
-                    ease: "power1.out"
-                });
-            });
-            
-            profileImg.addEventListener('mouseleave', () => {
-                gsap.to(statsOverlay, {
-                    opacity: 0,
-                    duration: 0.3,
-                    ease: "power1.out"
-                });
-            });
 
             // GSAP Animations
             gsap.to('.title', {
