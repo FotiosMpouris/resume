@@ -488,8 +488,8 @@
         .profile-stats-overlay {
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
-            left: -10px; /* Position to the left of the profile image */
-            transform: translateY(-50%) translateX(-100%); /* Shift to the left and center vertically */
+            left: 100%; /* Position to the right of the profile image */
+            transform: translateY(-50%) translateX(10px); /* Shift to the right and center vertically */
             width: 280px; /* Slightly narrower for better fit */
             background: rgba(0, 123, 255, 0.3); /* Light Transparent Blue */
             border: 1px solid rgba(0, 183, 255, 0.5); /* Updated Border Color */
@@ -504,7 +504,7 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translateY(-50%) translateX(-100%); /* Keep it left-aligned */
+            transform: translateY(-50%) translateX(0); /* Remove the X shift on hover */
             pointer-events: auto;
         }
 
@@ -1419,7 +1419,7 @@
             // Hover interactions directly on the profile image
             profileImg.addEventListener('mouseenter', () => {
                 statsOverlay.style.opacity = '1';
-                statsOverlay.style.transform = 'translateY(-50%) translateX(-100%)'; /* Align perfectly */
+                statsOverlay.style.transform = 'translateY(-50%) translateX(0)'; /* Align perfectly */
                 
                 const statItems = statsOverlay.querySelectorAll('.stat-item');
                 statItems.forEach((item, index) => {
@@ -1432,7 +1432,7 @@
             
             profileImg.addEventListener('mouseleave', () => {
                 statsOverlay.style.opacity = '0';
-                statsOverlay.style.transform = 'translateY(-50%) translateX(-100%)'; /* Maintain position */
+                statsOverlay.style.transform = 'translateY(-50%) translateX(10px)'; /* Slight right shift */
             });
 
             // GSAP Animations
