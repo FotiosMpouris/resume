@@ -527,12 +527,13 @@
                 0 0 10px rgba(0, 183, 255, 0.5);
             font-weight: 500;
             letter-spacing: 0.5px;
-            margin-top: 12px; /* Space between stats */
+            margin-top: 8px; /* Reduced Space between stats */
             font-family: 'Courier New', monospace;
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            white-space: nowrap;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            white-space: normal; /* Allow text wrapping */
+            word-wrap: break-word;
         }
 
         /* Content Area */
@@ -704,7 +705,7 @@
         /* Typing Effect */
         .typing-text {
             position: relative;
-            white-space: normal;
+            white-space: normal; /* Allow text wrapping */
             word-wrap: break-word;
             overflow: hidden;
             opacity: 0;
@@ -1292,7 +1293,7 @@
             const containerHeight = document.querySelector('.profile-stats-overlay').clientHeight;
 
             // Function to type text into an element
-            function typeText(element, text, speed = 50) {
+            function typeText(element, text, speed = 30) { // Increased typing speed
                 return new Promise(resolve => {
                     let index = 0;
                     const typingInterval = setInterval(() => {
@@ -1327,12 +1328,12 @@
                     await delay(100);
 
                     // Get the height of the stat item
-                    const statHeight = statItem.offsetHeight + 12; // 12px margin-top
+                    const statHeight = statItem.offsetHeight + 8; // 8px margin-top
 
                     // Animate the scroller upwards
                     gsap.to(scroller, {
                         y: `-=${statHeight}`,
-                        duration: 1,
+                        duration: 0.5, // Increased scroll speed
                         ease: "power1.out",
                         onComplete: () => {
                             cumulativeY += statHeight;
@@ -1348,8 +1349,8 @@
                     // Move to the next stat
                     currentStatIndex = (currentStatIndex + 1) % statsData.length;
 
-                    // Optional delay before typing the next stat
-                    await delay(500);
+                    // Reduced delay before typing the next stat
+                    await delay(300);
                 }
             }
 
@@ -1410,7 +1411,7 @@
         }
 
         // Function to type text into an element
-        function typeTextInfographic(element, text, speed = 50) {
+        function typeTextInfographic(element, text, speed = 30) { // Increased typing speed
             return new Promise((resolve) => {
                 let index = 0;
                 element.textContent = '';
@@ -1446,7 +1447,7 @@
                     typeTextInfographic(textElement, text)
                 ]);
 
-                // Wait for half a second
+                // Wait for a short duration before fading out
                 await delayInfographic(500);
 
                 // Fade out the infographic
