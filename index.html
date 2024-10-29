@@ -515,7 +515,7 @@
             display: flex;
             flex-direction: column;
             position: absolute;
-            top: 0;
+            bottom: 0; /* Start at the bottom */
             left: 0;
             width: 100%;
         }
@@ -528,7 +528,7 @@
                 0 0 10px rgba(0, 183, 255, 0.5);
             font-weight: 500;
             letter-spacing: 0.5px;
-            margin-bottom: 12px;
+            margin-top: 12px; /* Space between stats */
             font-family: 'Courier New', monospace;
             opacity: 1;
             transform: translateY(0);
@@ -1321,8 +1321,11 @@
                     // Type the stat text
                     await typeText(statItem, stat);
                     
-                    // Calculate the height to scroll (including margin)
-                    const statHeight = statItem.offsetHeight + 12; // 12px margin-bottom
+                    // Ensure the element is rendered to get accurate height
+                    await delay(100);
+
+                    // Get the height of the stat item
+                    const statHeight = statItem.offsetHeight + 12; // 12px margin-top
 
                     // Animate the scroller upwards
                     gsap.to(scroller, {
@@ -1331,7 +1334,7 @@
                         ease: "power1.out"
                     });
 
-                    // Remove the oldest stat if more than 25
+                    // Remove the oldest stat if over 25
                     if (scroller.children.length > 25) {
                         const removedStat = scroller.children[0];
                         scroller.removeChild(removedStat);
@@ -1461,22 +1464,6 @@
             const particlesContainers = document.querySelectorAll('.particles-container');
             particlesContainers.forEach(container => {
                 setInterval(() => createParticle(container), 200);
-            });
-        }
-
-        // Initialize Scrolling Stats Animation
-        function startScrollingStats() {
-            const scroller = document.querySelector('.profile-stats-overlay .stats-scroller');
-            const statsHeight = scroller.scrollHeight / 2; // Since we'll duplicate the stats for seamless scrolling
-
-            // Duplicate the stats for seamless loop
-            scroller.innerHTML += scroller.innerHTML;
-
-            gsap.to(scroller, {
-                y: -statsHeight,
-                ease: "none",
-                duration: 30, // Adjust the duration as needed for speed
-                repeat: -1
             });
         }
 
