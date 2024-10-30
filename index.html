@@ -508,26 +508,24 @@
         .profile-hover-button {
             position: absolute;
             bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-red);
+            left: calc(50% - 50px); /* Moved left by 50px */
+            background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
-            color: #fff;
+            color: #000; /* Changed text color for visibility */
             padding: 8px 16px;
             border-radius: 5px;
             font-size: 0.9rem;
             cursor: pointer;
             opacity: 1;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: transform 0.3s ease;
             z-index: 5; /* Increased z-index to ensure visibility */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
-        /* Removed hover effect to keep the button always visible */
-        /* .profile-container:hover .profile-hover-button {
-            opacity: 1;
-            transform: translateX(-50%) translateY(-5px);
-        } */
+        /* Optional: Add slight hover effect */
+        .profile-hover-button:hover {
+            transform: translateY(-3px);
+        }
 
         /* Profile Stats Overlay */
         .profile-stats-overlay {
@@ -1109,11 +1107,10 @@
         .profile-hover-button {
             position: absolute;
             bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-red);
+            left: calc(50% - 50px); /* Moved left by 50px */
+            background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
-            color: #fff;
+            color: #000; /* Changed text color for visibility */
             padding: 8px 16px;
             border-radius: 5px;
             font-size: 0.9rem;
@@ -1126,7 +1123,7 @@
 
         /* Optional: Add slight hover effect */
         .profile-hover-button:hover {
-            transform: translateX(-50%) translateY(-3px);
+            transform: translateY(-3px);
         }
     </style>
 </head>
