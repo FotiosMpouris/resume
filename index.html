@@ -374,11 +374,13 @@
                 rgba(20, 30, 50, 0.97) 50%,
                 rgba(15, 25, 40, 0.95) 100%
             ) !important;
-            border: 1px solid rgba(0, 123, 255, 0.1) !important;
+            border: 2px solid transparent !important; /* Changed from 1px to 2px and made transparent for gradient border */
             box-shadow: 
                 0 0 40px rgba(0, 0, 0, 0.4),
                 0 0 80px rgba(255, 0, 0, 0.2),
-                inset 0 0 40px rgba(0, 123, 255, 0.08) !important;
+                inset 0 0 40px rgba(0, 123, 255, 0.08),
+                0 0 20px rgba(0, 183, 255, 0.5),
+                0 0 40px rgba(0, 183, 255, 0.5) !important; /* Added additional neon shadows */
             overflow: hidden;
             backdrop-filter: blur(10px);
             transform-style: preserve-3d;
@@ -386,7 +388,7 @@
             z-index: 2; /* Ensure it is above the anime-background */
         }
 
-        /* Glowing Blue Border Around About Card */
+        /* Glowing Cyberpunk Border Around About Card */
         .about-card::before {
             content: '';
             position: absolute;
@@ -396,10 +398,18 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
+            background: linear-gradient(45deg, #0ff, #f0f, #0ff, #f0f); /* Neon gradient */
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite; /* Animated gradient */
             box-shadow: 0 0 20px rgba(0, 183, 255, 0.5), 0 0 40px rgba(0, 183, 255, 0.5);
-            animation: glowPulse 4s infinite alternate;
-            pointer-events: none;
             z-index: -1;
+        }
+
+        /* Gradient Animation Keyframes */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Tech Grid Background */
@@ -453,6 +463,7 @@
             margin-top: 0; /* Remove extra space above */
             z-index: 3;
             cursor: pointer; /* Indicate interactivity */
+            left: -175px; /* Shift left by 175px */
         }
 
         /* Profile Image Hover Effects */
