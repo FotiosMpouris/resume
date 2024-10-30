@@ -1215,7 +1215,7 @@
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
                             <!-- Added Hover Button -->
-                            <button class="profile-hover-button">Hover</button>
+                            <button class="profile-hover-button">Stats</button>
 
                             <div class="profile-stats-overlay">
                                 <div class="stats-cycler">
@@ -1459,26 +1459,33 @@
                 }
             }
 
-            // Attach event listeners to start cycling on hover
+            // Attach event listeners to start cycling on hover for both profile image and stats button
             const profileImg = document.querySelector('.about-profile-img');
+            const statsButton = document.querySelector('.profile-hover-button');
             const statsOverlay = document.querySelector('.profile-stats-overlay');
 
-            profileImg.addEventListener('mouseenter', () => {
+            function showStats() {
                 gsap.to(statsOverlay, {
                     opacity: 1,
                     duration: 0.3,
                     ease: "power1.out"
                 });
                 cycleStats(); // Start cycling on first hover
-            });
-            
-            profileImg.addEventListener('mouseleave', () => {
+            }
+
+            function hideStats() {
                 gsap.to(statsOverlay, {
                     opacity: 0,
                     duration: 0.3,
                     ease: "power1.out"
                 });
-            });
+            }
+
+            profileImg.addEventListener('mouseenter', showStats);
+            profileImg.addEventListener('mouseleave', hideStats);
+
+            statsButton.addEventListener('mouseenter', showStats);
+            statsButton.addEventListener('mouseleave', hideStats);
         }
 
         // Particle Effects
