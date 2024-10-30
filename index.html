@@ -377,10 +377,9 @@
             border: 2px solid transparent !important; /* Changed from 1px to 2px and made transparent for gradient border */
             box-shadow: 
                 0 0 40px rgba(0, 0, 0, 0.4),
-                0 0 80px rgba(255, 0, 0, 0.2),
                 inset 0 0 40px rgba(0, 123, 255, 0.08),
                 0 0 20px rgba(0, 183, 255, 0.5),
-                0 0 40px rgba(0, 183, 255, 0.5) !important; /* Added additional neon shadows */
+                0 0 40px rgba(0, 183, 255, 0.5) !important; /* Removed pink shadow and kept blue shadows */
             overflow: hidden;
             backdrop-filter: blur(10px);
             transform-style: preserve-3d;
@@ -398,7 +397,7 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, #0ff, #f0f, #0ff, #f0f); /* Neon gradient */
+            background: linear-gradient(45deg, #0ff, #00f, #0ff, #00f); /* Changed to blue gradient */
             background-size: 400% 400%;
             animation: gradientAnimation 10s ease infinite; /* Animated gradient */
             box-shadow: 0 0 20px rgba(0, 183, 255, 0.5), 0 0 40px rgba(0, 183, 255, 0.5);
@@ -463,7 +462,7 @@
             margin-top: 0; /* Remove extra space above */
             z-index: 3;
             cursor: pointer; /* Indicate interactivity */
-            left: -175px; /* Shift left by 175px */
+            left: -150px; /* Shift left by 150px (175px - 25px) */
         }
 
         /* Profile Image Hover Effects */
@@ -503,6 +502,28 @@
             );
             animation: scanlines 8s linear infinite;
             mix-blend-mode: overlay;
+        }
+
+        /* Hover Button on Profile Image */
+        .profile-hover-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 123, 255, 0.8);
+            border: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 4;
+        }
+
+        .profile-container:hover .profile-hover-button {
+            opacity: 1;
+            transform: translateY(-5px);
         }
 
         /* Profile Stats Overlay */
@@ -1082,10 +1103,29 @@
 
         /* Added Styles for "mouse hover" Text */
         .hover-text {
-            margin-top: 0.5rem;
+            /* Removed this class as per user request */
+        }
+
+        /* New Button Styling */
+        .profile-hover-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 123, 255, 0.8);
+            border: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
             font-size: 0.8rem;
-            color: var(--faint-text);
-            user-select: none;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 4;
+        }
+
+        .profile-container:hover .profile-hover-button {
+            opacity: 1;
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -1159,8 +1199,7 @@
     <section class="lower-hero">
         <div class="particles-container"></div>
         <div class="scrolling-code"></div>
-        <!-- Removed #profile-trigger div -->
-        <!-- No additional content needed as per your preference -->
+        <!-- Removed #profile-trigger div and "mouse hover" text -->
     </section>
 
     <!-- Dark Theme Section -->
@@ -1177,8 +1216,8 @@
                         <div class="profile-container">
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
-                            <!-- "mouse hover" Text -->
-                            <p class="hover-text">mouse hover</p>
+                            <!-- Added Hover Button -->
+                            <button class="profile-hover-button">Explore</button>
 
                             <div class="profile-stats-overlay">
                                 <div class="stats-cycler">
