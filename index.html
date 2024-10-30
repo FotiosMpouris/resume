@@ -504,51 +504,61 @@
             mix-blend-mode: overlay;
         }
 
+        /* Profile Stats Overlay */
+        .profile-stats-overlay {
+            position: absolute;
+            top: 0; /* Align to the top of the profile container */
+            left: 0; /* Align to the left of the profile container */
+            width: 100%; /* Match the width of the profile image */
+            height: 100%; /* Match the height of the profile image */
+            background: rgba(0, 123, 255, 0.2); /* Semi-transparent background */
+            border: 1px solid rgba(0, 183, 255, 0.5); /* Border color */
+            border-radius: 8px;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 5; /* Ensure it's above the profile image */
+            backdrop-filter: blur(5px);
+            pointer-events: none; /* Prevents accidental clicks */
+            display: flex; /* Use flexbox for centering content */
+            align-items: center; /* Vertically center content */
+            justify-content: center; /* Horizontally center content */
+            overflow: hidden;
+        }
+
+        /* Hover Effect to Show Overlay */
+        .profile-container:hover .profile-stats-overlay {
+            opacity: 1;
+            pointer-events: auto; /* Enable interactions when visible */
+        }
+
         /* Hover Button on Profile Image */
         .profile-hover-button {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
             background: rgba(0, 123, 255, 0.8);
             border: none;
             color: #fff;
-            padding: 5px 10px;
+            padding: 10px 20px; /* Increased padding for better visibility */
             border-radius: 5px;
-            font-size: 0.8rem;
+            font-size: 1rem; /* Increased font size */
             cursor: pointer;
             opacity: 0;
             transition: opacity 0.3s ease, transform 0.3s ease;
-            z-index: 4;
+            z-index: 6; /* Ensure it's above the overlay */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
         }
 
         .profile-container:hover .profile-hover-button {
             opacity: 1;
-            transform: translateY(-5px);
+            transform: translate(-50%, -50%) scale(1);
         }
 
-        /* Profile Stats Overlay */
-        .profile-stats-overlay {
-            position: absolute;
-            top: 50%; /* Center vertically relative to the profile image */
-            left: 100%; /* Position to the right of the profile image */
-            transform: translate(-300px, -50%);
-            width: 280px; /* Slightly narrower for better fit */
-            height: 200px; /* Fixed height for cycling */
-            background: rgba(0, 123, 255, 0.2); /* Reduced opacity to minimize shadow effect */
-            border: 1px solid rgba(0, 183, 255, 0.5); /* Updated Border Color */
-            border-radius: 8px;
-            padding: 1rem; /* Reduced padding for better text fit */
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 4;
-            backdrop-filter: blur(5px);
-            pointer-events: none; /* Prevents accidental clicks */
-            overflow: hidden; /* Hide overflowing stats */
-        }
-
+        /* Profile Stats Overlay Hover */
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translate(-300px, -50%); /* Maintain the left and down shift on hover */
+            transform: translate(0, 0); /* Reset any transform */
             pointer-events: auto;
         }
 
@@ -1216,10 +1226,9 @@
                         <div class="profile-container">
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
-                            <!-- Added Hover Button -->
-                            <button class="profile-hover-button">Explore</button>
-
+                            <!-- Profile Stats Overlay -->
                             <div class="profile-stats-overlay">
+                                <button class="profile-hover-button">Explore</button>
                                 <div class="stats-cycler">
                                     <div class="stat-paragraph">
                                         <p></p>
