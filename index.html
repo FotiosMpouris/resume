@@ -1148,7 +1148,6 @@
     <section class="lower-hero">
         <div class="particles-container"></div>
         <div class="scrolling-code"></div>
-        <!-- Invisible Trigger for Profile Stats (Removed as it's no longer needed) -->
         <!-- Removed #profile-trigger div -->
         <!-- No additional content needed as per your preference -->
     </section>
@@ -1363,7 +1362,7 @@
             const totalStats = statsData.length;
 
             // Function to type text into an element
-            function typeText(element, text, speed = 20) { // Increased typing speed
+            function typeText(element, text, speed = 10) { // Reduced typing speed from 20ms to 10ms
                 return new Promise(resolve => {
                     let index = 0;
                     const typingInterval = setInterval(() => {
@@ -1487,7 +1486,7 @@
         }
 
         // Function to type text into an element
-        function typeTextInfographic(element, text, speed = 20) { // Increased typing speed
+        function typeTextInfographic(element, text, speed = 10) { // Reduced typing speed from 20ms to 10ms
             return new Promise((resolve) => {
                 let index = 0;
                 element.textContent = '';
@@ -1555,33 +1554,37 @@
             return chars[Math.floor(Math.random() * chars.length)];
         }
 
-        // Function to display random Japanese characters with random color
-        function displayRandomJapaneseChar() {
+        // Function to display multiple random Japanese characters with random color
+        function displayRandomJapaneseChars(count = 2) {
             const darkSection = document.querySelector('.dark-theme-section');
-            const char = generateRandomJapaneseChar();
-            const randomCharElem = document.createElement('span');
-            randomCharElem.className = 'random-char';
+            const chars = ['守', 'ら', 'れ', 'た', 'ア', 'プ', 'リ', 'ケ', 'ー', 'シ', 'ョ', 'ン', 'ア', 'ク', 'プ'];
 
-            // Randomly assign one of the three colors
-            const colors = ['white', 'red', 'blue'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            randomCharElem.classList.add(randomColor);
+            for(let i = 0; i < count; i++) {
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                const randomCharElem = document.createElement('span');
+                randomCharElem.className = 'random-char';
 
-            randomCharElem.textContent = char;
+                // Randomly assign one of the three colors
+                const colors = ['white', 'red', 'blue'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                randomCharElem.classList.add(randomColor);
 
-            // Random position within the dark-theme-section
-            const x = Math.random() * 100;
-            const y = Math.random() * 100;
+                randomCharElem.textContent = char;
 
-            randomCharElem.style.left = `${x}%`;
-            randomCharElem.style.top = `${y}%`;
+                // Random position within the dark-theme-section
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
 
-            darkSection.appendChild(randomCharElem);
+                randomCharElem.style.left = `${x}%`;
+                randomCharElem.style.top = `${y}%`;
 
-            // Remove the character after animation completes
-            randomCharElem.addEventListener('animationend', () => {
-                randomCharElem.remove();
-            });
+                darkSection.appendChild(randomCharElem);
+
+                // Remove the character after animation completes
+                randomCharElem.addEventListener('animationend', () => {
+                    randomCharElem.remove();
+                });
+            }
         }
 
         // Initialize Everything
@@ -1689,7 +1692,7 @@
 
             /* --- Added Code for Random Japanese Characters in Dark Theme Section --- */
             // Generate Japanese characters at random intervals
-            setInterval(displayRandomJapaneseChar, 300); // Increased frequency to every 300ms
+            setInterval(() => displayRandomJapaneseChars(2), 300); // Generate 2 characters every 300ms
         });
     </script>
 </body>
