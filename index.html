@@ -441,9 +441,11 @@
 
         .profile-container {
             position: relative;
-            display: inline-block;
-            flex: 2; /* Adjusted to allow space for infographic */
-            text-align: center; /* Center the "mouse hover" text */
+            display: flex; /* Changed from inline-block to flex for horizontal alignment */
+            align-items: center;
+            gap: 10px; /* Space between image and button */
+            flex: none; /* Removed flex: 2; to prevent unintended stretching */
+            text-align: center;
         }
 
         /* Profile Image */
@@ -462,7 +464,7 @@
             margin-top: 0; /* Remove extra space above */
             z-index: 3;
             cursor: pointer; /* Indicate interactivity */
-            left: -150px; /* Shift left by 150px (175px - 25px) */
+            /* Removed left: -150px; */
         }
 
         /* Profile Image Hover Effects */
@@ -506,9 +508,6 @@
 
         /* Hover Button on Profile Image */
         .profile-hover-button {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
             background: rgba(0, 123, 255, 0.8);
             border: none;
             color: #fff;
@@ -519,6 +518,7 @@
             opacity: 0;
             transition: opacity 0.3s ease, transform 0.3s ease;
             z-index: 4;
+            /* Removed absolute positioning */
         }
 
         .profile-container:hover .profile-hover-button {
@@ -531,7 +531,7 @@
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
             left: 100%; /* Position to the right of the profile image */
-            transform: translate(-300px, -50%);
+            transform: translate(10px, -50%); /* Adjusted to position to the immediate right */
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
             background: rgba(0, 123, 255, 0.2); /* Reduced opacity to minimize shadow effect */
@@ -540,15 +540,15 @@
             padding: 1rem; /* Reduced padding for better text fit */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 4;
+            z-index: 3; /* Set below the button */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
         }
 
-        .profile-stats-overlay:hover {
+        .profile-container:hover .profile-stats-overlay {
             opacity: 1;
-            transform: translate(-300px, -50%); /* Maintain the left and down shift on hover */
+            transform: translate(10px, -50%); /* Maintain the shift on hover */
             pointer-events: auto;
         }
 
@@ -1108,9 +1108,6 @@
 
         /* New Button Styling */
         .profile-hover-button {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
             background: rgba(0, 123, 255, 0.8);
             border: none;
             color: #fff;
@@ -1121,6 +1118,7 @@
             opacity: 0;
             transition: opacity 0.3s ease, transform 0.3s ease;
             z-index: 4;
+            /* Removed absolute positioning */
         }
 
         .profile-container:hover .profile-hover-button {
@@ -1216,7 +1214,7 @@
                         <div class="profile-container">
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
-                            <!-- Added Hover Button -->
+                            <!-- Added Explore Button -->
                             <button class="profile-hover-button">Explore</button>
 
                             <div class="profile-stats-overlay">
@@ -1464,23 +1462,32 @@
             // Attach event listeners to start cycling on hover
             const profileImg = document.querySelector('.about-profile-img');
             const statsOverlay = document.querySelector('.profile-stats-overlay');
+            const exploreButton = document.querySelector('.profile-hover-button');
 
-            profileImg.addEventListener('mouseenter', () => {
+            // Function to handle mouse enter
+            function handleMouseEnter() {
                 gsap.to(statsOverlay, {
                     opacity: 1,
                     duration: 0.3,
                     ease: "power1.out"
                 });
                 cycleStats(); // Start cycling on first hover
-            });
-            
-            profileImg.addEventListener('mouseleave', () => {
+            }
+
+            // Function to handle mouse leave
+            function handleMouseLeave() {
                 gsap.to(statsOverlay, {
                     opacity: 0,
                     duration: 0.3,
                     ease: "power1.out"
                 });
-            });
+            }
+
+            // Attach to both profile image and explore button
+            profileImg.addEventListener('mouseenter', handleMouseEnter);
+            profileImg.addEventListener('mouseleave', handleMouseLeave);
+            exploreButton.addEventListener('mouseenter', handleMouseEnter);
+            exploreButton.addEventListener('mouseleave', handleMouseLeave);
         }
 
         // Particle Effects
@@ -1747,6 +1754,3 @@
     </script>
 </body>
 </html>
-
-
-
