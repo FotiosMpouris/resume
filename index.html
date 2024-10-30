@@ -531,7 +531,7 @@
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
             left: 100%; /* Position to the right of the profile image */
-            transform: translate(10px, -50%); /* Adjusted to position to the immediate right */
+            transform: translate(10px, -50%); /* Adjusted to position immediately to the right */
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
             background: rgba(0, 123, 255, 0.2); /* Reduced opacity to minimize shadow effect */
@@ -546,7 +546,8 @@
             overflow: hidden; /* Hide overflowing stats */
         }
 
-        .profile-container:hover .profile-stats-overlay {
+        .profile-container:hover .profile-stats-overlay,
+        .profile-hover-button:hover + .profile-stats-overlay {
             opacity: 1;
             transform: translate(10px, -50%); /* Maintain the shift on hover */
             pointer-events: auto;
