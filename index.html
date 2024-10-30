@@ -26,6 +26,7 @@
             --code-white: #ffffff;
             --code-red: #ff0000;
             --code-blue: #0000ff;
+            --faint-text: rgba(255, 255, 255, 0.4); /* For "mouse hover" text */
         }
 
         /* Reset and Base Styles */
@@ -433,6 +434,7 @@
             position: relative;
             display: inline-block;
             flex: 2; /* Adjusted to allow space for infographic */
+            text-align: center; /* Center the "mouse hover" text */
         }
 
         /* Profile Image */
@@ -1067,6 +1069,13 @@
             z-index: 5; /* Ensure it's above other elements */
         }
 
+        /* Added Styles for "mouse hover" Text */
+        .hover-text {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--faint-text);
+            user-select: none;
+        }
     </style>
 </head>
 
@@ -1139,8 +1148,8 @@
     <section class="lower-hero">
         <div class="particles-container"></div>
         <div class="scrolling-code"></div>
-        <!-- Invisible Trigger for Profile Stats -->
-        <div id="profile-trigger"></div> <!-- Added Invisible Box -->
+        <!-- Invisible Trigger for Profile Stats (Removed as it's no longer needed) -->
+        <!-- Removed #profile-trigger div -->
         <!-- No additional content needed as per your preference -->
     </section>
 
@@ -1157,6 +1166,9 @@
                     <div class="about-header">
                         <div class="profile-container">
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
+
+                            <!-- "mouse hover" Text -->
+                            <p class="hover-text">mouse hover</p>
 
                             <div class="profile-stats-overlay">
                                 <div class="stats-cycler">
@@ -1668,30 +1680,12 @@
                 });
             });
 
-            /* --- Added Code for Profile Stats Trigger via Scroll --- */
-            // ScrollTrigger to show profile stats when #profile-trigger enters the viewport
-            ScrollTrigger.create({
-                trigger: "#profile-trigger",
-                start: "top center",
-                onEnter: () => {
-                    const statsOverlay = document.querySelector('.profile-stats-overlay');
-                    gsap.to(statsOverlay, {
-                        opacity: 1,
-                        duration: 0.3,
-                        ease: "power1.out"
-                    });
-                    // Start cycling stats if not already started
-                    cycleStats(); // This function already checks the isCyclingStats flag
-                },
-                onLeaveBack: () => {
-                    const statsOverlay = document.querySelector('.profile-stats-overlay');
-                    gsap.to(statsOverlay, {
-                        opacity: 0,
-                        duration: 0.3,
-                        ease: "power1.out"
-                    });
-                }
-            });
+            /* --- Removed Code for Profile Stats Trigger via Scroll --- */
+            /* 
+                Previously, there was a ScrollTrigger that activated the profile stats overlay
+                when scrolling into the lower section. Since you want to revert to only hover
+                triggering, this code has been removed.
+            */
 
             /* --- Added Code for Random Japanese Characters in Dark Theme Section --- */
             // Generate Japanese characters at random intervals
