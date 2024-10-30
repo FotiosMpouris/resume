@@ -116,7 +116,7 @@
             background: linear-gradient(
                 0deg,
                 transparent,
-                rgba(255, 60, 0, 0.2) 50%,
+                rgba(0, 123, 255, 0.2) 50%,
                 transparent
             );
             background-size: 100% 200%;
@@ -443,7 +443,7 @@
             position: relative;
             display: inline-block;
             flex: 2; /* Adjusted to allow space for infographic */
-            text-align: center; /* Center the "mouse hover" text */
+            text-align: center; /* Center the content */
         }
 
         /* Profile Image */
@@ -516,13 +516,13 @@
             border-radius: 5px;
             font-size: 0.8rem;
             cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            z-index: 4;
+            opacity: 1; /* Always visible */
+            transition: transform 0.3s ease, background 0.3s ease;
+            z-index: 5; /* Ensure it's above the stats overlay */
         }
 
-        .profile-container:hover .profile-hover-button {
-            opacity: 1;
+        .profile-hover-button:hover {
+            background: rgba(0, 123, 255, 1);
             transform: translateY(-5px);
         }
 
@@ -531,7 +531,7 @@
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
             left: 100%; /* Position to the right of the profile image */
-            transform: translate(-300px, -50%);
+            transform: translate(-100%, -50%);
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
             background: rgba(0, 123, 255, 0.2); /* Reduced opacity to minimize shadow effect */
@@ -539,8 +539,8 @@
             border-radius: 8px;
             padding: 1rem; /* Reduced padding for better text fit */
             opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 4;
+            transition: opacity 0.3s ease;
+            z-index: 4; /* Ensure it's below the button */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -548,7 +548,7 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translate(-300px, -50%); /* Maintain the left and down shift on hover */
+            transform: translate(-100%, -50%); /* Maintain the left and down shift on hover */
             pointer-events: auto;
         }
 
@@ -1101,31 +1101,9 @@
             z-index: 5; /* Ensure it's above other elements */
         }
 
-        /* Added Styles for "mouse hover" Text */
+        /* Removed Styles for "mouse hover" Text */
         .hover-text {
             /* Removed this class as per user request */
-        }
-
-        /* New Button Styling */
-        .profile-hover-button {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 123, 255, 0.8);
-            border: none;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            z-index: 4;
-        }
-
-        .profile-container:hover .profile-hover-button {
-            opacity: 1;
-            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -1462,10 +1440,10 @@
             }
 
             // Attach event listeners to start cycling on hover
-            const profileImg = document.querySelector('.about-profile-img');
+            const profileContainer = document.querySelector('.profile-container');
             const statsOverlay = document.querySelector('.profile-stats-overlay');
 
-            profileImg.addEventListener('mouseenter', () => {
+            profileContainer.addEventListener('mouseenter', () => {
                 gsap.to(statsOverlay, {
                     opacity: 1,
                     duration: 0.3,
@@ -1474,7 +1452,7 @@
                 cycleStats(); // Start cycling on first hover
             });
             
-            profileImg.addEventListener('mouseleave', () => {
+            profileContainer.addEventListener('mouseleave', () => {
                 gsap.to(statsOverlay, {
                     opacity: 0,
                     duration: 0.3,
@@ -1539,12 +1517,12 @@
         function typeTextInfographic(element, text, speed = 10) { // Reduced typing speed from 20ms to 10ms
             return new Promise((resolve) => {
                 let index = 0;
-                element.textContent = '';
+                element.querySelector('p').textContent = '';
                 element.style.opacity = '1';
                 
                 const typingInterval = setInterval(() => {
                     if (index < text.length) {
-                        element.textContent += text[index];
+                        element.querySelector('p').textContent += text[index];
                         index++;
                     } else {
                         clearInterval(typingInterval);
