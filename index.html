@@ -116,7 +116,7 @@
             background: linear-gradient(
                 0deg,
                 transparent,
-                rgba(0, 123, 255, 0.2) 50%,
+                rgba(255, 60, 0, 0.2) 50%,
                 transparent
             );
             background-size: 100% 200%;
@@ -443,7 +443,7 @@
             position: relative;
             display: inline-block;
             flex: 2; /* Adjusted to allow space for infographic */
-            text-align: center; /* Center the content */
+            text-align: center; /* Center the "mouse hover" text */
         }
 
         /* Profile Image */
@@ -508,23 +508,22 @@
         .profile-hover-button {
             position: absolute;
             bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 10px;
             background: rgba(0, 123, 255, 0.8);
             border: none;
             color: #fff;
-            padding: 8px 16px;
+            padding: 5px 10px;
             border-radius: 5px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             cursor: pointer;
-            opacity: 1; /* Always visible */
-            transition: transform 0.3s ease, background 0.3s ease;
-            z-index: 5; /* Ensure it's above the stats overlay */
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 4;
         }
 
-        .profile-hover-button:hover {
-            background: rgba(0, 123, 255, 1);
-            transform: translateX(-50%) translateY(-5px);
+        .profile-container:hover .profile-hover-button {
+            opacity: 1;
+            transform: translateY(-5px);
         }
 
         /* Profile Stats Overlay */
@@ -532,7 +531,7 @@
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
             left: 100%; /* Position to the right of the profile image */
-            transform: translate(-100%, -50%);
+            transform: translate(-300px, -50%);
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
             background: rgba(0, 123, 255, 0.2); /* Reduced opacity to minimize shadow effect */
@@ -540,8 +539,8 @@
             border-radius: 8px;
             padding: 1rem; /* Reduced padding for better text fit */
             opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 4; /* Ensure it's below the button */
+            transition: all 0.3s ease;
+            z-index: 4;
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -549,7 +548,7 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translate(-100%, -50%); /* Maintain the left and down shift on hover */
+            transform: translate(-300px, -50%); /* Maintain the left and down shift on hover */
             pointer-events: auto;
         }
 
@@ -1102,9 +1101,31 @@
             z-index: 5; /* Ensure it's above other elements */
         }
 
-        /* Removed Styles for "mouse hover" Text */
+        /* Added Styles for "mouse hover" Text */
         .hover-text {
             /* Removed this class as per user request */
+        }
+
+        /* New Button Styling */
+        .profile-hover-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 123, 255, 0.8);
+            border: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 4;
+        }
+
+        .profile-container:hover .profile-hover-button {
+            opacity: 1;
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -1195,7 +1216,7 @@
                         <div class="profile-container">
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
-                            <!-- Repositioned Explore Button -->
+                            <!-- Added Hover Button -->
                             <button class="profile-hover-button">Explore</button>
 
                             <div class="profile-stats-overlay">
@@ -1216,7 +1237,7 @@
                             </div>
                         </div>
                         <!-- Removed the .about-header-text div as per user request -->
-                        <!-- Infographics Container (Restored to Original) -->
+                        <!-- Infographics Container -->
                         <div class="infographic">
                             <div class="infographic-item">
                                 <h4>AI Development</h4>
@@ -1441,10 +1462,10 @@
             }
 
             // Attach event listeners to start cycling on hover
-            const profileContainer = document.querySelector('.profile-container');
+            const profileImg = document.querySelector('.about-profile-img');
             const statsOverlay = document.querySelector('.profile-stats-overlay');
 
-            profileContainer.addEventListener('mouseenter', () => {
+            profileImg.addEventListener('mouseenter', () => {
                 gsap.to(statsOverlay, {
                     opacity: 1,
                     duration: 0.3,
@@ -1453,7 +1474,7 @@
                 cycleStats(); // Start cycling on first hover
             });
             
-            profileContainer.addEventListener('mouseleave', () => {
+            profileImg.addEventListener('mouseleave', () => {
                 gsap.to(statsOverlay, {
                     opacity: 0,
                     duration: 0.3,
@@ -1518,12 +1539,12 @@
         function typeTextInfographic(element, text, speed = 10) { // Reduced typing speed from 20ms to 10ms
             return new Promise((resolve) => {
                 let index = 0;
-                element.querySelector('p').textContent = '';
+                element.textContent = '';
                 element.style.opacity = '1';
                 
                 const typingInterval = setInterval(() => {
                     if (index < text.length) {
-                        element.querySelector('p').textContent += text[index];
+                        element.textContent += text[index];
                         index++;
                     } else {
                         clearInterval(typingInterval);
