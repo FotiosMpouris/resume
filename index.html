@@ -1022,20 +1022,15 @@
             .about-profile-img {
                 width: 130px; /* Further reduced size */
                 height: 130px;
-                transform: translate(-15px, -25px); /* Move up and to the left */
+                transform: translate(0, -20px); /* Move up */
+                margin-left: 0;
+                position: relative;
             }
 
-            @media (orientation: landscape) {
-                .about-profile-img {
-                    width: 160px; /* Larger size for landscape */
-                    height: 160px;
-                    transform: translate(-10px, -20px); /* Adjusted movement */
-                }
-            }
-
-            /* Adjust profile-stats-overlay positioning */
-            .profile-stats-overlay {
-                z-index: 5; /* Ensure it is above infographics */
+            /* Ensure the profile-container items are aligned correctly */
+            .profile-container {
+                align-items: flex-start;
+                width: 100%;
             }
         }
 
@@ -1105,19 +1100,14 @@
             .profile-container {
                 display: flex;
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center; /* Center align for mobile */
                 justify-content: center;
-                gap: 0.5rem;
+                gap: 1rem;
                 width: 100%;
             }
 
             .profile-hover-button {
-                width: 80px;
-                height: 40px;
-                font-size: 0.9rem;
-                left: 0;
-                transform: none;
-                margin-top: 10px;
+                display: none; /* Hide the stats button on mobile */
             }
 
             .profile-stats-overlay {
@@ -1125,10 +1115,12 @@
                 left: 0;
                 top: 0;
                 transform: none;
-                width: 100%;
-                max-width: 280px;
-                height: 200px;
+                width: 100%; /* Make it the same width as infographic */
+                max-width: 300px;
+                height: 250px; /* Match the height of infographic */
                 margin-top: 10px;
+                opacity: 1; /* Make it always visible */
+                pointer-events: auto; /* Allow interaction if needed */
             }
 
             .infographic {
@@ -1142,12 +1134,7 @@
                 height: 130px;
                 transform: translate(0, -20px); /* Adjusted movement */
                 margin-left: 0;
-            }
-
-            /* Ensure the profile-container items are aligned correctly */
-            .profile-container {
-                align-items: flex-start;
-                width: 100%;
+                position: relative;
             }
         }
 
@@ -1178,11 +1165,7 @@
             }
 
             .profile-hover-button {
-                width: 35px;
-                height: 35px;
-                font-size: 0.7rem;
-                left: 50%; /* Center the button */
-                transform: translateX(-50%);
+                display: none; /* Ensure the button is hidden */
             }
 
             .profile-stats-overlay {
@@ -1190,7 +1173,9 @@
                 transform: translate(-50%, 0);
                 width: 90%;
                 max-width: 300px;
-                height: 200px;
+                height: 250px; /* Match the infographic height */
+                opacity: 1; /* Always visible */
+                pointer-events: auto;
             }
         }
 
@@ -1270,11 +1255,7 @@
         /* Responsive Adjustments for Profile Hover Button */
         @media (max-width: 768px) {
             .profile-hover-button {
-                width: 35px;
-                height: 35px;
-                font-size: 0.7rem;
-                left: 50%; /* Center the button */
-                transform: translateX(-50%);
+                display: none; /* Hide the stats button on mobile */
             }
         }
 
@@ -1914,6 +1895,17 @@
 
             /* --- Added Code for Random Japanese Characters in Dark Theme Section --- */
             // Generate Japanese characters at random intervals
+
+            // Automatically show profile stats and start cycling on mobile
+            if (window.innerWidth <= 768) {
+                const statsOverlay = document.querySelector('.profile-stats-overlay');
+                gsap.to(statsOverlay, {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
+                cycleStats(); // Start cycling automatically
+            }
         });
     </script>
 </body>
