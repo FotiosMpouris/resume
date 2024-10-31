@@ -1103,14 +1103,16 @@
 
             /* Profile Image Adjustments */
             .about-profile-img {
-                width: 150px; /* Smaller size for portrait */
-                height: 150px;
+                width: 130px; /* Further reduced size */
+                height: 130px;
+                transform: translate(-15px, -25px); /* Move up and to the left */
             }
 
             @media (orientation: landscape) {
                 .about-profile-img {
-                    width: 180px; /* Larger size for landscape */
-                    height: 180px;
+                    width: 160px; /* Larger size for landscape */
+                    height: 160px;
+                    transform: translate(-10px, -20px); /* Adjusted movement */
                 }
             }
 
@@ -1122,8 +1124,9 @@
 
         @media (max-width: 480px) {
             .about-profile-img {
-                width: 150px;
-                height: 150px;
+                width: 120px;
+                height: 120px;
+                transform: translate(-10px, -20px); /* Move up and to the left */
             }
 
             .glow-text {
@@ -1142,6 +1145,7 @@
             .about-profile-img {
                 left: 0; /* Ensure no left offset */
                 margin: 0 auto; /* Center the image */
+                transform: translate(0, -20px); /* Move up */
             }
 
             .profile-hover-button {
