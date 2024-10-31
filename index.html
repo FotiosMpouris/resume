@@ -367,14 +367,16 @@
 
         /* About Card Styling */
         .about-card {
+            --martiniqe: #0a192f; /* Changed Martiniqe color to match hero section */
             position: relative;
             max-width: 900px !important;
             margin: 0 auto !important;
             padding: 2rem !important;
             background: linear-gradient(
                 135deg,
-                var(--primary-dark) 0%, /* Same as hero section */
-                var(--primary-light) 100% /* Same as hero section */
+                rgba(10, 25, 47, 0.95) 0%, /* Updated Martiniqe color with opacity */
+                rgba(10, 25, 47, 0.85) 50%, /* Slightly darker shade */
+                rgba(10, 25, 47, 0.95) 100% /* Updated Martiniqe color with opacity */
             ) !important;
             border: 2px solid transparent !important; /* Changed from 1px to 2px and made transparent for gradient border */
             box-shadow: 
@@ -399,7 +401,7 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Updated gradient to include Martiniqe color */
+            background: linear-gradient(45deg, #0a192f, #090e27, #0a192f, #090e27); /* Updated gradient to include new Martiniqe color */
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite; /* Smoother animated gradient */
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.6), 0 0 60px rgba(0, 212, 255, 0.6); /* Enhanced glow */
