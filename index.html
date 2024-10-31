@@ -14,7 +14,7 @@
         :root {
             --primary-dark: #0a192f;
             --primary-light: #20232a;
-            --accent-blue: #00aaff;
+            --accent-blue: #4169E1; /* Royal Blue */
             --accent-light-blue: #00d4ff;
             --accent-dark-blue: #007BFF;
             --accent-red: #FF0000; /* Consistent red */
@@ -249,6 +249,7 @@
             margin-bottom: 1rem;
             opacity: 0;
             transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
         }
 
         .subtitle {
@@ -257,6 +258,7 @@
             margin-bottom: 2rem;
             opacity: 0;
             transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
         }
 
         /* Skills Grid */
@@ -387,6 +389,35 @@
             transform-style: preserve-3d;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             z-index: 2; /* Ensure it is above the anime-background */
+            animation: gradientShift 10s infinite alternate; /* Gradient Animation */
+        }
+
+        /* Gradient Shift Animation */
+        @keyframes gradientShift {
+            0% {
+                background: linear-gradient(
+                    135deg,
+                    rgba(0, 29, 60, 0.95) 0%,
+                    rgba(0, 40, 80, 0.97) 50%,
+                    rgba(0, 29, 60, 0.95) 100%
+                );
+            }
+            50% {
+                background: linear-gradient(
+                    135deg,
+                    rgba(0, 29, 60, 0.6) 0%,
+                    rgba(0, 40, 80, 0.7) 50%,
+                    rgba(0, 29, 60, 0.6) 100%
+                );
+            }
+            100% {
+                background: linear-gradient(
+                    135deg,
+                    rgba(0, 29, 60, 0.95) 0%,
+                    rgba(0, 40, 80, 0.97) 50%,
+                    rgba(0, 29, 60, 0.95) 100%
+                );
+            }
         }
 
         /* Glowing Starship Border Around About Card */
@@ -406,13 +437,6 @@
             z-index: -1;
         }
 
-        /* Gradient Animation Keyframes */
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         /* Tech Grid Background */
         .tech-grid {
             position: absolute;
@@ -428,6 +452,42 @@
             animation: gridMove 15s infinite ease-in-out;
             pointer-events: none;
             z-index: 1;
+        }
+
+        /* Gears and Switches Layout Behind About Section */
+        .circuits-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Between tech-grid (1) and about-content (3) */
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .circuit {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 2px solid var(--accent-blue);
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--accent-blue);
+            opacity: 0;
+            animation: pulseCircuit 10s infinite;
+        }
+
+        /* Positioning multiple circuits */
+        .circuit1 { top: 10%; left: 20%; animation-delay: 0s; }
+        .circuit2 { top: 30%; left: 70%; animation-delay: 2s; }
+        .circuit3 { top: 60%; left: 40%; animation-delay: 4s; }
+        .circuit4 { top: 80%; left: 10%; animation-delay: 6s; }
+        .circuit5 { top: 50%; left: 80%; animation-delay: 8s; }
+
+        @keyframes pulseCircuit {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(0.8); }
         }
 
         /* Profile Section */
@@ -705,6 +765,14 @@
         @keyframes glowPulse {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
+        }
+
+        /* Fade In Up Animation for Titles */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Infographics Cycling Animation */
@@ -1161,118 +1229,7 @@
         }
 
         /* Gears and Switches Layout Behind About Section */
-        .gears-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* Between tech-grid (1) and about-content (3) */
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .gear {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: rgba(0, 123, 255, 0.3);
-            border: 4px solid var(--accent-blue);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-blue);
-            animation: rotate 20s linear infinite;
-            opacity: 0.6;
-        }
-
-        .gear::before, .gear::after {
-            content: '';
-            position: absolute;
-            background: var(--accent-blue);
-        }
-
-        .gear::before {
-            top: 50%;
-            left: 0;
-            width: 10px;
-            height: 40px;
-            transform: translateY(-50%);
-        }
-
-        .gear::after {
-            top: 0;
-            left: 50%;
-            width: 40px;
-            height: 10px;
-            transform: translateX(-50%);
-        }
-
-        .gear1 {
-            top: 20%;
-            left: 15%;
-            animation-duration: 25s;
-        }
-
-        .gear2 {
-            top: 50%;
-            left: 80%;
-            animation-duration: 30s;
-            animation-direction: reverse;
-            width: 60px;
-            height: 60px;
-        }
-
-        .gear3 {
-            top: 70%;
-            left: 30%;
-            animation-duration: 22s;
-            width: 100px;
-            height: 100px;
-        }
-
-        .switch {
-            position: absolute;
-            width: 20px;
-            height: 40px;
-            background: rgba(0, 123, 255, 0.2);
-            border: 2px solid var(--accent-blue);
-            border-radius: 10px;
-            box-shadow: 0 0 5px var(--accent-blue);
-            animation: toggle 5s ease-in-out infinite;
-            opacity: 0.5;
-        }
-
-        .switch::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 5px;
-            width: 10px;
-            height: 20px;
-            background: var(--accent-blue);
-            border-radius: 5px;
-        }
-
-        .switch1 {
-            top: 40%;
-            left: 60%;
-            animation-duration: 5s;
-        }
-
-        .switch2 {
-            top: 10%;
-            left: 75%;
-            animation-duration: 7s;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes toggle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        /* Removed previous gears and switches, replaced with circuits */
 
         /* Glowing Starship Border Around About Card */
         /* Existing styles... */
@@ -1280,7 +1237,6 @@
         /* Continue with existing styles... */
 
         /* Continue with the rest of your CSS as provided */
-
     </style>
 </head>
 
@@ -1367,13 +1323,13 @@
                     <div class="anime-background"></div> <!-- Added Anime Background -->
                     <div class="tech-grid"></div>
                     
-                    <!-- Gears and Switches Layout -->
-                    <div class="gears-container">
-                        <div class="gear gear1"></div>
-                        <div class="gear gear2"></div>
-                        <div class="gear gear3"></div>
-                        <div class="switch switch1"></div>
-                        <div class="switch switch2"></div>
+                    <!-- Gears and Switches Layout (Replaced with Circuits) -->
+                    <div class="circuits-container">
+                        <div class="circuit circuit1"></div>
+                        <div class="circuit circuit2"></div>
+                        <div class="circuit circuit3"></div>
+                        <div class="circuit circuit4"></div>
+                        <div class="circuit circuit5"></div>
                     </div>
                     
                     <div class="about-header">
