@@ -370,18 +370,18 @@
             padding: 2rem !important;
             background: linear-gradient(
                 135deg,
-                rgba(15, 25, 40, 0.95) 0%,
-                rgba(20, 30, 50, 0.97) 50%,
-                rgba(15, 25, 40, 0.95) 100%
+                rgba(25, 35, 55, 0.95) 0%,
+                rgba(35, 45, 65, 0.97) 50%,
+                rgba(25, 35, 55, 0.95) 100%
             ) !important;
             border: 2px solid transparent !important; /* Changed from 1px to 2px and made transparent for gradient border */
             box-shadow: 
                 0 0 40px rgba(0, 0, 0, 0.4),
                 inset 0 0 40px rgba(0, 123, 255, 0.08),
-                0 0 20px rgba(0, 183, 255, 0.5),
-                0 0 40px rgba(0, 183, 255, 0.5) !important; /* Removed pink shadow and kept blue shadows */
+                0 0 25px rgba(0, 183, 255, 0.6),
+                0 0 50px rgba(0, 183, 255, 0.6) !important; /* Enhanced blue shadows */
             overflow: hidden;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px); /* Increased blur for better glass effect */
             transform-style: preserve-3d;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             z-index: 2; /* Ensure it is above the anime-background */
@@ -397,10 +397,10 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, #0ff, #00f, #0ff, #00f); /* Changed to blue gradient */
+            background: linear-gradient(45deg, #00f, #007BFF, #00aaff, #007BFF); /* Refined blue gradient */
             background-size: 400% 400%;
-            animation: gradientAnimation 10s ease infinite; /* Animated gradient */
-            box-shadow: 0 0 20px rgba(0, 183, 255, 0.5), 0 0 40px rgba(0, 183, 255, 0.5);
+            animation: gradientAnimation 15s ease infinite; /* Smoother animated gradient */
+            box-shadow: 0 0 30px rgba(0, 183, 255, 0.6), 0 0 60px rgba(0, 183, 255, 0.6); /* Enhanced glow */
             z-index: -1;
         }
 
@@ -512,7 +512,7 @@
             background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
             color: #000; /* Changed text color for visibility */
-            padding: 8px 8px;
+            padding: 8px 16px;
             border-radius: 5px;
             font-size: 0.9rem;
             cursor: pointer;
@@ -599,7 +599,7 @@
         .about-content {
             position: relative;
             z-index: 3;
-            background: rgba(20, 35, 60, 0.4);
+            background: rgba(25, 35, 55, 0.4);
             border: 1px solid rgba(0, 123, 255, 0.1);
             padding: 1.5rem;
             border-radius: 15px;
