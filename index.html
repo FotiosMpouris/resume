@@ -8,8 +8,6 @@
     <!-- Essential Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
     
     <style>
         /* Core Variables */
@@ -19,18 +17,19 @@
             --accent-blue: #00aaff;
             --accent-light-blue: #00d4ff;
             --accent-dark-blue: #007BFF;
-            --accent-red: #FF0000;
+            --martiniqe: #303655; /* Added Martiniqe color */
+            --accent-red: #FF0000; /* Consistent red */
             --accent-glow: rgba(0, 212, 255, 0.5);
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
             --matrix-color: rgba(0, 183, 255, 0.25);
-            --matrix-glow: rgba(0, 183, 255, 0.6);
+            --matrix-glow: rgba(0, 183, 255, 0.6); /* Added for anime effect */
             --transition-standard: all 0.3s ease;
-            --infographic-bg: rgba(0, 123, 255, 0.3);
+            --infographic-bg: rgba(0, 123, 255, 0.3); /* Semi-transparent Blue */
             --code-white: #ffffff;
             --code-red: #ff0000;
             --code-blue: #0000ff;
-            --faint-text: rgba(255, 255, 255, 0.4);
+            --faint-text: rgba(255, 255, 255, 0.4); /* For "mouse hover" text */
         }
 
         /* Reset and Base Styles */
@@ -46,7 +45,6 @@
             overflow-x: hidden;
             background: var(--primary-dark);
             color: var(--text-primary);
-            position: relative;
         }
 
         /* Particle System */
@@ -110,13 +108,13 @@
 
         .matrix-column {
             position: absolute;
-            width: 30px;
+            width: 30px; /* Increased width for fewer columns */
             height: 100%;
             color: var(--matrix-color);
             font-family: 'Courier New', monospace;
             font-size: 16px;
-            line-height: 24px;
-            white-space: pre-wrap;
+            line-height: 24px; /* Fixed line height */
+            white-space: pre-wrap; /* Allow wrapping */
             word-wrap: break-word;
             background: linear-gradient(
                 0deg,
@@ -148,7 +146,7 @@
             right: 0;
             bottom: 0;
             overflow: hidden;
-            z-index: 0;
+            z-index: 0; /* Behind the content */
             mask-image: linear-gradient(
                 to bottom,
                 transparent,
@@ -172,8 +170,8 @@
             color: var(--matrix-color);
             font-family: 'Courier New', monospace;
             font-size: 16px;
-            line-height: 24px;
-            white-space: pre-wrap;
+            line-height: 24px; /* Fixed line height */
+            white-space: pre-wrap; /* Allow wrapping */
             word-wrap: break-word;
             animation: animeRain 20s linear infinite;
             mix-blend-mode: screen;
@@ -223,7 +221,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
             position: relative;
@@ -248,24 +246,18 @@
 
         /* Title Elements */
         .title {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
             opacity: 0;
             transform: translateY(30px);
-            background: linear-gradient(90deg, #00d4ff, #007BFF, #00aaff, #005fcc);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientText 10s ease infinite, fadeIn 1s forwards 0.5s;
         }
 
         .subtitle {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--accent-blue);
             margin-bottom: 2rem;
             opacity: 0;
             transform: translateY(30px);
-            animation: fadeIn 1s forwards 0.8s;
         }
 
         /* Skills Grid */
@@ -275,15 +267,15 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 1.5rem;
-            max-width: 1000px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .skill-icon {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1rem;
+            border-radius: 8px;
+            padding: 0.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -291,27 +283,25 @@
             transform: scale(0.5);
             transition: var(--transition-standard);
             cursor: pointer;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .skill-icon:hover {
-            transform: scale(1.2);
+            transform: scale(1.1) !important;
             background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 25px var(--accent-glow);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
         .skill-icon img {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             object-fit: contain;
         }
 
         /* Lower Hero Section Enhancements */
         .lower-hero {
             position: relative;
-            height: 50vh;
-            background: transparent;
+            height: 0vh; /* Set to 0 to remove extra space */
+            background: transparent; /* Remove background */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -324,7 +314,7 @@
             position: absolute;
             inset: 0;
             background: url('https://www.svgrepo.com/show/331541/circuit.svg') repeat;
-            background-size: 100px 100px;
+            background-size: 50px 50px;
             opacity: 0.05;
             animation: subtleScroll 60s linear infinite;
         }
@@ -369,53 +359,59 @@
 
         /* Dark Theme Section */
         .dark-theme-section {
-            background: linear-gradient(135deg, #001f3f 0%, #003366 50%, #001f3f 100%);
+            /* Updated background to a deep blue gradient to resemble a starship interface */
+            background: linear-gradient(135deg, #303655 0%, #303655 50%, #303655 100%); /* Updated to Martiniqe color */
             position: relative;
             overflow: hidden;
-            padding: 4rem 0;
         }
 
         /* About Card Styling */
         .about-card {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem;
+            position: relative;
+            max-width: 900px !important;
+            margin: 0 auto !important;
+            padding: 2rem !important;
             background: linear-gradient(
                 135deg,
-                rgba(0, 29, 60, 0.95) 0%,
-                rgba(0, 40, 80, 0.97) 50%,
-                rgba(0, 29, 60, 0.95) 100%
-            );
-            border: 2px solid transparent;
+                rgba(48, 54, 85, 0.95) 0%, /* Martiniqe color with opacity */
+                rgba(48, 54, 85, 0.85) 50%, /* Slightly darker shade */
+                rgba(48, 54, 85, 0.95) 100% /* Martiniqe color with opacity */
+            ) !important;
+            border: 2px solid transparent !important; /* Changed from 1px to 2px and made transparent for gradient border */
             box-shadow: 
                 0 0 40px rgba(0, 0, 0, 0.4),
                 inset 0 0 40px rgba(0, 123, 255, 0.08),
                 0 0 25px rgba(0, 212, 255, 0.6),
-                0 0 60px rgba(0, 212, 255, 0.6);
+                0 0 60px rgba(0, 212, 255, 0.6) !important; /* Enhanced blue shadows */
             overflow: hidden;
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
+            backdrop-filter: blur(15px); /* Increased blur for better glass effect */
             transform-style: preserve-3d;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            z-index: 2;
+            z-index: 2; /* Ensure it is above the anime-background */
         }
 
         /* Glowing Starship Border Around About Card */
         .about-card::before {
             content: '';
             position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
             border: 2px solid transparent;
-            border-radius: 25px;
-            background: linear-gradient(45deg, #00aaff, #007BFF, #00d4ff, #007BFF);
+            border-radius: 15px;
+            background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Updated gradient to include Martiniqe color */
             background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.6), 0 0 60px rgba(0, 212, 255, 0.6);
+            animation: gradientAnimation 15s ease infinite; /* Smoother animated gradient */
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.6), 0 0 60px rgba(0, 212, 255, 0.6); /* Enhanced glow */
             z-index: -1;
+        }
+
+        /* Gradient Animation Keyframes */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Tech Grid Background */
@@ -435,7 +431,7 @@
             z-index: 1;
         }
 
-        /* About Header */
+        /* Profile Section */
         .about-header {
             display: flex;
             align-items: flex-start;
@@ -444,44 +440,40 @@
             padding: 0 1rem;
             position: relative;
             z-index: 3;
-            flex-wrap: wrap;
-            justify-content: center;
         }
 
         .profile-container {
             position: relative;
             display: inline-block;
-            flex: 2;
-            text-align: center;
-            max-width: 300px;
-            margin: 0 auto;
+            flex: 2; /* Adjusted to allow space for infographic */
+            text-align: center; /* Center the "mouse hover" text */
         }
 
         /* Profile Image */
         .about-profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 15px;
+            width: 180px;
+            height: 180px;
+            border-radius: 10px;
             object-fit: cover;
             box-shadow: 
                 0 10px 25px rgba(0, 0, 0, 0.3),
-                0 0 0 2px rgba(0, 123, 255, 0.3);
+                0 0 0 1px rgba(0, 123, 255, 0.3);
             transform: rotate(-3deg);
             transition: all 0.5s ease;
             position: relative;
             isolation: isolate;
+            margin-top: 0; /* Remove extra space above */
             z-index: 3;
-            cursor: pointer;
-            left: 0;
-            margin-bottom: 1rem;
+            cursor: pointer; /* Indicate interactivity */
+            left: -150px; /* Shift left by 150px (175px - 25px) */
         }
 
         /* Profile Image Hover Effects */
         .about-profile-img:hover {
-            transform: rotate(0deg) scale(1.05);
+            transform: rotate(0deg) scale(1.02);
             box-shadow: 
                 0 15px 35px rgba(0, 0, 0, 0.4),
-                0 0 0 3px rgba(0, 123, 255, 0.5),
+                0 0 0 2px rgba(0, 123, 255, 0.5),
                 0 0 30px rgba(0, 123, 255, 0.3);
         }
 
@@ -499,7 +491,6 @@
             animation: holoGlow 8s linear infinite;
             z-index: 1;
             opacity: 0.5;
-            border-radius: 15px;
         }
 
         .about-profile-img::after {
@@ -514,55 +505,59 @@
             );
             animation: scanlines 8s linear infinite;
             mix-blend-mode: overlay;
-            border-radius: 15px;
         }
 
         /* Hover Button on Profile Image */
         .profile-hover-button {
             position: absolute;
             bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.2);
+            left: calc(50% - 20px); /* Adjusted for square button */
+            background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
-            color: #000;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1rem;
+            color: #000; /* Changed text color for visibility */
+            padding: 0; /* Removed padding */
+            width: 40px; /* Set width equal to height */
+            height: 40px; /* Set height equal to width */
+            border-radius: 50%; /* Make it circular for better aesthetics */
+            font-size: 0.8rem;
             cursor: pointer;
             opacity: 1;
-            transition: transform 0.3s ease, background 0.3s ease;
-            z-index: 5;
+            transition: transform 0.3s ease;
+            z-index: 5; /* Increased z-index to ensure visibility */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* Optional: Add slight hover effect */
         .profile-hover-button:hover {
-            transform: translateX(-50%) translateY(-5px);
-            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
         }
 
         /* Profile Stats Overlay */
         .profile-stats-overlay {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 220px;
-            background: rgba(0, 123, 255, 0.2);
-            border: 1px solid rgba(0, 183, 255, 0.5);
-            border-radius: 10px;
-            padding: 1.5rem;
+            top: 50%; /* Center vertically relative to the profile image */
+            left: calc(100% + 35px); /* Moved 35px to the right */
+            transform: translate(-300px, -50%);
+            width: 280px; /* Slightly narrower for better fit */
+            height: 200px; /* Fixed height for cycling */
+            background: rgba(48, 54, 85, 0.5); /* Updated to match Martiniqe color */
+            border: none; /* Removed the light blue border */
+            border-radius: 8px;
+            padding: 1rem; /* Reduced padding for better text fit */
             opacity: 0;
             transition: all 0.3s ease;
             z-index: 4;
             backdrop-filter: blur(5px);
-            pointer-events: none;
-            overflow: hidden;
+            pointer-events: none; /* Prevents accidental clicks */
+            overflow: hidden; /* Hide overflowing stats */
         }
 
         .profile-stats-overlay:hover {
             opacity: 1;
+            transform: translate(-300px, -50%); /* Maintain the left and down shift on hover */
             pointer-events: auto;
         }
 
@@ -570,7 +565,7 @@
         .stats-cycler {
             display: flex;
             flex-direction: column;
-            position: relative;
+            position: relative; /* Changed from absolute to relative */
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -586,16 +581,16 @@
             font-weight: 500;
             letter-spacing: 0.5px;
             font-family: 'Courier New', monospace;
-            font-size: 1rem;
+            font-size: 0.9rem; /* Reduced font size */
             opacity: 0;
             transform: translateY(0);
             transition: opacity 0.3s ease, transform 0.3s ease;
-            white-space: normal;
+            white-space: normal; /* Allow text wrapping */
             word-wrap: break-word;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Prevent overflow */
+            background: rgba(0, 0, 0, 0.1); /* Reduced background opacity */
             border-radius: 4px;
-            padding: 10px;
+            padding: 8px; /* Reduced padding */
             position: absolute;
             top: 0;
             left: 0;
@@ -603,6 +598,7 @@
             height: 100%;
         }
 
+        /* Active Paragraph */
         .stat-paragraph.active {
             opacity: 1;
         }
@@ -613,19 +609,18 @@
             z-index: 3;
             background: rgba(0, 29, 60, 0.4);
             border: 1px solid rgba(0, 123, 255, 0.1);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 15px;
             box-shadow: 
                 inset 0 0 40px rgba(0, 123, 255, 0.08),
                 0 0 30px rgba(0, 0, 0, 0.15);
-            margin-top: 2rem;
-            backdrop-filter: blur(10px);
+            margin-top: 1rem;
         }
 
         .about-content p {
             color: rgba(255, 255, 255, 0.9);
-            font-size: 1.2rem;
-            line-height: 2.2;
+            font-size: 1.15rem;
+            line-height: 2;
             text-align: justify;
             margin-bottom: 2.5rem;
             position: relative;
@@ -641,7 +636,7 @@
         }
 
         .about-content p:first-of-type {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: rgba(255, 255, 255, 0.95);
             font-weight: 500;
         }
@@ -713,61 +708,47 @@
             }
         }
 
-        @keyframes gradientText {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Infographics Cycling Animation */
+        .infographic {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            z-index: 1; /* Ensure it's behind the content */
+            background: var(--infographic-bg); /* Moved background here */
+            border-radius: 10px; /* Moved border radius here */
+            padding: 1rem; /* Added padding for inner spacing */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Animated Gradient Background for Infographic */
+        .infographic::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Updated to include Martiniqe color */
+            background-size: 400% 400%;
+            animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
+            z-index: -1;
         }
 
         @keyframes gradientAnimationInfographic {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-
-        /* Infographics Cycling Animation */
-        .infographic {
-            position: relative;
-            width: 350px;
-            height: 250px;
-            overflow: hidden;
-            z-index: 1;
-            background: var(--infographic-bg);
-            border-radius: 15px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .infographic::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
-            border: 2px solid transparent;
-            border-radius: 20px;
-            background: linear-gradient(45deg, #007BFF, #00aaff, #005fcc, #00aaff);
-            background-size: 400% 400%;
-            animation: gradientAnimationInfographic 15s ease infinite;
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
-            z-index: -1;
         }
 
         .infographic-item {
@@ -777,7 +758,8 @@
             top: 0;
             left: 0;
             box-sizing: border-box;
-            display: flex;
+            /* Removed background and border-radius */
+            display: flex; /* Always display flex */
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -795,30 +777,30 @@
             text-shadow: 0 0 10px rgba(0, 183, 255, 0.5);
             text-align: center;
             width: 100%;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             position: relative;
-            border: none;
+            border: none; /* Ensure no border */
         }
 
         .infographic-item p {
             color: rgba(255, 255, 255, 0.8);
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1rem;
             width: 100%;
             position: relative;
-            max-height: 150px;
+            max-height: 120px; /* Ensures text stays within box */
             overflow: hidden;
         }
 
         /* Typing Effect */
         .typing-text {
             position: relative;
-            white-space: normal;
+            white-space: normal; /* Allow text wrapping */
             word-wrap: break-word;
             overflow: hidden;
             opacity: 0;
             transition: opacity 0.3s ease;
-            font-size: 1rem;
+            font-size: 0.9rem; /* Reduced font size */
         }
 
         /* Section Styling */
@@ -833,9 +815,9 @@
         /* Card Styling */
         .card {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
             box-shadow: 
                 0 10px 30px rgba(0, 0, 0, 0.3),
                 0 0 20px rgba(255, 0, 0, 0.2);
@@ -856,10 +838,11 @@
         .card h3 {
             color: var(--accent-blue);
             margin-bottom: 1.5rem;
-            font-size: 2rem;
+            font-size: 1.8rem;
             position: relative;
             display: inline-block;
             text-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+            /* Removed the ::after pseudo-element to eliminate the line under "About Me" */
         }
 
         /* Projects Grid */
@@ -912,10 +895,10 @@
 
         .project-card h4 {
             color: #fff;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 0.5rem;
             text-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
-            border: none;
+            border: none; /* Ensure no border */
         }
 
         .project-card p {
@@ -929,7 +912,7 @@
             justify-content: center;
             gap: 2rem;
             margin-top: 2rem;
-            padding: 1.5rem;
+            padding: 1rem;
             background: rgba(20, 30, 50, 0.9);
             border-radius: 15px;
             position: relative;
@@ -943,12 +926,11 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             text-decoration: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             background: rgba(255, 60, 0, 0.1);
             border-radius: 5px;
             overflow: hidden;
             transition: all 0.3s ease;
-            font-weight: bold;
         }
 
         .social-link::before {
@@ -984,12 +966,7 @@
             }
 
             .project-card {
-                min-height: 180px;
-            }
-
-            .infographic {
-                width: 300px;
-                height: 200px;
+                min-height: 150px;
             }
         }
 
@@ -1002,20 +979,21 @@
 
             .profile-stats-overlay {
                 left: 50%;
-                top: 110%;
-                transform: translate(-50%, 0);
+                top: 110%; /* Adjusted to align closer */
+                transform: translate(-50%, 0); /* Center horizontally */
                 width: 90%;
                 max-width: 300px;
-                height: 220px;
+                height: 200px; /* Fixed height */
             }
 
             .about-content {
-                padding: 1.5rem;
+                padding: 1rem;
             }
 
+            /* Adjust infographic positioning */
             .infographic {
                 width: 100%;
-                height: 180px;
+                height: 150px;
             }
         }
 
@@ -1027,11 +1005,11 @@
             }
 
             .title {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
 
             .subtitle {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
 
             .skills-container {
@@ -1043,8 +1021,8 @@
             }
 
             .skill-icon img {
-                width: 40px;
-                height: 40px;
+                width: 30px;
+                height: 30px;
             }
 
             .social-links {
@@ -1059,15 +1037,16 @@
             }
 
             .card {
-                padding: 2rem;
+                padding: 1.5rem;
             }
 
+            /* About Section Adjustments */
             .about-content p {
-                font-size: 1rem;
+                font-size: 1rem; /* Smaller text size for mobile */
             }
 
             .stat-paragraph {
-                font-size: 0.8rem;
+                font-size: 0.8rem; /* Smaller stats text */
             }
         }
 
@@ -1077,8 +1056,8 @@
                 height: 150px;
             }
 
-            .title {
-                font-size: 2.5rem;
+            .glow-text {
+                font-size: 2rem;
             }
 
             .projects {
@@ -1118,10 +1097,13 @@
             100% { transform: translateX(0); }
         }
 
-        /* Random Japanese Characters */
+        /* Infographics Typing and Cycling */
+        /* Removed redundant keyframes */
+
+        /* Added Styles for Random Japanese Characters */
         .random-char {
             position: absolute;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             opacity: 0;
             pointer-events: none;
             user-select: none;
@@ -1147,18 +1129,31 @@
             100% { opacity: 0; transform: translateY(-20px); }
         }
 
-        /* Gradient Animation Keyframes */
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Added Styles for Invisible Profile Trigger */
+        #profile-trigger {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 300px; /* Adjust height as needed */
+            /* Make it invisible */
+            background: transparent;
+            pointer-events: none;
+            z-index: 5; /* Ensure it's above other elements */
         }
 
-        @keyframes gradientAnimationInfographic {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* New Button Styling */
+        /* Already updated above */
+
+        /* Responsive Adjustments for Profile Hover Button */
+        @media (max-width: 768px) {
+            .profile-hover-button {
+                width: 35px;
+                height: 35px;
+                font-size: 0.7rem;
+            }
         }
+
     </style>
 </head>
 
@@ -1231,6 +1226,7 @@
     <section class="lower-hero">
         <div class="particles-container"></div>
         <div class="scrolling-code"></div>
+        <!-- Removed #profile-trigger div and "mouse hover" text -->
     </section>
 
     <!-- Dark Theme Section -->
@@ -1241,13 +1237,14 @@
             <!-- About Section -->
             <section class="section">
                 <div class="card about-card">
-                    <div class="anime-background"></div>
+                    <div class="anime-background"></div> <!-- Added Anime Background -->
                     <div class="tech-grid"></div>
                     <div class="about-header">
                         <div class="profile-container">
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
-                            <button class="profile-hover-button">Stats</button>
+                            <!-- Updated Hover Button -->
+                            <button class="profile-hover-button">S</button> <!-- Changed to single letter to fit square button -->
 
                             <div class="profile-stats-overlay">
                                 <div class="stats-cycler">
@@ -1266,6 +1263,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Removed the .about-header-text div as per user request -->
                         <!-- Infographics Container -->
                         <div class="infographic">
                             <!-- Infographic items will be dynamically generated by JavaScript -->
@@ -1313,6 +1311,7 @@
                             <h4>AI Resume Tailor</h4>
                             <p>AI Tool</p>
                         </a>
+                        <!-- Removed Placeholder Projects -->
                     </div>
                 </div>
             </section>
@@ -1322,12 +1321,10 @@
                 <div class="card">
                     <h3>Connect</h3>
                     <div class="social-links">
+                        <!-- Updated Social Links with Correct Hrefs -->
                         <a href="mailto:fotiosmpouris@gmail.com" class="social-link">Email</a>
                         <a href="https://www.linkedin.com/in/fotios-mpouris-57728b240/" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                         <a href="https://www.behance.net/fotiosmpouris" class="social-link" target="_blank" rel="noopener noreferrer">Behance</a>
-                        <a href="https://twitter.com/FotiosMpouris" class="social-link" target="_blank" rel="noopener noreferrer">Twitter</a>
-                        <a href="https://www.instagram.com/FotiosMpouris" class="social-link" target="_blank" rel="noopener noreferrer">Instagram</a>
-                        <a href="https://www.youtube.com/channel/UC-FotiosMpouris" class="social-link" target="_blank" rel="noopener noreferrer">YouTube</a>
                     </div>
                 </div>
             </section>
@@ -1343,19 +1340,20 @@
             const containers = document.querySelectorAll('.matrix-background');
             containers.forEach(container => {
                 const containerWidth = container.offsetWidth;
-                const columnWidth = 30;
+                const columnWidth = 30; // Increased width for fewer columns
                 const numberOfColumns = Math.ceil(containerWidth / columnWidth);
 
                 const chars = '守らリケーシタアプョン01{}#$@987';
 
-                container.innerHTML = '';
+                container.innerHTML = ''; // Clear existing columns
 
                 for(let i = 0; i < numberOfColumns; i++) {
                     const column = document.createElement('div');
                     column.className = 'matrix-column';
                     
+                    // Create random string of characters
                     let columnChars = '';
-                    for(let j = 0; j < 100; j++) {
+                    for(let j = 0; j < 100; j++) { // Increased from 50 to 100
                         columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
                     }
 
@@ -1375,8 +1373,10 @@
             const columnWidth = 40;
             const numberOfColumns = Math.ceil(containerWidth / columnWidth);
             
+            // Anime characters pool
             const chars = '守らリケーシタアプョン01{}#$@987';
             
+            // Create columns
             for(let i = 0; i < numberOfColumns; i++) {
                 const column = document.createElement('div');
                 column.className = 'anime-column';
@@ -1390,6 +1390,7 @@
                 column.style.left = `${i * columnWidth}px`;
                 column.style.animationDelay = `${-Math.random() * 20}s`;
                 
+                // Randomly add glow effect
                 if (Math.random() < 0.3) {
                     column.classList.add('glow');
                 }
@@ -1399,7 +1400,7 @@
         }
 
         // Profile Stats Functions
-        let isCyclingStats = false;
+        let isCyclingStats = false; // Flag to prevent multiple cycles
 
         function initializeProfileStats() {
             const statsData = [
@@ -1414,7 +1415,8 @@
             let currentStatIndex = 0;
             const totalStats = statsData.length;
 
-            function typeText(element, text, speed = 10) {
+            // Function to type text into an element
+            function typeText(element, text, speed = 10) { // Reduced typing speed from 20ms to 10ms
                 return new Promise(resolve => {
                     let index = 0;
                     const typingInterval = setInterval(() => {
@@ -1429,32 +1431,41 @@
                 });
             }
 
+            // Function to delay execution
             function delay(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
 
+            // Function to cycle through stats
             async function cycleStats() {
-                if (isCyclingStats) return;
+                if (isCyclingStats) return; // Prevent multiple cycles
                 isCyclingStats = true;
 
                 while(true) {
                     const currentParagraph = paragraphs[currentStatIndex];
                     const currentText = statsData[currentStatIndex];
 
+                    // Activate the current paragraph
                     currentParagraph.classList.add('active');
                     
+                    // Type the text
                     await typeText(currentParagraph, currentText);
 
-                    await delay(1500);
+                    // Wait for a brief moment before transitioning
+                    await delay(1500); // Display duration
 
+                    // Deactivate the current paragraph
                     currentParagraph.classList.remove('active');
 
+                    // Clear the text
                     currentParagraph.querySelector('p').textContent = '';
 
+                    // Move to the next stat
                     currentStatIndex = (currentStatIndex + 1) % totalStats;
                 }
             }
 
+            // Attach event listeners to start cycling on hover for both profile image and stats button
             const profileImg = document.querySelector('.about-profile-img');
             const statsButton = document.querySelector('.profile-hover-button');
             const statsOverlay = document.querySelector('.profile-stats-overlay');
@@ -1465,7 +1476,7 @@
                     duration: 0.3,
                     ease: "power1.out"
                 });
-                cycleStats();
+                cycleStats(); // Start cycling on first hover
             }
 
             function hideStats() {
@@ -1544,11 +1555,13 @@
         let currentInfographic = 0;
         let infographicItems = [];
 
+        // Helper function to delay execution
         function delayInfographic(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        function typeTextInfographic(element, text, speed = 10) {
+        // Function to type text into an element
+        function typeTextInfographic(element, text, speed = 10) { // Reduced typing speed from 20ms to 10ms
             return new Promise((resolve) => {
                 let index = 0;
                 element.textContent = '';
@@ -1566,6 +1579,7 @@
             });
         }
 
+        // Function to cycle through infographics
         async function cycleInfographics() {
             while(true) {
                 const currentItem = infographicItems[currentInfographic];
@@ -1574,29 +1588,37 @@
                 const titleElement = currentItem.querySelector('h4');
                 const textElement = currentItem.querySelector('.typing-text');
 
+                // Retrieve the data for current infographic
                 const { title, text } = infographicData[currentInfographic % infographicData.length];
 
+                // Start typing title and text simultaneously
                 await Promise.all([
                     typeTextInfographic(titleElement, title),
                     typeTextInfographic(textElement, text)
                 ]);
 
-                await delayInfographic(800);
+                // Wait for a short duration before fading out
+                await delayInfographic(800); // Increased display duration
 
+                // Fade out the infographic
                 currentItem.classList.remove('active');
 
+                // Clear the texts
                 titleElement.textContent = '';
                 textElement.textContent = '';
 
+                // Move to next infographic
                 currentInfographic = (currentInfographic + 1) % infographicItems.length;
 
+                // Small delay before showing next infographic
                 await delayInfographic(300);
             }
         }
 
+        // Function to dynamically create infographic items
         function createInfographicItems() {
             const infographicContainer = document.querySelector('.infographic');
-            infographicContainer.innerHTML = '';
+            infographicContainer.innerHTML = ''; // Clear existing items
 
             infographicData.forEach((item, index) => {
                 const infographicItem = document.createElement('div');
@@ -1618,12 +1640,13 @@
             });
         }
 
-        // Random Japanese Characters
+        // Function to generate random Japanese characters with alternating colors
         function generateRandomJapaneseChar() {
             const chars = ['守', 'ら', 'れ', 'た', 'ア', 'プ', 'リ', 'ケ', 'ー', 'シ', 'ョ', 'ン', 'ア', 'ク', 'プ'];
             return chars[Math.floor(Math.random() * chars.length)];
         }
 
+        // Function to display multiple random Japanese characters with random color
         function displayRandomJapaneseChars(count = 2) {
             const darkSection = document.querySelector('.dark-theme-section');
             const chars = ['守', 'ら', 'れ', 'た', 'ア', 'プ', 'リ', 'ケ', 'ー', 'シ', 'ョ', 'ン', 'ア', 'ク', 'プ'];
@@ -1633,12 +1656,14 @@
                 const randomCharElem = document.createElement('span');
                 randomCharElem.className = 'random-char';
 
+                // Randomly assign one of the three colors
                 const colors = ['white', 'red', 'blue'];
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 randomCharElem.classList.add(randomColor);
 
                 randomCharElem.textContent = char;
 
+                // Random position within the dark-theme-section
                 const x = Math.random() * 100;
                 const y = Math.random() * 100;
 
@@ -1647,6 +1672,7 @@
 
                 darkSection.appendChild(randomCharElem);
 
+                // Remove the character after animation completes
                 randomCharElem.addEventListener('animationend', () => {
                     randomCharElem.remove();
                 });
@@ -1660,7 +1686,7 @@
             setInterval(() => {
                 const columns = document.querySelectorAll('.matrix-column');
                 columns.forEach(column => {
-                    if (Math.random() < 0.01) {
+                    if (Math.random() < 0.01) { // 1% chance per column to glow a character
                         const randomCharIndex = Math.floor(Math.random() * 100);
                         const char = column.childNodes[randomCharIndex];
                         if (char) {
@@ -1692,17 +1718,19 @@
                 delay: 0.8
             });
 
+            // Skill Icons Animation
             const skillIcons = document.querySelectorAll('.skill-icon');
             skillIcons.forEach((icon, index) => {
                 gsap.to(icon, {
                     opacity: 1,
                     scale: 1,
                     duration: 0.5,
-                    delay: 1.2 + (index * 0.05),
+                    delay: 1.2 + (index * 0.05), // Slightly faster stagger
                     ease: "back.out(1.7)"
                 });
             });
 
+            // Section Animations
             const sections = document.querySelectorAll('.section');
             sections.forEach((section, index) => {
                 gsap.to(section, {
@@ -1727,8 +1755,8 @@
             // Initialize Particles
             startParticles();
 
-            // Display random Japanese characters
-            setInterval(() => displayRandomJapaneseChars(2), 300);
+            // Start displaying random Japanese characters
+            setInterval(() => displayRandomJapaneseChars(2), 300); // Generate 2 characters every 300ms
 
             // Window Resize Handler
             window.addEventListener('resize', () => {
@@ -1752,6 +1780,16 @@
                     }
                 });
             });
+
+            /* --- Removed Code for Profile Stats Trigger via Scroll --- */
+            /* 
+                Previously, there was a ScrollTrigger that activated the profile stats overlay
+                when scrolling into the lower section. Since you want to revert to only hover
+                triggering, this code has been removed.
+            */
+
+            /* --- Added Code for Random Japanese Characters in Dark Theme Section --- */
+            // Generate Japanese characters at random intervals
         });
     </script>
 </body>
