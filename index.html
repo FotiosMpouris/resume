@@ -301,7 +301,7 @@
         .lower-hero {
             position: relative;
             height: 0vh; /* Set to 0 to remove extra space */
-            background: transparent; /* Remove background */
+            background: linear-gradient(135deg, #20232a 0%, #303655 100%); /* Made darker with Martiniqe color */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -359,8 +359,8 @@
 
         /* Dark Theme Section */
         .dark-theme-section {
-            /* Updated background to a deep blue gradient to resemble a starship interface */
-            background: linear-gradient(135deg, #303655 0%, #303655 50%, #303655 100%); /* Updated to Martiniqe color */
+            /* Updated background to a deeper Martiniqe gradient */
+            background: linear-gradient(135deg, #20232a 0%, #303655 50%, #20232a 100%);
             position: relative;
             overflow: hidden;
         }
@@ -511,20 +511,20 @@
         .profile-hover-button {
             position: absolute;
             bottom: 10px;
-            left: calc(50% - 20px); /* Adjusted for square button */
+            left: calc(50% - 100px - 70px); /* Placed to the left by 70px */
             background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
             color: #000; /* Changed text color for visibility */
-            padding: 0; /* Removed padding */
-            width: 40px; /* Set width equal to height */
-            height: 40px; /* Set height equal to width */
-            border-radius: 50%; /* Make it circular for better aesthetics */
-            font-size: 0.8rem;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 0.9rem;
             cursor: pointer;
             opacity: 1;
             transition: transform 0.3s ease;
             z-index: 5; /* Increased z-index to ensure visibility */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            width: 80px; /* Adjusted width */
+            height: 40px; /* Adjusted height to match width for equal size */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1142,15 +1142,13 @@
             z-index: 5; /* Ensure it's above other elements */
         }
 
-        /* New Button Styling */
-        /* Already updated above */
-
         /* Responsive Adjustments for Profile Hover Button */
         @media (max-width: 768px) {
             .profile-hover-button {
                 width: 35px;
                 height: 35px;
                 font-size: 0.7rem;
+                left: calc(50% - 100px - 70px); /* Maintain left positioning */
             }
         }
 
@@ -1244,7 +1242,7 @@
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
                             <!-- Updated Hover Button -->
-                            <button class="profile-hover-button">S</button> <!-- Changed to single letter to fit square button -->
+                            <button class="profile-hover-button">Stats</button>
 
                             <div class="profile-stats-overlay">
                                 <div class="stats-cycler">
