@@ -1100,6 +1100,24 @@
                 width: 100%;
                 height: 250px; /* Increased height */
             }
+
+            /* Profile Image Adjustments */
+            .about-profile-img {
+                width: 150px; /* Smaller size for portrait */
+                height: 150px;
+            }
+
+            @media (orientation: landscape) {
+                .about-profile-img {
+                    width: 180px; /* Larger size for landscape */
+                    height: 180px;
+                }
+            }
+
+            /* Adjust profile-stats-overlay positioning */
+            .profile-stats-overlay {
+                z-index: 5; /* Ensure it is above infographics */
+            }
         }
 
         @media (max-width: 480px) {
