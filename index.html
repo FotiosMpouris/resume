@@ -1065,6 +1065,41 @@
             .stat-paragraph {
                 font-size: 0.8rem; /* Smaller stats text */
             }
+
+            /* Adjust infographic for portrait mode */
+            .infographic {
+                height: 250px; /* Increased height for better fit */
+            }
+
+            /* Adjust profile-container to display stats next to image */
+            .about-header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .profile-container {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .profile-stats-overlay {
+                position: relative;
+                left: auto;
+                top: auto;
+                transform: none;
+                width: 80%;
+                max-width: 280px;
+                height: 200px;
+            }
+
+            .infographic {
+                width: 100%;
+                height: 250px; /* Increased height */
+            }
         }
 
         @media (max-width: 480px) {
