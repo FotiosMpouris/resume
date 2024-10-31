@@ -1012,6 +1012,31 @@
                 top: 110%; /* Position below the profile image */
                 transform: translate(-50%, 0);
             }
+
+            .infographic {
+                width: 100%;
+                height: 250px; /* Increased height */
+            }
+
+            /* Profile Image Adjustments */
+            .about-profile-img {
+                width: 130px; /* Further reduced size */
+                height: 130px;
+                transform: translate(-15px, -25px); /* Move up and to the left */
+            }
+
+            @media (orientation: landscape) {
+                .about-profile-img {
+                    width: 160px; /* Larger size for landscape */
+                    height: 160px;
+                    transform: translate(-10px, -20px); /* Adjusted movement */
+                }
+            }
+
+            /* Adjust profile-stats-overlay positioning */
+            .profile-stats-overlay {
+                z-index: 5; /* Ensure it is above infographics */
+            }
         }
 
         @media (max-width: 768px) {
@@ -1079,21 +1104,31 @@
 
             .profile-container {
                 display: flex;
-                flex-direction: row;
-                align-items: center;
+                flex-direction: column;
+                align-items: flex-start;
                 justify-content: center;
-                gap: 1rem;
+                gap: 0.5rem;
                 width: 100%;
+            }
+
+            .profile-hover-button {
+                width: 80px;
+                height: 40px;
+                font-size: 0.9rem;
+                left: 0;
+                transform: none;
+                margin-top: 10px;
             }
 
             .profile-stats-overlay {
                 position: relative;
-                left: auto;
-                top: auto;
+                left: 0;
+                top: 0;
                 transform: none;
-                width: 80%;
+                width: 100%;
                 max-width: 280px;
                 height: 200px;
+                margin-top: 10px;
             }
 
             .infographic {
@@ -1105,20 +1140,14 @@
             .about-profile-img {
                 width: 130px; /* Further reduced size */
                 height: 130px;
-                transform: translate(-15px, -25px); /* Move up and to the left */
+                transform: translate(0, -20px); /* Adjusted movement */
+                margin-left: 0;
             }
 
-            @media (orientation: landscape) {
-                .about-profile-img {
-                    width: 160px; /* Larger size for landscape */
-                    height: 160px;
-                    transform: translate(-10px, -20px); /* Adjusted movement */
-                }
-            }
-
-            /* Adjust profile-stats-overlay positioning */
-            .profile-stats-overlay {
-                z-index: 5; /* Ensure it is above infographics */
+            /* Ensure the profile-container items are aligned correctly */
+            .profile-container {
+                align-items: flex-start;
+                width: 100%;
             }
         }
 
@@ -1126,7 +1155,7 @@
             .about-profile-img {
                 width: 120px;
                 height: 120px;
-                transform: translate(-10px, -20px); /* Move up and to the left */
+                transform: translate(0, -20px); /* Move up */
             }
 
             .glow-text {
