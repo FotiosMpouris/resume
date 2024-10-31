@@ -1159,6 +1159,128 @@
         .profile-hover-button:hover {
             transform: translateY(-3px);
         }
+
+        /* Gears and Switches Layout Behind About Section */
+        .gears-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Between tech-grid (1) and about-content (3) */
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .gear {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 123, 255, 0.3);
+            border: 4px solid var(--accent-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-blue);
+            animation: rotate 20s linear infinite;
+            opacity: 0.6;
+        }
+
+        .gear::before, .gear::after {
+            content: '';
+            position: absolute;
+            background: var(--accent-blue);
+        }
+
+        .gear::before {
+            top: 50%;
+            left: 0;
+            width: 10px;
+            height: 40px;
+            transform: translateY(-50%);
+        }
+
+        .gear::after {
+            top: 0;
+            left: 50%;
+            width: 40px;
+            height: 10px;
+            transform: translateX(-50%);
+        }
+
+        .gear1 {
+            top: 20%;
+            left: 15%;
+            animation-duration: 25s;
+        }
+
+        .gear2 {
+            top: 50%;
+            left: 80%;
+            animation-duration: 30s;
+            animation-direction: reverse;
+            width: 60px;
+            height: 60px;
+        }
+
+        .gear3 {
+            top: 70%;
+            left: 30%;
+            animation-duration: 22s;
+            width: 100px;
+            height: 100px;
+        }
+
+        .switch {
+            position: absolute;
+            width: 20px;
+            height: 40px;
+            background: rgba(0, 123, 255, 0.2);
+            border: 2px solid var(--accent-blue);
+            border-radius: 10px;
+            box-shadow: 0 0 5px var(--accent-blue);
+            animation: toggle 5s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        .switch::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            width: 10px;
+            height: 20px;
+            background: var(--accent-blue);
+            border-radius: 5px;
+        }
+
+        .switch1 {
+            top: 40%;
+            left: 60%;
+            animation-duration: 5s;
+        }
+
+        .switch2 {
+            top: 10%;
+            left: 75%;
+            animation-duration: 7s;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes toggle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Glowing Starship Border Around About Card */
+        /* Existing styles... */
+
+        /* Continue with existing styles... */
+
+        /* Continue with the rest of your CSS as provided */
+
     </style>
 </head>
 
@@ -1244,6 +1366,16 @@
                 <div class="card about-card">
                     <div class="anime-background"></div> <!-- Added Anime Background -->
                     <div class="tech-grid"></div>
+                    
+                    <!-- Gears and Switches Layout -->
+                    <div class="gears-container">
+                        <div class="gear gear1"></div>
+                        <div class="gear gear2"></div>
+                        <div class="gear gear3"></div>
+                        <div class="switch switch1"></div>
+                        <div class="switch switch2"></div>
+                    </div>
+                    
                     <div class="about-header">
                         <div class="profile-container">
                             <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
