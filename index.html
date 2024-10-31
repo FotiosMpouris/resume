@@ -511,11 +511,11 @@
         /* Hover Button on Profile Image */
         .profile-hover-button {
             position: absolute;
-            bottom: 10px;
+            bottom: -15px; /* Moved down by 25px from original 10px */
             left: calc(50% - 100px - 70px); /* Placed to the left by 70px */
             background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
-            color: #000; /* Changed text color for visibility */
+            color: rgba(255, 255, 255, 0.8); /* Changed text color to white with transparency */
             padding: 8px 16px;
             border-radius: 5px;
             font-size: 0.9rem;
@@ -575,7 +575,7 @@
         /* Profile Stat Paragraph */
         .stat-paragraph {
             width: 100%;
-            color: #ffffff;
+            color: rgba(255, 255, 255, 0.8); /* Made text white with transparency */
             text-shadow: 
                 0 0 3px rgba(0, 183, 255, 0.8),
                 0 0 6px rgba(0, 183, 255, 0.5);
@@ -981,7 +981,7 @@
             .profile-stats-overlay {
                 left: 50%;
                 top: 110%; /* Adjusted to align closer */
-                transform: translate(-50%, 0); /* Center horizontally */
+                transform: translate(-50%, -50%);
                 width: 90%;
                 max-width: 300px;
                 height: 200px; /* Fixed height */
