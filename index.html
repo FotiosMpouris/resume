@@ -348,7 +348,7 @@
         }
 
         @keyframes subtleScroll {
-            from { background-position: 0 0; }
+            from { background-position: 0% 0%; }
             to { background-position: 100px 100px; }
         }
 
@@ -511,8 +511,8 @@
         /* Hover Button on Profile Image */
         .profile-hover-button {
             position: absolute;
-            bottom: -15px; /* Moved down by 25px from original 10px */
-            left: calc(50% - 100px - 70px); /* Placed to the left by 70px */
+            bottom: -15px; /* Moved down by 15px */
+            left: calc(50% - 40px); /* Center horizontally relative to profile image */
             background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
             color: rgba(255, 255, 255, 0.8); /* Changed text color to white with transparency */
@@ -1085,6 +1085,22 @@
             .profile-container {
                 align-items: flex-start;
                 width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) and (orientation: portrait) {
+            .profile-stats-overlay {
+                width: 90%;
+                max-width: 300px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) and (orientation: landscape) {
+            .profile-stats-overlay {
+                width: 60%;
+                max-width: 500px;
+                height: 200px;
             }
         }
 
