@@ -1063,16 +1063,6 @@
                 transform: translateX(-50%);
             }
 
-            .profile-stats-overlay {
-                top: 110%; /* Position below the profile image */
-                transform: translate(-50%, 0);
-            }
-
-            .infographic {
-                width: 100%;
-                height: 250px; /* Increased height */
-            }
-
             /* Profile Image Adjustments */
             .about-profile-img {
                 width: 130px; /* Further reduced size */
@@ -1294,6 +1284,23 @@
                 justify-content: center;
                 opacity: 1; /* Always visible */
                 pointer-events: auto;
+            }
+
+            .profile-stats-overlay::before {
+                /* Match Infographic Box Styles */
+                content: '';
+                position: absolute;
+                top: -10px;
+                left: -10px;
+                right: -10px;
+                bottom: -10px;
+                border: 2px solid transparent;
+                border-radius: 15px;
+                background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Match infographics gradient */
+                background-size: 400% 400%;
+                animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
+                box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Match infographics box-shadow */
+                z-index: -1;
             }
         }
 
@@ -2021,19 +2028,7 @@
                     }
                 });
             });
-
-            /* --- Removed Code for Profile Stats Trigger via Scroll --- */
-            /* 
-                Previously, there was a ScrollTrigger that activated the profile stats overlay
-                when scrolling into the lower section. Since you want to revert to only hover
-                triggering, this code has been removed.
-            */
-
-            /* --- Added Code for Random Japanese Characters in Dark Theme Section --- */
-            // Generate Japanese characters at random intervals
-            // This is already handled by the setInterval above
-
-            // The `initializeProfileStats` function now handles automatic cycling on mobile
+          
         });
     </script>
 </body>
