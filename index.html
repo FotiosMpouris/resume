@@ -30,6 +30,8 @@
             --code-red: #ff0000;
             --code-blue: #0000ff;
             --faint-text: rgba(255, 255, 255, 0.4); /* For "mouse hover" text */
+            --gradient-colors: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55);
+            --box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
         }
 
         /* Reset and Base Styles */
@@ -1360,8 +1362,6 @@
             90% { opacity: 1; }
             100% { opacity: 0; transform: translateY(-20px); }
         }
-
-        /* Removed #profile-trigger div as it was not being used */
 
         /* Responsive Adjustments for Profile Hover Button */
         @media (max-width: 768px) {
