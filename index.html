@@ -556,6 +556,22 @@
             overflow: hidden; /* Hide overflowing stats */
         }
 
+        .profile-stats-overlay::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Match infographics gradient */
+            background-size: 400% 400%;
+            animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Match infographics box-shadow */
+            z-index: -1;
+        }
+
         .profile-stats-overlay:hover {
             opacity: 1;
             transform: translate(-300px, -50%); /* Maintain the left and down shift on hover */
@@ -984,7 +1000,7 @@
                 transform: translate(-50%, -50%);
                 width: 90%;
                 max-width: 300px;
-                height: 200px; /* Fixed height */
+                height: 250px; /* Match the height of infographic */
                 background: var(--infographic-bg); /* Match infographics background */
                 border-radius: 10px; /* Match infographics border-radius */
                 box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Match infographics box-shadow */
@@ -998,6 +1014,22 @@
                 justify-content: center;
             }
 
+            .profile-stats-overlay::before {
+                content: '';
+                position: absolute;
+                top: -10px;
+                left: -10px;
+                right: -10px;
+                bottom: -10px;
+                border: 2px solid transparent;
+                border-radius: 15px;
+                background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Match infographics gradient */
+                background-size: 400% 400%;
+                animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
+                box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Match infographics box-shadow */
+                z-index: -1;
+            }
+
             .about-content {
                 padding: 1rem;
             }
@@ -1005,7 +1037,7 @@
             /* Adjust infographic positioning */
             .infographic {
                 width: 100%;
-                height: 150px;
+                height: 250px;
             }
 
             /* Fix profile image positioning on medium screens */
@@ -1142,6 +1174,22 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+            }
+
+            .profile-stats-overlay::before {
+                content: '';
+                position: absolute;
+                top: -10px;
+                left: -10px;
+                right: -10px;
+                bottom: -10px;
+                border: 2px solid transparent;
+                border-radius: 15px;
+                background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Match infographics gradient */
+                background-size: 400% 400%;
+                animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
+                box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Match infographics box-shadow */
+                z-index: -1;
             }
 
             .infographic {
