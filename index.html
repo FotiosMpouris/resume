@@ -1030,7 +1030,11 @@
 
         @media (max-width: 768px) and (orientation: portrait) {
             .profile-stats-overlay {
-                display: none;
+                display: block; /* Show the overlay */
+            }
+
+            .stat-paragraph {
+                font-size: 0.7rem; /* Reduce font size */
             }
         }
 
@@ -1907,6 +1911,3 @@
     </script>
 </body>
 </html>
-
-
-
