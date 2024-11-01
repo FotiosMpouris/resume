@@ -405,7 +405,6 @@
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite; /* Smoother animated gradient */
             box-shadow: 0 0 30px var(--accent-glow), 0 0 60px var(--accent-glow); /* Updated to use --accent-glow */
-            z-index: -1;
         }
 
         /* Gradient Animation Keyframes */
@@ -1021,6 +1020,19 @@
                 justify-content: center;
                 opacity: 1; /* Make it always visible */
                 pointer-events: auto; /* Allow interaction if needed */
+                
+                /* Mimic Infographic Box */
+                width: 100%;
+                max-width: 300px;
+                height: 250px;
+                border-radius: 10px;
+                background: var(--infographic-bg);
+                box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
+                padding: 1rem;
+                margin: 10px auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .profile-stats-overlay::before {
@@ -1198,6 +1210,19 @@
                 justify-content: center;
                 opacity: 1; /* Make it always visible */
                 pointer-events: auto; /* Allow interaction if needed */
+                
+                /* Mimic Infographic Box */
+                width: 100%;
+                max-width: 300px;
+                height: 250px;
+                border-radius: 10px;
+                background: var(--infographic-bg);
+                box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
+                padding: 1rem;
+                margin: 10px auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .profile-stats-overlay::before {
