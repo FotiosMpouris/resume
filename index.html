@@ -439,9 +439,13 @@
 
         .profile-container {
             position: relative;
-            display: inline-block;
+            display: flex;
             flex: 2; /* Adjusted to allow space for infographic */
-            text-align: center; /* Center the "mouse hover" text */
+            flex-direction: column;
+            align-items: center; /* Center align for mobile */
+            justify-content: center;
+            gap: 1rem;
+            text-align: center;
         }
 
         /* Profile Image */
@@ -505,7 +509,8 @@
         .profile-hover-button {
             position: absolute;
             bottom: -15px; /* Moved down by 15px */
-            left: calc(50% - 40px); /* Center horizontally relative to profile image */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center alignment */
             background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
             color: rgba(255, 255, 255, 0.8); /* Changed text color to white with transparency */
@@ -533,8 +538,8 @@
         .profile-stats-overlay {
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
-            left: calc(100% + 35px); /* Positioned to the right of the profile image */
-            transform: translateY(-50%);
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%);
             width: 300px; /* Unified width with infographic */
             height: 200px; /* Unified height with infographic */
             background: var(--infographic-bg); /* Inherit infographic background */
@@ -569,7 +574,6 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translateY(-50%); /* Maintain vertical centering */
             pointer-events: auto;
         }
 
