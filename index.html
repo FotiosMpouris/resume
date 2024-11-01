@@ -1101,9 +1101,13 @@
 
         @media (max-width: 768px) and (orientation: landscape) {
             .profile-stats-overlay {
-                width: 60%;
-                max-width: 500px;
-                height: 200px;
+                width: 80%; /* Reduced from 60% to better fit */
+                max-width: 250px; /* Reduced from 500px */
+                height: 180px; /* Reduced from 200px */
+            }
+
+            .stat-paragraph {
+                font-size: 0.7rem; /* Further reduced font size for better fit */
             }
         }
 
@@ -1213,10 +1217,10 @@
                 bottom: -10px;
                 border: 2px solid transparent;
                 border-radius: 15px;
-                background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55);
+                background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Match infographics gradient */
                 background-size: 400% 400%;
-                animation: gradientAnimationInfographic 15s ease infinite;
-                box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
+                animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
+                box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Match infographics box-shadow */
                 z-index: -1;
             }
 
