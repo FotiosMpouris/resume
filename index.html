@@ -1535,6 +1535,10 @@
                     ease: "none",
                     onStart: () => {
                         element.parentElement.classList.add('active');
+                    },
+                    onComplete: () => {
+                        element.parentElement.classList.remove('active');
+                        element.textContent = '';
                     }
                 });
             }
@@ -1551,15 +1555,7 @@
                     timeline.call(() => {
                         typeText(currentParagraph.querySelector('p'), text, 0.01);
                     });
-                    timeline.to({}, { duration: 0 }); // No pause between paragraphs
-                    timeline.call(() => {
-                        currentParagraph.classList.remove('active');
-                        currentParagraph.querySelector('p').textContent = '';
-                    }, null);
                 });
-
-                // Repeat the cycle infinitely
-                timeline.repeat(-1);
             }
 
             // Attach event listeners to start cycling on hover for desktop
