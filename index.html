@@ -301,7 +301,7 @@
         .lower-hero {
             position: relative;
             height: 0vh; /* Set to 0 to remove extra space */
-            background: linear-gradient(135deg, #20232a 0%, #303655 100%); /* Made darker with Martiniqe color */
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%); /* Updated to match top hero gradient */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -374,10 +374,9 @@
             padding: 2rem !important;
             background: linear-gradient(
                 135deg,
-                rgba(10, 25, 47, 0.95) 0%, /* Updated Martiniqe color with opacity */
-                rgba(10, 25, 47, 0.85) 50%, /* Slightly darker shade */
-                rgba(10, 25, 47, 0.95) 100% /* Updated Martiniqe color with opacity */
-            ) !important;
+                var(--primary-dark) 0%,
+                var(--primary-light) 100%
+            ) !important; /* Updated to match top hero gradient */
             border: 2px solid transparent !important; /* Changed from 1px to 2px and made transparent for gradient border */
             box-shadow: 
                 0 0 40px rgba(0, 0, 0, 0.4),
@@ -1424,6 +1423,15 @@
                             <h4>AI Resume Tailor</h4>
                             <p>AI Tool</p>
                         </a>
+                        <!-- New Project Cards Added -->
+                        <a href="https://github.com/FotiosMpouris/TheAsteriProject001" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h4>The Asteri Project</h4>
+                            <p>Software Development</p>
+                        </a>
+                        <a href="https://github.com/FotiosMpouris/HelgaUnity" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h4>HelgaUnity</h4>
+                            <p>Unity Development</p>
+                        </a>
                         <!-- Removed Placeholder Projects -->
                     </div>
                 </div>
@@ -1916,6 +1924,3 @@
     </script>
 </body>
 </html>
-
-
-
