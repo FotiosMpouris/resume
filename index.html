@@ -1749,7 +1749,7 @@
                     currentItem.classList.remove('active');
                     currentItem.querySelector('h4').textContent = '';
                     currentItem.querySelector('.typing-text').textContent = '';
-                });
+                }, null);
             });
         }
 
@@ -1949,13 +1949,17 @@
             moreButton.addEventListener('click', () => {
                 moreButton.style.display = 'none'; // Hide the button after clicking
 
-                // Type the remaining paragraphs sequentially
+                // Create a GSAP timeline for sequential typing
+                const tl = gsap.timeline();
+
+                // Type each remaining paragraph one after the other
                 const remainingParagraphs = paragraphs.slice(1);
                 remainingParagraphs.forEach((para, index) => {
                     const fullText = para.getAttribute('data-text');
-                    setTimeout(() => {
+                    tl.to({}, { duration: 0.5 }); // Small delay before starting
+                    tl.call(() => {
                         typeParagraph(para, fullText, 0.01);
-                    }, index * 1500); // Adjust delay as needed
+                    });
                 });
             });
         });
