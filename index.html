@@ -1771,41 +1771,41 @@
             });
         }
 
-        // Function to generate random Japanese characters with alternating colors
-        function generateRandomJapaneseChar() {
-            const chars = ['守', 'ら', 'れ', 'た', 'ア', 'プ', 'リ', 'ケ', 'ー', 'シ', 'ョ', 'ン', 'ア', 'ク', 'プ'];
-            return chars[Math.floor(Math.random() * chars.length)];
+        // Function to generate random star shapes
+        function generateRandomStar() {
+            const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
+            return stars[Math.floor(Math.random() * stars.length)];
         }
 
-        // Function to display multiple random Japanese characters with random color
-        function displayRandomJapaneseChars(count = 2) {
+        // Function to display multiple random stars with random color
+        function displayRandomJapaneseChars(count = 2) { // Function name remains unchanged
             const darkSection = document.querySelector('.dark-theme-section');
-            const chars = ['守', 'ら', 'れ', 'た', 'ア', 'プ', 'リ', 'ケ', 'ー', 'シ', 'ョ', 'ン', 'ア', 'ク', 'プ'];
+            const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
 
             for(let i = 0; i < count; i++) {
-                const char = chars[Math.floor(Math.random() * chars.length)];
-                const randomCharElem = document.createElement('span');
-                randomCharElem.className = 'random-char';
+                const star = stars[Math.floor(Math.random() * stars.length)];
+                const randomStarElem = document.createElement('span');
+                randomStarElem.className = 'random-char';
 
                 // Randomly assign one of the three colors
                 const colors = ['white', 'red', 'blue'];
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                randomCharElem.classList.add(randomColor);
+                randomStarElem.classList.add(randomColor);
 
-                randomCharElem.textContent = char;
+                randomStarElem.textContent = star;
 
                 // Random position within the dark-theme-section
                 const x = Math.random() * 100;
                 const y = Math.random() * 100;
 
-                randomCharElem.style.left = `${x}%`;
-                randomCharElem.style.top = `${y}%`;
+                randomStarElem.style.left = `${x}%`;
+                randomStarElem.style.top = `${y}%`;
 
-                darkSection.appendChild(randomCharElem);
+                darkSection.appendChild(randomStarElem);
 
-                // Remove the character after animation completes
-                randomCharElem.addEventListener('animationend', () => {
-                    randomCharElem.remove();
+                // Remove the star after animation completes
+                randomStarElem.addEventListener('animationend', () => {
+                    randomStarElem.remove();
                 });
             }
         }
@@ -1886,8 +1886,8 @@
             // Initialize Particles
             startParticles();
 
-            // Start displaying random Japanese characters
-            setInterval(() => displayRandomJapaneseChars(2), 300); // Generate 2 characters every 300ms
+            // Start displaying random stars
+            setInterval(() => displayRandomJapaneseChars(2), 300); // Generate 2 stars every 300ms
 
             // Window Resize Handler
             window.addEventListener('resize', () => {
