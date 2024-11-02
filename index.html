@@ -401,10 +401,10 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, #0a192f, #090e27, #0a192f, #090e27); /* Updated gradient to include new Martiniqe color */
+            background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Match infographics gradient */
             background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite; /* Smoother animated gradient */
-            box-shadow: 0 0 30px var(--accent-glow), 0 0 60px var(--accent-glow); /* Updated to use --accent-glow */
+            animation: gradientAnimation 15s ease infinite; /* Animated gradient */
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Match infographics box-shadow */
         }
 
         /* Gradient Animation Keyframes */
@@ -1035,6 +1035,11 @@
 
             .stat-paragraph {
                 font-size: 0.7rem; /* Reduce font size */
+            }
+
+            /* Fix paragraph spacing */
+            .about-content p {
+                text-align: left;
             }
         }
 
