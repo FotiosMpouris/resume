@@ -374,8 +374,9 @@
             padding: 2rem !important;
             background: linear-gradient(
                 135deg,
-                var(--primary-dark) 0%, /* Matching the hero section's primary dark color */
-                var(--primary-light) 100% /* Matching the hero section's primary light color */
+                rgba(10, 25, 47, 0.95) 0%, /* Updated Martiniqe color with opacity */
+                rgba(10, 25, 47, 0.85) 50%, /* Slightly darker shade */
+                rgba(10, 25, 47, 0.95) 100% /* Updated Martiniqe color with opacity */
             ) !important;
             border: 2px solid transparent !important; /* Changed from 1px to 2px and made transparent for gradient border */
             box-shadow: 
@@ -622,11 +623,7 @@
         .about-content {
             position: relative;
             z-index: 3;
-            background: linear-gradient(
-                135deg,
-                var(--primary-dark) 0%,
-                var(--primary-light) 100%
-            ); /* Updated to match hero section's background */
+            background: rgba(0, 29, 60, 0.4);
             border: 1px solid rgba(0, 123, 255, 0.1);
             padding: 1.5rem;
             border-radius: 15px;
@@ -1919,3 +1916,6 @@
     </script>
 </body>
 </html>
+
+
+
