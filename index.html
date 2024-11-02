@@ -536,8 +536,8 @@
         .profile-stats-overlay {
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
-            left: calc(100% + 35px); /* Moved 35px to the right */
-            transform: translate(-300px, -50%);
+            left: 100%; /* Position to the right of the profile image */
+            transform: translate(0, -50%); /* Center vertically */
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
             background: rgba(48, 54, 85, 0.5); /* Royal Blue theme */
@@ -570,7 +570,6 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translate(-300px, -50%); /* Maintain shift on hover */
             pointer-events: auto;
         }
 
@@ -1528,7 +1527,7 @@
             const totalStats = statsData.length;
 
             // Function to type text into an element using GSAP TextPlugin
-            function typeText(element, text, speed = 0.01) { // Further increased typing speed
+            function typeText(element, text, speed = 0.02) { // Adjusted typing speed for readability
                 return gsap.to(element, {
                     duration: text.length * speed,
                     text: text,
@@ -1553,8 +1552,9 @@
                 statsData.forEach((text, index) => {
                     const currentParagraph = paragraphs[index % paragraphs.length];
                     timeline.call(() => {
-                        typeText(currentParagraph.querySelector('p'), text, 0.01);
+                        typeText(currentParagraph.querySelector('p'), text, 0.02);
                     });
+                    timeline.to({}, { duration: (text.length * 0.02) + 2 }); // Wait for typing and display duration
                 });
             }
 
@@ -1590,7 +1590,7 @@
 
             // Automatically start cycling on mobile
             function startCyclingIfMobile() {
-                if (window.innerWidth <= 768 && !isCyclingStats) {
+                if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches && !isCyclingStats) {
                     gsap.to(statsOverlay, {
                         opacity: 1,
                         duration: 0.3,
@@ -1669,7 +1669,7 @@
         let infographicItems = [];
 
         // Function to type text into an element using GSAP TextPlugin
-        function typeTextInfographic(element, text, speed = 0.05) { // Speed adjusted for fast typing
+        function typeTextInfographic(element, text, speed = 0.05) { // Speed adjusted for readability
             return gsap.to(element, {
                 duration: text.length * speed,
                 text: text,
@@ -1693,7 +1693,7 @@
                     typeTextInfographic(currentItem.querySelector('h4'), item.title, 0.05);
                     typeTextInfographic(currentItem.querySelector('.typing-text'), item.text, 0.05);
                 });
-                timeline.to({}, { duration: (item.title.length + item.text.length) * 0.05 + 1.5 }); // Wait for typing and display duration
+                timeline.to({}, { duration: (item.title.length + item.text.length) * 0.05 + 2 }); // Wait for typing and display duration
                 timeline.call(() => {
                     currentItem.classList.remove('active');
                     currentItem.querySelector('h4').textContent = '';
@@ -1885,7 +1885,7 @@
 
                 // Removed initial delay and wait after typing for seamless transition
                 paragraphTimeline.to(para, {
-                    duration: fullText.length * 0.01, // Further increased typing speed
+                    duration: fullText.length * 0.02, // Adjusted typing speed
                     text: fullText,
                     ease: "none",
                     onStart: () => {
