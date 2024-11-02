@@ -1591,7 +1591,7 @@
                 if (isCyclingStats) return; // Prevent multiple cycles
                 isCyclingStats = true;
 
-                const timeline = gsap.timeline();
+                const timeline = gsap.timeline({ repeat: -1 });
 
                 statsData.forEach((text, index) => {
                     const currentParagraph = paragraphs[index % paragraphs.length];
@@ -1923,7 +1923,7 @@
             let currentParagraphIndex = 0;
 
             // Function to type text into a paragraph
-            function typeParagraph(para, fullText, speed = 0.01) {
+            function typeParagraph(para, fullText, speed = 0.01, onComplete = null) {
                 para.textContent = ''; // Clear existing text
                 gsap.to(para, {
                     duration: fullText.length * speed,
@@ -1931,14 +1931,15 @@
                     ease: "none",
                     onStart: () => {
                         para.style.opacity = '1';
-                    }
+                    },
+                    onComplete: onComplete
                 });
             }
 
             // Type the first paragraph and then show the button
             const firstParagraph = paragraphs[0];
             const firstText = firstParagraph.getAttribute('data-text');
-            typeParagraph(firstParagraph, firstText, 0.01).then(() => {
+            typeParagraph(firstParagraph, firstText, 0.01, () => {
                 const moreBtn = document.getElementById('more-btn');
                 moreBtn.style.display = 'inline-block'; // Show the button
             });
