@@ -14,10 +14,9 @@
         :root {
             --primary-dark: #0a192f;
             --primary-light: #20232a;
-            --accent-blue: #00aaff;
-            --accent-light-blue: #00d4ff;
-            --accent-dark-blue: #007BFF;
-            --martiniqe: #303655; /* Added Martiniqe color */
+            --accent-blue: #4169E1; /* Royal Blue */
+            --accent-light-blue: #1E90FF; /* Dodger Blue */
+            --accent-dark-blue: #0000CD; /* Medium Blue */
             --accent-red: #FF0000; /* Consistent red */
             --accent-glow: rgba(0, 170, 255, 0.6); /* Changed to light blue */
             --text-primary: #ffffff;
@@ -301,7 +300,7 @@
         .lower-hero {
             position: relative;
             height: 0vh; /* Set to 0 to remove extra space */
-            background: linear-gradient(135deg, #20232a 0%, #303655 100%); /* Made darker with Martiniqe color */
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark-blue) 100%); /* Gradient with Royal Blue */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -359,24 +358,23 @@
 
         /* Dark Theme Section */
         .dark-theme-section {
-            /* Updated background to a deeper Martiniqe gradient */
-            background: linear-gradient(135deg, #20232a 0%, #303655 50%, #20232a 100%);
+            /* Updated background to a deeper Royal Blue gradient */
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark-blue) 50%, var(--accent-blue) 100%);
             position: relative;
             overflow: hidden;
         }
 
         /* About Card Styling */
         .about-card {
-            --martiniqe: #4169E1; /* Changed Martiniqe color to Royal Blue */
             position: relative;
             max-width: 900px !important;
             margin: 0 auto !important;
             padding: 2rem !important;
             background: linear-gradient(
                 135deg,
-                rgba(10, 25, 47, 0.95) 0%, /* Updated Martiniqe color with opacity */
-                rgba(10, 25, 47, 0.85) 50%, /* Slightly darker shade */
-                rgba(10, 25, 47, 0.95) 100% /* Updated Martiniqe color with opacity */
+                rgba(65, 105, 225, 0.95) 0%, /* Royal Blue with opacity */
+                rgba(30, 144, 255, 0.85) 50%, /* Dodger Blue */
+                rgba(65, 105, 225, 0.95) 100% /* Royal Blue with opacity */
             ) !important;
             border: 2px solid transparent !important; /* Changed from 1px to 2px and made transparent for gradient border */
             box-shadow: 
@@ -401,7 +399,7 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Match infographics gradient */
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite; /* Animated gradient */
             box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Match infographics box-shadow */
@@ -543,7 +541,7 @@
             transform: translate(-300px, -50%);
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
-            background: rgba(48, 54, 85, 0.5); /* Updated to match Martiniqe color */
+            background: rgba(48, 54, 85, 0.5); /* Updated to match Royal Blue theme */
             border: none; /* Removed the light blue border */
             border-radius: 8px;
             padding: 1rem; /* Reduced padding for better text fit */
@@ -564,7 +562,7 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Match infographics gradient */
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
             background-size: 400% 400%;
             animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
             box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Match infographics box-shadow */
@@ -754,7 +752,7 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, #303655, #2a2f55, #303655, #2a2f55); /* Updated to include Martiniqe color */
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
             background-size: 400% 400%;
             animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
             box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
