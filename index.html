@@ -401,7 +401,7 @@
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite; /* Animated gradient */
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Matching box-shadow */
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
         }
 
         /* Gradient Animation Keyframes */
@@ -1918,24 +1918,26 @@
             const paragraphs = Array.from(aboutContent);
             let currentParagraphIndex = 0;
 
-            // Function to type text into a paragraph
-            function typeParagraph(para, fullText, speed = 0.01, onComplete) {
-                para.textContent = ''; // Clear existing text
-                gsap.to(para, {
-                    duration: fullText.length * speed,
-                    text: fullText,
-                    ease: "none",
-                    onStart: () => {
-                        para.style.opacity = '1';
-                    },
-                    onComplete: onComplete
+            // Function to type text into a paragraph and return a Promise
+            function typeParagraph(para, fullText, speed = 0.01) {
+                return new Promise((resolve) => {
+                    para.textContent = ''; // Clear existing text
+                    gsap.to(para, {
+                        duration: fullText.length * speed,
+                        text: fullText,
+                        ease: "none",
+                        onStart: () => {
+                            para.style.opacity = '1';
+                        },
+                        onComplete: resolve
+                    });
                 });
             }
 
             // Type the first paragraph and then show the button
             const firstParagraph = paragraphs[0];
             const firstText = firstParagraph.getAttribute('data-text');
-            typeParagraph(firstParagraph, firstText, 0.01, () => {
+            typeParagraph(firstParagraph, firstText, 0.01).then(() => {
                 const moreBtn = document.getElementById('more-btn');
                 moreBtn.style.display = 'inline-block'; // Show the button
                 gsap.fromTo(moreBtn, { opacity: 0 }, { opacity: 1, duration: 0.5, delay: 0.2 });
@@ -1943,17 +1945,19 @@
 
             // Handle the "Want to know more?" button click
             const moreButton = document.getElementById('more-btn');
-            moreButton.addEventListener('click', () => {
-                moreButton.style.display = 'none'; // Hide the button after clicking
+            moreButton.addEventListener('click', async () => {
+                // Hide the button with a fade-out effect
                 gsap.to(moreButton, { opacity: 0, duration: 0.3 });
+                setTimeout(() => {
+                    moreButton.style.display = 'none'; // Hide the button after fade-out
+                }, 300);
 
                 // Type the remaining paragraphs sequentially
-                paragraphs.slice(1).forEach((para, index) => {
+                for(let i = 1; i < paragraphs.length; i++) {
+                    const para = paragraphs[i];
                     const fullText = para.getAttribute('data-text');
-                    setTimeout(() => {
-                        typeParagraph(para, fullText, 0.01);
-                    }, index * 1500); // Adjust delay as needed
-                });
+                    await typeParagraph(para, fullText, 0.01);
+                }
             });
         });
     </script>
