@@ -374,11 +374,9 @@
             padding: 2rem !important;
             background: linear-gradient(
                 135deg,
-                #0047AB,
-                #4169E1,
-                #000080,
-                #1B3A57
-            ) !important; /* Animated gradient with specified colors */
+                var(--primary-dark) 0%,
+                var(--primary-light) 100%
+            ) !important; /* Updated to match top hero gradient */
             border: 2px solid transparent !important; /* Changed from 1px to 2px and made transparent for gradient border */
             box-shadow: 
                 0 0 40px rgba(0, 0, 0, 0.4),
@@ -390,7 +388,6 @@
             transform-style: preserve-3d;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             z-index: 2; /* Ensure it is above the anime-background */
-            animation: gradientAnimationAboutCard 15s ease infinite; /* Added gradient animation */
         }
 
         /* Glowing Starship Border Around About Card */
@@ -414,15 +411,6 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-
-        /* About Card Gradient Animation Keyframes */
-        @keyframes gradientAnimationAboutCard {
-            0% { background: linear-gradient(135deg, #0047AB, #4169E1, #000080, #1B3A57); }
-            25% { background: linear-gradient(135deg, #4169E1, #000080, #1B3A57, #0047AB); }
-            50% { background: linear-gradient(135deg, #000080, #1B3A57, #0047AB, #4169E1); }
-            75% { background: linear-gradient(135deg, #1B3A57, #0047AB, #4169E1, #000080); }
-            100% { background: linear-gradient(135deg, #0047AB, #4169E1, #000080, #1B3A57); }
         }
 
         /* Tech Grid Background */
