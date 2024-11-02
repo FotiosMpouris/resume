@@ -249,7 +249,6 @@
             font-size: 3.5rem;
             margin-bottom: 1rem;
             opacity: 0;
-            transform: translateY(30px);
         }
 
         .subtitle {
@@ -257,7 +256,6 @@
             color: var(--accent-blue);
             margin-bottom: 2rem;
             opacity: 0;
-            transform: translateY(30px);
         }
 
         /* Skills Grid */
@@ -598,7 +596,6 @@
             font-family: 'Courier New', monospace;
             font-size: 0.9rem; /* Reduced font size */
             opacity: 0;
-            transform: translateY(0);
             transition: opacity 0.3s ease, transform 0.3s ease;
             white-space: normal; /* Allow text wrapping */
             word-wrap: break-word;
@@ -642,12 +639,6 @@
             z-index: 3;
             transition: all 0.3s ease;
             opacity: 0; /* Hidden initially for typing effect */
-            transform: translateY(20px); /* Slight movement for animation */
-        }
-
-        .about-content p.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .about-content p:hover {
@@ -1710,7 +1701,7 @@
                     currentItem.classList.remove('active');
                     currentItem.querySelector('h4').textContent = '';
                     currentItem.querySelector('.typing-text').textContent = '';
-                    currentInfographic = (currentInfographic + 1) % infographicItems.length;
+                    currentInfographic = (currentInfographic + 1) % infographicData.length;
                     cycle();
                 }, typingDuration * 1000 + 1500); // Adding 1.5s display duration
             };
@@ -1809,14 +1800,12 @@
             // GSAP Animations for Titles
             gsap.to('.title', {
                 opacity: 1,
-                y: 0,
                 duration: 1,
                 delay: 0.5
             });
 
             gsap.to('.subtitle', {
                 opacity: 1,
-                y: 0,
                 duration: 1,
                 delay: 0.8
             });
@@ -1843,7 +1832,6 @@
                         toggleActions: "play none none none"
                     },
                     opacity: 1,
-                    y: 0,
                     duration: 1,
                     delay: 0.2 * index
                 });
@@ -1891,30 +1879,33 @@
                 const fullText = para.getAttribute('data-text');
                 para.textContent = ''; // Clear existing text
 
-                ScrollTrigger.create({
-                    trigger: para,
-                    start: "top 80%",
-                    onEnter: () => {
-                        gsap.to(para, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 1,
-                            ease: "power1.out",
-                            onStart: () => {
-                                gsap.to(para, {
-                                    text: fullText,
-                                    duration: 3,
-                                    ease: "none",
-                                    onComplete: () => {
-                                        para.classList.add('visible');
-                                    }
-                                });
-                            }
-                        });
-                    },
-                    once: true
+                // Split the text into lines based on periods for example
+                const lines = fullText.split('. ').map(line => line.trim()).filter(line => line.length > 0);
+
+                const timeline = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: para,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                });
+
+                lines.forEach(line => {
+                    timeline.to(para, {
+                        duration: line.length * 0.02, // Faster typing speed
+                        text: line + '.',
+                        ease: "none",
+                        onStart: () => {
+                            para.style.opacity = '1';
+                        }
+                    });
+                    timeline.to({}, { duration: 0.3 }); // Small delay between lines
                 });
             });
+
+            // Start Infographics Typing
+            // Ensure the infographics start cycling after creation
+            cycleInfographics();
         });
     </script>
 </body>
