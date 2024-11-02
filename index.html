@@ -1512,6 +1512,8 @@
         }
 
         // Profile Stats Functions
+        let isCyclingStats = false; // Flag to prevent multiple cycles
+
         function initializeProfileStats() {
             const statsData = [
                 "Proficient in creating visually stunning graphics with a 95% client satisfaction rate, ensuring projects are delivered on time and exceed expectations.",
@@ -1526,7 +1528,7 @@
             const totalStats = statsData.length;
 
             // Function to type text into an element using GSAP TextPlugin
-            function typeText(element, text, speed = 0.01) { // Increased speed by reducing from 0.05 to 0.01
+            function typeText(element, text, speed = 0.05) { // Speed adjusted for fast typing
                 return gsap.to(element, {
                     duration: text.length * speed,
                     text: text,
@@ -1537,23 +1539,27 @@
                 });
             }
 
-            // Function to cycle through stats sequentially using recursive setTimeout
+            // Function to cycle through stats sequentially
             function cycleStats() {
-                if (currentStatIndex >= totalStats) {
-                    currentStatIndex = 0; // Reset index for infinite cycling
-                }
+                if (isCyclingStats) return; // Prevent multiple cycles
+                isCyclingStats = true;
 
-                const currentParagraph = paragraphs[currentStatIndex % paragraphs.length];
-                const currentText = statsData[currentStatIndex % statsData.length];
+                const timeline = gsap.timeline();
 
-                typeText(currentParagraph.querySelector('p'), currentText, 0.01).then(() => {
-                    setTimeout(() => {
+                statsData.forEach((text, index) => {
+                    const currentParagraph = paragraphs[index % paragraphs.length];
+                    timeline.call(() => {
+                        typeText(currentParagraph.querySelector('p'), text, 0.05);
+                    }, null, `+=0.5`); // Delay before starting each paragraph
+                    timeline.to({}, { duration: text.length * 0.05 + 1.5 }); // Wait for typing and display duration
+                    timeline.call(() => {
                         currentParagraph.classList.remove('active');
                         currentParagraph.querySelector('p').textContent = '';
-                        currentStatIndex++;
-                        cycleStats(); // Recursive call for next stat
-                    }, 1500); // Wait 1.5s before typing next stat
+                    }, null);
                 });
+
+                // Repeat the cycle infinitely
+                timeline.repeat(-1);
             }
 
             // Attach event listeners to start cycling on hover for desktop
@@ -1567,8 +1573,8 @@
                     duration: 0.3,
                     ease: "power1.out"
                 });
-                if (currentStatIndex === 0) { // Start cycling only once
-                    cycleStats();
+                if (!isCyclingStats) {
+                    cycleStats(); // Start cycling on first hover
                 }
             }
 
@@ -1588,7 +1594,7 @@
 
             // Automatically start cycling on mobile
             function startCyclingIfMobile() {
-                if (window.innerWidth <= 768 && currentStatIndex === 0) {
+                if (window.innerWidth <= 768 && !isCyclingStats) {
                     gsap.to(statsOverlay, {
                         opacity: 1,
                         duration: 0.3,
@@ -1883,7 +1889,7 @@
 
                 paragraphTimeline.to({}, { duration: 0.5 }); // Initial delay before starting
                 paragraphTimeline.to(para, {
-                    duration: fullText.length * 0.01, // Increased speed by reducing duration
+                    duration: fullText.length * 0.01, // Reduced duration per character for faster typing
                     text: fullText,
                     ease: "none",
                     onStart: () => {
@@ -1892,6 +1898,12 @@
                 });
                 paragraphTimeline.to({}, { duration: 1.5 }); // Wait after typing
             });
+
+            // Create infographic items
+            createInfographicItems();
+
+            // Start Infographics Cycling
+            cycleInfographics();
         });
     </script>
 </body>
