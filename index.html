@@ -675,10 +675,6 @@
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
 
-        .about-content #more-btn {
-            display: none; /* Hidden initially */
-        }
-
         /* Animations */
         @keyframes ripple {
             0% {
@@ -1749,7 +1745,7 @@
                     currentItem.classList.remove('active');
                     currentItem.querySelector('h4').textContent = '';
                     currentItem.querySelector('.typing-text').textContent = '';
-                }, null);
+                });
             });
         }
 
@@ -1923,7 +1919,7 @@
             let currentParagraphIndex = 0;
 
             // Function to type text into a paragraph
-            function typeParagraph(para, fullText, speed = 0.01, onComplete = null) {
+            function typeParagraph(para, fullText, speed = 0.01, onComplete) {
                 para.textContent = ''; // Clear existing text
                 gsap.to(para, {
                     duration: fullText.length * speed,
@@ -1942,24 +1938,21 @@
             typeParagraph(firstParagraph, firstText, 0.01, () => {
                 const moreBtn = document.getElementById('more-btn');
                 moreBtn.style.display = 'inline-block'; // Show the button
+                gsap.fromTo(moreBtn, { opacity: 0 }, { opacity: 1, duration: 0.5, delay: 0.2 });
             });
 
             // Handle the "Want to know more?" button click
             const moreButton = document.getElementById('more-btn');
             moreButton.addEventListener('click', () => {
                 moreButton.style.display = 'none'; // Hide the button after clicking
+                gsap.to(moreButton, { opacity: 0, duration: 0.3 });
 
-                // Create a GSAP timeline for sequential typing
-                const tl = gsap.timeline();
-
-                // Type each remaining paragraph one after the other
-                const remainingParagraphs = paragraphs.slice(1);
-                remainingParagraphs.forEach((para, index) => {
+                // Type the remaining paragraphs sequentially
+                paragraphs.slice(1).forEach((para, index) => {
                     const fullText = para.getAttribute('data-text');
-                    tl.to({}, { duration: 0.5 }); // Small delay before starting
-                    tl.call(() => {
+                    setTimeout(() => {
                         typeParagraph(para, fullText, 0.01);
-                    });
+                    }, index * 1500); // Adjust delay as needed
                 });
             });
         });
