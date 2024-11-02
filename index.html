@@ -1388,20 +1388,15 @@
                         </div>
                     </div>
                     <div class="about-content">
-                        <p>
-                            I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.
+                        <p data-text="I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.">
                         </p>
-                        <p>
-                            More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement. By leveraging AI-assisted applications, I'm focused on creating innovative, agent-centric systems that reflect the future of technology.
+                        <p data-text="More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement. By leveraging AI-assisted applications, I'm focused on creating innovative, agent-centric systems that reflect the future of technology.">
                         </p>
-                        <p>
-                            Throughout my career, I've used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.
+                        <p data-text="Throughout my career, I've used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.">
                         </p>
-                        <p>
-                            I've also managed digital platforms and multimedia content creation for various organizations, overseeing Google Workspace operations and creating social media assets to improve outreach. These hands-on experiences have given me a well-rounded understanding of how technology and creativity intersect to streamline workflows, enhance communication, and deliver captivating user experiences.
+                        <p data-text="I've also managed digital platforms and multimedia content creation for various organizations, overseeing Google Workspace operations and creating social media assets to improve outreach. These hands-on experiences have given me a well-rounded understanding of how technology and creativity intersect to streamline workflows, enhance communication, and deliver captivating user experiences.">
                         </p>
-                        <p>
-                            Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.
+                        <p data-text="Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.">
                         </p>
                     </div>
                 </div>
@@ -1565,15 +1560,14 @@
 
                     typeText(currentParagraph.querySelector('p'), currentText, 0.05);
 
-                    currentParagraph.querySelector('p').addEventListener('complete', () => {
-                        // Wait before showing next stat
-                        setTimeout(() => {
-                            currentParagraph.classList.remove('active');
-                            currentParagraph.querySelector('p').textContent = '';
-                            currentStatIndex = (currentStatIndex + 1) % totalStats;
-                            showNextStat();
-                        }, 1500); // Display duration
-                    }, { once: true });
+                    // Wait for the typing to finish plus display duration
+                    const typingDuration = currentText.length * 0.05;
+                    setTimeout(() => {
+                        currentParagraph.classList.remove('active');
+                        currentParagraph.querySelector('p').textContent = '';
+                        currentStatIndex = (currentStatIndex + 1) % totalStats;
+                        showNextStat();
+                    }, typingDuration * 1000 + 1500); // Adding 1.5s display duration
                 }
 
                 showNextStat();
@@ -1894,6 +1888,9 @@
             const aboutContent = document.querySelectorAll('.about-content p');
 
             aboutContent.forEach((para) => {
+                const fullText = para.getAttribute('data-text');
+                para.textContent = ''; // Clear existing text
+
                 ScrollTrigger.create({
                     trigger: para,
                     start: "top 80%",
@@ -1905,13 +1902,11 @@
                             ease: "power1.out",
                             onStart: () => {
                                 gsap.to(para, {
-                                    text: para.textContent,
+                                    text: fullText,
                                     duration: 3,
                                     ease: "none",
-                                    scrollTrigger: {
-                                        trigger: para,
-                                        start: "top 80%",
-                                        toggleActions: "play none none none"
+                                    onComplete: () => {
+                                        para.classList.add('visible');
                                     }
                                 });
                             }
