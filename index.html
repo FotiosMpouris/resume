@@ -260,7 +260,7 @@
         }
 
         .matrix-column::before {
-            content: '守\A ら\A れ\A た\A 0\A 1\A ア\A プ\A リ\A ケ\A ー\A シ\A ョ\A \}\A \{\A #\A $\A @\A 9\A 8\A 7';
+            content: '守らリケーシタアプョン01{}#$@987';
             position: absolute;
             white-space: pre-wrap;
             word-wrap: break-word;
@@ -418,7 +418,7 @@
         /* Popup Styles */
         .popup {
             position: absolute;
-            top: -10px;
+            top: 110%; /* Position popup below the icon */
             left: 50%;
             transform: translateX(-50%);
             width: 250px;
@@ -431,6 +431,7 @@
             pointer-events: none;
             transition: opacity 0.3s ease;
             z-index: 10;
+            font-size: 0.9rem;
         }
 
         .popup.active {
@@ -442,18 +443,25 @@
             margin-bottom: 0.5rem;
             text-align: left;
             font-size: 0.9rem;
+            opacity: 0; /* Start hidden for typing effect */
+        }
+
+        .popup .stat {
+            font-weight: bold;
+            margin-top: 0.5rem;
+            opacity: 0; /* Start hidden for typing effect */
         }
 
         /* Tooltip Arrow */
         .popup::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            top: -10px; /* Arrow above the popup */
             left: 50%;
             transform: translateX(-50%);
             border-width: 5px;
             border-style: solid;
-            border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+            border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
         }
 
         /* Dark Theme Section */
@@ -563,7 +571,6 @@
             margin-top: 0; /* Remove extra space above */
             z-index: 3;
             cursor: pointer; /* Indicate interactivity */
-            left: -150px; /* Shift left by 150px */
         }
 
         /* Profile Image Hover Effects */
@@ -609,7 +616,8 @@
         .profile-hover-button {
             position: absolute;
             bottom: -15px; /* Moved down by 15px */
-            left: calc(50% - 40px); /* Center horizontally relative to profile image */
+            left: 50%; /* Center horizontally relative to profile image */
+            transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
             color: rgba(255, 255, 255, 0.8); /* White with transparency */
@@ -638,7 +646,7 @@
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
             left: calc(100% + 35px); /* Moved 35px to the right */
-            transform: translate(-300px, -50%);
+            transform: translateY(-50%);
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
             background: rgba(48, 54, 85, 0.5); /* Royal Blue theme */
@@ -671,7 +679,7 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translate(-300px, -50%); /* Maintain shift on hover */
+            transform: translateY(-50%); /* Maintain vertical centering */
             pointer-events: auto;
         }
 
@@ -975,7 +983,6 @@
             position: relative;
             display: inline-block;
             text-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
-            /* Removed the ::after pseudo-element */
         }
 
         /* Projects Grid */
@@ -1944,7 +1951,7 @@
                     text: text,
                     ease: "none",
                     onStart: () => {
-                        element.parentElement.classList.add('active');
+                        element.style.opacity = '1';
                     }
                 });
             }
@@ -1965,6 +1972,7 @@
                     timeline.call(() => {
                         currentParagraph.classList.remove('active');
                         currentParagraph.querySelector('p').textContent = '';
+                        currentParagraph.querySelector('p').style.opacity = '0';
                     }, null);
                 });
 
@@ -2348,9 +2356,10 @@
                     document.querySelectorAll('.popup').forEach(p => {
                         if (p !== popup) {
                             p.classList.remove('active');
-                            p.querySelector('p').textContent = '';
-                            p.querySelector('p:nth-child(2)').textContent = '';
-                            p.querySelector('.stat').textContent = '';
+                            p.querySelectorAll('p').forEach(pTag => {
+                                pTag.textContent = '';
+                                pTag.style.opacity = '0';
+                            });
                         }
                     });
 
@@ -2399,7 +2408,10 @@
                 // Function to hide popup
                 function hidePopup() {
                     popup.classList.remove('active');
-                    popup.querySelectorAll('p').forEach(p => p.textContent = '');
+                    popup.querySelectorAll('p').forEach(p => {
+                        p.textContent = '';
+                        p.style.opacity = '0';
+                    });
                 }
 
                 // Event listeners for hover
