@@ -418,7 +418,7 @@
         /* Popup Styles */
         .popup {
             position: absolute;
-            top: 110%; /* Positioned below the icon */
+            top: 50px; /* Adjusted to appear below the icon */
             left: 50%;
             transform: translateX(-50%);
             width: 250px;
@@ -430,7 +430,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            z-index: 100; /* Increased z-index to appear above other elements */
+            z-index: 1000; /* Higher z-index to appear above other elements */
         }
 
         .popup.active {
@@ -438,24 +438,25 @@
             pointer-events: auto;
         }
 
-        .popup p {
+        .popup p.info1,
+        .popup p.info2 {
             margin-bottom: 0.5rem;
             text-align: left;
             font-size: 0.9rem;
-            opacity: 0; /* Initially hidden */
         }
 
-        .popup .stat {
-            margin-top: 0.5rem;
+        .popup p.stat {
             font-weight: bold;
-            opacity: 0; /* Initially hidden */
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 0.5rem;
         }
 
         /* Tooltip Arrow */
         .popup::after {
             content: '';
             position: absolute;
-            top: -10px;
+            top: -10px; /* Positioned above the popup */
             left: 50%;
             transform: translateX(-50%);
             border-width: 5px;
@@ -616,8 +617,7 @@
         .profile-hover-button {
             position: absolute;
             bottom: -15px; /* Moved down by 15px */
-            left: 50%; /* Center horizontally relative to profile image */
-            transform: translateX(-50%);
+            left: calc(50% - 40px); /* Center horizontally relative to profile image */
             background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
             color: rgba(255, 255, 255, 0.8); /* White with transparency */
@@ -645,17 +645,17 @@
         .profile-stats-overlay {
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
-            left: calc(100% + 20px); /* Positioned to the right of the profile image */
-            transform: translateY(-50%);
+            left: calc(100% + 35px); /* Moved 35px to the right */
+            transform: translate(-300px, -50%);
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
-            background: rgba(0, 0, 0, 0.85); /* Dark background for better visibility */
+            background: rgba(48, 54, 85, 0.5); /* Royal Blue theme */
             border: none; /* Removed the light blue border */
             border-radius: 8px;
             padding: 1rem; /* Reduced padding */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 100; /* Increased z-index to appear above other elements */
+            z-index: 4;
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -673,12 +673,13 @@
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
             background-size: 400% 400%;
             animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Matching box-shadow */
             z-index: -1;
         }
 
         .profile-stats-overlay:hover {
             opacity: 1;
+            transform: translate(-300px, -50%); /* Maintain shift on hover */
             pointer-events: auto;
         }
 
@@ -1523,6 +1524,10 @@
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
+
+        /* Infographics Typing and Cycling */
+        /* Removed redundant keyframes */
+
     </style>
 </head>
 
@@ -1573,8 +1578,8 @@
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1585,8 +1590,8 @@
                         <img src="https://download.blender.org/branding/community/blender_community_badge_white.svg" alt="blender">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1597,8 +1602,8 @@
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1609,8 +1614,8 @@
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg" alt="dotnet">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1621,8 +1626,8 @@
                         <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" alt="gcp">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1633,8 +1638,8 @@
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1645,8 +1650,8 @@
                         <img src="https://www.vectorlogo.zone/logos/adobe_illustrator/adobe_illustrator-icon.svg" alt="illustrator">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1657,8 +1662,8 @@
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1669,8 +1674,8 @@
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1681,8 +1686,8 @@
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg" alt="photoshop">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1693,8 +1698,8 @@
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1705,8 +1710,8 @@
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg" alt="unity">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1717,8 +1722,8 @@
                         <img src="https://www.vectorlogo.zone/logos/zapier/zapier-icon.svg" alt="zapier">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1729,8 +1734,8 @@
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg" alt="premiere pro">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1741,8 +1746,8 @@
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg" alt="after effects">
                     </div>
                     <div class="popup">
-                        <p></p>
-                        <p></p>
+                        <p class="info1"></p>
+                        <p class="info2"></p>
                         <p class="stat"></p>
                     </div>
                 </div>
@@ -1947,7 +1952,7 @@
                     text: text,
                     ease: "none",
                     onStart: () => {
-                        element.style.opacity = '1';
+                        element.parentElement.classList.add('active');
                     }
                 });
             }
@@ -1966,8 +1971,8 @@
                     }, null, `+=0.5`); // Delay before starting each paragraph
                     timeline.to({}, { duration: text.length * 0.05 + 1.5 }); // Wait for typing and display duration
                     timeline.call(() => {
+                        currentParagraph.classList.remove('active');
                         currentParagraph.querySelector('p').textContent = '';
-                        currentParagraph.style.opacity = '0';
                     }, null);
                 });
 
@@ -2222,8 +2227,96 @@
             });
 
             // Skill Icons Animation
-            const skillIcons = document.querySelectorAll('.skill-icon');
-            skillIcons.forEach((icon, index) => {
+            const skillWrappers = document.querySelectorAll('.skill-wrapper');
+            skillWrappers.forEach((wrapper, index) => {
+                const icon = wrapper.querySelector('.skill-icon');
+                const popup = wrapper.querySelector('.popup');
+                const info1 = icon.getAttribute('data-info1');
+                const info2 = icon.getAttribute('data-info2');
+
+                // Function to generate random stat
+                function generateRandomStat() {
+                    const efficiency = Math.floor(Math.random() * 11) + 85; // 85 to 95
+                    return `Efficiency: ${efficiency}%`;
+                }
+
+                // Function to show popup
+                function showPopup() {
+                    // Hide other popups
+                    document.querySelectorAll('.popup').forEach(p => {
+                        if (p !== popup) {
+                            p.classList.remove('active');
+                            p.querySelectorAll('p').forEach(pElem => {
+                                pElem.textContent = '';
+                            });
+                        }
+                    });
+
+                    popup.classList.add('active');
+
+                    const para1 = popup.querySelector('.info1');
+                    const para2 = popup.querySelector('.info2');
+                    const stat = popup.querySelector('.stat');
+
+                    // Generate random stat
+                    const randomStat = generateRandomStat();
+
+                    // Type out the first bullet point
+                    gsap.to(para1, {
+                        duration: info1.length * 0.05,
+                        text: info1,
+                        ease: "none",
+                        onStart: () => {
+                            para1.style.opacity = '1';
+                        },
+                        onComplete: () => {
+                            // Type out the second bullet point
+                            gsap.to(para2, {
+                                duration: info2.length * 0.05,
+                                text: info2,
+                                ease: "none",
+                                onStart: () => {
+                                    para2.style.opacity = '1';
+                                },
+                                onComplete: () => {
+                                    // Type out the random stat
+                                    gsap.to(stat, {
+                                        duration: randomStat.length * 0.05,
+                                        text: randomStat,
+                                        ease: "none",
+                                        onStart: () => {
+                                            stat.style.opacity = '1';
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+
+                // Function to hide popup
+                function hidePopup() {
+                    popup.classList.remove('active');
+                    popup.querySelectorAll('p').forEach(pElem => {
+                        pElem.textContent = '';
+                    });
+                }
+
+                // Event listeners for hover
+                icon.addEventListener('mouseenter', showPopup);
+                icon.addEventListener('mouseleave', hidePopup);
+
+                // Event listeners for click
+                icon.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default link behavior
+                    if (popup.classList.contains('active')) {
+                        hidePopup();
+                    } else {
+                        showPopup();
+                    }
+                });
+
+                // Initial GSAP animation for skill icons
                 gsap.to(icon, {
                     opacity: 1,
                     scale: 1,
@@ -2328,102 +2421,6 @@
                     const fullText = para.getAttribute('data-text');
                     await typeParagraph(para, fullText, 0.01);
                 }
-            });
-
-            // Popup Functionality for Skill Icons
-            const skillWrappers = document.querySelectorAll('.skill-wrapper');
-
-            skillWrappers.forEach(wrapper => {
-                const icon = wrapper.querySelector('.skill-icon');
-                const popup = wrapper.querySelector('.popup');
-                const info1 = icon.getAttribute('data-info1');
-                const info2 = icon.getAttribute('data-info2');
-
-                // Function to generate random stat
-                function generateRandomStat() {
-                    const efficiency = Math.floor(Math.random() * 11) + 85; // 85 to 95
-                    return `Efficiency: ${efficiency}%`;
-                }
-
-                // Function to show popup
-                function showPopup() {
-                    // Hide other popups
-                    document.querySelectorAll('.popup').forEach(p => {
-                        if (p !== popup) {
-                            p.classList.remove('active');
-                            p.querySelector('p:nth-child(1)').textContent = '';
-                            p.querySelector('p:nth-child(2)').textContent = '';
-                            p.querySelector('.stat').textContent = '';
-                            p.querySelector('p:nth-child(1)').style.opacity = '0';
-                            p.querySelector('p:nth-child(2)').style.opacity = '0';
-                            p.querySelector('.stat').style.opacity = '0';
-                        }
-                    });
-
-                    popup.classList.add('active');
-
-                    const para1 = popup.querySelector('p:nth-child(1)');
-                    const para2 = popup.querySelector('p:nth-child(2)');
-                    const stat = popup.querySelector('.stat');
-
-                    // Generate random stat
-                    const randomStat = generateRandomStat();
-
-                    // Type out the first bullet point
-                    gsap.to(para1, {
-                        duration: info1.length * 0.05,
-                        text: info1,
-                        ease: "none",
-                        onStart: () => {
-                            para1.style.opacity = '1';
-                        },
-                        onComplete: () => {
-                            // Type out the second bullet point
-                            gsap.to(para2, {
-                                duration: info2.length * 0.05,
-                                text: info2,
-                                ease: "none",
-                                onStart: () => {
-                                    para2.style.opacity = '1';
-                                },
-                                onComplete: () => {
-                                    // Type out the random stat
-                                    gsap.to(stat, {
-                                        duration: randomStat.length * 0.05,
-                                        text: randomStat,
-                                        ease: "none",
-                                        onStart: () => {
-                                            stat.style.opacity = '1';
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
-
-                // Function to hide popup
-                function hidePopup() {
-                    popup.classList.remove('active');
-                    popup.querySelectorAll('p').forEach(p => {
-                        p.textContent = '';
-                        p.style.opacity = '0';
-                    });
-                }
-
-                // Event listeners for hover
-                icon.addEventListener('mouseenter', showPopup);
-                icon.addEventListener('mouseleave', hidePopup);
-
-                // Event listeners for click
-                icon.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent default link behavior
-                    if (popup.classList.contains('active')) {
-                        hidePopup();
-                    } else {
-                        showPopup();
-                    }
-                });
             });
         });
     </script>
