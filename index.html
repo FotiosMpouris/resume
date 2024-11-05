@@ -430,7 +430,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            z-index: 1000; /* Higher z-index to appear above other elements */
+            z-index: 9999; /* Increased z-index to appear above all */
         }
 
         .popup.active {
@@ -854,12 +854,6 @@
         @keyframes glowPulse {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
-        }
-
-        @keyframes gradientAnimationInfographic {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         /* Infographics Cycling Animation */
@@ -2226,7 +2220,7 @@
                 delay: 0.8
             });
 
-            // Skill Icons Animation
+            // Skill Icons Animation and Popup Functionality
             const skillWrappers = document.querySelectorAll('.skill-wrapper');
             skillWrappers.forEach((wrapper, index) => {
                 const icon = wrapper.querySelector('.skill-icon');
@@ -2302,12 +2296,12 @@
                     });
                 }
 
-                // Event listeners for hover
-                icon.addEventListener('mouseenter', showPopup);
-                icon.addEventListener('mouseleave', hidePopup);
+                // Event listeners for hover on the wrapper to prevent shaking
+                wrapper.addEventListener('mouseenter', showPopup);
+                wrapper.addEventListener('mouseleave', hidePopup);
 
                 // Event listeners for click
-                icon.addEventListener('click', (e) => {
+                wrapper.addEventListener('click', (e) => {
                     e.preventDefault(); // Prevent default link behavior
                     if (popup.classList.contains('active')) {
                         hidePopup();
