@@ -418,11 +418,11 @@
         /* Popup Styles */
         .popup {
             position: absolute;
-            top: -10px;
+            top: 110%; /* Positioned below the icon */
             left: 50%;
             transform: translateX(-50%);
             width: 250px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             color: #fff;
             padding: 1rem;
             border-radius: 8px;
@@ -442,18 +442,25 @@
             margin-bottom: 0.5rem;
             text-align: left;
             font-size: 0.9rem;
+            opacity: 0; /* Initially hidden */
+        }
+
+        .popup .stat {
+            margin-top: 0.5rem;
+            font-weight: bold;
+            opacity: 0; /* Initially hidden */
         }
 
         /* Tooltip Arrow */
         .popup::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            top: -10px;
             left: 50%;
             transform: translateX(-50%);
             border-width: 5px;
             border-style: solid;
-            border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+            border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
         }
 
         /* Dark Theme Section */
@@ -666,7 +673,7 @@
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
             background-size: 400% 400%;
             animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Matching box-shadow */
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
             z-index: -1;
         }
 
@@ -727,7 +734,7 @@
             border-radius: 15px;
             box-shadow: 
                 inset 0 0 40px rgba(0, 123, 255, 0.08),
-                0 0 30px rgba(0, 0, 0, 0.15);
+                0 0 20px rgba(0, 0, 0, 0.15);
             margin-top: 1rem;
         }
 
@@ -1517,10 +1524,6 @@
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
-
-        /* Infographics Typing and Cycling */
-        /* Removed redundant keyframes */
-
     </style>
 </head>
 
@@ -1567,9 +1570,9 @@
             <div class="skills-container">
                 <!-- Skill 1: Android -->
                 <div class="skill-wrapper">
-                    <a href="https://developer.android.com" target="_blank" class="skill-icon" data-skill="Android" data-info1="Developed interactive features for geo-positioning mobile applications, enhancing user engagement and functionality on Android platforms." data-info2="Collaborated with cross-functional teams to integrate Android-specific features, ensuring seamless performance and user experience.">
+                    <div class="skill-icon" data-skill="Android" data-info1="Developed interactive features for geo-positioning mobile applications, enhancing user engagement and functionality on Android platforms." data-info2="Collaborated with cross-functional teams to integrate Android-specific features, ensuring seamless performance and user experience.">
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1579,9 +1582,9 @@
                 
                 <!-- Skill 2: Blender -->
                 <div class="skill-wrapper">
-                    <a href="https://www.blender.org/" target="_blank" class="skill-icon" data-skill="Blender" data-info1="Created detailed 3D models and animations using Blender, contributing to multimedia content and enhancing visual appeal in various projects." data-info2="Implemented character rigging and animation workflows in Blender, bringing digital assets to life with realistic movements.">
+                    <div class="skill-icon" data-skill="Blender" data-info1="Created detailed 3D models and animations using Blender, contributing to multimedia content and enhancing visual appeal in various projects." data-info2="Implemented character rigging and animation workflows in Blender, bringing digital assets to life with realistic movements.">
                         <img src="https://download.blender.org/branding/community/blender_community_badge_white.svg" alt="blender">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1591,9 +1594,9 @@
                 
                 <!-- Skill 3: C# -->
                 <div class="skill-wrapper">
-                    <a href="https://www.w3schools.com/cs/" target="_blank" class="skill-icon" data-skill="C#" data-info1="Programmed robust C# scripts in Unity to implement game mechanics and optimize performance, driving seamless user experiences in mobile gaming applications." data-info2="Developed scalable C# applications, ensuring efficient performance and reliability across multiple projects.">
+                    <div class="skill-icon" data-skill="C#" data-info1="Programmed robust C# scripts in Unity to implement game mechanics and optimize performance, driving seamless user experiences in mobile gaming applications." data-info2="Developed scalable C# applications, ensuring efficient performance and reliability across multiple projects.">
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1603,9 +1606,9 @@
                 
                 <!-- Skill 4: .NET (Dotnet) -->
                 <div class="skill-wrapper">
-                    <a href="https://dotnet.microsoft.com/" target="_blank" class="skill-icon" data-skill=".NET (Dotnet)" data-info1="Utilized .NET framework for developing scalable and efficient applications, integrating with Unity projects to enhance functionality and user interactions." data-info2="Implemented backend services using .NET, facilitating smooth data management and application performance.">
+                    <div class="skill-icon" data-skill=".NET (Dotnet)" data-info1="Utilized .NET framework for developing scalable and efficient applications, integrating with Unity projects to enhance functionality and user interactions." data-info2="Implemented backend services using .NET, facilitating smooth data management and application performance.">
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg" alt="dotnet">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1615,9 +1618,9 @@
                 
                 <!-- Skill 5: GCP (Google Cloud Platform) -->
                 <div class="skill-wrapper">
-                    <a href="https://cloud.google.com" target="_blank" class="skill-icon" data-skill="GCP (Google Cloud Platform)" data-info1="Managed Google Cloud Console resources to deploy and maintain scalable applications, ensuring high performance and reliability for multimedia and gaming projects." data-info2="Optimized cloud infrastructure on GCP, reducing operational costs by 15% while maintaining application efficiency.">
+                    <div class="skill-icon" data-skill="GCP (Google Cloud Platform)" data-info1="Managed Google Cloud Console resources to deploy and maintain scalable applications, ensuring high performance and reliability for multimedia and gaming projects." data-info2="Optimized cloud infrastructure on GCP, reducing operational costs by 15% while maintaining application efficiency.">
                         <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" alt="gcp">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1627,9 +1630,9 @@
                 
                 <!-- Skill 6: HTML5 -->
                 <div class="skill-wrapper">
-                    <a href="https://www.w3.org/html/" target="_blank" class="skill-icon" data-skill="HTML5" data-info1="Designed and developed responsive web interfaces using HTML5, improving user experience and accessibility for project-related websites and applications." data-info2="Integrated HTML5 with CSS and JavaScript to build interactive web components, enhancing site functionality and engagement.">
+                    <div class="skill-icon" data-skill="HTML5" data-info1="Designed and developed responsive web interfaces using HTML5, improving user experience and accessibility for project-related websites and applications." data-info2="Integrated HTML5 with CSS and JavaScript to build interactive web components, enhancing site functionality and engagement.">
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1639,9 +1642,9 @@
                 
                 <!-- Skill 7: Illustrator -->
                 <div class="skill-wrapper">
-                    <a href="https://www.adobe.com/in/products/illustrator.html" target="_blank" class="skill-icon" data-skill="Illustrator" data-info1="Created visually compelling graphics and design elements with Adobe Illustrator, enhancing branding materials and multimedia content for social media and outreach programs." data-info2="Designed custom logos and templates in Illustrator, strengthening brand identity and visual consistency across projects.">
+                    <div class="skill-icon" data-skill="Illustrator" data-info1="Created visually compelling graphics and design elements with Adobe Illustrator, enhancing branding materials and multimedia content for social media and outreach programs." data-info2="Designed custom logos and templates in Illustrator, strengthening brand identity and visual consistency across projects.">
                         <img src="https://www.vectorlogo.zone/logos/adobe_illustrator/adobe_illustrator-icon.svg" alt="illustrator">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1651,9 +1654,9 @@
                 
                 <!-- Skill 8: JavaScript -->
                 <div class="skill-wrapper">
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="skill-icon" data-skill="JavaScript" data-info1="Implemented dynamic web functionalities using JavaScript, enhancing interactivity and user engagement on project websites and digital platforms." data-info2="Developed interactive UI components with JavaScript, improving overall user experience and site responsiveness.">
+                    <div class="skill-icon" data-skill="JavaScript" data-info1="Implemented dynamic web functionalities using JavaScript, enhancing interactivity and user engagement on project websites and digital platforms." data-info2="Developed interactive UI components with JavaScript, improving overall user experience and site responsiveness.">
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1663,9 +1666,9 @@
                 
                 <!-- Skill 9: Node.js -->
                 <div class="skill-wrapper">
-                    <a href="https://nodejs.org" target="_blank" class="skill-icon" data-skill="Node.js" data-info1="Developed backend services with Node.js for interactive applications, ensuring efficient data handling and seamless integration with frontend components." data-info2="Optimized server-side performance using Node.js, reducing response times by 20% and enhancing application scalability.">
+                    <div class="skill-icon" data-skill="Node.js" data-info1="Developed backend services with Node.js for interactive applications, ensuring efficient data handling and seamless integration with frontend components." data-info2="Optimized server-side performance using Node.js, reducing response times by 20% and enhancing application scalability.">
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1675,9 +1678,9 @@
                 
                 <!-- Skill 10: Photoshop -->
                 <div class="skill-wrapper">
-                    <a href="https://www.photoshop.com/en" target="_blank" class="skill-icon" data-skill="Photoshop" data-info1="Produced high-quality multimedia content and graphics using Adobe Photoshop, boosting engagement and visual appeal for social media and training materials." data-info2="Edited images and created visual assets in Photoshop, supporting effective communication and marketing efforts.">
+                    <div class="skill-icon" data-skill="Photoshop" data-info1="Produced high-quality multimedia content and graphics using Adobe Photoshop, boosting engagement and visual appeal for social media and training materials." data-info2="Edited images and created visual assets in Photoshop, supporting effective communication and marketing efforts.">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg" alt="photoshop">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1687,9 +1690,9 @@
                 
                 <!-- Skill 11: Python -->
                 <div class="skill-wrapper">
-                    <a href="https://www.python.org" target="_blank" class="skill-icon" data-skill="Python" data-info1="Developed Python-based applications for AI-assisted generative art platforms, streamlining creative processes and enhancing project innovation." data-info2="Automated data processing tasks with Python, increasing efficiency and accuracy in project workflows.">
+                    <div class="skill-icon" data-skill="Python" data-info1="Developed Python-based applications for AI-assisted generative art platforms, streamlining creative processes and enhancing project innovation." data-info2="Automated data processing tasks with Python, increasing efficiency and accuracy in project workflows.">
                         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1699,9 +1702,9 @@
                 
                 <!-- Skill 12: Unity -->
                 <div class="skill-wrapper">
-                    <a href="https://unity.com/" target="_blank" class="skill-icon" data-skill="Unity" data-info1="Led Unity development efforts, creating immersive 2D and 3D interactive features for mobile applications, and managing alpha testing to ensure product stability." data-info2="Collaborated with the CTO to design and implement game mechanics in Unity, resulting in a seamless and engaging user experience.">
+                    <div class="skill-icon" data-skill="Unity" data-info1="Led Unity development efforts, creating immersive 2D and 3D interactive features for mobile applications, and managing alpha testing to ensure product stability." data-info2="Collaborated with the CTO to design and implement game mechanics in Unity, resulting in a seamless and engaging user experience.">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg" alt="unity">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1711,9 +1714,9 @@
                 
                 <!-- Skill 13: Zapier -->
                 <div class="skill-wrapper">
-                    <a href="https://zapier.com" target="_blank" class="skill-icon" data-skill="Zapier" data-info1="Automated workflows and integrated various applications using Zapier, enhancing team productivity and streamlining project management processes." data-info2="Implemented Zapier integrations to connect disparate tools, reducing manual tasks and improving operational efficiency.">
+                    <div class="skill-icon" data-skill="Zapier" data-info1="Automated workflows and integrated various applications using Zapier, enhancing team productivity and streamlining project management processes." data-info2="Implemented Zapier integrations to connect disparate tools, reducing manual tasks and improving operational efficiency.">
                         <img src="https://www.vectorlogo.zone/logos/zapier/zapier-icon.svg" alt="zapier">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1723,9 +1726,9 @@
                 
                 <!-- Skill 14: Premiere Pro -->
                 <div class="skill-wrapper">
-                    <a href="https://www.adobe.com/products/premiere.html" target="_blank" class="skill-icon" data-skill="Premiere Pro" data-info1="Edited engaging video content with Adobe Premiere Pro, improving training materials and multimedia communication efforts for volunteer and client support programs." data-info2="Produced high-quality video presentations in Premiere Pro, enhancing the effectiveness of outreach and training initiatives.">
+                    <div class="skill-icon" data-skill="Premiere Pro" data-info1="Edited engaging video content with Adobe Premiere Pro, improving training materials and multimedia communication efforts for volunteer and client support programs." data-info2="Produced high-quality video presentations in Premiere Pro, enhancing the effectiveness of outreach and training initiatives.">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg" alt="premiere pro">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1735,9 +1738,9 @@
                 
                 <!-- Skill 15: After Effects -->
                 <div class="skill-wrapper">
-                    <a href="https://www.adobe.com/products/aftereffects.html" target="_blank" class="skill-icon" data-skill="After Effects" data-info1="Designed motion graphics and animated content using Adobe After Effects, elevating the quality of multimedia projects and enhancing visual storytelling." data-info2="Created dynamic animations in After Effects, adding visual flair and professional polish to video content.">
+                    <div class="skill-icon" data-skill="After Effects" data-info1="Designed motion graphics and animated content using Adobe After Effects, elevating the quality of multimedia projects and enhancing visual storytelling." data-info2="Created dynamic animations in After Effects, adding visual flair and professional polish to video content.">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg" alt="after effects">
-                    </a>
+                    </div>
                     <div class="popup">
                         <p></p>
                         <p></p>
@@ -1945,7 +1948,7 @@
                     text: text,
                     ease: "none",
                     onStart: () => {
-                        element.parentElement.classList.add('active');
+                        element.style.opacity = '1';
                     }
                 });
             }
@@ -1964,8 +1967,8 @@
                     }, null, `+=0.5`); // Delay before starting each paragraph
                     timeline.to({}, { duration: text.length * 0.05 + 1.5 }); // Wait for typing and display duration
                     timeline.call(() => {
-                        currentParagraph.classList.remove('active');
                         currentParagraph.querySelector('p').textContent = '';
+                        currentParagraph.style.opacity = '0';
                     }, null);
                 });
 
@@ -2349,8 +2352,7 @@
                     document.querySelectorAll('.popup').forEach(p => {
                         if (p !== popup) {
                             p.classList.remove('active');
-                            p.querySelector('p:nth-child(1)').textContent = '';
-                            p.querySelector('p:nth-child(2)').textContent = '';
+                            p.querySelector('p').textContent = '';
                             p.querySelector('.stat').textContent = '';
                         }
                     });
@@ -2401,6 +2403,7 @@
                 function hidePopup() {
                     popup.classList.remove('active');
                     popup.querySelectorAll('p').forEach(p => p.textContent = '');
+                    popup.querySelectorAll('p').forEach(p => p.style.opacity = '0');
                 }
 
                 // Event listeners for hover
