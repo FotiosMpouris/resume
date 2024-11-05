@@ -430,7 +430,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            z-index: 10;
+            z-index: 100; /* Increased z-index to appear above other elements */
         }
 
         .popup.active {
@@ -645,17 +645,17 @@
         .profile-stats-overlay {
             position: absolute;
             top: 50%; /* Center vertically relative to the profile image */
-            left: calc(100% + 35px); /* Moved 35px to the right */
-            transform: translate(-300px, -50%);
+            left: calc(100% + 20px); /* Positioned to the right of the profile image */
+            transform: translateY(-50%);
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
-            background: rgba(48, 54, 85, 0.5); /* Royal Blue theme */
+            background: rgba(0, 0, 0, 0.85); /* Dark background for better visibility */
             border: none; /* Removed the light blue border */
             border-radius: 8px;
             padding: 1rem; /* Reduced padding */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 4;
+            z-index: 100; /* Increased z-index to appear above other elements */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -679,7 +679,6 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translate(-300px, -50%); /* Maintain shift on hover */
             pointer-events: auto;
         }
 
@@ -2352,8 +2351,12 @@
                     document.querySelectorAll('.popup').forEach(p => {
                         if (p !== popup) {
                             p.classList.remove('active');
-                            p.querySelector('p').textContent = '';
+                            p.querySelector('p:nth-child(1)').textContent = '';
+                            p.querySelector('p:nth-child(2)').textContent = '';
                             p.querySelector('.stat').textContent = '';
+                            p.querySelector('p:nth-child(1)').style.opacity = '0';
+                            p.querySelector('p:nth-child(2)').style.opacity = '0';
+                            p.querySelector('.stat').style.opacity = '0';
                         }
                     });
 
@@ -2402,8 +2405,10 @@
                 // Function to hide popup
                 function hidePopup() {
                     popup.classList.remove('active');
-                    popup.querySelectorAll('p').forEach(p => p.textContent = '');
-                    popup.querySelectorAll('p').forEach(p => p.style.opacity = '0');
+                    popup.querySelectorAll('p').forEach(p => {
+                        p.textContent = '';
+                        p.style.opacity = '0';
+                    });
                 }
 
                 // Event listeners for hover
