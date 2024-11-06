@@ -388,7 +388,7 @@
             margin-left: auto;
             margin-right: auto;
             position: relative; /* To position popups absolutely */
-            z-index: 2; /* Ensure it's above background sections */
+            z-index: 2; /* Ensure it's above lower sections */
         }
 
         .skill-wrapper {
@@ -430,7 +430,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 250px;
-            background: rgba(30, 144, 255, 0.9); /* Increased opacity for better visibility */
+            background: rgba(30, 144, 255, 0.95); /* Increased opacity for better visibility */
             color: #fff;
             padding: 1rem;
             border-radius: 8px;
@@ -438,7 +438,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            z-index: 10000; /* Very high z-index to appear above all */
+            z-index: 99999; /* Very high z-index to appear above all */
         }
 
         .popup.active {
@@ -469,7 +469,7 @@
             transform: translateX(-50%);
             border-width: 5px;
             border-style: solid;
-            border-color: transparent transparent rgba(30, 144, 255, 0.9) transparent; /* Match popup background */
+            border-color: transparent transparent rgba(30, 144, 255, 0.95) transparent; /* Match popup background */
         }
 
         /* Dark Theme Section */
@@ -626,7 +626,8 @@
         .profile-hover-button {
             position: absolute;
             bottom: -15px; /* Moved down by 15px */
-            left: calc(50% - 40px); /* Center horizontally relative to profile image */
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
             color: rgba(255, 255, 255, 0.8); /* White with transparency */
@@ -658,13 +659,13 @@
             transform: translateX(-50%);
             width: 280px;
             height: 200px;
-            background: rgba(30, 144, 255, 0.9); /* Increased opacity for better visibility */
+            background: rgba(30, 144, 255, 0.95); /* Increased opacity for better visibility */
             border: none; /* Removed the light blue border */
             border-radius: 8px;
             padding: 1rem; /* Reduced padding */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 10000; /* Very high z-index to appear above all sections */
+            z-index: 99999; /* Very high z-index to appear above all sections */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
