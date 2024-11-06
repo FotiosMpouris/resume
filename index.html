@@ -646,16 +646,16 @@
             justify-content: center;
         }
 
-        /* Optional: Add slight hover effect */
+        /* Fixed Transform on Hover to Prevent Shaking */
         .profile-hover-button:hover {
-            transform: translateY(-3px);
+            transform: translateX(-50%) translateY(-3px);
         }
 
         /* Profile Stats Overlay */
         .profile-stats-overlay {
             position: absolute; /* Positioned relative to .about-header */
             top: 50%; /* Align vertically centered */
-            left: calc(50% - 300px); /* Position to the left of infographic */
+            left: calc(50% + 50px); /* Moved right by 50px from previous position */
             transform: translateY(-50%);
             width: 280px;
             height: 200px;
@@ -1777,7 +1777,7 @@
                             <!-- Updated Hover Button -->
                             <button class="profile-hover-button">Stats</button>
                         </div>
-                        <!-- Profile Stats Overlay positioned to the left of infographic -->
+                        <!-- Profile Stats Overlay positioned to the right of infographic -->
                         <div class="profile-stats-overlay">
                             <div class="stats-cycler">
                                 <div class="stat-paragraph">
