@@ -67,7 +67,6 @@
             cursor: pointer;
             transition: color 0.3s ease, transform 0.3s ease;
             color: #ffffff; /* White */
-            fill: currentColor; /* Ensure SVG inherits the color */
         }
 
         .github-icon:hover {
@@ -326,11 +325,337 @@
             100% { transform: translateY(100%); }
         }
 
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(
+                135deg,
+                var(--primary-dark) 0%,
+                var(--primary-light) 100%
+            );
+            overflow: visible; /* Changed from hidden to visible */
+            color: var(--text-primary);
+            padding-top: 80px; /* Adjusted padding to prevent content from being hidden behind navbar */
+            z-index: 2; /* Ensure it's above background elements */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0,123,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0,123,255,0.1) 0%, transparent 50%);
+            animation: glowPulse 8s ease-in-out infinite;
+            z-index: 1; /* Below content */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Title Elements */
+        .title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 2rem;
+            opacity: 0;
+        }
+
+        /* Skills Grid */
+        .skills-container {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative; /* To position popups absolutely */
+            z-index: 2; /* Ensure it's above background sections */
+        }
+
+        .skill-wrapper {
+            position: relative; /* Position relative to contain the absolute popup */
+            /* Removed z-index to prevent stacking context interference */
+        }
+
+        .skill-icon {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: var(--transition-standard);
+            cursor: pointer;
+            position: relative;
+            z-index: 1; /* Lower than popup */
+        }
+
+        .skill-icon:hover {
+            transform: scale(1.1) !important;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .skill-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        /* Popup Styles */
+        .popup {
+            position: absolute; /* Positioned relative to .skill-wrapper */
+            top: 50%; /* Align vertically centered */
+            left: 100%; /* Position to the right of the skill icon */
+            transform: translateY(-50%);
+            width: 250px;
+            background: rgba(30, 144, 255, 0.95); /* Increased opacity for better visibility */
+            color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 99999; /* Very high z-index to appear above all sections */
+        }
+
+        .popup.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup p.info1,
+        .popup p.info2 {
+            margin-bottom: 0.5rem;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .popup p.stat {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Tooltip Arrow */
+        .popup::after {
+            content: '';
+            position: absolute;
+            top: 50%; /* Center vertically */
+            left: -10px; /* Positioned to the left */
+            transform: translateY(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent rgba(30, 144, 255, 0.95) transparent transparent; /* Match popup background and arrow direction */
+        }
+
+        /* Dark Theme Section */
+        .dark-theme-section {
+            /* Updated background to a deeper Royal Blue gradient */
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark-blue) 50%, var(--accent-blue) 100%);
+            position: relative;
+            overflow: hidden;
+            z-index: 1; /* Ensure it's below popups */
+        }
+
+        /* About Card Styling */
+        .about-card {
+            position: relative;
+            max-width: 900px !important;
+            margin: 0 auto !important;
+            padding: 2rem !important;
+            background: linear-gradient(
+                135deg,
+                rgba(65, 105, 225, 0.95) 0%, /* Royal Blue with opacity */
+                rgba(30, 144, 255, 0.85) 50%, /* Dodger Blue */
+                rgba(65, 105, 225, 0.95) 100% /* Royal Blue with opacity */
+            ) !important;
+            border: 2px solid transparent !important; /* Transparent gradient border */
+            box-shadow: 
+                0 0 40px rgba(0, 0, 0, 0.4),
+                inset 0 0 40px rgba(0, 123, 255, 0.08),
+                0 0 30px rgba(0, 123, 255, 0.5),
+                0 0 60px rgba(0, 123, 255, 0.5) !important; /* Using --accent-glow */
+            overflow: hidden;
+            backdrop-filter: blur(15px); /* Enhanced glass effect */
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 2; /* Above anime-background */
+        }
+
+        /* Glowing Starship Border Around About Card */
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite; /* Animated gradient */
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Gradient Animation Keyframes */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Tech Grid Background */
+        .tech-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 123, 255, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 123, 255, 0.15) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.2;
+            animation: gridMove 15s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Profile Section */
+        .about-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            flex: 2; /* Allows space for infographic */
+            text-align: center; /* Centers the "mouse hover" text */
+        }
+
+        /* Profile Image */
+        .about-profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(0, 123, 255, 0.3);
+            transform: rotate(-3deg);
+            transition: all 0.5s ease;
+            position: relative;
+            isolation: isolate;
+            margin-top: 0; /* Remove extra space above */
+            z-index: 1; /* Lower than popup */
+            cursor: pointer; /* Indicate interactivity */
+            left: -150px; /* Shift left by 150px */
+        }
+
+        /* Profile Image Hover Effects */
+        .about-profile-img:hover {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                0 0 0 2px rgba(0, 123, 255, 0.5),
+                0 0 30px rgba(0, 123, 255, 0.3);
+        }
+
+        .about-profile-img::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(
+                125deg,
+                transparent 0%,
+                rgba(0, 123, 255, 0.3) 40%,
+                rgba(0, 255, 255, 0.6) 60%,
+                transparent 100%
+            );
+            animation: holoGlow 8s linear infinite;
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        .about-profile-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                rgba(0, 123, 255, 0.1) 1px,
+                transparent 2px
+            );
+            animation: scanlines 8s linear infinite;
+            mix-blend-mode: overlay;
+        }
+
+        /* Hover Button on Profile Image */
+        .profile-hover-button {
+            position: absolute;
+            bottom: -15px; /* Moved down by 15px */
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.2); /* Very transparent white */
+            border: none;
+            color: rgba(255, 255, 255, 0.8); /* White with transparency */
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            opacity: 1;
+            transition: transform 0.3s ease;
+            z-index: 99999; /* Ensure visibility above everything */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            width: 80px; /* Adjusted width */
+            height: 40px; /* Adjusted height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Fixed Transform on Hover to Prevent Shaking */
+        .profile-hover-button:hover {
+            transform: translateX(-50%) translateY(-3px);
+        }
+
         /* Profile Stats Overlay */
         .profile-stats-overlay {
             position: absolute; /* Positioned relative to .about-header */
             top: 50%; /* Align vertically centered */
-            left: calc(50% - 150px); /* Moved left by 200px from previous position */
+            left: calc(50% - 150px); /* Moved left by 200px from previous position (calc(50% + 50px) - 200px = calc(50% - 150px)) */
             transform: translateY(-50%);
             width: 280px;
             height: 200px;
@@ -1217,7 +1542,7 @@
         <!-- GitHub Icon within Navbar -->
         <a href="https://github.com/FotiosMpouris" target="_blank" rel="noopener noreferrer" title="Visit my GitHub Homepage">
             <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12,0.297C5.373,0.297,0,5.67,0,12.297c0,5.302,3.438,9.8,8.205,11.387c0.6,0.113,0.82-0.258,0.82-0.577
+                <path fill="currentColor" d="M12,0.297C5.373,0.297,0,5.67,0,12.297c0,5.302,3.438,9.8,8.205,11.387c0.6,0.113,0.82-0.258,0.82-0.577
                 c0-0.285-0.01-1.04-0.015-2.04c-3.338,0.724-4.042-1.61-4.042-1.61c-0.546-1.385-1.333-1.754-1.333-1.754
                 c-1.089-0.744,0.084-0.729,0.084-0.729c1.205,0.084,1.84,1.236,1.84,1.236c1.07,1.835,2.807,1.305,3.495,0.997
                 c0.108-0.776,0.42-1.305,0.763-1.605c-2.665-0.303-5.466-1.333-5.466-5.931c0-1.31,0.47-2.381,1.236-3.221
