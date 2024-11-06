@@ -430,7 +430,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            z-index: 9999; /* Increased z-index to appear above all */
+            z-index: 10000; /* Increased z-index to appear above all */
         }
 
         .popup.active {
@@ -470,6 +470,7 @@
             background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark-blue) 50%, var(--accent-blue) 100%);
             position: relative;
             overflow: hidden;
+            z-index: 999; /* Ensure it's below popups */
         }
 
         /* About Card Styling */
@@ -655,7 +656,7 @@
             padding: 1rem; /* Reduced padding */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 9999; /* Ensure it appears above all sections */
+            z-index: 10000; /* Increased z-index to appear above all sections */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -961,6 +962,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
+            z-index: 2; /* Ensure cards are above lower sections */
         }
 
         .card:hover {
@@ -1053,6 +1055,7 @@
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(255, 60, 0, 0.2);
+            z-index: 2; /* Ensure it's above lower sections */
         }
 
         .social-link {
@@ -2183,6 +2186,22 @@
             }
         }
 
+        // Function to type text into a paragraph and return a Promise
+        function typeParagraph(para, fullText, speed = 0.02) { // Increased speed
+            return new Promise((resolve) => {
+                para.textContent = ''; // Clear existing text
+                gsap.to(para, {
+                    duration: fullText.length * speed,
+                    text: fullText,
+                    ease: "none",
+                    onStart: () => {
+                        para.style.opacity = '1';
+                    },
+                    onComplete: resolve
+                });
+            });
+        }
+
         // Initialize Everything
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize Matrix
@@ -2374,22 +2393,6 @@
             const aboutContent = document.querySelectorAll('.about-content p');
             const paragraphs = Array.from(aboutContent);
             let currentParagraphIndex = 0;
-
-            // Function to type text into a paragraph and return a Promise
-            function typeParagraph(para, fullText, speed = 0.02) { // Increased speed
-                return new Promise((resolve) => {
-                    para.textContent = ''; // Clear existing text
-                    gsap.to(para, {
-                        duration: fullText.length * speed,
-                        text: fullText,
-                        ease: "none",
-                        onStart: () => {
-                            para.style.opacity = '1';
-                        },
-                        onComplete: resolve
-                    });
-                });
-            }
 
             // Type the first paragraph and then show the button
             const firstParagraph = paragraphs[0];
