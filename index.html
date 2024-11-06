@@ -422,7 +422,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 250px;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(30, 144, 255, 0.7); /* Light blue semi-transparent */
             color: #fff;
             padding: 1rem;
             border-radius: 8px;
@@ -461,7 +461,7 @@
             transform: translateX(-50%);
             border-width: 5px;
             border-style: solid;
-            border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
+            border-color: transparent transparent rgba(30, 144, 255, 0.7) transparent; /* Match popup background */
         }
 
         /* Dark Theme Section */
@@ -649,13 +649,13 @@
             transform: translate(-300px, -50%);
             width: 280px; /* Slightly narrower for better fit */
             height: 200px; /* Fixed height for cycling */
-            background: rgba(48, 54, 85, 0.5); /* Royal Blue theme */
+            background: rgba(30, 144, 255, 0.7); /* Light blue semi-transparent */
             border: none; /* Removed the light blue border */
             border-radius: 8px;
             padding: 1rem; /* Reduced padding */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 4;
+            z-index: 9999; /* Ensure it appears above all sections */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -1940,7 +1940,7 @@
             const totalStats = statsData.length;
 
             // Function to type text into an element using GSAP TextPlugin
-            function typeText(element, text, speed = 0.05) { // Speed adjusted for fast typing
+            function typeText(element, text, speed = 0.02) { // Increased speed
                 return gsap.to(element, {
                     duration: text.length * speed,
                     text: text,
@@ -1961,9 +1961,9 @@
                 statsData.forEach((text, index) => {
                     const currentParagraph = paragraphs[index % paragraphs.length];
                     timeline.call(() => {
-                        typeText(currentParagraph.querySelector('p'), text, 0.05);
+                        typeText(currentParagraph.querySelector('p'), text, 0.02); // Increased speed
                     }, null, `+=0.5`); // Delay before starting each paragraph
-                    timeline.to({}, { duration: text.length * 0.05 + 1.5 }); // Wait for typing and display duration
+                    timeline.to({}, { duration: text.length * 0.02 + 1.5 }); // Wait for typing and display duration
                     timeline.call(() => {
                         currentParagraph.classList.remove('active');
                         currentParagraph.querySelector('p').textContent = '';
@@ -2085,7 +2085,7 @@
         let infographicItems = [];
 
         // Function to type text into an element using GSAP TextPlugin
-        function typeTextInfographic(element, text, speed = 0.05) { // Speed adjusted for fast typing
+        function typeTextInfographic(element, text, speed = 0.02) { // Increased speed
             return gsap.to(element, {
                 duration: text.length * speed,
                 text: text,
@@ -2106,10 +2106,10 @@
                 const currentItem = infographicItems[index % infographicItems.length];
                 timeline.call(() => {
                     currentItem.classList.add('active');
-                    typeTextInfographic(currentItem.querySelector('h4'), item.title, 0.05);
-                    typeTextInfographic(currentItem.querySelector('.typing-text'), item.text, 0.05);
+                    typeTextInfographic(currentItem.querySelector('h4'), item.title, 0.02); // Increased speed
+                    typeTextInfographic(currentItem.querySelector('.typing-text'), item.text, 0.02); // Increased speed
                 });
-                timeline.to({}, { duration: (item.title.length + item.text.length) * 0.05 + 1.5 }); // Wait for typing and display duration
+                timeline.to({}, { duration: (item.title.length + item.text.length) * 0.02 + 1.5 }); // Wait for typing and display duration
                 timeline.call(() => {
                     currentItem.classList.remove('active');
                     currentItem.querySelector('h4').textContent = '';
@@ -2257,7 +2257,7 @@
 
                     // Type out the first bullet point
                     gsap.to(para1, {
-                        duration: info1.length * 0.05,
+                        duration: info1.length * 0.02, // Increased speed
                         text: info1,
                         ease: "none",
                         onStart: () => {
@@ -2266,7 +2266,7 @@
                         onComplete: () => {
                             // Type out the second bullet point
                             gsap.to(para2, {
-                                duration: info2.length * 0.05,
+                                duration: info2.length * 0.02, // Increased speed
                                 text: info2,
                                 ease: "none",
                                 onStart: () => {
@@ -2275,7 +2275,7 @@
                                 onComplete: () => {
                                     // Type out the random stat
                                     gsap.to(stat, {
-                                        duration: randomStat.length * 0.05,
+                                        duration: randomStat.length * 0.02, // Increased speed
                                         text: randomStat,
                                         ease: "none",
                                         onStart: () => {
@@ -2376,7 +2376,7 @@
             let currentParagraphIndex = 0;
 
             // Function to type text into a paragraph and return a Promise
-            function typeParagraph(para, fullText, speed = 0.01) {
+            function typeParagraph(para, fullText, speed = 0.02) { // Increased speed
                 return new Promise((resolve) => {
                     para.textContent = ''; // Clear existing text
                     gsap.to(para, {
@@ -2394,7 +2394,7 @@
             // Type the first paragraph and then show the button
             const firstParagraph = paragraphs[0];
             const firstText = firstParagraph.getAttribute('data-text');
-            typeParagraph(firstParagraph, firstText, 0.01).then(() => {
+            typeParagraph(firstParagraph, firstText, 0.02).then(() => { // Increased speed
                 const moreBtn = document.getElementById('more-btn');
                 moreBtn.style.display = 'inline-block'; // Show the button
                 gsap.fromTo(moreBtn, { opacity: 0 }, { opacity: 1, duration: 0.5, delay: 0.2 });
@@ -2413,7 +2413,7 @@
                 for(let i = 1; i < paragraphs.length; i++) {
                     const para = paragraphs[i];
                     const fullText = para.getAttribute('data-text');
-                    await typeParagraph(para, fullText, 0.01);
+                    await typeParagraph(para, fullText, 0.02); // Increased speed
                 }
             });
         });
