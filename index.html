@@ -100,6 +100,7 @@
             display: none; /* Hidden initially */
             gap: 2rem;
             align-items: center;
+            z-index: 999; /* Ensure nav-links are below popups */
         }
 
         .nav-links.active {
@@ -132,6 +133,7 @@
                 padding-top: 2rem;
                 transform: translateX(100%);
                 transition: transform 0.3s ease-in-out;
+                z-index: 1000; /* Ensure it doesn't overlap popups */
             }
 
             .nav-links.active {
@@ -168,6 +170,7 @@
                 transform: translateX(0);
                 height: auto;
                 width: auto;
+                z-index: 999; /* Below popups */
             }
 
             .nav-links.active {
@@ -384,6 +387,7 @@
             margin-left: auto;
             margin-right: auto;
             position: relative; /* To position popups absolutely */
+            z-index: 2; /* Ensure it's above lower sections */
         }
 
         .skill-wrapper {
@@ -401,6 +405,8 @@
             transform: scale(0.5);
             transition: var(--transition-standard);
             cursor: pointer;
+            position: relative; /* Ensure positioning */
+            z-index: 1; /* Below popups */
         }
 
         .skill-icon:hover {
@@ -417,12 +423,12 @@
 
         /* Popup Styles */
         .popup {
-            position: absolute;
-            top: 50px; /* Adjusted to appear below the icon */
+            position: fixed; /* Changed from absolute to fixed */
+            top: 60%; /* Adjusted position */
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             width: 250px;
-            background: rgba(30, 144, 255, 0.7); /* Light blue semi-transparent */
+            background: rgba(30, 144, 255, 0.9); /* Increased opacity */
             color: #fff;
             padding: 1rem;
             border-radius: 8px;
@@ -430,7 +436,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            z-index: 10000; /* Increased z-index to appear above all */
+            z-index: 99999; /* Extremely high z-index */
         }
 
         .popup.active {
@@ -461,7 +467,7 @@
             transform: translateX(-50%);
             border-width: 5px;
             border-style: solid;
-            border-color: transparent transparent rgba(30, 144, 255, 0.7) transparent; /* Match popup background */
+            border-color: transparent transparent rgba(30, 144, 255, 0.9) transparent; /* Match popup background */
         }
 
         /* Dark Theme Section */
@@ -470,7 +476,7 @@
             background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark-blue) 50%, var(--accent-blue) 100%);
             position: relative;
             overflow: hidden;
-            z-index: 999; /* Ensure it's below popups */
+            z-index: 1; /* Ensure it's below popups */
         }
 
         /* About Card Styling */
@@ -644,19 +650,19 @@
 
         /* Profile Stats Overlay */
         .profile-stats-overlay {
-            position: absolute;
-            top: 50%; /* Center vertically relative to the profile image */
-            left: calc(100% + 35px); /* Moved 35px to the right */
-            transform: translate(-300px, -50%);
-            width: 280px; /* Slightly narrower for better fit */
-            height: 200px; /* Fixed height for cycling */
-            background: rgba(30, 144, 255, 0.7); /* Light blue semi-transparent */
+            position: fixed; /* Changed from absolute to fixed */
+            top: 60%; /* Adjusted position */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 200px;
+            background: rgba(30, 144, 255, 0.9); /* Increased opacity */
             border: none; /* Removed the light blue border */
             border-radius: 8px;
             padding: 1rem; /* Reduced padding */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 10000; /* Increased z-index to appear above all sections */
+            z-index: 99999; /* Extremely high z-index to appear above all */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -680,7 +686,7 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translate(-300px, -50%); /* Maintain shift on hover */
+            transform: translate(-50%, -50%); /* Maintain shift on hover */
             pointer-events: auto;
         }
 
