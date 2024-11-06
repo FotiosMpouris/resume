@@ -427,7 +427,7 @@
         .popup {
             position: absolute; /* Positioned relative to .skill-wrapper */
             top: 50%; /* Align vertically centered */
-            left: 100%; /* Position to the right of the profile image */
+            left: 100%; /* Position to the right of the skill icon */
             transform: translateY(-50%);
             width: 250px;
             background: rgba(30, 144, 255, 0.95); /* Increased opacity for better visibility */
@@ -653,9 +653,9 @@
 
         /* Profile Stats Overlay */
         .profile-stats-overlay {
-            position: absolute; /* Positioned relative to .profile-container */
+            position: absolute; /* Positioned relative to .about-header */
             top: 50%; /* Align vertically centered */
-            left: 100%; /* Position to the right of the profile image */
+            left: calc(50% - 300px); /* Position to the left of infographic */
             transform: translateY(-50%);
             width: 280px;
             height: 200px;
@@ -1776,21 +1776,21 @@
 
                             <!-- Updated Hover Button -->
                             <button class="profile-hover-button">Stats</button>
-
-                            <div class="profile-stats-overlay">
-                                <div class="stats-cycler">
-                                    <div class="stat-paragraph">
-                                        <p></p>
-                                    </div>
-                                    <div class="stat-paragraph">
-                                        <p></p>
-                                    </div>
-                                    <div class="stat-paragraph">
-                                        <p></p>
-                                    </div>
-                                    <div class="stat-paragraph">
-                                        <p></p>
-                                    </div>
+                        </div>
+                        <!-- Profile Stats Overlay positioned to the left of infographic -->
+                        <div class="profile-stats-overlay">
+                            <div class="stats-cycler">
+                                <div class="stat-paragraph">
+                                    <p></p>
+                                </div>
+                                <div class="stat-paragraph">
+                                    <p></p>
+                                </div>
+                                <div class="stat-paragraph">
+                                    <p></p>
+                                </div>
+                                <div class="stat-paragraph">
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
