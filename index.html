@@ -100,7 +100,6 @@
             display: none; /* Hidden initially */
             gap: 2rem;
             align-items: center;
-            z-index: 999; /* Ensure nav-links are below popups */
         }
 
         .nav-links.active {
@@ -133,7 +132,6 @@
                 padding-top: 2rem;
                 transform: translateX(100%);
                 transition: transform 0.3s ease-in-out;
-                z-index: 1000; /* Ensure it doesn't overlap popups */
             }
 
             .nav-links.active {
@@ -170,7 +168,6 @@
                 transform: translateX(0);
                 height: auto;
                 width: auto;
-                z-index: 999; /* Below popups */
             }
 
             .nav-links.active {
@@ -260,6 +257,7 @@
                 matrixRain 20s linear infinite,
                 fireFlow 8s linear infinite;
             mix-blend-mode: screen;
+            z-index: 1; /* Ensure it's below popups */
         }
 
         .matrix-column::before {
@@ -310,6 +308,7 @@
             mix-blend-mode: screen;
             text-shadow: 0 0 8px var(--matrix-glow);
             opacity: 0.7;
+            z-index: 1; /* Below popups */
         }
 
         .anime-column.glow {
@@ -342,6 +341,7 @@
             overflow: hidden;
             color: var(--text-primary);
             padding-top: 80px; /* Adjusted padding to prevent content from being hidden behind navbar */
+            z-index: 2; /* Ensure it's above background elements */
         }
 
         .hero::before {
@@ -352,6 +352,7 @@
                 radial-gradient(circle at 20% 50%, rgba(0,123,255,0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 50%, rgba(0,123,255,0.1) 0%, transparent 50%);
             animation: glowPulse 8s ease-in-out infinite;
+            z-index: 1; /* Below content */
         }
 
         .container {
@@ -387,12 +388,12 @@
             margin-left: auto;
             margin-right: auto;
             position: relative; /* To position popups absolutely */
-            z-index: 2; /* Ensure it's above lower sections */
+            z-index: 2; /* Ensure it's above background sections */
         }
 
         .skill-wrapper {
-            position: relative; /* Ensure it doesn't create a new stacking context */
-            z-index: 1; /* Below popups */
+            position: relative; /* Position relative to contain the absolute popup */
+            z-index: 2; /* Ensure it's above lower sections */
         }
 
         .skill-icon {
@@ -406,8 +407,8 @@
             transform: scale(0.5);
             transition: var(--transition-standard);
             cursor: pointer;
-            position: relative; /* Ensure positioning */
-            z-index: 1; /* Below popups */
+            position: relative;
+            z-index: 2; /* Above lower sections */
         }
 
         .skill-icon:hover {
@@ -424,12 +425,12 @@
 
         /* Popup Styles */
         .popup {
-            position: absolute; /* Changed from fixed to absolute */
-            top: 60px; /* Positioned below the skill icon */
+            position: absolute; /* Positioned relative to .skill-wrapper */
+            top: 50px; /* Adjusted to appear below the icon */
             left: 50%;
             transform: translateX(-50%);
             width: 250px;
-            background: rgba(30, 144, 255, 0.9); /* Increased opacity */
+            background: rgba(30, 144, 255, 0.9); /* Increased opacity for better visibility */
             color: #fff;
             padding: 1rem;
             border-radius: 8px;
@@ -437,7 +438,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            z-index: 9999; /* High z-index to appear above other elements */
+            z-index: 10000; /* Very high z-index to appear above all */
         }
 
         .popup.active {
@@ -625,8 +626,7 @@
         .profile-hover-button {
             position: absolute;
             bottom: -15px; /* Moved down by 15px */
-            left: 50%; /* Center horizontally relative to profile image */
-            transform: translateX(-50%);
+            left: calc(50% - 40px); /* Center horizontally relative to profile image */
             background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
             color: rgba(255, 255, 255, 0.8); /* White with transparency */
@@ -652,19 +652,19 @@
 
         /* Profile Stats Overlay */
         .profile-stats-overlay {
-            position: fixed; /* Changed from absolute to fixed */
-            top: 60%; /* Adjusted position */
+            position: absolute; /* Positioned relative to .profile-container */
+            top: 100%; /* Position below the profile image */
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             width: 280px;
             height: 200px;
-            background: rgba(30, 144, 255, 0.9); /* Increased opacity */
+            background: rgba(30, 144, 255, 0.9); /* Increased opacity for better visibility */
             border: none; /* Removed the light blue border */
             border-radius: 8px;
             padding: 1rem; /* Reduced padding */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 99999; /* Extremely high z-index to appear above all */
+            z-index: 10000; /* Very high z-index to appear above all sections */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -688,7 +688,7 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translate(-50%, -50%); /* Maintain shift on hover */
+            transform: translateX(-50%);
             pointer-events: auto;
         }
 
@@ -1532,7 +1532,6 @@
 
         /* Infographics Typing and Cycling */
         /* Removed redundant keyframes */
-
     </style>
 </head>
 
@@ -1757,700 +1756,701 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Dark Theme Section -->
-        <div class="dark-theme-section" id="about">
-            <div class="particles-container" id="particles-container-bottom"></div>
-            
-            <div class="container">
-                <!-- About Section -->
-                <section class="section">
-                    <div class="card about-card">
-                        <div class="anime-background"></div> <!-- Anime Background -->
-                        <div class="tech-grid"></div>
-                        <div class="about-header">
-                            <div class="profile-container">
-                                <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
+    <!-- Dark Theme Section -->
+    <div class="dark-theme-section" id="about">
+        <div class="particles-container" id="particles-container-bottom"></div>
+        
+        <div class="container">
+            <!-- About Section -->
+            <section class="section">
+                <div class="card about-card">
+                    <div class="anime-background"></div> <!-- Anime Background -->
+                    <div class="tech-grid"></div>
+                    <div class="about-header">
+                        <div class="profile-container">
+                            <img src="assets/fotiosProfile.png" alt="Fotios Mpouris" class="about-profile-img">
 
-                                <!-- Updated Hover Button -->
-                                <button class="profile-hover-button">Stats</button>
+                            <!-- Updated Hover Button -->
+                            <button class="profile-hover-button">Stats</button>
 
-                                <div class="profile-stats-overlay">
-                                    <div class="stats-cycler">
-                                        <div class="stat-paragraph">
-                                            <p></p>
-                                        </div>
-                                        <div class="stat-paragraph">
-                                            <p></p>
-                                        </div>
-                                        <div class="stat-paragraph">
-                                            <p></p>
-                                        </div>
-                                        <div class="stat-paragraph">
-                                            <p></p>
-                                        </div>
+                            <div class="profile-stats-overlay">
+                                <div class="stats-cycler">
+                                    <div class="stat-paragraph">
+                                        <p></p>
+                                    </div>
+                                    <div class="stat-paragraph">
+                                        <p></p>
+                                    </div>
+                                    <div class="stat-paragraph">
+                                        <p></p>
+                                    </div>
+                                    <div class="stat-paragraph">
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Infographics Container -->
-                            <div class="infographic">
-                                <!-- Infographic items will be dynamically generated by JavaScript -->
-                            </div>
                         </div>
-                        <div class="about-content">
-                            <p data-text="I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.">
-                            </p>
-                            <button class="want-know-more-btn" id="more-btn">Want to know more?</button>
-                            <p data-text="More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement. By leveraging AI-assisted applications, I'm focused on creating innovative, agent-centric systems that reflect the future of technology.">
-                            </p>
-                            <p data-text="Throughout my career, I've used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.">
-                            </p>
-                            <p data-text="I've also managed digital platforms and multimedia content creation for various organizations, overseeing Google Workspace operations and creating social media assets to improve outreach. These hands-on experiences have given me a well-rounded understanding of how technology and creativity intersect to streamline workflows, enhance communication, and deliver captivating user experiences.">
-                            </p>
-                            <p data-text="Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.">
-                            </p>
+                        <!-- Infographics Container -->
+                        <div class="infographic">
+                            <!-- Infographic items will be dynamically generated by JavaScript -->
                         </div>
                     </div>
-                </section>
+                    <div class="about-content">
+                        <p data-text="I'm a tech-savvy multimedia specialist with a unique blend of skills in digital design, software development, and AI-assisted platforms. Proficient in Python, C#, Unity, and Adobe Creative Suite, I have a strong background in creating immersive digital experiences, animation, and video production. My expertise spans developing interactive applications, managing creative projects, and utilizing AI and generative art platforms to enhance user experiences and push creative boundaries.">
+                        </p>
+                        <button class="want-know-more-btn" id="more-btn">Want to know more?</button>
+                        <p data-text="More recently, I've been exploring the intersection of AI and application development, working with tools like Streamlit Cloud, Google Cloud Console, Python, GitHub, and large language models (LLMs). These technologies allow me to design intelligent, automated solutions that streamline processes and enhance user engagement. By leveraging AI-assisted applications, I'm focused on creating innovative, agent-centric systems that reflect the future of technology.">
+                        </p>
+                        <p data-text="Throughout my career, I've used cutting-edge tools to develop interactive features for mobile gaming and geo-positioning apps, collaborating with technical teams to prototype and bring functional products to life. My proficiency in Adobe tools like Photoshop, After Effects, Premiere Pro, and Audition has enabled me to produce high-quality multimedia content, from video editing to motion graphics and animation.">
+                        </p>
+                        <p data-text="I've also managed digital platforms and multimedia content creation for various organizations, overseeing Google Workspace operations and creating social media assets to improve outreach. These hands-on experiences have given me a well-rounded understanding of how technology and creativity intersect to streamline workflows, enhance communication, and deliver captivating user experiences.">
+                        </p>
+                        <p data-text="Always eager to explore new frontiers in creative development, I'm committed to using AI and emerging technologies to innovate and produce impactful digital media. Whether it's developing dynamic applications or crafting custom solutions, I'm dedicated to merging technology and design in today's rapidly evolving digital landscape.">
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-                <!-- Projects Section -->
-                <section class="section" id="projects">
-                    <div class="card">
-                        <h3>Featured Projects</h3>
-                        <div class="projects">
-                            <!-- Wrapped Project Cards with Links -->
-                            <a href="https://github.com/FotiosMpouris/ImpossibleShark2" class="project-card" target="_blank" rel="noopener noreferrer">
-                                <h4>Impossible Shark</h4>
-                                <p>Game Development</p>
-                            </a>
-                            <a href="https://github.com/FotiosMpouris/Hardie-Siding-Agent-Testing-Working_Copy/blob/main/README.md" class="project-card" target="_blank" rel="noopener noreferrer">
-                                <h4>Siding Project Assistant</h4>
-                                <p>AI Development</p>
-                            </a>
-                            <a href="https://github.com/FotiosMpouris/Oriana/blob/main/README.md" class="project-card" target="_blank" rel="noopener noreferrer">
-                                <h4>Oriana</h4>
-                                <p>AI Assistant</p>
-                            </a>
-                            <a href="https://github.com/FotiosMpouris/ReggieResume2/blob/main/README.md" class="project-card" target="_blank" rel="noopener noreferrer">
-                                <h4>AI Resume Tailor</h4>
-                                <p>AI Tool</p>
-                            </a>
-                            <!-- Added New Project Cards -->
-                            <a href="https://github.com/FotiosMpouris/TheAsteriProject001" class="project-card" target="_blank" rel="noopener noreferrer">
-                                <h4>The Asteri Project 001</h4>
-                                <p>AI Development</p>
-                            </a>
-                            <a href="https://github.com/FotiosMpouris/HelgaUnity" class="project-card" target="_blank" rel="noopener noreferrer">
-                                <h4>Helga Unity</h4>
-                                <p>Game Development</p>
-                            </a>
-                            <!-- Removed Placeholder Projects -->
-                        </div>
+            <!-- Projects Section -->
+            <section class="section" id="projects">
+                <div class="card">
+                    <h3>Featured Projects</h3>
+                    <div class="projects">
+                        <!-- Wrapped Project Cards with Links -->
+                        <a href="https://github.com/FotiosMpouris/ImpossibleShark2" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h4>Impossible Shark</h4>
+                            <p>Game Development</p>
+                        </a>
+                        <a href="https://github.com/FotiosMpouris/Hardie-Siding-Agent-Testing-Working_Copy/blob/main/README.md" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h4>Siding Project Assistant</h4>
+                            <p>AI Development</p>
+                        </a>
+                        <a href="https://github.com/FotiosMpouris/Oriana/blob/main/README.md" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h4>Oriana</h4>
+                            <p>AI Assistant</p>
+                        </a>
+                        <a href="https://github.com/FotiosMpouris/ReggieResume2/blob/main/README.md" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h4>AI Resume Tailor</h4>
+                            <p>AI Tool</p>
+                        </a>
+                        <!-- Added New Project Cards -->
+                        <a href="https://github.com/FotiosMpouris/TheAsteriProject001" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h4>The Asteri Project 001</h4>
+                            <p>AI Development</p>
+                        </a>
+                        <a href="https://github.com/FotiosMpouris/HelgaUnity" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h4>Helga Unity</h4>
+                            <p>Game Development</p>
+                        </a>
+                        <!-- Removed Placeholder Projects -->
                     </div>
-                </section>
+                </div>
+            </section>
 
-                <!-- Connect Section -->
-                <section class="section" id="connect">
-                    <div class="card">
-                        <h3>Connect</h3>
-                        <div class="social-links">
-                            <!-- Updated Social Links with Correct Hrefs -->
-                            <a href="mailto:fotiosmpouris@gmail.com" class="social-link">Email</a>
-                            <a href="https://www.linkedin.com/in/fotios-mpouris-57728b240/" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                            <a href="https://www.behance.net/fotiosmpouris" class="social-link" target="_blank" rel="noopener noreferrer">Behance</a>
-                        </div>
+            <!-- Connect Section -->
+            <section class="section" id="connect">
+                <div class="card">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <!-- Updated Social Links with Correct Hrefs -->
+                        <a href="mailto:fotiosmpouris@gmail.com" class="social-link">Email</a>
+                        <a href="https://www.linkedin.com/in/fotios-mpouris-57728b240/" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="https://www.behance.net/fotiosmpouris" class="social-link" target="_blank" rel="noopener noreferrer">Behance</a>
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
         </div>
+    </div>
 
-        <script>
-            // Initialize GSAP ScrollTrigger and TextPlugin
-            gsap.registerPlugin(ScrollTrigger, TextPlugin);
+    <script>
+        // Initialize GSAP ScrollTrigger and TextPlugin
+        gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-            // Matrix Effect Functions
-            function createMatrixBackground() {
-                const containers = document.querySelectorAll('.matrix-background');
-                containers.forEach(container => {
-                    const containerWidth = container.offsetWidth;
-                    const columnWidth = 30; // Increased width for fewer columns
-                    const numberOfColumns = Math.ceil(containerWidth / columnWidth);
-
-                    const chars = '守らリケーシタアプョン01{}#$@987';
-
-                    container.innerHTML = ''; // Clear existing columns
-
-                    for(let i = 0; i < numberOfColumns; i++) {
-                        const column = document.createElement('div');
-                        column.className = 'matrix-column';
-                        
-                        // Create random string of characters
-                        let columnChars = '';
-                        for(let j = 0; j < 100; j++) { // Increased from 50 to 100
-                            columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
-                        }
-
-                        column.textContent = columnChars;
-                        column.style.left = `${i * columnWidth}px`;
-                        column.style.animationDelay = `${-Math.random() * 20}s`;
-
-                        container.appendChild(column);
-                    }
-                });
-            }
-
-            // Anime Effect Functions
-            function createAnimeBackground() {
-                const container = document.querySelector('.anime-background');
+        // Matrix Effect Functions
+        function createMatrixBackground() {
+            const containers = document.querySelectorAll('.matrix-background');
+            containers.forEach(container => {
                 const containerWidth = container.offsetWidth;
-                const columnWidth = 40;
+                const columnWidth = 30; // Increased width for fewer columns
                 const numberOfColumns = Math.ceil(containerWidth / columnWidth);
-                
-                // Anime characters pool
+
                 const chars = '守らリケーシタアプョン01{}#$@987';
-                
-                // Create columns
+
+                container.innerHTML = ''; // Clear existing columns
+
                 for(let i = 0; i < numberOfColumns; i++) {
                     const column = document.createElement('div');
-                    column.className = 'anime-column';
+                    column.className = 'matrix-column';
                     
+                    // Create random string of characters
                     let columnChars = '';
-                    for(let j = 0; j < 100; j++) {
+                    for(let j = 0; j < 100; j++) { // Increased from 50 to 100
                         columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
                     }
-                    
+
                     column.textContent = columnChars;
                     column.style.left = `${i * columnWidth}px`;
                     column.style.animationDelay = `${-Math.random() * 20}s`;
-                    
-                    // Randomly add glow effect
-                    if (Math.random() < 0.3) {
-                        column.classList.add('glow');
-                    }
-                    
+
                     container.appendChild(column);
                 }
+            });
+        }
+
+        // Anime Effect Functions
+        function createAnimeBackground() {
+            const container = document.querySelector('.anime-background');
+            const containerWidth = container.offsetWidth;
+            const columnWidth = 40;
+            const numberOfColumns = Math.ceil(containerWidth / columnWidth);
+            
+            // Anime characters pool
+            const chars = '守らリケーシタアプョン01{}#$@987';
+            
+            // Create columns
+            for(let i = 0; i < numberOfColumns; i++) {
+                const column = document.createElement('div');
+                column.className = 'anime-column';
+                
+                let columnChars = '';
+                for(let j = 0; j < 100; j++) {
+                    columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
+                }
+                
+                column.textContent = columnChars;
+                column.style.left = `${i * columnWidth}px`;
+                column.style.animationDelay = `${-Math.random() * 20}s`;
+                
+                // Randomly add glow effect
+                if (Math.random() < 0.3) {
+                    column.classList.add('glow');
+                }
+                
+                container.appendChild(column);
             }
+        }
 
-            // Profile Stats Functions
-            let isCyclingStats = false; // Flag to prevent multiple cycles
+        // Profile Stats Functions
+        let isCyclingStats = false; // Flag to prevent multiple cycles
 
-            function initializeProfileStats() {
-                const statsData = [
-                    "Proficient in creating visually stunning graphics with a 95% client satisfaction rate, ensuring projects are delivered on time and exceed expectations.",
-                    "Expert in development operations, improving workflow efficiency by 80% through innovative solutions and automation.",
-                    "Specialized in game development with a 90% success rate in asset creation, enhancing user engagement and experience.",
-                    "Skilled in asset creation and multimedia production, contributing to a 100% increase in project scalability and flexibility."
-                ];
-                
-                const cycler = document.querySelector('.profile-stats-overlay .stats-cycler');
-                const paragraphs = cycler.querySelectorAll('.stat-paragraph');
-                let currentStatIndex = 0;
-                const totalStats = statsData.length;
-
-                // Function to type text into an element using GSAP TextPlugin
-                function typeText(element, text, speed = 0.02) { // Increased speed
-                    return gsap.to(element, {
-                        duration: text.length * speed,
-                        text: text,
-                        ease: "none",
-                        onStart: () => {
-                            element.parentElement.classList.add('active');
-                        }
-                    });
-                }
-
-                // Function to cycle through stats sequentially
-                function cycleStats() {
-                    if (isCyclingStats) return; // Prevent multiple cycles
-                    isCyclingStats = true;
-
-                    const timeline = gsap.timeline({ repeat: -1 });
-
-                    statsData.forEach((text, index) => {
-                        const currentParagraph = paragraphs[index % paragraphs.length];
-                        timeline.call(() => {
-                            typeText(currentParagraph.querySelector('p'), text, 0.02); // Increased speed
-                        }, null, `+=0.5`); // Delay before starting each paragraph
-                        timeline.to({}, { duration: text.length * 0.02 + 1.5 }); // Wait for typing and display duration
-                        timeline.call(() => {
-                            currentParagraph.classList.remove('active');
-                            currentParagraph.querySelector('p').textContent = '';
-                        }, null);
-                    });
-
-                    // Repeat the cycle infinitely
-                    timeline.repeat(-1);
-                }
-
-                // Attach event listeners to start cycling on hover for desktop
-                const profileImg = document.querySelector('.about-profile-img');
-                const statsButton = document.querySelector('.profile-hover-button');
-                const statsOverlay = document.querySelector('.profile-stats-overlay');
-
-                function showStats() {
-                    gsap.to(statsOverlay, {
-                        opacity: 1,
-                        duration: 0.3,
-                        ease: "power1.out"
-                    });
-                    if (!isCyclingStats) {
-                        cycleStats(); // Start cycling on first hover
-                    }
-                }
-
-                function hideStats() {
-                    gsap.to(statsOverlay, {
-                        opacity: 0,
-                        duration: 0.3,
-                        ease: "power1.out"
-                    });
-                }
-
-                profileImg.addEventListener('mouseenter', showStats);
-                profileImg.addEventListener('mouseleave', hideStats);
-
-                statsButton.addEventListener('mouseenter', showStats);
-                statsButton.addEventListener('mouseleave', hideStats);
-
-                // Automatically start cycling on mobile
-                function startCyclingIfMobile() {
-                    if (window.innerWidth <= 768 && !isCyclingStats) {
-                        gsap.to(statsOverlay, {
-                            opacity: 1,
-                            duration: 0.3,
-                            ease: "power1.out"
-                        });
-                        cycleStats();
-                    }
-                }
-
-                // Initial check
-                startCyclingIfMobile();
-
-                // Listen for resize events to handle orientation changes
-                window.addEventListener('resize', startCyclingIfMobile);
-            }
-
-            // Particle Effects
-            function createParticle(container) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                
-                container.appendChild(particle);
-                
-                gsap.to(particle, {
-                    y: -500,
-                    x: Math.random() * 100 - 50,
-                    opacity: 0,
-                    duration: Math.random() * 3 + 2,
-                    ease: "power1.out",
-                    onComplete: () => particle.remove()
-                });
-            }
-
-            function createEnergyWave(x, y, container) {
-                const wave = document.createElement('div');
-                wave.className = 'energy-wave';
-                wave.style.left = `${x - 100}px`;
-                wave.style.top = `${y - 100}px`;
-                container.appendChild(wave);
-                
-                setTimeout(() => wave.remove(), 6000);
-            }
-
-            // Typing and Cycling for Infographics
-            const infographicData = [
-                { title: "Unity 2D & 3D Development", text: "Crafting immersive 2D and 3D game environments with Unity to deliver engaging user experiences." },
-                { title: "C# Programming", text: "Developing robust and scalable applications using C# to meet diverse project requirements." },
-                { title: "Blender 3D Modeling", text: "Creating detailed 3D models and animations with Blender to bring creative visions to life." },
-                { title: "Web Design with HTML", text: "Designing responsive and visually appealing websites using HTML to enhance online presence." },
-                { title: "Alpha Test Development in Unity", text: "Leading alpha testing phases in Unity to ensure high-quality and bug-free game releases." },
-                { title: "Content Creation", text: "Generating compelling digital content that resonates with audiences and drives engagement." },
-                { title: "Autodesk 3DsMax Certification", text: "Certified Autodesk 3DsMax user proficient in advanced 3D modeling and rendering techniques." },
-                { title: "Adobe Creative Suite Expertise", text: "Mastering Photoshop, After Effects, InDesign, Premiere Pro, and Audition for versatile multimedia projects." },
-                { title: "Digital Design & Branding", text: "Designing logos, page layouts, and custom templates to establish strong brand identities." },
-                { title: "Python & C# Development", text: "Leveraging Python and C# languages to build versatile software solutions and automate workflows." },
-                { title: "JavaScript Programming", text: "Implementing dynamic and interactive web functionalities using JavaScript." },
-                { title: "Google Cloud Console Management", text: "Managing and deploying scalable applications on Google Cloud Console for optimal performance." },
-                { title: "Streamlit Cloud Development", text: "Building interactive data applications with Streamlit Cloud to visualize and share insights effectively." },
-                { title: "Video Editing with Premiere Pro", text: "Editing high-quality videos using Premiere Pro to produce professional-grade multimedia content." },
-                { title: "AI-Assisted Development", text: "Integrating AI technologies to enhance development processes and create intelligent applications." },
-                { title: "Generative Art with AI Platforms", text: "Utilizing AI-assisted generative art platforms to produce unique and creative visual content." },
-                { title: "2D & 3D Animation", text: "Animating characters and scenes in both 2D and 3D to tell captivating stories." },
-                { title: "Character Rigging & Animation", text: "Rigging and animating characters to ensure fluid and lifelike movements in digital media." },
-                { title: "Project Management", text: "Coordinating cross-functional teams to deliver projects on time and exceed client expectations." },
-                { title: "Data Analysis", text: "Analyzing complex datasets to derive actionable insights and inform strategic decisions." }
+        function initializeProfileStats() {
+            const statsData = [
+                "Proficient in creating visually stunning graphics with a 95% client satisfaction rate, ensuring projects are delivered on time and exceed expectations.",
+                "Expert in development operations, improving workflow efficiency by 80% through innovative solutions and automation.",
+                "Specialized in game development with a 90% success rate in asset creation, enhancing user engagement and experience.",
+                "Skilled in asset creation and multimedia production, contributing to a 100% increase in project scalability and flexibility."
             ];
-
-            let currentInfographic = 0;
-            let infographicItems = [];
+            
+            const cycler = document.querySelector('.profile-stats-overlay .stats-cycler');
+            const paragraphs = cycler.querySelectorAll('.stat-paragraph');
+            let currentStatIndex = 0;
+            const totalStats = statsData.length;
 
             // Function to type text into an element using GSAP TextPlugin
-            function typeTextInfographic(element, text, speed = 0.02) { // Increased speed
+            function typeText(element, text, speed = 0.02) { // Increased speed
                 return gsap.to(element, {
                     duration: text.length * speed,
                     text: text,
                     ease: "none",
                     onStart: () => {
-                        element.style.opacity = '1';
+                        element.parentElement.classList.add('active');
                     }
                 });
             }
 
-            // Function to cycle through infographics
-            function cycleInfographics() {
-                if (infographicItems.length === 0) return;
+            // Function to cycle through stats sequentially
+            function cycleStats() {
+                if (isCyclingStats) return; // Prevent multiple cycles
+                isCyclingStats = true;
 
-                const timeline = gsap.timeline({ repeat: -1, repeatDelay: 1.5 });
+                const timeline = gsap.timeline({ repeat: -1 });
 
-                infographicData.forEach((item, index) => {
-                    const currentItem = infographicItems[index % infographicItems.length];
+                statsData.forEach((text, index) => {
+                    const currentParagraph = paragraphs[index % paragraphs.length];
                     timeline.call(() => {
-                        currentItem.classList.add('active');
-                        typeTextInfographic(currentItem.querySelector('h4'), item.title, 0.02); // Increased speed
-                        typeTextInfographic(currentItem.querySelector('.typing-text'), item.text, 0.02); // Increased speed
-                    });
-                    timeline.to({}, { duration: (item.title.length + item.text.length) * 0.02 + 1.5 }); // Wait for typing and display duration
+                        typeText(currentParagraph.querySelector('p'), text, 0.02); // Increased speed
+                    }, null, `+=0.5`); // Delay before starting each paragraph
+                    timeline.to({}, { duration: text.length * 0.02 + 1.5 }); // Wait for typing and display duration
                     timeline.call(() => {
-                        currentItem.classList.remove('active');
-                        currentItem.querySelector('h4').textContent = '';
-                        currentItem.querySelector('.typing-text').textContent = '';
-                    });
+                        currentParagraph.classList.remove('active');
+                        currentParagraph.querySelector('p').textContent = '';
+                    }, null);
                 });
+
+                // Repeat the cycle infinitely
+                timeline.repeat(-1);
             }
 
-            // Function to dynamically create infographic items
-            function createInfographicItems() {
-                const infographicContainer = document.querySelector('.infographic');
-                infographicContainer.innerHTML = ''; // Clear existing items
-                infographicItems = []; // Reset the array
+            // Attach event listeners to start cycling on hover for desktop
+            const profileImg = document.querySelector('.about-profile-img');
+            const statsButton = document.querySelector('.profile-hover-button');
+            const statsOverlay = document.querySelector('.profile-stats-overlay');
 
-                infographicData.forEach((item, index) => {
-                    const infographicItem = document.createElement('div');
-                    infographicItem.className = 'infographic-item';
-                    infographicItem.innerHTML = `
-                        <h4></h4>
-                        <p class="typing-text"></p>
-                    `;
-                    infographicContainer.appendChild(infographicItem);
-                    infographicItems.push(infographicItem);
+            function showStats() {
+                gsap.to(statsOverlay, {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power1.out"
                 });
-            }
-
-            // Initialize Particles
-            function startParticles() {
-                const particlesContainers = document.querySelectorAll('.particles-container');
-                particlesContainers.forEach(container => {
-                    setInterval(() => createParticle(container), 100); // Increased frequency
-                });
-            }
-
-            // Function to generate random star shapes
-            function generateRandomStar() {
-                const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
-                return stars[Math.floor(Math.random() * stars.length)];
-            }
-
-            // Function to display multiple random stars with random color
-            function displayRandomJapaneseChars(count = 4) { // Increased count from 2 to 4
-                const darkSection = document.querySelector('.dark-theme-section');
-                const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
-
-                for(let i = 0; i < count; i++) {
-                    const star = stars[Math.floor(Math.random() * stars.length)];
-                    const randomStarElem = document.createElement('span');
-                    randomStarElem.className = 'random-char';
-
-                    // Randomly assign one of the three colors
-                    const colors = ['white', 'red', 'blue'];
-                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                    randomStarElem.classList.add(randomColor);
-
-                    randomStarElem.textContent = star;
-
-                    // Random position within the dark-theme-section
-                    const x = Math.random() * 100;
-                    const y = Math.random() * 100;
-
-                    randomStarElem.style.left = `${x}%`;
-                    randomStarElem.style.top = `${y}%`;
-
-                    darkSection.appendChild(randomStarElem);
-
-                    // Remove the star after animation completes
-                    randomStarElem.addEventListener('animationend', () => {
-                        randomStarElem.remove();
-                    });
+                if (!isCyclingStats) {
+                    cycleStats(); // Start cycling on first hover
                 }
             }
 
-            // Function to type text into a paragraph and return a Promise
-            function typeParagraph(para, fullText, speed = 0.02) { // Increased speed
-                return new Promise((resolve) => {
-                    para.textContent = ''; // Clear existing text
-                    gsap.to(para, {
-                        duration: fullText.length * speed,
-                        text: fullText,
-                        ease: "none",
-                        onStart: () => {
-                            para.style.opacity = '1';
-                        },
-                        onComplete: resolve
-                    });
+            function hideStats() {
+                gsap.to(statsOverlay, {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power1.out"
                 });
             }
 
-            // Initialize Everything
-            document.addEventListener('DOMContentLoaded', () => {
-                // Initialize Matrix
-                createMatrixBackground();
-                setInterval(() => {
-                    const columns = document.querySelectorAll('.matrix-column');
-                    columns.forEach(column => {
-                        if (Math.random() < 0.01) { // 1% chance per column to glow a character
-                            const randomCharIndex = Math.floor(Math.random() * 100);
-                            const char = column.childNodes[randomCharIndex];
-                            if (char) {
-                                char.classList.add('glow');
-                                setTimeout(() => char.classList.remove('glow'), 1000);
-                            }
-                        }
-                    });
-                }, 100);
+            profileImg.addEventListener('mouseenter', showStats);
+            profileImg.addEventListener('mouseleave', hideStats);
 
-                // Initialize Anime Background
-                createAnimeBackground();
+            statsButton.addEventListener('mouseenter', showStats);
+            statsButton.addEventListener('mouseleave', hideStats);
 
-                // Initialize Profile Stats
-                initializeProfileStats();
-
-                // GSAP Animations for Titles
-                gsap.to('.title', {
-                    opacity: 1,
-                    duration: 1,
-                    delay: 0.5
-                });
-
-                gsap.to('.subtitle', {
-                    opacity: 1,
-                    duration: 1,
-                    delay: 0.8
-                });
-
-                // Skill Icons Animation and Popup Functionality
-                const skillWrappers = document.querySelectorAll('.skill-wrapper');
-                skillWrappers.forEach((wrapper, index) => {
-                    const icon = wrapper.querySelector('.skill-icon');
-                    const popup = wrapper.querySelector('.popup');
-                    const info1 = icon.getAttribute('data-info1');
-                    const info2 = icon.getAttribute('data-info2');
-
-                    // Function to generate random stat
-                    function generateRandomStat() {
-                        const efficiency = Math.floor(Math.random() * 11) + 85; // 85 to 95
-                        return `Efficiency: ${efficiency}%`;
-                    }
-
-                    // Function to show popup
-                    function showPopup() {
-                        // Hide other popups
-                        document.querySelectorAll('.popup').forEach(p => {
-                            if (p !== popup) {
-                                p.classList.remove('active');
-                                p.querySelectorAll('p').forEach(pElem => {
-                                    pElem.textContent = '';
-                                });
-                            }
-                        });
-
-                        popup.classList.add('active');
-
-                        const para1 = popup.querySelector('.info1');
-                        const para2 = popup.querySelector('.info2');
-                        const stat = popup.querySelector('.stat');
-
-                        // Generate random stat
-                        const randomStat = generateRandomStat();
-
-                        // Type out the first bullet point
-                        gsap.to(para1, {
-                            duration: info1.length * 0.02, // Increased speed
-                            text: info1,
-                            ease: "none",
-                            onStart: () => {
-                                para1.style.opacity = '1';
-                            },
-                            onComplete: () => {
-                                // Type out the second bullet point
-                                gsap.to(para2, {
-                                    duration: info2.length * 0.02, // Increased speed
-                                    text: info2,
-                                    ease: "none",
-                                    onStart: () => {
-                                        para2.style.opacity = '1';
-                                    },
-                                    onComplete: () => {
-                                        // Type out the random stat
-                                        gsap.to(stat, {
-                                            duration: randomStat.length * 0.02, // Increased speed
-                                            text: randomStat,
-                                            ease: "none",
-                                            onStart: () => {
-                                                stat.style.opacity = '1';
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        });
-                    }
-
-                    // Function to hide popup
-                    function hidePopup() {
-                        popup.classList.remove('active');
-                        popup.querySelectorAll('p').forEach(pElem => {
-                            pElem.textContent = '';
-                        });
-                    }
-
-                    // Event listeners for hover on the wrapper to prevent shaking
-                    wrapper.addEventListener('mouseenter', showPopup);
-                    wrapper.addEventListener('mouseleave', hidePopup);
-
-                    // Event listeners for click
-                    wrapper.addEventListener('click', (e) => {
-                        e.preventDefault(); // Prevent default link behavior
-                        if (popup.classList.contains('active')) {
-                            hidePopup();
-                        } else {
-                            showPopup();
-                        }
-                    });
-
-                    // Initial GSAP animation for skill icons
-                    gsap.to(icon, {
+            // Automatically start cycling on mobile
+            function startCyclingIfMobile() {
+                if (window.innerWidth <= 768 && !isCyclingStats) {
+                    gsap.to(statsOverlay, {
                         opacity: 1,
-                        scale: 1,
-                        duration: 0.5,
-                        delay: 1.2 + (index * 0.05), // Slightly faster stagger
-                        ease: "back.out(1.7)"
+                        duration: 0.3,
+                        ease: "power1.out"
                     });
-                });
+                    cycleStats();
+                }
+            }
 
-                // Section Animations with ScrollTrigger
-                const sections = document.querySelectorAll('.section');
-                sections.forEach((section, index) => {
-                    gsap.to(section, {
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 80%",
-                            toggleActions: "play none none none"
+            // Initial check
+            startCyclingIfMobile();
+
+            // Listen for resize events to handle orientation changes
+            window.addEventListener('resize', startCyclingIfMobile);
+        }
+
+        // Particle Effects
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            container.appendChild(particle);
+            
+            gsap.to(particle, {
+                y: -500,
+                x: Math.random() * 100 - 50,
+                opacity: 0,
+                duration: Math.random() * 3 + 2,
+                ease: "power1.out",
+                onComplete: () => particle.remove()
+            });
+        }
+
+        function createEnergyWave(x, y, container) {
+            const wave = document.createElement('div');
+            wave.className = 'energy-wave';
+            wave.style.left = `${x - 100}px`;
+            wave.style.top = `${y - 100}px`;
+            container.appendChild(wave);
+            
+            setTimeout(() => wave.remove(), 6000);
+        }
+
+        // Typing and Cycling for Infographics
+        const infographicData = [
+            { title: "Unity 2D & 3D Development", text: "Crafting immersive 2D and 3D game environments with Unity to deliver engaging user experiences." },
+            { title: "C# Programming", text: "Developing robust and scalable applications using C# to meet diverse project requirements." },
+            { title: "Blender 3D Modeling", text: "Creating detailed 3D models and animations with Blender to bring creative visions to life." },
+            { title: "Web Design with HTML", text: "Designing responsive and visually appealing websites using HTML to enhance online presence." },
+            { title: "Alpha Test Development in Unity", text: "Leading alpha testing phases in Unity to ensure high-quality and bug-free game releases." },
+            { title: "Content Creation", text: "Generating compelling digital content that resonates with audiences and drives engagement." },
+            { title: "Autodesk 3DsMax Certification", text: "Certified Autodesk 3DsMax user proficient in advanced 3D modeling and rendering techniques." },
+            { title: "Adobe Creative Suite Expertise", text: "Mastering Photoshop, After Effects, InDesign, Premiere Pro, and Audition for versatile multimedia projects." },
+            { title: "Digital Design & Branding", text: "Designing logos, page layouts, and custom templates to establish strong brand identities." },
+            { title: "Python & C# Development", text: "Leveraging Python and C# languages to build versatile software solutions and automate workflows." },
+            { title: "JavaScript Programming", text: "Implementing dynamic and interactive web functionalities using JavaScript." },
+            { title: "Google Cloud Console Management", text: "Managing and deploying scalable applications on Google Cloud Console for optimal performance." },
+            { title: "Streamlit Cloud Development", text: "Building interactive data applications with Streamlit Cloud to visualize and share insights effectively." },
+            { title: "Video Editing with Premiere Pro", text: "Editing high-quality videos using Premiere Pro to produce professional-grade multimedia content." },
+            { title: "AI-Assisted Development", text: "Integrating AI technologies to enhance development processes and create intelligent applications." },
+            { title: "Generative Art with AI Platforms", text: "Utilizing AI-assisted generative art platforms to produce unique and creative visual content." },
+            { title: "2D & 3D Animation", text: "Animating characters and scenes in both 2D and 3D to tell captivating stories." },
+            { title: "Character Rigging & Animation", text: "Rigging and animating characters to ensure fluid and lifelike movements in digital media." },
+            { title: "Project Management", text: "Coordinating cross-functional teams to deliver projects on time and exceed client expectations." },
+            { title: "Data Analysis", text: "Analyzing complex datasets to derive actionable insights and inform strategic decisions." }
+        ];
+
+        let currentInfographic = 0;
+        let infographicItems = [];
+
+        // Function to type text into an element using GSAP TextPlugin
+        function typeTextInfographic(element, text, speed = 0.02) { // Increased speed
+            return gsap.to(element, {
+                duration: text.length * speed,
+                text: text,
+                ease: "none",
+                onStart: () => {
+                    element.style.opacity = '1';
+                }
+            });
+        }
+
+        // Function to cycle through infographics
+        function cycleInfographics() {
+            if (infographicItems.length === 0) return;
+
+            const timeline = gsap.timeline({ repeat: -1, repeatDelay: 1.5 });
+
+            infographicData.forEach((item, index) => {
+                const currentItem = infographicItems[index % infographicItems.length];
+                timeline.call(() => {
+                    currentItem.classList.add('active');
+                    typeTextInfographic(currentItem.querySelector('h4'), item.title, 0.02); // Increased speed
+                    typeTextInfographic(currentItem.querySelector('.typing-text'), item.text, 0.02); // Increased speed
+                });
+                timeline.to({}, { duration: (item.title.length + item.text.length) * 0.02 + 1.5 }); // Wait for typing and display duration
+                timeline.call(() => {
+                    currentItem.classList.remove('active');
+                    currentItem.querySelector('h4').textContent = '';
+                    currentItem.querySelector('.typing-text').textContent = '';
+                });
+            });
+        }
+
+        // Function to dynamically create infographic items
+        function createInfographicItems() {
+            const infographicContainer = document.querySelector('.infographic');
+            infographicContainer.innerHTML = ''; // Clear existing items
+            infographicItems = []; // Reset the array
+
+            infographicData.forEach((item, index) => {
+                const infographicItem = document.createElement('div');
+                infographicItem.className = 'infographic-item';
+                infographicItem.innerHTML = `
+                    <h4></h4>
+                    <p class="typing-text"></p>
+                `;
+                infographicContainer.appendChild(infographicItem);
+                infographicItems.push(infographicItem);
+            });
+        }
+
+        // Initialize Particles
+        function startParticles() {
+            const particlesContainers = document.querySelectorAll('.particles-container');
+            particlesContainers.forEach(container => {
+                setInterval(() => createParticle(container), 100); // Increased frequency
+            });
+        }
+
+        // Function to generate random star shapes
+        function generateRandomStar() {
+            const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
+            return stars[Math.floor(Math.random() * stars.length)];
+        }
+
+        // Function to display multiple random stars with random color
+        function displayRandomJapaneseChars(count = 4) { // Increased count from 2 to 4
+            const darkSection = document.querySelector('.dark-theme-section');
+            const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
+
+            for(let i = 0; i < count; i++) {
+                const star = stars[Math.floor(Math.random() * stars.length)];
+                const randomStarElem = document.createElement('span');
+                randomStarElem.className = 'random-char';
+
+                // Randomly assign one of the three colors
+                const colors = ['white', 'red', 'blue'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                randomStarElem.classList.add(randomColor);
+
+                randomStarElem.textContent = star;
+
+                // Random position within the dark-theme-section
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+
+                randomStarElem.style.left = `${x}%`;
+                randomStarElem.style.top = `${y}%`;
+
+                darkSection.appendChild(randomStarElem);
+
+                // Remove the star after animation completes
+                randomStarElem.addEventListener('animationend', () => {
+                    randomStarElem.remove();
+                });
+            }
+        }
+
+        // Function to type text into a paragraph and return a Promise
+        function typeParagraph(para, fullText, speed = 0.02) { // Increased speed
+            return new Promise((resolve) => {
+                para.textContent = ''; // Clear existing text
+                gsap.to(para, {
+                    duration: fullText.length * speed,
+                    text: fullText,
+                    ease: "none",
+                    onStart: () => {
+                        para.style.opacity = '1';
+                    },
+                    onComplete: resolve
+                });
+            });
+        }
+
+        // Initialize Everything
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Matrix
+            createMatrixBackground();
+            setInterval(() => {
+                const columns = document.querySelectorAll('.matrix-column');
+                columns.forEach(column => {
+                    if (Math.random() < 0.01) { // 1% chance per column to glow a character
+                        const randomCharIndex = Math.floor(Math.random() * 100);
+                        const char = column.childNodes[randomCharIndex];
+                        if (char) {
+                            char.classList.add('glow');
+                            setTimeout(() => char.classList.remove('glow'), 1000);
+                        }
+                    }
+                });
+            }, 100);
+
+            // Initialize Anime Background
+            createAnimeBackground();
+
+            // Initialize Profile Stats
+            initializeProfileStats();
+
+            // GSAP Animations for Titles
+            gsap.to('.title', {
+                opacity: 1,
+                duration: 1,
+                delay: 0.5
+            });
+
+            gsap.to('.subtitle', {
+                opacity: 1,
+                duration: 1,
+                delay: 0.8
+            });
+
+            // Skill Icons Animation and Popup Functionality
+            const skillWrappers = document.querySelectorAll('.skill-wrapper');
+            skillWrappers.forEach((wrapper, index) => {
+                const icon = wrapper.querySelector('.skill-icon');
+                const popup = wrapper.querySelector('.popup');
+                const info1 = icon.getAttribute('data-info1');
+                const info2 = icon.getAttribute('data-info2');
+
+                // Function to generate random stat
+                function generateRandomStat() {
+                    const efficiency = Math.floor(Math.random() * 11) + 85; // 85 to 95
+                    return `Efficiency: ${efficiency}%`;
+                }
+
+                // Function to show popup
+                function showPopup() {
+                    // Hide other popups
+                    document.querySelectorAll('.popup').forEach(p => {
+                        if (p !== popup) {
+                            p.classList.remove('active');
+                            p.querySelectorAll('p').forEach(pElem => {
+                                pElem.textContent = '';
+                            });
+                        }
+                    });
+
+                    popup.classList.add('active');
+
+                    const para1 = popup.querySelector('.info1');
+                    const para2 = popup.querySelector('.info2');
+                    const stat = popup.querySelector('.stat');
+
+                    // Generate random stat
+                    const randomStat = generateRandomStat();
+
+                    // Type out the first bullet point
+                    gsap.to(para1, {
+                        duration: info1.length * 0.02, // Increased speed
+                        text: info1,
+                        ease: "none",
+                        onStart: () => {
+                            para1.style.opacity = '1';
                         },
-                        opacity: 1,
-                        duration: 1,
-                        delay: 0.2 * index
-                    });
-                });
-
-                // Create infographic items
-                createInfographicItems();
-
-                // Start Infographics Cycling
-                cycleInfographics();
-
-                // Initialize Particles
-                startParticles();
-
-                // Start displaying random stars
-                setInterval(() => displayRandomJapaneseChars(4), 150); // Increased stars and frequency
-
-                // Window Resize Handler
-                window.addEventListener('resize', () => {
-                    createMatrixBackground();
-                    const animeContainer = document.querySelector('.anime-background');
-                    animeContainer.innerHTML = '';
-                    createAnimeBackground();
-                });
-
-                // Mouse Movement Handler
-                document.addEventListener('mousemove', (e) => {
-                    const particlesContainers = document.querySelectorAll('.particles-container');
-                    particlesContainers.forEach(container => {
-                        const rect = container.getBoundingClientRect();
-                        if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                            if (Math.random() < 0.3) { // Increased chance for more energy waves
-                                const x = e.clientX - rect.left;
-                                const y = e.clientY - rect.top;
-                                createEnergyWave(x, y, container);
-                            }
+                        onComplete: () => {
+                            // Type out the second bullet point
+                            gsap.to(para2, {
+                                duration: info2.length * 0.02, // Increased speed
+                                text: info2,
+                                ease: "none",
+                                onStart: () => {
+                                    para2.style.opacity = '1';
+                                },
+                                onComplete: () => {
+                                    // Type out the random stat
+                                    gsap.to(stat, {
+                                        duration: randomStat.length * 0.02, // Increased speed
+                                        text: randomStat,
+                                        ease: "none",
+                                        onStart: () => {
+                                            stat.style.opacity = '1';
+                                        }
+                                    });
+                                }
+                            });
                         }
                     });
+                }
+
+                // Function to hide popup
+                function hidePopup() {
+                    popup.classList.remove('active');
+                    popup.querySelectorAll('p').forEach(pElem => {
+                        pElem.textContent = '';
+                    });
+                }
+
+                // Event listeners for hover on the wrapper to prevent shaking
+                wrapper.addEventListener('mouseenter', showPopup);
+                wrapper.addEventListener('mouseleave', hidePopup);
+
+                // Event listeners for click
+                wrapper.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default link behavior
+                    if (popup.classList.contains('active')) {
+                        hidePopup();
+                    } else {
+                        showPopup();
+                    }
                 });
 
-                // Typed-in Effect for Summary Paragraphs
-                const aboutContent = document.querySelectorAll('.about-content p');
-                const paragraphs = Array.from(aboutContent);
-                let currentParagraphIndex = 0;
-
-                // Type the first paragraph and then show the button
-                const firstParagraph = paragraphs[0];
-                const firstText = firstParagraph.getAttribute('data-text');
-                typeParagraph(firstParagraph, firstText, 0.02).then(() => { // Increased speed
-                    const moreBtn = document.getElementById('more-btn');
-                    moreBtn.style.display = 'inline-block'; // Show the button
-                    gsap.fromTo(moreBtn, { opacity: 0 }, { opacity: 1, duration: 0.5, delay: 0.2 });
+                // Initial GSAP animation for skill icons
+                gsap.to(icon, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.5,
+                    delay: 1.2 + (index * 0.05), // Slightly faster stagger
+                    ease: "back.out(1.7)"
                 });
+            });
 
-                // Handle the "Want to know more?" button click
-                const moreButton = document.getElementById('more-btn');
-                moreButton.addEventListener('click', async () => {
-                    // Hide the button with a fade-out effect
-                    gsap.to(moreButton, { opacity: 0, duration: 0.3 });
-                    setTimeout(() => {
-                        moreButton.style.display = 'none'; // Hide the button after fade-out
-                    }, 300);
+            // Section Animations with ScrollTrigger
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                gsap.to(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 1,
+                    duration: 1,
+                    delay: 0.2 * index
+                });
+            });
 
-                    // Type the remaining paragraphs sequentially
-                    for(let i = 1; i < paragraphs.length; i++) {
-                        const para = paragraphs[i];
-                        const fullText = para.getAttribute('data-text');
-                        await typeParagraph(para, fullText, 0.02); // Increased speed
+            // Create infographic items
+            createInfographicItems();
+
+            // Start Infographics Cycling
+            cycleInfographics();
+
+            // Initialize Particles
+            startParticles();
+
+            // Start displaying random stars
+            setInterval(() => displayRandomJapaneseChars(4), 150); // Increased stars and frequency
+
+            // Window Resize Handler
+            window.addEventListener('resize', () => {
+                createMatrixBackground();
+                const animeContainer = document.querySelector('.anime-background');
+                animeContainer.innerHTML = '';
+                createAnimeBackground();
+            });
+
+            // Mouse Movement Handler
+            document.addEventListener('mousemove', (e) => {
+                const particlesContainers = document.querySelectorAll('.particles-container');
+                particlesContainers.forEach(container => {
+                    const rect = container.getBoundingClientRect();
+                    if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                        if (Math.random() < 0.3) { // Increased chance for more energy waves
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            createEnergyWave(x, y, container);
+                        }
                     }
                 });
             });
-        </script>
 
-        <script>
-            // Hamburger Menu Toggle
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.getElementById('nav-links');
+            // Typed-in Effect for Summary Paragraphs
+            const aboutContent = document.querySelectorAll('.about-content p');
+            const paragraphs = Array.from(aboutContent);
+            let currentParagraphIndex = 0;
 
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
+            // Type the first paragraph and then show the button
+            const firstParagraph = paragraphs[0];
+            const firstText = firstParagraph.getAttribute('data-text');
+            typeParagraph(firstParagraph, firstText, 0.02).then(() => { // Increased speed
+                const moreBtn = document.getElementById('more-btn');
+                moreBtn.style.display = 'inline-block'; // Show the button
+                gsap.fromTo(moreBtn, { opacity: 0 }, { opacity: 1, duration: 0.5, delay: 0.2 });
             });
 
-            // Smooth Scrolling for Navigation Links
-            document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    target.scrollIntoView({ behavior: 'smooth' });
+            // Handle the "Want to know more?" button click
+            const moreButton = document.getElementById('more-btn');
+            moreButton.addEventListener('click', async () => {
+                // Hide the button with a fade-out effect
+                gsap.to(moreButton, { opacity: 0, duration: 0.3 });
+                setTimeout(() => {
+                    moreButton.style.display = 'none'; // Hide the button after fade-out
+                }, 300);
 
-                    // Close the menu after clicking a link
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
-                });
+                // Type the remaining paragraphs sequentially
+                for(let i = 1; i < paragraphs.length; i++) {
+                    const para = paragraphs[i];
+                    const fullText = para.getAttribute('data-text');
+                    await typeParagraph(para, fullText, 0.02); // Increased speed
+                }
             });
-        </script>
-    </body>
+        });
+    </script>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+
+                // Close the menu after clicking a link
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
 </html>
