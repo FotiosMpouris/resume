@@ -257,7 +257,6 @@
                 matrixRain 20s linear infinite,
                 fireFlow 8s linear infinite;
             mix-blend-mode: screen;
-            z-index: 1; /* Ensure it's below popups */
         }
 
         .matrix-column::before {
@@ -308,7 +307,6 @@
             mix-blend-mode: screen;
             text-shadow: 0 0 8px var(--matrix-glow);
             opacity: 0.7;
-            z-index: 1; /* Below popups */
         }
 
         .anime-column.glow {
@@ -341,7 +339,6 @@
             overflow: hidden;
             color: var(--text-primary);
             padding-top: 80px; /* Adjusted padding to prevent content from being hidden behind navbar */
-            z-index: 2; /* Ensure it's above background elements */
         }
 
         .hero::before {
@@ -352,7 +349,6 @@
                 radial-gradient(circle at 20% 50%, rgba(0,123,255,0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 50%, rgba(0,123,255,0.1) 0%, transparent 50%);
             animation: glowPulse 8s ease-in-out infinite;
-            z-index: 1; /* Below content */
         }
 
         .container {
@@ -388,12 +384,10 @@
             margin-left: auto;
             margin-right: auto;
             position: relative; /* To position popups absolutely */
-            z-index: 2; /* Ensure it's above background sections */
         }
 
         .skill-wrapper {
-            position: relative; /* Position relative to contain the absolute popup */
-            z-index: 2; /* Ensure it's above lower sections */
+            position: relative;
         }
 
         .skill-icon {
@@ -407,8 +401,6 @@
             transform: scale(0.5);
             transition: var(--transition-standard);
             cursor: pointer;
-            position: relative;
-            z-index: 2; /* Above lower sections */
         }
 
         .skill-icon:hover {
@@ -425,12 +417,12 @@
 
         /* Popup Styles */
         .popup {
-            position: absolute; /* Positioned relative to .skill-wrapper */
+            position: absolute;
             top: 50px; /* Adjusted to appear below the icon */
             left: 50%;
             transform: translateX(-50%);
             width: 250px;
-            background: rgba(30, 144, 255, 0.9); /* Increased opacity for better visibility */
+            background: rgba(30, 144, 255, 0.7); /* Light blue semi-transparent */
             color: #fff;
             padding: 1rem;
             border-radius: 8px;
@@ -438,7 +430,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            z-index: 10000; /* Very high z-index to appear above all */
+            z-index: 10000; /* Increased z-index to appear above all */
         }
 
         .popup.active {
@@ -469,7 +461,7 @@
             transform: translateX(-50%);
             border-width: 5px;
             border-style: solid;
-            border-color: transparent transparent rgba(30, 144, 255, 0.9) transparent; /* Match popup background */
+            border-color: transparent transparent rgba(30, 144, 255, 0.7) transparent; /* Match popup background */
         }
 
         /* Dark Theme Section */
@@ -478,7 +470,7 @@
             background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark-blue) 50%, var(--accent-blue) 100%);
             position: relative;
             overflow: hidden;
-            z-index: 1; /* Ensure it's below popups */
+            z-index: 999; /* Ensure it's below popups */
         }
 
         /* About Card Styling */
@@ -652,19 +644,19 @@
 
         /* Profile Stats Overlay */
         .profile-stats-overlay {
-            position: absolute; /* Positioned relative to .profile-container */
-            top: 100%; /* Position below the profile image */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 280px;
-            height: 200px;
-            background: rgba(30, 144, 255, 0.9); /* Increased opacity for better visibility */
+            position: absolute;
+            top: 50%; /* Center vertically relative to the profile image */
+            left: calc(100% + 35px); /* Moved 35px to the right */
+            transform: translate(-300px, -50%);
+            width: 280px; /* Slightly narrower for better fit */
+            height: 200px; /* Fixed height for cycling */
+            background: rgba(30, 144, 255, 0.7); /* Light blue semi-transparent */
             border: none; /* Removed the light blue border */
             border-radius: 8px;
             padding: 1rem; /* Reduced padding */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 10000; /* Very high z-index to appear above all sections */
+            z-index: 10000; /* Increased z-index to appear above all sections */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -688,7 +680,7 @@
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translateX(-50%);
+            transform: translate(-300px, -50%); /* Maintain shift on hover */
             pointer-events: auto;
         }
 
@@ -1532,6 +1524,7 @@
 
         /* Infographics Typing and Cycling */
         /* Removed redundant keyframes */
+
     </style>
 </head>
 
