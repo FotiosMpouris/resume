@@ -665,7 +665,7 @@
             padding: 1rem; /* Reduced padding */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 99999; /* Very high z-index to appear above all sections */
+            z-index: 2; /* Lowered z-index to prevent overlapping */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -1208,7 +1208,7 @@
                 width: 130px; /* Further reduced size */
                 height: 130px;
                 transform: translate(0, -20px); /* Move up */
-                margin-left: 0;
+                left: 0;
                 position: relative;
                 display: block;
                 margin: 0 auto; /* Center the image */
