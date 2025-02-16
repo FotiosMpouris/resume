@@ -1,0 +1,219 @@
+/* style.css */
+
+/* Root Variables */
+:root {
+  --blue-sticky: #1E90FF;   /* DodgerBlue or similar */
+  --blood-red: #8B0000;     /* "Blood red" */
+  --black-text: #000000;
+  --white-text: #FFFFFF;
+  --transition-speed: 0.3s;
+}
+
+/* Global Reset/Defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: var(--white-text);
+  color: var(--black-text);
+  overflow-x: hidden;  /* Avoid horizontal scroll */
+}
+
+/* Navbar Styles */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: var(--blue-sticky);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.navbar .logo {
+  color: var(--white-text);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Hamburger Icon */
+.hamburger {
+  display: none; /* Hidden by default on larger screens */
+  flex-direction: column;
+  cursor: pointer;
+  gap: 6px;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: var(--white-text);
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+/* Nav Menu */
+.nav-menu {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-menu li a {
+  color: var(--white-text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-speed) ease;
+}
+
+.nav-menu li a:hover {
+  color: #ddd; /* Slight hover effect */
+}
+
+/* Dropdown Container */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  content: " ▼";
+  font-size: 0.7rem;
+}
+
+/* Hide dropdown by default */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--blue-sticky);
+  display: none;
+  flex-direction: column;
+  min-width: 150px;
+}
+
+.dropdown-menu a {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: var(--white-text);
+  white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+  background: #0f5fbf; /* Darker blue on hover */
+}
+
+/* Show dropdown on hover (desktop) */
+.dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+/* MOBILE: We'll toggle the nav with hamburger */
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: flex; /* show hamburger on mobile */
+  }
+  
+  .nav-menu {
+    position: absolute;
+    top: 80px;  /* below the navbar */
+    right: 0;
+    background: var(--blue-sticky);
+    flex-direction: column;
+    gap: 0;
+    width: 200px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-speed) ease-in-out;
+  }
+  
+  .nav-menu.open {
+    max-height: 500px; /* arbitrary large number */
+  }
+  
+  .nav-menu li {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  /* Hide dropdown on mobile until tapped/clicked? (Optional) */
+  .dropdown-menu {
+    position: static;
+    display: none;
+    width: 100%;
+  }
+  .dropdown-menu.open {
+    display: block;
+  }
+}
+
+/* Hamburger Transform when active */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Sections */
+.black-section {
+  background: var(--black-text);
+  color: var(--white-text);
+  padding: 4rem 2rem;
+}
+
+.white-section {
+  background: var(--white-text);
+  color: var(--black-text);
+  padding: 4rem 2rem;
+}
+
+/* Video styling (optional) */
+.video-container {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.video-container video {
+  width: 100%;
+  max-height: 500px; /* adjust as needed */
+  object-fit: cover;
+}
+
+/* Connect Section (Blood Red) */
+.connect-section {
+  background: var(--blood-red);
+  color: var(--white-text);
+  text-align: center;
+  padding: 2rem;
+}
+
+.connect-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.connect-links li a {
+  color: var(--white-text);
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid var(--white-text);
+  padding: 0.5rem 1rem;
+  transition: background var(--transition-speed);
+}
+
+.connect-links li a:hover {
+  background: rgba(255,255,255,0.2);
+}
