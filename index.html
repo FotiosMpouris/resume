@@ -3,83 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home - Fotios Mpouris</title>
+  <title>Fotios Mpouris - Home</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <a href="#" class="logo">Fotios Mpouris</a>
-    <div class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul class="nav-menu">
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <!-- GitHub Icon (glow red on hover) -->
+    <a href="https://github.com/FotiosMpouris" target="_blank" rel="noopener noreferrer" 
+       class="github-icon-link" title="Visit my GitHub Homepage">
+      <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M12,0.297C5.373,0.297,0,5.67,0,12.297c0,5.302,3.438,9.8,8.205,11.387
+          c0.6,0.113,0.82-0.258,0.82-0.577c0-0.285-0.01-1.04-0.015-2.04c-3.338,0.724-4.042-1.61-4.042-1.61
+          c-0.546-1.385-1.333-1.754-1.333-1.754c-1.089-0.744,0.084-0.729,0.084-0.729c1.205,0.084,1.84,1.236,1.84,1.236
+          c1.07,1.835,2.807,1.305,3.495,0.997c0.108-0.776,0.42-1.305,0.763-1.605c-2.665-0.303-5.466-1.333-5.466-5.931
+          c0-1.31,0.47-2.381,1.236-3.221c-0.123-0.303-0.535-1.523,0.117-3.176c0,0,1.008-0.322,3.301,1.23
+          c0.957-0.266,1.983-0.399,3.003-0.404c1.02,0.005,2.047,0.138,3.006,0.404c2.291-1.552,3.297-1.23,3.297-1.23
+          c0.71,0.987,0.408,2.172,0.2,3.221c0.77,0.84,1.235,1.911,1.235,3.221c0,4.61-2.807,5.625-5.479,5.921
+          c0.43,0.37,0.823,1.102,0.823,2.222c0,1.606-0.015,2.896-0.015,3.286c0,0.319,0.216,0.694,0.825,0.576
+          C20.565,22.093,24,17.595,24,12.297C24,5.67,18.627,0.297,12,0.297z"/>
+      </svg>
+    </a>
+    
+    <!-- Your Name -->
+    <span class="site-name">Fotios Mpouris</span>
+  </div>
+
+  <!-- Hamburger for Mobile -->
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Overlay Menu (hidden by default) -->
+  <div class="overlay" id="overlay">
+    <ul class="overlay-menu">
       <li><a href="index.html">Home</a></li>
-      <li><a href="cv.html">CV</a></li>
-      <li class="dropdown">
-        <a href="projects.html" class="dropdown-toggle">Projects</a>
-        <!-- Sub-menu only for "Featured Website Builds" -->
-        <ul class="dropdown-menu">
-          <li><a href="https://colorfotifoti.com" target="_blank">colorfotifoti.com</a></li>
-          <li><a href="https://pythos.app" target="_blank">pythos.app</a></li>
-        </ul>
-      </li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="tech-projects.html">Tech Projects</a></li>
+      <li><a href="websites.html">Websites</a></li>
     </ul>
-  </nav>
+  </div>
 
-  <!-- BLACK SECTION (Video Hero) -->
-  <section class="black-section">
-    <div class="video-container">
-      <!-- Make sure homevideo.mp4 is in your assets folder or correct path -->
-      <video src="assets/homevideo.mp4" autoplay muted loop></video>
-    </div>
-    <h1>Welcome to My Creative Dev Space</h1>
-    <p>
-      This is the Home Page. Use this section to introduce yourself or
-      your brand, or say something captivating about your main offerings.
-    </p>
-  </section>
+  <!-- Desktop Nav Menu -->
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="tech-projects.html">Tech Projects</a></li>
+    <li><a href="websites.html">Websites</a></li>
+  </ul>
+</nav>
 
-  <!-- WHITE SECTION (Paragraphs) -->
-  <section class="white-section">
-    <h2>A Few Words About Me</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at
-      libero sit amet augue consectetur elementum. Etiam egestas
-      tincidunt lectus, quis auctor mauris lobortis a.
-    </p>
-    <p>
-      Vivamus venenatis finibus eros. Cras non felis et neque
-      malesuada pellentesque in at eros.
-    </p>
-  </section>
+<!-- HOME CONTENT -->
 
-  <!-- BLACK SECTION (Second Video) -->
-  <section class="black-section">
-    <div class="video-container">
-      <!-- Make sure homebottomvideo.mp4 is in your assets folder or correct path -->
-      <video src="assets/homebottomvideo.mp4" autoplay muted loop></video>
-    </div>
-    <h2>Another Cool Video Section</h2>
-    <p>
-      Showcase something else here: maybe a preview reel of your portfolio,
-      or a short introduction to your projects.
-    </p>
-  </section>
+<!-- BLACK SECTION: Professional Summary -->
+<section class="black-section">
+  <h2>Professional Summary</h2>
+  <p>
+    Innovative full-stack developer and multimedia specialist combining technical expertise 
+    with creative design capabilities. Features 4+ years of Unity/C# development experience 
+    alongside advanced Python application development and Adobe Creative Suite mastery. 
+    Demonstrates exceptional ability in developing AI-integrated applications, interactive 
+    digital experiences, and automated solutions. Brings unique background in client relations 
+    and project coordination, enabling effective communication between technical and non-technical 
+    stakeholders.
+  </p>
+</section>
 
-  <!-- CONNECT (Blood Red) -->
-  <footer class="connect-section">
-    <h2>Connect</h2>
-    <ul class="connect-links">
-      <li><a href="mailto:fotiosmpouris@gmail.com">Email</a></li>
-      <li><a href="https://www.linkedin.com/in/fotios-mpouris-57728b240/" target="_blank">LinkedIn</a></li>
-      <li><a href="https://www.behance.net/fotiosmpouris" target="_blank">Behance</a></li>
-    </ul>
-  </footer>
+<!-- WHITE SECTION: Technical Expertise > Development & Programming -->
+<section class="white-section">
+  <h2>Technical Expertise: Development & Programming</h2>
+  <p>
+    <strong>Languages:</strong> Python, C#, JavaScript, HTML5, CSS3, Node.js<br/>
+    <strong>Game Development:</strong> Unity 2D/3D, Physics Systems, AI Programming, Mobile<br/>
+    <strong>Frameworks & Platforms:</strong> Streamlit Cloud, Google Cloud Console, React<br/>
+    <strong>Version Control:</strong> Git, GitHub<br/>
+    <strong>Testing:</strong> Alpha Testing, Microsoft Playwright<br/>
+    <strong>Cloud Services:</strong> Google Cloud Platform, StreamLit Cloud, AWS RDS
+  </p>
+</section>
 
-  <script src="script.js"></script>
+<!-- BLACK SECTION: Technical Expertise > Creative Technology -->
+<section class="black-section">
+  <h2>Technical Expertise: Creative Technology</h2>
+  <p>
+    <strong>Adobe Creative Suite:</strong> Premiere Pro, After Effects, Photoshop, Audition, InDesign<br/>
+    <strong>3D Software:</strong> Blender, Autodesk 3DsMax (Certified)<br/>
+    <strong>Animation:</strong> 2D/3D Animation, Character Rigging, Motion Graphics<br/>
+    <strong>Design:</strong> UI/UX Development, Logo Creation, Layout Design<br/>
+    <strong>Emerging Tech:</strong> AI-Assisted Development, Generative Art, Sora Text-to-Video
+  </p>
+</section>
+
+<!-- WHITE SECTION: Technical Expertise > Project Management -->
+<section class="white-section">
+  <h2>Technical Expertise: Project Management</h2>
+  <p>
+    <strong>Collaboration:</strong> Google Workspace, Microsoft Teams, Slack, Nation Builder <br/>
+    <strong>Data Management:</strong> BEACON System Integration, Nation Builder<br/>
+    <strong>Documentation:</strong> Technical Writing, Training Material Development
+  </p>
+</section>
+
+<!-- BLACK SECTION: Technical Expertise > Professional Competencies -->
+<section class="black-section">
+  <h2>Technical Expertise: Professional Competencies</h2>
+  <p>
+    <strong>Team Collaboration:</strong> Proven success in cross-functional teams and remote environments<br/>
+    <strong>Independent Excellence:</strong> Demonstrated ability to self-manage complex projects <br/>
+    <strong>Adaptability:</strong> Experience in structured team environments and autonomous roles
+  </p>
+</section>
+
+<!-- CONNECT (Blood Red Footer) -->
+<footer class="connect-section">
+  <h2>Connect</h2>
+  <ul class="connect-links">
+    <li><a href="mailto:fotiosmpouris@gmail.com">Email</a></li>
+    <li><a href="https://www.linkedin.com/in/fotios-mpouris-57728b240/" target="_blank">LinkedIn</a></li>
+    <li><a href="https://www.behance.net/fotiosmpouris" target="_blank">Behance</a></li>
+  </ul>
+</footer>
+
+<!-- Script for Hamburger / Overlay -->
+<script src="script.js"></script>
 </body>
 </html>
