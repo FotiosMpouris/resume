@@ -177,7 +177,7 @@ body {
 
 /* Connect Section (Footer) */
 .connect-section {
-  background: var(--black); /* All black bottom */
+  background: var(--blood-red); /* All black bottom */
   color: var(--white);
   text-align: center;
   padding: 2rem;
