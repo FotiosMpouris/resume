@@ -1,9 +1,7 @@
-/* style.css */
-
 /* Root Variables */
 :root {
   --space-blue: #1c2951;     /* main navbar background */
-  --blood-red: #8B0000;      /* for visit website buttons */
+  --blood-red: #8B0000;      /* for buttons and footer */
   --black: #000000;
   --white: #ffffff;
   --transition-speed: 0.3s;
@@ -23,7 +21,7 @@ body {
   overflow-x: hidden; /* Avoid horizontal scroll on mobile */
 }
 
-/* Navbar */
+/* Navbar (unchanged) */
 .navbar {
   position: sticky;
   top: 0;
@@ -34,69 +32,53 @@ body {
   padding: 1rem 2rem;
   z-index: 999;
 }
-
-/* Left portion with GitHub icon & site name */
 .navbar-left {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-
-/* GitHub Icon (glow red on hover) */
 .github-icon {
   width: 40px;
   height: 40px;
   color: #ffffff;
   transition: color var(--transition-speed), transform var(--transition-speed);
 }
-
 .github-icon-link:hover .github-icon {
   color: red;
   transform: scale(1.2);
 }
-
-/* Site Name (next to GitHub icon) */
 .site-name {
   color: #ffffff;
   font-size: 1.3rem;
   font-weight: bold;
 }
-
-/* Desktop Navigation Links */
 .nav-links {
   display: flex;
   list-style: none;
   gap: 1.5rem;
 }
-
 .nav-links li a {
   color: #ffffff;
   text-decoration: none;
   font-weight: 500;
   transition: color var(--transition-speed);
 }
-
 .nav-links li a:hover {
   color: #ddd;
 }
-
-/* Hamburger Icon */
 .hamburger {
-  display: none; /* hidden on desktop by default */
+  display: none; /* hidden on desktop */
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
   z-index: 1001;
 }
-
 .hamburger span {
   width: 25px;
   height: 3px;
   background: #fff;
   transition: all var(--transition-speed) ease-in-out;
 }
-
-/* Overlay Menu for Mobile */
 .overlay {
   position: fixed;
   top: 0;
@@ -110,33 +92,25 @@ body {
   justify-content: center;
   z-index: 1000;
 }
-
 .overlay-menu {
   list-style: none;
   text-align: center;
 }
-
 .overlay-menu li {
   margin: 1rem 0;
 }
-
 .overlay-menu li a {
   color: #fff;
   text-decoration: none;
   font-size: 1.5rem;
   transition: color var(--transition-speed);
 }
-
 .overlay-menu li a:hover {
   color: #ddd;
 }
-
-/* When overlay is open, we show it */
 .overlay.open {
   display: flex;
 }
-
-/* Hamburger active states (the 'X' transformation) */
 .hamburger.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -146,15 +120,9 @@ body {
 .hamburger.active span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
-
-/* Responsive: show hamburger & hide nav-links on mobile */
 @media (max-width: 768px) {
-  .nav-links {
-    display: none; /* hide the desktop menu */
-  }
-  .hamburger {
-    display: flex; /* show the hamburger icon */
-  }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
 }
 
 /* Sections */
@@ -163,120 +131,106 @@ body {
   color: var(--white);
   padding: 3rem 2rem;
 }
-
 .white-section {
   background: var(--white);
   color: var(--black);
   padding: 3rem 2rem;
 }
-
 .black-section h2, .white-section h2,
 .black-section h3, .white-section h3 {
   margin-bottom: 1rem;
 }
 
-/* Connect Section (Footer) */
+/* --------------------------
+   CONNECT SECTION MODIFICATIONS
+----------------------------- */
 .connect-section {
-  background: var(--blood-red); /* All black bottom */
-  color: var(--white);
-  text-align: center;
-  padding: 2rem;
-}
-
-.connect-section h2 {
-  margin-bottom: 1rem;
-}
-
-/* Connect links: black w/ white text (already black background, so we style the "buttons") */
-.connect-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-.connect-links li a {
-  background: #000;      /* black button */
-  color: #fff;           /* white text */
-  border: 1px solid #000;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background var(--transition-speed);
-}
-
-.connect-links li a:hover {
-  background: #333;
-  border: 1px solid #333;
-}
-
-/* Website Layout */
-.website-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: flex-start; /* top-align or center if you prefer */
-  margin-top: 1.5rem;
-}
-
-.website-text {
-  flex: 1;
-  min-width: 280px;
-}
-
-.website-media {
-  flex: 1;
-  min-width: 280px;
-  text-align: center;
-}
-
-/* Website Logos */
-.website-logo {
-  width: 150px;
-  height: auto;
-  margin-bottom: 1rem;
-}
-
-/* Collage Image */
-.website-collage {
-  max-width: 100%;
-  height: auto;
-  border: 2px solid #ccc; /* optional border */
-}
-
-/* Website Video */
-.website-video {
-  max-width: 100%;
-  height: auto;
-  border: 2px solid #ccc; /* optional border */
-  background: #000;       /* fallback background */
-}
-
-/* "Visit Website" link uses blood-red background */
-.website-link {
-  display: inline-block;
   background: var(--blood-red);
   color: var(--white);
-  padding: 0.5rem 1rem;
-  margin-top: 0.5rem;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.connect-section h2 {
+  margin-bottom: 1.5rem; /* extra space between header and buttons */
+}
+.connect-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.connect-links li a {
+  background: #000;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
   text-decoration: none;
+  font-weight: bold;
+  border: 1px solid #000;
+  display: inline-block;
+  width: 150px; /* fixed width for uniformity */
+  text-align: center;
   transition: background var(--transition-speed);
-  border-radius: 4px;
+}
+.connect-links li a:hover {
+  background: #333;
+  border-color: #333;
 }
 
-.website-link:hover {
-  background: #b30000; /* darker red on hover */
+/* --------------------------
+   AI-Powered Applications Layout
+----------------------------- */
+.project-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+.project-container img {
+  width: 150px;
+  height: auto;
+}
+.project-details {
+  flex: 1;
+}
+.project-details h3 {
+  margin-bottom: 0.5rem;
+}
+.project-details ul {
+  list-style: disc;
+  margin-left: 1.5rem;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .website-container {
-    flex-direction: column; /* stack text + media */
-  }
-  .website-text, 
-  .website-media {
-    width: 100%;
-    flex: none; /* reset flex for stacking */
-  }
+/* --------------------------
+   Multimedia Media Items
+----------------------------- */
+.media-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+.media-item {
+  flex: 1 1 300px;
+  text-align: center;
+}
+.media-item video,
+.media-item img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
+}
+
+/* --------------------------
+   Video Styling (for websites & multimedia)
+----------------------------- */
+.website-video,
+.media-video {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
+  background: #000;
 }
