@@ -8,12 +8,18 @@
   <style>
     /* Additional styling for project items */
     .project-item {
-      margin-bottom: 3rem;
+      display: flex;           /* Place logo left, text right */
+      align-items: flex-start; /* Align top edges */
+      gap: 1rem;               /* Space between logo and text */
+      margin-bottom: 2rem;     /* Space between projects */
+      flex-wrap: wrap;         /* Responsive wrapping if needed */
     }
     .project-logo {
       width: 150px;
-      display: block;
-      margin: 1rem 0;
+      height: auto;
+    }
+    .project-details {
+      flex: 1; /* Let the details expand */
     }
     .project-links {
       margin-top: 1rem;
@@ -30,9 +36,6 @@
     }
     .project-links a:hover {
       background: #b30000;
-    }
-    .project-link-group {
-      margin-bottom: 2rem;
     }
   </style>
 </head>
@@ -83,77 +86,86 @@
     </ul>
   </nav>
 
-  <!-- AI-POWERED APPLICATIONS SECTION -->
+  <!-- FIRST SECTION (BLACK) with main heading and first project -->
   <section class="black-section">
-    <h2>AI-Powered Applications</h2>
-    
+    <h2 style="margin-bottom: 2rem;">AI-Powered Applications</h2>
+
     <!-- Siding Assistant Platform -->
     <div class="project-item">
-      <h3>Siding Assistant Platform | Python/Streamlit Project</h3>
       <img src="assets/siding-assistant-logo.png" alt="Siding Assistant Logo" class="project-logo">
-      <ul>
-        <li>Developed custom AI sales training assistant using Python and Streamlit Cloud</li>
-        <li>Engineered automated video transcript processing system for 370+ company videos</li>
-        <li>Implemented intelligent web scraping for real-time product information retrieval</li>
-        <li>Created customer-specific property analysis system with personalized recommendations</li>
-        <li>Built comprehensive training documentation generator from processed video content</li>
-        <li>Integrated multiple LLM frameworks for enhanced decision-making capabilities</li>
-      </ul>
-      <div class="project-links">
-        <a href="https://github.com/FotiosMpouris/Hardie-Siding-Agent-Testing-Working_Copy" class="website-link" target="_blank">View Repository</a>
+      <div class="project-details">
+        <h3>Siding Assistant Platform | Python/Streamlit Project</h3>
+        <ul>
+          <li>Developed custom AI sales training assistant using Python and Streamlit Cloud</li>
+          <li>Engineered automated video transcript processing system for 370+ company videos</li>
+          <li>Implemented intelligent web scraping for real-time product information retrieval</li>
+          <li>Created customer-specific property analysis system with personalized recommendations</li>
+          <li>Built comprehensive training documentation generator from processed video content</li>
+          <li>Integrated multiple LLM frameworks for enhanced decision-making capabilities</li>
+        </ul>
+        <div class="project-links">
+          <a href="https://github.com/FotiosMpouris/Hardie-Siding-Agent-Testing-Working_Copy" target="_blank">View Repository</a>
+        </div>
       </div>
     </div>
-    
-    <!-- Resume Tailor Application -->
+  </section>
+
+  <!-- SECOND SECTION (WHITE) with second project -->
+  <section class="white-section">
     <div class="project-item">
-      <h3>Resume Tailor Application | Python/Streamlit Project</h3>
       <img src="assets/resume-tailor-logo.png" alt="Resume Tailor Logo" class="project-logo">
-      
-      <div class="project-link-group">
-        <p><strong>Version 1:</strong></p>
-        <ul>
-          <li>Resume analysis and tailoring based on job descriptions</li>
-          <li>Custom summary generation</li>
-          <li>Skills comparison between applicant and job requirements</li>
-          <li>Relevant work experience extraction</li>
-          <li>Education information summarization</li>
-          <li>Cover letter generation</li>
-          <li>PDF output for both tailored resume and cover letter</li>
-        </ul>
-        <a href="https://github.com/FotiosMpouris/ReggieResume2" class="website-link" target="_blank">View Repository</a>
-        <a href="https://reggieresume2-6dr9c9mscx7jcajhrbz7yd.streamlit.app/" class="website-link" target="_blank">Launch App</a>
-      </div>
-      
-      <div class="project-link-group">
-        <p><strong>Version 2:</strong></p>
-        <ul>
-          <li>Resume analysis and customization based on job descriptions</li>
-          <li>Automatic generation of tailored summaries and work experience descriptions</li>
-          <li>Cover letter generation</li>
-          <li>PDF export functionality for both resume and cover letter</li>
-          <li>User-friendly interface with real-time updates</li>
-        </ul>
-        <a href="https://github.com/FotiosMpouris/Ai-Resume-Tailor2" class="website-link" target="_blank">View Repository</a>
-        <a href="https://ai-resume-tailor2.streamlit.app/" class="website-link" target="_blank">Launch App</a>
+      <div class="project-details">
+        <h3>Resume Tailor Application | Python/Streamlit Project</h3>
+
+        <div class="project-links" style="margin-bottom: 1rem;">
+          <p><strong>Version 1:</strong></p>
+          <ul>
+            <li>Resume analysis and tailoring based on job descriptions</li>
+            <li>Custom summary generation</li>
+            <li>Skills comparison between applicant and job requirements</li>
+            <li>Relevant work experience extraction</li>
+            <li>Education information summarization</li>
+            <li>Cover letter generation</li>
+            <li>PDF output for both tailored resume and cover letter</li>
+          </ul>
+          <a href="https://github.com/FotiosMpouris/ReggieResume2" target="_blank">View Repository</a>
+          <a href="https://reggieresume2-6dr9c9mscx7jcajhrbz7yd.streamlit.app/" target="_blank">Launch App</a>
+        </div>
+
+        <div class="project-links">
+          <p><strong>Version 2:</strong></p>
+          <ul>
+            <li>Resume analysis and customization based on job descriptions</li>
+            <li>Automatic generation of tailored summaries and work experience descriptions</li>
+            <li>Cover letter generation</li>
+            <li>PDF export functionality for both resume and cover letter</li>
+            <li>User-friendly interface with real-time updates</li>
+          </ul>
+          <a href="https://github.com/FotiosMpouris/Ai-Resume-Tailor2" target="_blank">View Repository</a>
+          <a href="https://ai-resume-tailor2.streamlit.app/" target="_blank">Launch App</a>
+        </div>
       </div>
     </div>
-    
-    <!-- Oriana: AI Investigative Assistant -->
+  </section>
+
+  <!-- THIRD SECTION (BLACK) with third project -->
+  <section class="black-section">
     <div class="project-item">
-      <h3>Oriana: AI Investigative Assistant | Python/Streamlit Project</h3>
       <img src="assets/oriana-logo.png" alt="Oriana Logo" class="project-logo">
-      <ul>
-        <li>Developed sophisticated AI journalism tool using multiple AI APIs</li>
-        <li>Implemented advanced source management system</li>
-        <li>Created automated transcript generation pipeline</li>
-        <li>Engineered comprehensive error handling system</li>
-      </ul>
-      <div class="project-links">
-        <a href="https://github.com/FotiosMpouris/Oriana/tree/main" class="website-link" target="_blank">View Repository</a>
-        <a href="https://oriana.streamlit.app/" class="website-link" target="_blank">Launch App</a>
+      <div class="project-details">
+        <h3>Oriana: AI Investigative Assistant | Python/Streamlit Project</h3>
+        <ul>
+          <li>Developed sophisticated AI journalism tool using multiple AI APIs</li>
+          <li>Implemented advanced source management system</li>
+          <li>Created automated transcript generation pipeline</li>
+          <li>Engineered comprehensive error handling system</li>
+        </ul>
+        <div class="project-links">
+          <a href="https://github.com/FotiosMpouris/Oriana/tree/main" target="_blank">View Repository</a>
+          <a href="https://oriana.streamlit.app/" target="_blank">Launch App</a>
+        </div>
       </div>
     </div>
-    
   </section>
 
   <!-- Footer -->
@@ -168,5 +180,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
-
