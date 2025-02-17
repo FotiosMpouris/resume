@@ -177,30 +177,39 @@ body {
 
 /* Connect Section (Footer) */
 .connect-section {
-  background: var(--blood-red); /* All black bottom */
+  background: var(--blood-red);
   color: var(--white);
   text-align: center;
-  padding: 2rem;
+  /* Slightly less top padding to move “Connect” up,
+     and enough bottom padding to keep spacing. */
+  padding: 1.5rem 2rem;
 }
 
 .connect-section h2 {
-  margin-bottom: 1rem;
+  /* More bottom margin so it isn't too close to buttons */
+  margin-bottom: 1.5rem;
 }
 
-/* Connect links: black w/ white text (already black background, so we style the "buttons") */
+/* Ensure the three connect buttons are the same size */
 .connect-links {
   list-style: none;
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 0;
+  /* align-items: center;  optional if you want perfect vertical alignment */
 }
 
+/* Force identical width on each button */
 .connect-links li a {
-  background: #000;      /* black button */
-  color: #fff;           /* white text */
+  display: inline-block;
+  text-align: center;
+  background: #000;
+  color: #fff;
   border: 1px solid #000;
-  padding: 0.5rem 1rem;
+  /* Fixed width so they match exactly. Adjust if needed. */
+  width: 120px;
+  padding: 0.5rem 0;
   text-decoration: none;
   font-weight: bold;
   transition: background var(--transition-speed);
@@ -280,5 +289,3 @@ body {
     flex: none; /* reset flex for stacking */
   }
 }
-
-
