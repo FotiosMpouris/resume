@@ -3,7 +3,7 @@
 /* Root Variables */
 :root {
   --space-blue: #1c2951;     /* main navbar background */
-  --blood-red: #8B0000;      /* for visit website buttons */
+  --blood-red: #8B0000;      /* for contact buttons & certain highlights */
   --black: #000000;
   --white: #ffffff;
   --transition-speed: 0.3s;
@@ -16,11 +16,17 @@
   box-sizing: border-box;
 }
 
+/* Body & HTML to prevent horizontal scroll */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;  /* avoids horizontal scroll */
+}
+
 body {
   font-family: Arial, sans-serif;
   background: var(--white);
   color: var(--black);
-  overflow-x: hidden; /* Avoid horizontal scroll on mobile */
 }
 
 /* Navbar */
@@ -35,7 +41,6 @@ body {
   z-index: 999;
 }
 
-/* Left portion with GitHub icon & site name */
 .navbar-left {
   display: flex;
   align-items: center;
@@ -49,7 +54,6 @@ body {
   color: #ffffff;
   transition: color var(--transition-speed), transform var(--transition-speed);
 }
-
 .github-icon-link:hover .github-icon {
   color: red;
   transform: scale(1.2);
@@ -68,19 +72,17 @@ body {
   list-style: none;
   gap: 1.5rem;
 }
-
 .nav-links li a {
   color: #ffffff;
   text-decoration: none;
   font-weight: 500;
   transition: color var(--transition-speed);
 }
-
 .nav-links li a:hover {
   color: #ddd;
 }
 
-/* Hamburger Icon */
+/* Hamburger Icon (Mobile Only) */
 .hamburger {
   display: none; /* hidden on desktop by default */
   flex-direction: column;
@@ -88,7 +90,6 @@ body {
   cursor: pointer;
   z-index: 1001;
 }
-
 .hamburger span {
   width: 25px;
   height: 3px;
@@ -96,47 +97,17 @@ body {
   transition: all var(--transition-speed) ease-in-out;
 }
 
-/* Overlay Menu for Mobile */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--space-blue);
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+/* Show hamburger, hide nav-links on smaller screens */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
 }
 
-.overlay-menu {
-  list-style: none;
-  text-align: center;
-}
-
-.overlay-menu li {
-  margin: 1rem 0;
-}
-
-.overlay-menu li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.5rem;
-  transition: color var(--transition-speed);
-}
-
-.overlay-menu li a:hover {
-  color: #ddd;
-}
-
-/* When overlay is open, we show it */
-.overlay.open {
-  display: flex;
-}
-
-/* Hamburger active states (the 'X' transformation) */
+/* Hamburger 'X' transform */
 .hamburger.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -147,122 +118,174 @@ body {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Responsive: show hamburger & hide nav-links on mobile */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none; /* hide the desktop menu */
-  }
-  .hamburger {
-    display: flex; /* show the hamburger icon */
-  }
+/* ==========================
+   OVERLAY POP-UP STYLES
+   ========================== */
+
+/* Dark semi-transparent full-screen background */
+.overlay-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(28, 41, 81, 0.8); /* slightly transparent version of space-blue */
+  display: none;
+  z-index: 998;  /* behind the popup but above normal content */
 }
 
-/* Sections */
+/* The popup container itself */
+.overlay-popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 350px;
+  background: var(--space-blue);
+  border: 2px solid var(--blood-red);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 999; /* in front of overlay-bg */
+}
+
+/* The extra announcement or header inside the popup */
+.overlay-header p {
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* The pop-up menu list */
+.overlay-menu {
+  list-style: none;
+  text-align: center;
+}
+.overlay-menu li {
+  margin: 0.5rem 0;
+}
+.overlay-menu li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color var(--transition-speed);
+}
+.overlay-menu li a:hover {
+  color: var(--blood-red);
+}
+
+/* Classes that appear when hamburger is active */
+.overlay-bg.open {
+  display: block;
+}
+.overlay-popup.open {
+  display: flex; /* show the popup */
+}
+
+/* ==========================
+   SECTION STYLES
+   ========================== */
 .black-section {
   background: var(--black);
   color: var(--white);
   padding: 3rem 2rem;
 }
-
 .white-section {
   background: var(--white);
   color: var(--black);
   padding: 3rem 2rem;
 }
-
 .black-section h2, .white-section h2,
 .black-section h3, .white-section h3 {
   margin-bottom: 1rem;
 }
 
-/* Connect Section (Footer) */
+/* ==========================
+   CONNECT (FOOTER)
+   ========================== */
 .connect-section {
   background: var(--blood-red);
   color: var(--white);
   text-align: center;
-  /* Slightly less top padding to move “Connect” up,
-     and enough bottom padding to keep spacing. */
   padding: 1.5rem 2rem;
+  box-sizing: border-box;
 }
-
 .connect-section h2 {
-  /* More bottom margin so it isn't too close to buttons */
   margin-bottom: 1.5rem;
 }
-
-/* Ensure the three connect buttons are the same size */
 .connect-links {
   list-style: none;
   display: flex;
   gap: 1rem;
   justify-content: center;
   margin-top: 0;
-  /* align-items: center;  optional if you want perfect vertical alignment */
+  flex-wrap: wrap; /* so they wrap on very narrow screens */
 }
 
-/* Force identical width on each button */
+/* Force consistent width on desktop, but let them wrap on mobile */
 .connect-links li a {
   display: inline-block;
   text-align: center;
   background: #000;
   color: #fff;
   border: 1px solid #000;
-  /* Fixed width so they match exactly. Adjust if needed. */
-  width: 120px;
+  width: 120px; /* fixed for medium screens */
   padding: 0.5rem 0;
   text-decoration: none;
   font-weight: bold;
   transition: background var(--transition-speed);
 }
-
 .connect-links li a:hover {
   background: #333;
   border: 1px solid #333;
 }
 
-/* Website Layout */
+/* For very narrow screens, reduce button width a bit */
+@media (max-width: 400px) {
+  .connect-links li a {
+    width: 100px; /* narrower so they don't squash into screen edges */
+  }
+}
+
+/* ==========================
+   WEBSITE LAYOUT (Optional)
+   ========================== */
 .website-container {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  align-items: flex-start; /* top-align or center if you prefer */
+  align-items: flex-start;
   margin-top: 1.5rem;
 }
-
 .website-text {
   flex: 1;
   min-width: 280px;
 }
-
 .website-media {
   flex: 1;
   min-width: 280px;
   text-align: center;
 }
-
-/* Website Logos */
 .website-logo {
   width: 150px;
   height: auto;
   margin-bottom: 1rem;
 }
-
-/* Collage Image */
 .website-collage {
   max-width: 100%;
   height: auto;
-  border: 2px solid #ccc; /* optional border */
+  border: 2px solid #ccc;
 }
-
-/* Website Video */
 .website-video {
   max-width: 100%;
   height: auto;
-  border: 2px solid #ccc; /* optional border */
-  background: #000;       /* fallback background */
+  border: 2px solid #ccc;
+  background: #000;
 }
-
-/* "Visit Website" link uses blood-red background */
 .website-link {
   display: inline-block;
   background: var(--blood-red);
@@ -273,19 +296,28 @@ body {
   transition: background var(--transition-speed);
   border-radius: 4px;
 }
-
 .website-link:hover {
-  background: #b30000; /* darker red on hover */
+  background: #b30000;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .website-container {
-    flex-direction: column; /* stack text + media */
-  }
-  .website-text, 
-  .website-media {
-    width: 100%;
-    flex: none; /* reset flex for stacking */
-  }
+/* ==========================
+   MEDIA ITEMS (OPTIONAL)
+   ========================== */
+.media-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+.media-item {
+  flex: 1 1 300px;
+  text-align: center;
+}
+.media-item video,
+.media-item img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
 }
