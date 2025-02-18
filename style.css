@@ -2,8 +2,8 @@
 
 /* Root Variables */
 :root {
-  --space-blue: #1c2951;     /* main navbar background */
-  --blood-red: #8B0000;      /* for contact buttons & certain highlights */
+  --space-blue: #1c2951; /* main navbar background */
+  --blood-red: #8B0000;  /* for contact buttons & highlights */
   --black: #000000;
   --white: #ffffff;
   --transition-speed: 0.3s;
@@ -16,11 +16,10 @@
   box-sizing: border-box;
 }
 
-/* Body & HTML to prevent horizontal scroll */
 html, body {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;  /* avoids horizontal scroll */
+  overflow-x: hidden;  /* prevents horizontal scroll */
 }
 
 body {
@@ -29,10 +28,13 @@ body {
   color: var(--black);
 }
 
-/* Navbar */
+/* ==========================
+   NAVBAR
+   ========================== */
+
+/* We keep the navbar for desktop. On mobile, only the hamburger is shown. */
 .navbar {
-  position: sticky;
-  top: 0;
+  position: relative; /* normal position on desktop */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,6 +43,7 @@ body {
   z-index: 999;
 }
 
+/* Left portion: GitHub icon & site name */
 .navbar-left {
   display: flex;
   align-items: center;
@@ -59,14 +62,14 @@ body {
   transform: scale(1.2);
 }
 
-/* Site Name (next to GitHub icon) */
+/* Site Name */
 .site-name {
   color: #ffffff;
   font-size: 1.3rem;
   font-weight: bold;
 }
 
-/* Desktop Navigation Links */
+/* Desktop Nav Links */
 .nav-links {
   display: flex;
   list-style: none;
@@ -82,7 +85,7 @@ body {
   color: #ddd;
 }
 
-/* Hamburger Icon (Mobile Only) */
+/* Hamburger Icon */
 .hamburger {
   display: none; /* hidden on desktop by default */
   flex-direction: column;
@@ -96,18 +99,7 @@ body {
   background: #fff;
   transition: all var(--transition-speed) ease-in-out;
 }
-
-/* Show hamburger, hide nav-links on smaller screens */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-  .hamburger {
-    display: flex;
-  }
-}
-
-/* Hamburger 'X' transform */
+/* Hamburger 'X' transform when active */
 .hamburger.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -118,19 +110,46 @@ body {
   transform: translateY(-8px) rotate(-45deg);
 }
 
+/* MOBILE MEDIA QUERY: Hide the entire nav bar except hamburger. */
+@media (max-width: 768px) {
+  .navbar-left {
+    display: none; /* hide GitHub icon & site name */
+  }
+  .nav-links {
+    display: none; /* hide desktop links */
+  }
+
+  /* Make the navbar effectively "invisible," 
+     but keep 0 height if you want, or remove it. */
+  .navbar {
+    position: static; /* or relative, whichever you prefer */
+    padding: 0;       /* no top/bottom padding */
+  }
+
+  /* Hamburger pinned at top-right corner,
+     always visible as user scrolls. */
+  .hamburger {
+    display: flex;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1001;
+  }
+}
+
 /* ==========================
-   OVERLAY POP-UP STYLES
+   OVERLAY POP-UP
    ========================== */
 
-/* Dark semi-transparent full-screen background */
+/* The dark background behind the popup */
 .overlay-bg {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(28, 41, 81, 0.8); /* slightly transparent version of space-blue */
+  background: rgba(28, 41, 81, 0.8); /* semi-transparent space-blue */
   display: none;
-  z-index: 998;  /* behind the popup but above normal content */
+  z-index: 998;  /* behind the popup but above normal page */
 }
 
 /* The popup container itself */
@@ -139,7 +158,7 @@ body {
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  max-width: 350px;
+  max-width: 300px;
   background: var(--space-blue);
   border: 2px solid var(--blood-red);
   border-radius: 8px;
@@ -148,34 +167,33 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 1rem;
   z-index: 999; /* in front of overlay-bg */
 }
 
-/* The extra announcement or header inside the popup */
-.overlay-header p {
-  color: #fff;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-/* The pop-up menu list */
+/* The menu inside the popup */
 .overlay-menu {
   list-style: none;
-  text-align: center;
+  width: 100%;          /* so links stretch horizontally */
+  margin-top: 0.5rem;
+  padding: 0;
 }
 .overlay-menu li {
   margin: 0.5rem 0;
 }
 .overlay-menu li a {
+  display: block;          /* full-width clickable area */
+  padding: 0.75rem 1rem;
+  font-size: 1.2rem;       /* larger text */
+  background: #222;        /* dark background highlight */
   color: #fff;
+  border: 1px solid var(--blood-red);
   text-decoration: none;
-  font-size: 1.1rem;
-  transition: color var(--transition-speed);
+  transition: background var(--transition-speed);
+  text-align: center;
 }
 .overlay-menu li a:hover {
-  color: var(--blood-red);
+  background: #444;        /* slightly lighter highlight */
 }
 
 /* Classes that appear when hamburger is active */
@@ -183,7 +201,7 @@ body {
   display: block;
 }
 .overlay-popup.open {
-  display: flex; /* show the popup */
+  display: flex;
 }
 
 /* ==========================
@@ -223,17 +241,15 @@ body {
   gap: 1rem;
   justify-content: center;
   margin-top: 0;
-  flex-wrap: wrap; /* so they wrap on very narrow screens */
+  flex-wrap: wrap; /* wrap on very narrow screens */
 }
-
-/* Force consistent width on desktop, but let them wrap on mobile */
 .connect-links li a {
   display: inline-block;
   text-align: center;
   background: #000;
   color: #fff;
   border: 1px solid #000;
-  width: 120px; /* fixed for medium screens */
+  width: 120px; /* consistent width on normal screens */
   padding: 0.5rem 0;
   text-decoration: none;
   font-weight: bold;
@@ -243,16 +259,15 @@ body {
   background: #333;
   border: 1px solid #333;
 }
-
-/* For very narrow screens, reduce button width a bit */
+/* narrower for very small screens */
 @media (max-width: 400px) {
   .connect-links li a {
-    width: 100px; /* narrower so they don't squash into screen edges */
+    width: 100px;
   }
 }
 
 /* ==========================
-   WEBSITE LAYOUT (Optional)
+   OPTIONAL LAYOUTS
    ========================== */
 .website-container {
   display: flex;
@@ -300,9 +315,7 @@ body {
   background: #b30000;
 }
 
-/* ==========================
-   MEDIA ITEMS (OPTIONAL)
-   ========================== */
+/* Example for media items (if you use it) */
 .media-container {
   display: flex;
   flex-wrap: wrap;
