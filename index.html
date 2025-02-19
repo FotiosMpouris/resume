@@ -9,9 +9,9 @@
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar">
+<nav class="navbar" id="navbar">
+  <!-- Left portion: GitHub + Name (always visible) -->
   <div class="navbar-left">
-    <!-- GitHub Icon (glow red on hover) -->
     <a href="https://github.com/FotiosMpouris" target="_blank" rel="noopener noreferrer" 
        class="github-icon-link" title="Visit my GitHub Homepage">
       <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -26,24 +26,31 @@
           C20.565,22.093,24,17.595,24,12.297C24,5.67,18.627,0.297,12,0.297z"/>
       </svg>
     </a>
-    
-    <!-- Your Name -->
     <span class="site-name">Fotios Mpouris</span>
   </div>
 
-  <!-- Hamburger for Mobile -->
+  <!-- Hamburger for Mobile (hidden on desktop) -->
   <div class="hamburger" id="hamburger">
     <span></span>
     <span></span>
     <span></span>
   </div>
 
-  <!-- Overlay Menu (hidden by default) -->
- <!-- Dark background for popup -->
+  <!-- Desktop Nav Links (hidden on mobile) -->
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="tech-projects.html">Tech Projects</a></li>
+    <li><a href="websites.html">Websites</a></li>
+    <li><a href="multimedia.html">Multimedia</a></li>
+    <li><a href="unity-projects.html">Unity Projects</a></li>
+  </ul>
+</nav>
+
+<!-- DARK OVERLAY BACKGROUND (for mobile menu) -->
 <div class="overlay-bg" id="overlay-bg"></div>
 
-<!-- Centered popup container -->
-<div class="overlay-bg" id="overlay-bg"></div>
+<!-- POPUP MENU (for mobile) -->
 <div class="overlay-popup" id="overlay-popup">
   <ul class="overlay-menu">
     <li><a href="index.html">Home</a></li>
@@ -54,17 +61,6 @@
     <li><a href="unity-projects.html">Unity Projects</a></li>
   </ul>
 </div>
-
-  <!-- Desktop Nav Menu -->
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="experience.html">Experience</a></li>
-    <li><a href="tech-projects.html">Tech Projects</a></li>
-    <li><a href="websites.html">Websites</a></li>
-    <li><a href="multimedia.html">Multimedia</a></li>
-    <li><a href="unity-projects.html">Unity Projects</a></li>
-  </ul>
-</nav>
 
 <!-- HOME CONTENT -->
 
