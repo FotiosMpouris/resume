@@ -27,10 +27,10 @@ body {
 }
 
 /* ==========================
-   NAVBAR
+   NAVBAR (Fixed at top)
    ========================== */
 
-/* Fixed at top, standard ~80px height */
+/* Standard ~80px height. Desktop: show links, Mobile: show hamburger. */
 .navbar {
   position: fixed;
   top: 0; left: 0;
@@ -45,15 +45,11 @@ body {
   z-index: 999;
 }
 
-/* Translucent background if scrolled (desktop) */
-.navbar.scrolled {
-  background: rgba(28, 41, 81, 0.5);
-}
-
-/* More opaque on hover (optional) */
-.navbar.scrolled:hover {
-  background: rgba(28, 41, 81, 0.9);
-}
+/* If you have scroll-based transparency, you can add the .scrolled logic:
+   .navbar.scrolled { background: rgba(28, 41, 81, 0.5); }
+   .navbar.scrolled:hover { background: rgba(28, 41, 81, 0.9); }
+   If you do not want that, you can remove it.
+*/
 
 /* Left portion: GitHub + name */
 .navbar-left {
@@ -93,7 +89,7 @@ body {
   color: #ddd;
 }
 
-/* Hamburger Icon (mobile only) */
+/* Hamburger Icon (Mobile Only) */
 .hamburger {
   display: none; 
   flex-direction: column;
@@ -107,11 +103,11 @@ body {
   background: #fff;
   transition: all var(--transition-speed) ease-in-out;
 }
-/* Red lines after scroll on mobile */
-.hamburger.scrolled span {
-  background: var(--blood-red);
-}
-/* 'X' transform */
+/* If you want the lines to turn red on scroll, 
+   your script can toggle .hamburger.scrolled span { background: var(--blood-red); } 
+*/
+
+/* 'X' transform when active */
 .hamburger.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -122,15 +118,11 @@ body {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* ==========================
-   MEDIA QUERY (MOBILE)
-   ========================== */
+/* Hide the desktop nav links on mobile, show hamburger */
 @media (max-width: 768px) {
-  /* Hide the desktop nav links */
   .nav-links {
     display: none;
   }
-  /* Show the hamburger */
   .hamburger {
     display: flex;
   }
@@ -155,7 +147,7 @@ body {
 }
 
 /* ==========================
-   CONNECT (FOOTER)
+   CONNECT FOOTER
    ========================== */
 .connect-section {
   background: var(--blood-red);
@@ -198,7 +190,7 @@ body {
 }
 
 /* ==========================
-   OVERLAY MENU (MOBILE)
+   OVERLAY MENU (Mobile)
    ========================== */
 .overlay-bg {
   position: fixed;
@@ -254,4 +246,83 @@ body {
 }
 .overlay-popup.open {
   display: flex;
+}
+
+/* ==========================
+   OPTIONAL LAYOUTS (fixes big PNGs)
+   ========================== */
+
+/* Container for websites: text + media side by side */
+.website-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+}
+/* Left side text area */
+.website-text {
+  flex: 1;
+  min-width: 280px; /* so it doesn't get too narrow */
+}
+/* Right side (images / videos) */
+.website-media {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+}
+
+/* Force logos to be smaller */
+.website-logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+/* Collage images also limited, with optional border */
+.website-collage {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #ccc; 
+}
+/* Website video gets similar constraints */
+.website-video {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
+  background: #000;
+}
+
+/* “Visit Website” link button */
+.website-link {
+  display: inline-block;
+  background: var(--blood-red);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  transition: background var(--transition-speed);
+  border-radius: 4px;
+}
+.website-link:hover {
+  background: #b30000;
+}
+
+/* Example for multimedia containers, if used */
+.media-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+.media-item {
+  flex: 1 1 300px;
+  text-align: center;
+}
+.media-item video,
+.media-item img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
 }
