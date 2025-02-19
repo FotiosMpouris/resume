@@ -19,7 +19,7 @@
 html, body {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;  /* prevents horizontal scroll on mobile */
+  overflow-x: hidden;  /* prevents horizontal scroll */
 }
 
 body {
@@ -29,35 +29,40 @@ body {
 }
 
 /* ==========================
-   NAVBAR & HERO
+   NAVBAR
    ========================== */
+
+/* We keep the navbar for desktop. On mobile, only the hamburger is shown. */
 .navbar {
-  /* remains at the top, does NOT follow scroll
-     unless you specifically want .navbar { position: sticky; top: 0; } */
-  background: var(--space-blue);
-  padding: 1rem 2rem;
+  position: relative; /* normal position on desktop */
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: var(--space-blue);
+  padding: 1rem 2rem;
   z-index: 999;
 }
 
-/* Left portion: GitHub + Name */
+/* Left portion: GitHub icon & site name */
 .navbar-left {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
+
+/* GitHub Icon (glow red on hover) */
 .github-icon {
   width: 40px;
   height: 40px;
-  color: #fff;
+  color: #ffffff;
   transition: color var(--transition-speed), transform var(--transition-speed);
 }
 .github-icon-link:hover .github-icon {
   color: red;
   transform: scale(1.2);
 }
+
+/* Site Name */
 .site-name {
   color: #ffffff;
   font-size: 1.3rem;
@@ -66,8 +71,8 @@ body {
 
 /* Desktop Nav Links */
 .nav-links {
-  list-style: none;
   display: flex;
+  list-style: none;
   gap: 1.5rem;
 }
 .nav-links li a {
@@ -80,17 +85,11 @@ body {
   color: #ddd;
 }
 
-/* ==========================
-   HAMBURGER ICON
-   ========================== */
-/* Hidden by default. We’ll show it once the user scrolls. */
+/* Hamburger Icon */
 .hamburger {
-  display: none; /* will be toggled by JS after scrolling */
+  display: none; /* hidden on desktop by default */
   flex-direction: column;
   gap: 5px;
-  position: fixed; /* pinned at top-right */
-  top: 1rem;
-  right: 1rem;
   cursor: pointer;
   z-index: 1001;
 }
@@ -100,7 +99,7 @@ body {
   background: #fff;
   transition: all var(--transition-speed) ease-in-out;
 }
-/* 'X' transform when active */
+/* Hamburger 'X' transform when active */
 .hamburger.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -111,20 +110,49 @@ body {
   transform: translateY(-8px) rotate(-45deg);
 }
 
+/* MOBILE MEDIA QUERY: Hide the entire nav bar except hamburger. */
+@media (max-width: 768px) {
+  .navbar-left {
+    display: none; /* hide GitHub icon & site name */
+  }
+  .nav-links {
+    display: none; /* hide desktop links */
+  }
+
+  /* Make the navbar effectively "invisible," 
+     but keep 0 height if you want, or remove it. */
+  .navbar {
+    position: static; /* or relative, whichever you prefer */
+    padding: 0;       /* no top/bottom padding */
+  }
+
+  /* Hamburger pinned at top-right corner,
+     always visible as user scrolls. */
+  .hamburger {
+    display: flex;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1001;
+  }
+}
+
 /* ==========================
    OVERLAY POP-UP
    ========================== */
-/* Dark background behind popup */
+
+/* The dark background behind the popup */
 .overlay-bg {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(28, 41, 81, 0.8); /* semi-transparent */
+  background: rgba(28, 41, 81, 0.8); /* semi-transparent space-blue */
   display: none;
-  z-index: 998;
+  z-index: 998;  /* behind the popup but above normal page */
 }
-/* Pop-up container */
+
+/* The popup container itself */
 .overlay-popup {
   position: fixed;
   top: 50%; left: 50%;
@@ -140,12 +168,13 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  z-index: 999;
+  z-index: 999; /* in front of overlay-bg */
 }
-/* Overlay menu links */
+
+/* The menu inside the popup */
 .overlay-menu {
   list-style: none;
-  width: 100%;
+  width: 100%;          /* so links stretch horizontally */
   margin-top: 0.5rem;
   padding: 0;
 }
@@ -153,10 +182,10 @@ body {
   margin: 0.5rem 0;
 }
 .overlay-menu li a {
-  display: block;
+  display: block;          /* full-width clickable area */
   padding: 0.75rem 1rem;
-  font-size: 1.2rem;
-  background: #222;
+  font-size: 1.2rem;       /* larger text */
+  background: #222;        /* dark background highlight */
   color: #fff;
   border: 1px solid var(--blood-red);
   text-decoration: none;
@@ -164,9 +193,10 @@ body {
   text-align: center;
 }
 .overlay-menu li a:hover {
-  background: #444;
+  background: #444;        /* slightly lighter highlight */
 }
-/* Toggled by JS */
+
+/* Classes that appear when hamburger is active */
 .overlay-bg.open {
   display: block;
 }
@@ -211,7 +241,7 @@ body {
   gap: 1rem;
   justify-content: center;
   margin-top: 0;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* wrap on very narrow screens */
 }
 .connect-links li a {
   display: inline-block;
@@ -219,7 +249,7 @@ body {
   background: #000;
   color: #fff;
   border: 1px solid #000;
-  width: 120px;
+  width: 120px; /* consistent width on normal screens */
   padding: 0.5rem 0;
   text-decoration: none;
   font-weight: bold;
@@ -229,7 +259,7 @@ body {
   background: #333;
   border: 1px solid #333;
 }
-/* narrower for tiny screens */
+/* narrower for very small screens */
 @media (max-width: 400px) {
   .connect-links li a {
     width: 100px;
@@ -285,7 +315,7 @@ body {
   background: #b30000;
 }
 
-/* For any media items you use: */
+/* Example for media items (if you use it) */
 .media-container {
   display: flex;
   flex-wrap: wrap;
@@ -304,3 +334,6 @@ body {
   height: auto;
   border: 2px solid #ccc;
 }
+
+
+
