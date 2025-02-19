@@ -2,8 +2,8 @@
 
 /* Root Variables */
 :root {
-  --space-blue: #1c2951; /* main hero/nav background */
-  --blood-red: #8B0000;
+  --space-blue: #1c2951; 
+  --blood-red: #8B0000;  
   --black: #000000;
   --white: #ffffff;
   --transition-speed: 0.3s;
@@ -18,7 +18,7 @@
 html, body {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden; /* prevent horizontal scroll */
+  overflow-x: hidden; 
 }
 body {
   font-family: Arial, sans-serif;
@@ -27,57 +27,40 @@ body {
 }
 
 /* ==========================
-   HERO SECTION
+   NAVBAR
    ========================== */
 
-.hero {
+/* Fixed at top, standard ~80px height */
+.navbar {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
-  height: 300px; /* or try 100vh if you want fullscreen hero */
+  height: 80px;
   background: var(--space-blue);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 2rem;
   transition: background var(--transition-speed);
-  z-index: 999; /* above main content */
+  z-index: 999;
 }
 
-/* Translucent when scrolled (desktop or wide screens) */
-.hero.scrolled {
+/* Translucent background if scrolled (desktop) */
+.navbar.scrolled {
   background: rgba(28, 41, 81, 0.5);
 }
 
-/* More opaque on hover (desktop) */
-.hero.scrolled:hover {
+/* More opaque on hover (optional) */
+.navbar.scrolled:hover {
   background: rgba(28, 41, 81, 0.9);
 }
 
-/* Hero content container */
-.hero-content {
-  width: 90%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Left side inside hero */
-.hero-left {
+/* Left portion: GitHub + name */
+.navbar-left {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-
-/* Example styling for your name */
-.hero-name {
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-/* GitHub icon in hero */
 .github-icon {
   width: 40px;
   height: 40px;
@@ -88,19 +71,35 @@ body {
   color: red;
   transform: scale(1.2);
 }
+.site-name {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
 
-/* ==========================
-   HAMBURGER
-   ========================== */
-
-/* The hamburger is inside .hero, so it's pinned at top-right. */
-.hamburger {
+/* Desktop Navigation Links */
+.nav-links {
   display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+.nav-links li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-speed);
+}
+.nav-links li a:hover {
+  color: #ddd;
+}
+
+/* Hamburger Icon (mobile only) */
+.hamburger {
+  display: none; 
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
   transition: background var(--transition-speed);
-  /* no explicit position needed, the hero-content uses justify-content: space-between */
 }
 .hamburger span {
   width: 25px;
@@ -108,13 +107,11 @@ body {
   background: #fff;
   transition: all var(--transition-speed) ease-in-out;
 }
-
-/* If user scrolled, color lines blood-red (mobile or any screen) */
+/* Red lines after scroll on mobile */
 .hamburger.scrolled span {
   background: var(--blood-red);
 }
-
-/* If hamburger is active (the X) */
+/* 'X' transform */
 .hamburger.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -126,14 +123,22 @@ body {
 }
 
 /* ==========================
-   MAIN CONTENT
+   MEDIA QUERY (MOBILE)
    ========================== */
-.main-content {
-  /* push content below hero's 300px height */
-  margin-top: 300px;
+@media (max-width: 768px) {
+  /* Hide the desktop nav links */
+  .nav-links {
+    display: none;
+  }
+  /* Show the hamburger */
+  .hamburger {
+    display: flex;
+  }
 }
 
-/* Sections */
+/* ==========================
+   SECTIONS
+   ========================== */
 .black-section {
   background: var(--black);
   color: var(--white);
@@ -193,9 +198,8 @@ body {
 }
 
 /* ==========================
-   OVERLAY POP-UP MENU
+   OVERLAY MENU (MOBILE)
    ========================== */
-
 .overlay-bg {
   position: fixed;
   top: 0; left: 0;
@@ -250,18 +254,4 @@ body {
 }
 .overlay-popup.open {
   display: flex;
-}
-
-/* ==========================
-   MEDIA QUERIES & MOBILE
-   ========================== */
-/* If you want any changes for mobile, add them here. */
-@media (max-width: 768px) {
-  /* Example: if you want smaller hero on mobile, do so here */
-  .hero {
-    height: 250px;
-  }
-  .hero-name {
-    font-size: 1.2rem;
-  }
 }
