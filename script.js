@@ -4,37 +4,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const hamburger = document.getElementById("hamburger");
   const overlayBg = document.getElementById("overlay-bg");
   const overlayPopup = document.getElementById("overlay-popup");
-  const hero = document.getElementById("hero");
 
-  // 1) SCROLL EVENT: Add or remove .scrolled class
+  // We'll grab the .navbar via class name or ID.
+  // Easiest is to give your nav an id="navbar" in the HTML.
+  const navbar = document.getElementById("navbar");
+
+  // 1) Scroll Event: Toggle .scrolled on the navbar for desktop effect
   window.addEventListener("scroll", () => {
     if (window.scrollY > 0) {
-      hero.classList.add("scrolled");
-      hamburger.classList.add("scrolled");
+      navbar.classList.add("scrolled");
     } else {
-      hero.classList.remove("scrolled");
-      hamburger.classList.remove("scrolled");
+      navbar.classList.remove("scrolled");
     }
   });
 
-  // 2) HAMBURGER CLICK
+  // 2) Hamburger Click
   hamburger.addEventListener("click", () => {
-    // Toggle the hamburger 'X' state
+    // Toggle the hamburger 'X'
     hamburger.classList.toggle("active");
 
-    // Toggle the overlay background and popup
+    // Toggle the overlay
     overlayBg.classList.toggle("open");
     overlayPopup.classList.toggle("open");
   });
 
-  // 3) CLICKING ON THE BACKGROUND
+  // 3) Close overlay if user clicks background
   overlayBg.addEventListener("click", () => {
     hamburger.classList.remove("active");
     overlayBg.classList.remove("open");
     overlayPopup.classList.remove("open");
   });
 
-  // 4) CLICKING A MENU LINK
+  // 4) Close overlay when clicking a menu link
   const menuLinks = document.querySelectorAll(".overlay-menu a");
   menuLinks.forEach(link => {
     link.addEventListener("click", () => {
