@@ -8,40 +8,49 @@
 </head>
 <body>
 
-<!-- HERO SECTION (FIXED) -->
-<div class="hero" id="hero">
-  <div class="hero-content">
-    <!-- Left side: GitHub link + name (or any design you like) -->
-    <div class="hero-left">
-      <a href="https://github.com/FotiosMpouris" target="_blank" class="github-icon-link">
-        <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M12,0.297C5.373,0.297,0,5.67,0,12.297c0,5.302,3.438,9.8,8.205,11.387
-            c0.6,0.113,0.82-0.258,0.82-0.577c0-0.285-0.01-1.04-0.015-2.04c-3.338,0.724-4.042-1.61-4.042-1.61
-            c-0.546-1.385-1.333-1.754-1.333-1.754c-1.089-0.744,0.084-0.729,0.084-0.729c1.205,0.084,1.84,1.236,1.84,1.236
-            c1.07,1.835,2.807,1.305,3.495,0.997c0.108-0.776,0.42-1.305,0.763-1.605c-2.665-0.303-5.466-1.333-5.466-5.931
-            c0-1.31,0.47-2.381,1.236-3.221c-0.123-0.303-0.535-1.523,0.117-3.176c0,0,1.008-0.322,3.301,1.23
-            c0.957-0.266,1.983-0.399,3.003-0.404c1.02,0.005,2.047,0.138,3.006,0.404c2.291-1.552,3.297-1.23,3.297-1.23
-            c0.71,0.987,0.408,2.172,0.2,3.221c0.77,0.84,1.235,1.911,1.235,3.221c0,4.61-2.807,5.625-5.479,5.921
-            c0.43,0.37,0.823,1.102,0.823,2.222c0,1.606-0.015,2.896-0.015,3.286c0,0.319,0.216,0.694,0.825,0.576
-            C20.565,22.093,24,17.595,24,12.297C24,5.67,18.627,0.297,12,0.297z"/>
-        </svg>
-      </a>
-      <h1 class="hero-name">Fotios Mpouris</h1>
-    </div>
-
-    <!-- Right side: Hamburger icon pinned in hero -->
-    <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+<!-- NAVBAR (fixed at top) -->
+<nav class="navbar" id="navbar">
+  <!-- Left portion: GitHub + Name (always visible) -->
+  <div class="navbar-left">
+    <a href="https://github.com/FotiosMpouris" target="_blank" rel="noopener noreferrer" 
+       class="github-icon-link" title="Visit my GitHub Homepage">
+      <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M12,0.297C5.373,0.297,0,5.67,0,12.297c0,5.302,3.438,9.8,8.205,11.387
+          c0.6,0.113,0.82-0.258,0.82-0.577c0-0.285-0.01-1.04-0.015-2.04c-3.338,0.724-4.042-1.61-4.042-1.61
+          c-0.546-1.385-1.333-1.754-1.333-1.754c-1.089-0.744,0.084-0.729,0.084-0.729c1.205,0.084,1.84,1.236,1.84,1.236
+          c1.07,1.835,2.807,1.305,3.495,0.997c0.108-0.776,0.42-1.305,0.763-1.605c-2.665-0.303-5.466-1.333-5.466-5.931
+          c0-1.31,0.47-2.381,1.236-3.221c-0.123-0.303-0.535-1.523,0.117-3.176c0,0,1.008-0.322,3.301,1.23
+          c0.957-0.266,1.983-0.399,3.003-0.404c1.02,0.005,2.047,0.138,3.006,0.404c2.291-1.552,3.297-1.23,3.297-1.23
+          c0.71,0.987,0.408,2.172,0.2,3.221c0.77,0.84,1.235,1.911,1.235,3.221c0,4.61-2.807,5.625-5.479,5.921
+          c0.43,0.37,0.823,1.102,0.823,2.222c0,1.606-0.015,2.896-0.015,3.286c0,0.319,0.216,0.694,0.825,0.576
+          C20.565,22.093,24,17.595,24,12.297C24,5.67,18.627,0.297,12,0.297z"/>
+      </svg>
+    </a>
+    <span class="site-name">Fotios Mpouris</span>
   </div>
-</div>
 
-<!-- OVERLAY BACKGROUND -->
+  <!-- Hamburger for Mobile (hidden on desktop) -->
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Desktop Nav Links (hidden on mobile) -->
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="tech-projects.html">Tech Projects</a></li>
+    <li><a href="websites.html">Websites</a></li>
+    <li><a href="multimedia.html">Multimedia</a></li>
+    <li><a href="unity-projects.html">Unity Projects</a></li>
+  </ul>
+</nav>
+
+<!-- DARK OVERLAY BACKGROUND (for mobile menu) -->
 <div class="overlay-bg" id="overlay-bg"></div>
 
-<!-- OVERLAY POPUP MENU -->
+<!-- POPUP MENU (for mobile) -->
 <div class="overlay-popup" id="overlay-popup">
   <ul class="overlay-menu">
     <li><a href="index.html">Home</a></li>
@@ -53,12 +62,11 @@
   </ul>
 </div>
 
-<!-- MAIN CONTENT: Push below hero with margin-top -->
-<div class="main-content">
-  
-  <!-- EXPERIENCE SECTIONS -->
+<!-- MAIN CONTENT (just starts after the fixed nav) -->
+<main style="margin-top:80px;">
   <section class="black-section">
     <h2>Professional Experience</h2>
+
     <h3>Technical Lead & Full-Stack Developer | Hybrid</h3>
     <p>Startup Investment Project | Massachusetts | 2024 - Present</p>
     <ul>
@@ -129,7 +137,7 @@
     </ul>
   </section>
 
-  <!-- CONNECT SECTION -->
+  <!-- CONNECT FOOTER -->
   <footer class="connect-section">
     <h2>Connect</h2>
     <ul class="connect-links">
@@ -138,8 +146,7 @@
       <li><a href="https://www.behance.net/fotiosmpouris" target="_blank">Behance</a></li>
     </ul>
   </footer>
-
-</div> <!-- end main-content -->
+</main>
 
 <script src="script.js"></script>
 </body>
