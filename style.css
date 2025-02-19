@@ -15,11 +15,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 html, body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden; 
 }
+
 body {
   font-family: Arial, sans-serif;
   background: var(--white);
@@ -30,10 +32,11 @@ body {
    NAVBAR (Fixed at top)
    ========================== */
 
-/* Standard ~80px height. Desktop: show links, Mobile: show hamburger. */
+/* 80px tall, pinned at top; transitions to translucent on scroll. */
 .navbar {
   position: fixed;
-  top: 0; left: 0;
+  top: 0; 
+  left: 0;
   width: 100%;
   height: 80px;
   background: var(--space-blue);
@@ -45,13 +48,17 @@ body {
   z-index: 999;
 }
 
-/* If you have scroll-based transparency, you can add the .scrolled logic:
-   .navbar.scrolled { background: rgba(28, 41, 81, 0.5); }
-   .navbar.scrolled:hover { background: rgba(28, 41, 81, 0.9); }
-   If you do not want that, you can remove it.
-*/
+/* Translucent background if scrolled (desktop) */
+.navbar.scrolled {
+  background: rgba(28, 41, 81, 0.5);
+}
 
-/* Left portion: GitHub + name */
+/* More opaque on hover when scrolled (desktop) */
+.navbar.scrolled:hover {
+  background: rgba(28, 41, 81, 0.9);
+}
+
+/* Left portion: GitHub + site name */
 .navbar-left {
   display: flex;
   align-items: center;
@@ -73,7 +80,7 @@ body {
   font-weight: bold;
 }
 
-/* Desktop Navigation Links */
+/* Desktop Nav Links */
 .nav-links {
   display: flex;
   list-style: none;
@@ -89,7 +96,7 @@ body {
   color: #ddd;
 }
 
-/* Hamburger Icon (Mobile Only) */
+/* Hamburger Icon (mobile only) */
 .hamburger {
   display: none; 
   flex-direction: column;
@@ -97,15 +104,18 @@ body {
   cursor: pointer;
   transition: background var(--transition-speed);
 }
+
 .hamburger span {
   width: 25px;
   height: 3px;
   background: #fff;
   transition: all var(--transition-speed) ease-in-out;
 }
-/* If you want the lines to turn red on scroll, 
-   your script can toggle .hamburger.scrolled span { background: var(--blood-red); } 
-*/
+
+/* Lines turn red when scrolled on mobile */
+.hamburger.scrolled span {
+  background: var(--blood-red);
+}
 
 /* 'X' transform when active */
 .hamburger.active span:nth-child(1) {
@@ -118,7 +128,7 @@ body {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Hide the desktop nav links on mobile, show hamburger */
+/* Hide desktop nav, show hamburger on smaller screens */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -147,7 +157,7 @@ body {
 }
 
 /* ==========================
-   CONNECT FOOTER
+   CONNECT (Footer)
    ========================== */
 .connect-section {
   background: var(--blood-red);
@@ -194,16 +204,22 @@ body {
    ========================== */
 .overlay-bg {
   position: fixed;
-  top: 0; left: 0;
+  top: 0; 
+  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(28,41,81,0.8);
   display: none;
   z-index: 998;
 }
+.overlay-bg.open {
+  display: block;
+}
+
 .overlay-popup {
   position: fixed;
-  top: 50%; left: 50%;
+  top: 50%; 
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
   max-width: 300px;
@@ -218,6 +234,10 @@ body {
   padding: 1rem;
   z-index: 999;
 }
+.overlay-popup.open {
+  display: flex;
+}
+
 .overlay-menu {
   list-style: none;
   width: 100%;
@@ -241,18 +261,12 @@ body {
 .overlay-menu li a:hover {
   background: #444;
 }
-.overlay-bg.open {
-  display: block;
-}
-.overlay-popup.open {
-  display: flex;
-}
 
 /* ==========================
-   OPTIONAL LAYOUTS (fixes big PNGs)
+   LAYOUT FOR WEBSITES / IMAGES
    ========================== */
 
-/* Container for websites: text + media side by side */
+/* Container for side-by-side layout */
 .website-container {
   display: flex;
   flex-wrap: wrap;
@@ -260,31 +274,35 @@ body {
   align-items: flex-start;
   margin-top: 1.5rem;
 }
-/* Left side text area */
+
+/* Left-side text block */
 .website-text {
   flex: 1;
-  min-width: 280px; /* so it doesn't get too narrow */
+  min-width: 280px;
 }
-/* Right side (images / videos) */
+
+/* Right-side media (images/videos) */
 .website-media {
   flex: 1;
   min-width: 280px;
   text-align: center;
 }
 
-/* Force logos to be smaller */
+/* Keep logos smaller */
 .website-logo {
   width: 150px;
   height: auto;
   margin-bottom: 1rem;
 }
-/* Collage images also limited, with optional border */
+
+/* Keep collage images from being huge */
 .website-collage {
   max-width: 100%;
   height: auto;
-  border: 2px solid #ccc; 
+  border: 2px solid #ccc;
 }
-/* Website video gets similar constraints */
+
+/* Constrain videos similarly */
 .website-video {
   max-width: 100%;
   height: auto;
@@ -292,7 +310,7 @@ body {
   background: #000;
 }
 
-/* “Visit Website” link button */
+/* “Visit Website” style button */
 .website-link {
   display: inline-block;
   background: var(--blood-red);
@@ -307,7 +325,7 @@ body {
   background: #b30000;
 }
 
-/* Example for multimedia containers, if used */
+/* Example for multimedia items (if used) */
 .media-container {
   display: flex;
   flex-wrap: wrap;
