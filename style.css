@@ -2,7 +2,7 @@
 
 /* Root Variables */
 :root {
-  --space-blue: #1c2951;     /* main navbar background */
+  --space-blue: #1c2951; /* main hero/nav background */
   --blood-red: #8B0000;
   --black: #000000;
   --white: #ffffff;
@@ -27,34 +27,57 @@ body {
 }
 
 /* ==========================
-   NAVBAR
+   HERO SECTION
    ========================== */
-.navbar {
-  position: sticky; /* stays at top when scrolling */
+
+.hero {
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px; /* or try 100vh if you want fullscreen hero */
+  background: var(--space-blue);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: var(--space-blue);
-  /* The original short height you had: padding top/bottom = ~1rem */
-  padding: 1rem 2rem;
-  z-index: 999;
+  justify-content: center;
   transition: background var(--transition-speed);
+  z-index: 999; /* above main content */
 }
 
-/* Translucent background once user scrolls (desktop) */
-.navbar.scrolled {
-  background: rgba(28,41,81,0.7);
+/* Translucent when scrolled (desktop or wide screens) */
+.hero.scrolled {
+  background: rgba(28, 41, 81, 0.5);
 }
 
-/* Left portion with GitHub icon & site name */
-.navbar-left {
+/* More opaque on hover (desktop) */
+.hero.scrolled:hover {
+  background: rgba(28, 41, 81, 0.9);
+}
+
+/* Hero content container */
+.hero-content {
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Left side inside hero */
+.hero-left {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-/* GitHub Icon (glow red on hover) */
+/* Example styling for your name */
+.hero-name {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* GitHub icon in hero */
 .github-icon {
   width: 40px;
   height: 40px;
@@ -66,39 +89,18 @@ body {
   transform: scale(1.2);
 }
 
-/* Site Name (next to GitHub icon) */
-.site-name {
-  color: #ffffff;
-  font-size: 1.3rem;
-  font-weight: bold;
-}
-
-/* Desktop Nav Links */
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 1.5rem;
-}
-.nav-links li a {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color var(--transition-speed);
-}
-/* On hover, let them see the link text color change */
-.nav-links li a:hover {
-  color: var(--blood-red); /* or #ddd if you prefer something subtler */
-}
-
 /* ==========================
-   HAMBURGER (mobile only)
+   HAMBURGER
    ========================== */
+
+/* The hamburger is inside .hero, so it's pinned at top-right. */
 .hamburger {
-  display: none; /* hidden on desktop by default */
+  display: flex;
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
-  z-index: 1001;
+  transition: background var(--transition-speed);
+  /* no explicit position needed, the hero-content uses justify-content: space-between */
 }
 .hamburger span {
   width: 25px;
@@ -107,7 +109,12 @@ body {
   transition: all var(--transition-speed) ease-in-out;
 }
 
-/* Hamburger 'X' transform when active */
+/* If user scrolled, color lines blood-red (mobile or any screen) */
+.hamburger.scrolled span {
+  background: var(--blood-red);
+}
+
+/* If hamburger is active (the X) */
 .hamburger.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -118,80 +125,15 @@ body {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Show hamburger only on small screens, hide nav-links on small screens */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-  .hamburger {
-    display: flex;
-  }
-}
-
 /* ==========================
-   OVERLAY POP-UP MENU
+   MAIN CONTENT
    ========================== */
-.overlay-bg {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(28,41,81,0.8);
-  display: none;
-  z-index: 998;
-}
-.overlay-popup {
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  max-width: 300px;
-  background: var(--space-blue);
-  border: 2px solid var(--blood-red);
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  z-index: 999;
-}
-.overlay-menu {
-  list-style: none;
-  width: 100%;
-  margin-top: 0.5rem;
-  padding: 0;
-}
-.overlay-menu li {
-  margin: 0.5rem 0;
-}
-.overlay-menu li a {
-  display: block;
-  padding: 0.75rem 1rem;
-  font-size: 1.2rem;
-  background: #222;
-  color: #fff;
-  border: 1px solid var(--blood-red);
-  text-decoration: none;
-  transition: background var(--transition-speed);
-  text-align: center;
-}
-.overlay-menu li a:hover {
-  background: #444;
+.main-content {
+  /* push content below hero's 300px height */
+  margin-top: 300px;
 }
 
-/* Toggling open classes */
-.overlay-bg.open {
-  display: block;
-}
-.overlay-popup.open {
-  display: flex;
-}
-
-/* ==========================
-   SECTION STYLES
-   ========================== */
+/* Sections */
 .black-section {
   background: var(--black);
   color: var(--white);
@@ -244,8 +186,6 @@ body {
   background: #333;
   border: 1px solid #333;
 }
-
-/* narrower for very small screens */
 @media (max-width: 400px) {
   .connect-links li a {
     width: 100px;
@@ -253,70 +193,75 @@ body {
 }
 
 /* ==========================
-   OPTIONAL LAYOUTS (If used)
+   OVERLAY POP-UP MENU
    ========================== */
-.website-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: flex-start;
-  margin-top: 1.5rem;
+
+.overlay-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(28,41,81,0.8);
+  display: none;
+  z-index: 998;
 }
-.website-text {
-  flex: 1;
-  min-width: 280px;
+.overlay-popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 300px;
+  background: var(--space-blue);
+  border: 2px solid var(--blood-red);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 999;
 }
-.website-media {
-  flex: 1;
-  min-width: 280px;
-  text-align: center;
-}
-.website-logo {
-  width: 150px;
-  height: auto;
-  margin-bottom: 1rem;
-}
-.website-collage {
-  max-width: 100%;
-  height: auto;
-  border: 2px solid #ccc;
-}
-.website-video {
-  max-width: 100%;
-  height: auto;
-  border: 2px solid #ccc;
-  background: #000;
-}
-.website-link {
-  display: inline-block;
-  background: var(--blood-red);
-  color: var(--white);
-  padding: 0.5rem 1rem;
+.overlay-menu {
+  list-style: none;
+  width: 100%;
   margin-top: 0.5rem;
+  padding: 0;
+}
+.overlay-menu li {
+  margin: 0.5rem 0;
+}
+.overlay-menu li a {
+  display: block;
+  padding: 0.75rem 1rem;
+  font-size: 1.2rem;
+  background: #222;
+  color: #fff;
+  border: 1px solid var(--blood-red);
   text-decoration: none;
   transition: background var(--transition-speed);
-  border-radius: 4px;
-}
-.website-link:hover {
-  background: #b30000;
-}
-
-/* If you have any special "media-container" or such, keep them here. */
-.media-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem 0;
-}
-.media-item {
-  flex: 1 1 300px;
   text-align: center;
 }
-.media-item video,
-.media-item img {
-  max-width: 100%;
-  height: auto;
-  border: 2px solid #ccc;
+.overlay-menu li a:hover {
+  background: #444;
+}
+.overlay-bg.open {
+  display: block;
+}
+.overlay-popup.open {
+  display: flex;
+}
+
+/* ==========================
+   MEDIA QUERIES & MOBILE
+   ========================== */
+/* If you want any changes for mobile, add them here. */
+@media (max-width: 768px) {
+  /* Example: if you want smaller hero on mobile, do so here */
+  .hero {
+    height: 250px;
+  }
+  .hero-name {
+    font-size: 1.2rem;
+  }
 }
