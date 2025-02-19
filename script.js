@@ -5,23 +5,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlayBg = document.getElementById("overlay-bg");
   const overlayPopup = document.getElementById("overlay-popup");
 
-  hamburger.addEventListener("click", () => {
-    // Toggle the hamburger 'X' state
-    hamburger.classList.toggle("active");
+  // 1) SCROLL LOGIC for showing/hiding the hamburger
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    if (scrollTop > 50) {
+      // user scrolled down more than 50px
+      hamburger.style.display = "flex";
+    } else {
+      // near the top of the page
+      hamburger.style.display = "none";
+    }
+  });
 
-    // Toggle the overlay background and popup
+  // 2) CLICKING THE HAMBURGER -> open/close the overlay
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
     overlayBg.classList.toggle("open");
     overlayPopup.classList.toggle("open");
   });
 
-  // Close if user clicks on the background
+  // 3) CLICKING THE DARK BACKGROUND -> close overlay
   overlayBg.addEventListener("click", () => {
     hamburger.classList.remove("active");
     overlayBg.classList.remove("open");
     overlayPopup.classList.remove("open");
   });
 
-  // Close if user clicks on a menu link
+  // 4) CLICKING A MENU LINK -> close overlay
   const menuLinks = document.querySelectorAll(".overlay-menu a");
   menuLinks.forEach(link => {
     link.addEventListener("click", () => {
