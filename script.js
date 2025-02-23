@@ -41,17 +41,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 5) VIDEO: Allow only one unmuted video at a time
+  // 5) VIDEO: Only one unmuted video at a time + allow toggling mute
   const videos = document.querySelectorAll(".media-video");
+
   videos.forEach(video => {
     video.addEventListener("click", () => {
-      // Mute all videos first
-      videos.forEach(otherVideo => {
-        otherVideo.muted = true;
-      });
-      // Then unmute and play the clicked video
-      video.muted = false;
-      video.play();
+      // If video is already unmuted, clicking again will mute it.
+      if (!video.muted) {
+        video.muted = true;
+      } else {
+        // Otherwise, mute all videos first
+        videos.forEach(otherVideo => {
+          otherVideo.muted = true;
+        });
+        // Then unmute + play this one
+        video.muted = false;
+        video.play();
+      }
     });
   });
 });
