@@ -1,3 +1,5 @@
+// script.js
+
 document.addEventListener("DOMContentLoaded", () => {
   const navbar = document.getElementById("navbar");
   const hamburger = document.getElementById("hamburger");
@@ -39,16 +41,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 5) VIDEO: Allow unmuting on click/tap
+  // 5) VIDEO: Allow only one unmuted video at a time
   const videos = document.querySelectorAll(".media-video");
   videos.forEach(video => {
-    // Either 'click' works for both desktop and mobile,
-    // or you can add touchstart if needed:
     video.addEventListener("click", () => {
-      if (video.muted) {
-        video.muted = false;
-        video.play();
-      }
+      // Mute all videos first
+      videos.forEach(otherVideo => {
+        otherVideo.muted = true;
+      });
+      // Then unmute and play the clicked video
+      video.muted = false;
+      video.play();
     });
   });
 });
