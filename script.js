@@ -1,12 +1,10 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", () => {
   const navbar = document.getElementById("navbar");
   const hamburger = document.getElementById("hamburger");
   const overlayBg = document.getElementById("overlay-bg");
   const overlayPopup = document.getElementById("overlay-popup");
 
-  // 1) SCROLL: toggle .scrolled
+  // 1) SCROLL: Toggle .scrolled on navbar + hamburger
   window.addEventListener("scroll", () => {
     if (window.scrollY > 0) {
       navbar.classList.add("scrolled");
@@ -24,20 +22,33 @@ document.addEventListener("DOMContentLoaded", () => {
     overlayPopup.classList.toggle("open");
   });
 
-  // 3) Clicking dark background => close
+  // 3) Clicking dark background => close menu
   overlayBg.addEventListener("click", () => {
     hamburger.classList.remove("active");
     overlayBg.classList.remove("open");
     overlayPopup.classList.remove("open");
   });
 
-  // 4) Clicking a menu link => close
+  // 4) Clicking a menu link => close menu
   const menuLinks = document.querySelectorAll(".overlay-menu a");
   menuLinks.forEach(link => {
     link.addEventListener("click", () => {
       hamburger.classList.remove("active");
       overlayBg.classList.remove("open");
       overlayPopup.classList.remove("open");
+    });
+  });
+
+  // 5) VIDEO: Allow unmuting on click/tap
+  const videos = document.querySelectorAll(".media-video");
+  videos.forEach(video => {
+    // Either 'click' works for both desktop and mobile,
+    // or you can add touchstart if needed:
+    video.addEventListener("click", () => {
+      if (video.muted) {
+        video.muted = false;
+        video.play();
+      }
     });
   });
 });
